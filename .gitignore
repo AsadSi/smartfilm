@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Pre-edit video originals (watermarked); kept out of public/ so they are not served.
+.asset-originals/

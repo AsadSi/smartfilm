@@ -1,7 +1,8 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Without this, Next walks up past the repo and picks up an unrelated lockfile.
+  turbopack: { root: __dirname },
 };
 
 export default nextConfig;

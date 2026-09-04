@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SmartFilm Danmark — Next.js
 
-## Getting Started
+A ground-up rebuild of the SmartFilm Danmark site: **apple.com's structure**
+(full-bleed media, one idea per band, sticky product sub-nav, huge centred
+display type, pill buttons and chevron links) dressed in the **live site's
+aesthetic** — warm cream ground, champagne gold accent, warm near-black ink,
+Cormorant Garamond over Inter.
 
-First, run the development server:
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm run build   # static export of all 9 routes
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Layout
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/                 one folder per route; each page.tsx holds only metadata
+    page.tsx             home
+    produkter/           comparison matrix + three product cards
+    smart-film/          ┐
+    led-film/            ├ all three render <ProductPage slug="…" />
+    3d-media-glass/      ┘
+    referencer/  om-os/  kontakt/
+    globals.css        design tokens + the utilities the whole site is built on
+  components/          section-level building blocks
+    product/           the product-page sequence
+  content/             every string and product fact on the site
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Content lives in `src/content`
 
-## Learn More
+Nothing user-facing is hard-coded in a component. Copy is authored as
+Danish/English pairs (`L('dansk', 'english')`) and resolved through `useT()`,
+so the DA/EN switch in the header covers the whole site with no route
+duplication. Adding a product is a matter of appending to `PRODUCTS` in
+`content/products.ts` and creating a two-line route file.
 
-To learn more about Next.js, take a look at the following resources:
+### Design tokens
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`globals.css` defines the palette and the type scale as Tailwind v4 `@theme`
+tokens and `@utility` classes (`shell`, `band`, `display-xl`, `eyebrow`, `btn`,
+`chev`, …). Components compose those rather than re-deriving spacing and colour,
+which is what keeps the eight pages looking like one site.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Language
 
-## Deploy on Vercel
+The choice is remembered in `localStorage` and applied after first paint, so
+the server-rendered Danish never mismatches during hydration.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Media
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`public/assets` holds the product footage and photography. Videos ship an
+H.265 source first with an H.264 fallback, and every one carries a poster so
+the hero has something to show before it plays.
