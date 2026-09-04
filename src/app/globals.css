@@ -1,26 +1,375 @@
 @import "tailwindcss";
 
+/* =============================================================================
+   SmartFilm Danmark — design tokens
+
+   The palette is lifted from smartfilmdanmark.dk: warm cream ground, warm
+   near-black ink, champagne gold as the only accent. The *structure* is Apple's
+   — full-bleed media, one idea per band, huge centred display type, translucent
+   sticky nav, pill buttons and chevron links.
+   ============================================================================= */
+@theme {
+  /* Grounds */
+  --color-cream: #faf8f4;      /* page ground */
+  --color-sand: #f1ebdf;       /* alternating band / cards */
+  --color-sand-deep: #e8e0cf;  /* pressed / hover on sand */
+  --color-noir: #0a0a0d;       /* full-bleed dark sections */
+  --color-noir-2: #141310;     /* elevated surface on noir */
+  --color-noir-3: #221f1a;
+
+  /* Ink — the neutral ramp is Radix "Sand", which is warm enough to sit under
+     the cream ground without greying it. */
+  --color-ink: #221f1a;        /* body + headlines            15.5:1 on cream */
+  --color-mut: #63635e;        /* secondary copy, labels       5.1:1 on sand  */
+  --color-mut-2: #55524a;      /* body copy at length          7.4:1 on cream */
+
+  /* The only accent in the system.
+     --color-gold is 2.1:1 on cream: it is a FILL, never text on a light ground.
+     Use it on noir (8.8:1) or as a background. For accent *text* on cream or
+     sand, --color-gold-deep is the only safe option. */
+  --color-gold: #c9a96a;
+  --color-gold-light: #e2c58c; /* accent text on noir         11.9:1          */
+  --color-gold-deep: #7b5f2f;  /* accent text on cream/sand    5.6 / 5.0:1    */
+
+  /* Hairlines. --color-line is decorative (1.3:1) and must not be the only
+     boundary of an interactive control — those need --color-line-strong. */
+  --color-line: #dcd9d1;
+  --color-line-soft: #e8e4db;
+  --color-line-strong: #8d8d86; /* control borders             3.2:1 on cream */
+  --color-line-dark: #2a2721;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  --radius-media: 6px;
+
+  /* Apple's easing — long, decelerating, never bouncy */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --header-h: 68px;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --container: 1200px;
+  --container-wide: 1440px;
+  --container-narrow: 720px;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ───── Base ───── */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-noir);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Anything anchored has to clear the fixed header */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 2rem);
+}
+
+/* On product pages the sticky sub-nav sits below the header too */
+@utility anchor-below-subnav {
+  scroll-margin-top: calc(var(--header-h) + 3.5rem + 1.5rem);
+}
+
+/* Locks the page behind the mobile nav sheet without losing scroll position */
+html.nav-open,
+html.nav-open body {
+  overflow: hidden;
+}
+
+/* ───── Layout helpers ───── */
+@utility shell {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility shell-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility shell-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* The section rhythm — Apple's generous, consistent vertical beat */
+@utility band {
+  padding-block: clamp(5.5rem, 11vw, 11rem);
+}
+
+@utility band-tight {
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+}
+
+/* Separates two sections that share a ground, so they still read as separate. */
+@utility band-sep {
+  border-top: 1px solid var(--color-line);
+}
+
+/* ───── Type ───── */
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3rem, 8.5vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+@utility display-md {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+@utility display-sm {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+/* Data, not prose. Cormorant has no tabular figures, so a column of numbers set
+   in it never lines up — the clearest "not engineered" tell on the old site.
+   Every figure, stat and spec value uses this. */
+@utility figure {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1, 'cv05' 1;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+}
+
+@utility figure-sm {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.01em;
+}
+
+/* The second half of a headline, set in italic gold — the live site's signature */
+@utility display-em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-gold-deep);
+}
+
+@utility display-em-light {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-gold-light);
+}
+
+/* Small caps label above a headline */
+@utility eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+}
+
+@utility eyebrow-light {
+  color: var(--color-gold-light);
+}
+
+@utility lead {
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.65;
+  font-weight: 400;
+  color: var(--color-mut-2);
+  text-wrap: pretty;
+}
+
+/* Micro-label used on specs, figures and captions */
+@utility micro {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-mut);
+}
+
+/* ───── Controls ───── */
+/* Apple's pill, in champagne */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  min-height: 46px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background 320ms var(--ease-out-soft),
+    color 320ms var(--ease-out-soft),
+    border-color 320ms var(--ease-out-soft),
+    transform 320ms var(--ease-out-soft);
+}
+
+@utility btn-gold {
+  background: var(--color-gold);
+  color: var(--color-noir);
+  border: 1px solid var(--color-gold);
+}
+
+@utility btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+}
+
+@utility btn-ghost-light {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / 0.35);
+}
+
+/* Apple's blue chevron link, in gold */
+@utility chev {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-gold-deep);
+  transition: gap 300ms var(--ease-out-soft);
+}
+
+@utility chev-light {
+  color: var(--color-gold-light);
+}
+
+/* ───── Media ───── */
+@utility media-frame {
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  background: var(--color-noir-2);
+}
+
+/* ───── Reveal on scroll ───── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 640ms var(--ease-out-soft),
+    transform 640ms var(--ease-out-soft);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ───── Scroll cue ───── */
+@keyframes drip {
+  0% {
+    transform: translateY(-100%);
+  }
+  55%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scroll-cue span {
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(var(--color-gold-light), transparent);
+  animation: drip 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ───── Base UI collapsible panels ─────
+   Base UI measures the panel and exposes the result as a custom property, which
+   is the only way to transition to a height the browser otherwise reports as
+   `auto`. Reduced-motion is handled by the global block above. */
+.spec-panel {
+  height: var(--accordion-panel-height);
+  transition: height 280ms var(--ease-out-soft);
+}
+
+.spec-panel[data-starting-style],
+.spec-panel[data-ending-style] {
+  height: 0;
 }

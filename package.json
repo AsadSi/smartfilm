@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:content": "node scripts/check-placeholders.mjs",
+    "check:content:strict": "node scripts/check-placeholders.mjs --strict"
   },
   "dependencies": {
+    "@base-ui/react": "^1.8.0",
+    "lucide-react": "^1.41.0",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"
