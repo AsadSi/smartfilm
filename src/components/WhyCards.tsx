@@ -5,7 +5,15 @@ import Reveal from './Reveal';
 import { useT } from './LanguageProvider';
 import { HOME, OM_OS } from '@/content/pages';
 
-const SHOTS = ['/assets/p1-poster.jpg', '/assets/p2-poster.jpg', '/assets/p3-poster.jpg'];
+/**
+ * These were frame-grabs off the product videos (p1/p2/p3-poster.jpg) — soft,
+ * low-bitrate, and in p3's case still showing a "FILMBASE" sponsor sign baked
+ * into the shot, the same rights concern already flagged in
+ * CONTENT-REQUEST.md. Swapped for the installation renders used elsewhere on
+ * the page; the low-res frame grabs still do their real job as video posters
+ * on the product pages, only their use as standalone photography here changes.
+ */
+const SHOTS = ['/assets/led-facade-night.jpg', '/assets/led-shopwindow.jpg', '/assets/media-glass-mall.jpg'];
 
 /**
  * Vitrocsa's "Why Vitrocsa": a heading and one paragraph of intro, centred and
