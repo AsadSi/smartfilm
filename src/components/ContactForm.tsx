@@ -14,7 +14,7 @@ type Status = 'idle' | 'sending' | 'ok' | 'error';
  * is a WCAG failure as well as a usability one.
  */
 const fieldClass =
-  'min-h-[52px] w-full rounded-lg border border-line-strong/70 bg-cream px-4 py-3 text-[15.5px] text-ink outline-none transition-colors duration-300 placeholder:text-mut focus:border-gold-deep';
+  'min-h-[52px] w-full border border-line-strong/70 bg-cream px-4 py-3 text-[15.5px] text-ink outline-none transition-colors duration-300 placeholder:text-mut focus:border-gold-deep';
 
 export default function ContactForm() {
   const { t } = useLanguage();

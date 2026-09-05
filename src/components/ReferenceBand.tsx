@@ -2,7 +2,6 @@
 
 import Reveal from './Reveal';
 import { useT } from './LanguageProvider';
-import { ChevLink } from './ui';
 import { HOME } from '@/content/pages';
 
 /**
@@ -18,7 +17,7 @@ export default function ReferenceBand({ withCaption = true }: { withCaption?: bo
   const { reference } = HOME;
 
   return (
-    <section id="referencer" className="band-tight">
+    <section id="reference-film" className="band-tight">
       <div className="shell">
         <div className="media-frame relative isolate overflow-hidden bg-noir">
           <video
@@ -41,11 +40,6 @@ export default function ReferenceBand({ withCaption = true }: { withCaption?: bo
               <Reveal>
                 <p className="eyebrow eyebrow-light mb-4 block">{t(reference.eyebrow)}</p>
                 <h2 className="display-md max-w-[20ch] text-white">{t(reference.title)}</h2>
-                <div className="mt-6">
-                  <ChevLink href="/referencer" light>
-                    {t(reference.cta)}
-                  </ChevLink>
-                </div>
               </Reveal>
             </div>
           ) : null}

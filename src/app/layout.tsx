@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { LanguageProvider } from '@/components/LanguageProvider';
@@ -7,17 +7,11 @@ import { META } from '@/content/pages';
 import { SITE } from '@/content/site';
 import './globals.css';
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
-
+// Display and body are both Inter now — 300 for the uppercase headlines,
+// 400/500 for copy and labels. Cormorant went with the italic headlines.
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['200', '300', '400', '500', '600'],
   variable: '--font-inter',
   display: 'swap',
 });
@@ -51,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       // top. This opts back into the instant-jump behaviour while keeping
       // smooth scrolling for in-page anchors.
       data-scroll-behavior="smooth"
-      className={`${cormorant.variable} ${inter.variable}`}
+      className={inter.variable}
     >
       <body>
         <LanguageProvider>

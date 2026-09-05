@@ -1,50 +1,37 @@
 import EndCta from '@/components/EndCta';
 import Hero from '@/components/Hero';
+import PhilosophyQuote from '@/components/PhilosophyQuote';
 import ProcessBand from '@/components/ProcessBand';
+import ProjectsTabs from '@/components/ProjectsTabs';
 import ReferenceBand from '@/components/ReferenceBand';
-import SplitFeature from '@/components/SplitFeature';
-import TechTiles from '@/components/TechTiles';
-import { HOME } from '@/content/pages';
-import { UI } from '@/content/site';
-import { L } from '@/content/types';
+import Stats from '@/components/Stats';
+import SystemsRow from '@/components/SystemsRow';
+import WhyCards from '@/components/WhyCards';
 
+/**
+ * One page for everything except the products.
+ *
+ * /referencer and /om-os were folded in here: the reference film and the
+ * installation types carry the first, and the three principles, the figures and
+ * the philosophy quote carry the second. Both old URLs redirect to the anchors
+ * below (see next.config.ts), and the nav points at them too.
+ */
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <SystemsRow />
 
-      <SplitFeature
-        eyebrow={HOME.partner.eyebrow}
-        title={HOME.partner.title}
-        em={HOME.partner.titleEm}
-        body={HOME.partner.body}
-        image={{
-          src: '/assets/gallery-1.jpg',
-          alt: L('LED glasfacade om aftenen', 'LED glass facade at night'),
-        }}
-        cta={{ href: '/produkter', label: UI.seeCollection }}
-      />
+      {/* was /referencer */}
+      <ReferenceBand />
+      <ProjectsTabs />
 
-      <TechTiles />
+      {/* was /om-os */}
+      <WhyCards />
+      <Stats />
+      <PhilosophyQuote />
 
       <ProcessBand />
-
-      <ReferenceBand />
-
-      <SplitFeature
-        eyebrow={HOME.positioning.eyebrow}
-        title={HOME.positioning.title}
-        em={HOME.positioning.titleEm}
-        body={HOME.positioning.body}
-        image={{
-          src: '/assets/gallery-2.jpg',
-          alt: L('Transparent LED i et butiksvindue', 'Transparent LED in a shop window'),
-        }}
-        cta={{ href: '/om-os', label: HOME.positioning.cta }}
-        reverse
-        tinted
-      />
-
       <EndCta />
     </>
   );

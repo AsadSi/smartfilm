@@ -42,7 +42,7 @@ export default function ProduktContent() {
                     sizes="(min-width: 1024px) 33vw, 100vw"
                     className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
                   />
-                  <span className="absolute top-4 left-4 rounded-full bg-noir/55 px-3 py-1.5 text-[10px] font-medium tracking-[0.24em] text-gold-light uppercase backdrop-blur-md">
+                  <span className="absolute top-4 left-4 bg-noir/55 px-3 py-1.5 text-[10px] font-medium tracking-[0.24em] text-gold-light uppercase backdrop-blur-md">
                     {product.index}
                   </span>
                 </Link>

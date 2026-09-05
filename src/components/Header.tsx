@@ -138,7 +138,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop navigation */}
-          <nav aria-label="Primær navigation" className="hidden lg:block">
+          <nav aria-label="Primær navigation" className="hidden">
             <ul className="flex items-center gap-8">
               <li
                 ref={panelItem}
@@ -175,14 +175,14 @@ export default function Header() {
                 <div
                   id="products-panel"
                   hidden={!panelOpen}
-                  className="absolute -left-6 top-[calc(100%+0.9rem)] w-[420px] rounded-xl border border-line/80 bg-cream/95 p-2 shadow-[0_30px_70px_-40px_rgba(34,31,26,0.55)] backdrop-blur-xl"
+                  className="absolute -left-6 top-[calc(100%+0.9rem)] w-[420px] border border-line/80 bg-cream/95 p-2 shadow-[0_30px_70px_-40px_rgba(34,31,26,0.55)] backdrop-blur-xl"
                 >
                   <ul>
                     {PRODUCTS.map((product) => (
                       <li key={product.slug}>
                         <Link
                           href={`/${product.slug}`}
-                          className="flex items-center gap-4 rounded-lg p-3 transition-colors duration-300 hover:bg-sand"
+                          className="flex items-center gap-4 p-3 transition-colors duration-300 hover:bg-sand"
                         >
                           <span className="media-frame relative h-14 w-20 shrink-0">
                             <Image
@@ -266,8 +266,8 @@ export default function Header() {
 
             <Link
               href="/kontakt"
-              className={`btn hidden !min-h-0 !px-5 !py-2.5 !text-[13px] lg:inline-flex ${
-                light ? 'btn-ghost-light hover:bg-white/10' : 'btn-gold hover:bg-gold-light'
+              className={`btn !min-h-0 inline-flex !px-5 !py-2.5 !text-[12px] ${
+                light ? 'btn-ghost-light hover:bg-white/10' : 'btn-ghost hover:border-ink'
               }`}
             >
               {t(UI.requestShort)}
@@ -278,7 +278,7 @@ export default function Header() {
               onClick={() => setSheetOpen((v) => !v)}
               aria-expanded={sheetOpen}
               aria-controls="nav-sheet"
-              className={`-mr-2 flex h-11 w-11 flex-col items-center justify-center gap-[6px] lg:hidden ${
+              className={`-mr-2 flex h-11 w-11 flex-col items-center justify-center gap-[6px] ${
                 light ? 'text-white' : 'text-ink'
               }`}
             >
@@ -304,7 +304,7 @@ export default function Header() {
       <div
         id="nav-sheet"
         aria-hidden={!sheetOpen}
-        className={`fixed inset-0 z-[99] flex flex-col overflow-y-auto bg-cream px-[var(--gutter)] pt-[calc(var(--header-h)+2rem)] pb-10 transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-[99] flex flex-col overflow-y-auto bg-cream px-[var(--gutter)] pt-[calc(var(--header-h)+2rem)] pb-10 transition-opacity duration-300 ${
           sheetOpen ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >

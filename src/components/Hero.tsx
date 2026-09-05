@@ -34,7 +34,7 @@ export default function Hero() {
       />
 
       <div className="shell pt-[calc(var(--header-h)+4rem)] pb-[clamp(4rem,9vw,7rem)]">
-        <div className="mx-auto flex max-w-[54rem] flex-col items-center text-center">
+        <div className="flex max-w-[60rem] flex-col items-start text-left">
           <p className="text-[11px] font-medium uppercase tracking-[0.34em] text-gold-light">
             {t(hero.eyebrow)}
           </p>
@@ -48,30 +48,22 @@ export default function Hero() {
             {t(hero.sub)}
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <ButtonLink href="/kontakt">{t(UI.requestQuote)}</ButtonLink>
+          {/* Both outlined. The reference gives its hero two equal-weight
+              outline controls and saves any filled button for the header. */}
+          <div className="mt-10 flex flex-wrap items-center justify-start gap-4">
+            <ButtonLink href="/kontakt" variant="ghost-light">
+              {t(UI.requestQuote)}
+            </ButtonLink>
             <ButtonLink href="/produkter" variant="ghost-light">
               {t(UI.seeCollection)}
             </ButtonLink>
           </div>
-
-          {/* The three headline figures, read as a strip rather than a column */}
-          <dl className="mt-12 grid w-full max-w-[34rem] grid-cols-3 gap-6 border-t border-white/20 pt-7">
-            {hero.meta.map((item) => (
-              <div key={item.value} className="flex flex-col items-center gap-2">
-                <dd className="figure text-[clamp(1.6rem,3vw,2.2rem)] text-gold-light">
-                  {item.value}
-                </dd>
-                <dt className="micro text-white/55">{t(item.label)}</dt>
-              </div>
-            ))}
-          </dl>
         </div>
       </div>
 
       <div
         aria-hidden="true"
-        className="scroll-cue absolute bottom-8 left-1/2 hidden h-14 w-px -translate-x-1/2 overflow-hidden md:block"
+        className="scroll-cue absolute right-[var(--gutter)] bottom-8 hidden h-14 w-px overflow-hidden md:block"
       >
         <span />
       </div>
