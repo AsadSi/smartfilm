@@ -10,6 +10,16 @@ import { HOME } from '@/content/pages';
 import { UI } from '@/content/site';
 
 /**
+ * This homepage grid uses the same poster image the product page's video
+ * falls back to — except for LED Film, which now has a real installation
+ * render. Overridden only here, so the video and its own poster frame on
+ * /led-film are untouched.
+ */
+const TILE_IMAGE: Record<string, string> = {
+  'led-film': '/assets/led-lounge.jpg',
+};
+
+/**
  * The "Systems" band: the heading sits on one line with a compare link pushed
  * to the right, and the three technologies sit underneath as a plain grid —
  * image, name, a paragraph of prose, one link. No figures and no numbered
@@ -34,7 +44,7 @@ export default function SystemsRow() {
               <Link href={`/${product.slug}`} className="group flex h-full flex-col">
                 <span className="media-frame relative block aspect-[4/3] overflow-hidden bg-noir-2">
                   <Image
-                    src={product.media.poster}
+                    src={TILE_IMAGE[product.slug] ?? product.media.poster}
                     alt={t(product.photo.alt)}
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"

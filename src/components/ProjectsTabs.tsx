@@ -6,8 +6,17 @@ import Reveal from './Reveal';
 import { useT } from './LanguageProvider';
 import { REFERENCER } from '@/content/pages';
 
-/** The reference band's photography, in the order the cases are written. */
-const SHOTS = ['/assets/gallery-1.jpg', '/assets/gallery-2.jpg', '/assets/gallery-3.jpg'];
+/**
+ * The reference band's photography, in the order the cases are written.
+ * Mediefacade and Butiksvindue got real LED-film installation renders; the
+ * third case (privacy film in a meeting room) has no matching shot yet, so it
+ * keeps the original placeholder photo.
+ */
+const SHOTS = [
+  { src: '/assets/led-facade-night.jpg', position: 'center' },
+  { src: '/assets/led-shopwindow.jpg', position: 'center 35%' },
+  { src: '/assets/gallery-3.jpg', position: 'center' },
+];
 
 /**
  * Vitrocsa's "Highlighted Projects": a centred heading over a paragraph of
@@ -71,18 +80,22 @@ export default function ProjectsTabs() {
             <div className="media-frame relative aspect-[16/9] w-full bg-noir-2">
               {/* All three stay mounted so switching tabs never shows an empty
                   frame while the next photograph decodes. */}
-              {items.map((item, i) => (
-                <Image
-                  key={i}
-                  src={SHOTS[i % SHOTS.length]}
-                  alt={t(item.title)}
-                  fill
-                  sizes="(min-width: 1200px) 1200px, 100vw"
-                  className={`object-cover transition-opacity duration-700 ease-[var(--ease-out-soft)] ${
-                    i === active ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-              ))}
+              {items.map((item, i) => {
+                const shot = SHOTS[i % SHOTS.length];
+                return (
+                  <Image
+                    key={i}
+                    src={shot.src}
+                    alt={t(item.title)}
+                    fill
+                    sizes="(min-width: 1200px) 1200px, 100vw"
+                    style={{ objectPosition: shot.position }}
+                    className={`object-cover transition-opacity duration-700 ease-[var(--ease-out-soft)] ${
+                      i === active ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                );
+              })}
             </div>
 
             <div className="mt-8">
