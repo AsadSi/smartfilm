@@ -9,39 +9,55 @@
    sticky nav, pill buttons and chevron links.
    ============================================================================= */
 @theme {
+  /* ---------------------------------------------------------------------
+     PALETTE — the client's, from the reference stylesheet he sent:
+
+       --paper #F4F7FB   --ink #0D1626   --accent #2F5FE0
+       --deep  #0D1B33   --line #DCE3ED  --muted  #5A667E
+
+     The token NAMES below are the originals (cream, sand, gold, noir) so that
+     no component has to change and flipping back to the champagne palette is a
+     single edit to this block. The names are historical; the values are blue.
+     --------------------------------------------------------------------- */
+
   /* Grounds */
-  --color-cream: #faf8f4;      /* page ground */
-  --color-sand: #f1ebdf;       /* alternating band / cards */
-  --color-sand-deep: #e8e0cf;  /* pressed / hover on sand */
-  --color-noir: #0a0a0d;       /* full-bleed dark sections */
-  --color-noir-2: #141310;     /* elevated surface on noir */
-  --color-noir-3: #221f1a;
+  --color-cream: #f4f7fb;      /* page ground — his --paper */
+  --color-sand: #ffffff;       /* alternating band / cards — white on paper */
+  --color-sand-deep: #e8eef6;  /* pressed / hover on sand */
+  --color-noir: #0d1b33;       /* full-bleed dark sections — his --deep */
+  --color-noir-2: #14274a;     /* elevated surface on noir */
+  --color-noir-3: #1b3159;
 
-  /* Ink — the neutral ramp is Radix "Sand", which is warm enough to sit under
-     the cream ground without greying it. */
-  --color-ink: #221f1a;        /* body + headlines            15.5:1 on cream */
-  --color-mut: #63635e;        /* secondary copy, labels       5.1:1 on sand  */
-  --color-mut-2: #55524a;      /* body copy at length          7.4:1 on cream */
+  /* Ink */
+  --color-ink: #0d1626;        /* body + headlines            16.2:1 on paper */
+  --color-mut: #5a667e;        /* secondary copy, labels       4.9:1 on paper */
+  --color-mut-2: #47536b;      /* body copy at length          7.1:1 on paper */
 
-  /* The only accent in the system.
-     --color-gold is 2.1:1 on cream: it is a FILL, never text on a light ground.
-     Use it on noir (8.8:1) or as a background. For accent *text* on cream or
-     sand, --color-gold-deep is the only safe option. */
-  --color-gold: #c9a96a;
-  --color-gold-light: #e2c58c; /* accent text on noir         11.9:1          */
-  --color-gold-deep: #7b5f2f;  /* accent text on cream/sand    5.6 / 5.0:1    */
+  /* The accent. Unlike the champagne it replaces, this blue is legible as text
+     on the light ground (5.1:1), so --gold-deep is no longer a workaround — it
+     is simply the accent. As a FILL it takes white text at 5.5:1, where the
+     champagne took dark ink. */
+  --color-gold: #2f5fe0;
+  --color-gold-light: #8fb0ff; /* accent text on noir          8.0:1          */
+  --color-gold-deep: #2f5fe0;  /* accent text on paper         5.1:1          */
 
-  /* Hairlines. --color-line is decorative (1.3:1) and must not be the only
-     boundary of an interactive control — those need --color-line-strong. */
-  --color-line: #dcd9d1;
-  --color-line-soft: #e8e4db;
-  --color-line-strong: #8d8d86; /* control borders             3.2:1 on cream */
-  --color-line-dark: #2a2721;
+  /* Hairlines. --color-line is decorative and must not be the only boundary of
+     an interactive control — those need --color-line-strong. */
+  --color-line: #dce3ed;
+  --color-line-soft: #e7ecf3;
+  --color-line-strong: #7c8aa3; /* control borders             3.2:1 on paper */
+  --color-line-dark: #24375c;
 
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  /* Vitrocsa sets its display type in Klavika — a light, squarish grotesque.
+     Klavika is licensed, so the closest thing already loaded here is Inter at
+     300, set uppercase. The serif is gone: an uppercase Cormorant headline is
+     the one thing that cannot be made to read as architectural. */
+  --font-display: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
-  --radius-media: 6px;
+  /* Vitrocsa rounds nothing. Every control and every image on that site
+     measures 0px, and it is most of why it reads as architecture. */
+  --radius-media: 0px;
 
   /* Apple's easing — long, decelerating, never bouncy */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -149,37 +165,44 @@ html.nav-open body {
 /* ───── Type ───── */
 @utility display-xl {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(3rem, 8.5vw, 7rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  font-weight: 300;
+  /* Uppercase runs ~40% wider than sentence case, so the ceiling comes down
+     from 7rem — Vitrocsa's own h1 resolves to 61px on a desktop viewport. */
+  font-size: clamp(2.3rem, 6.2vw, 4.6rem);
+  line-height: 1.06;
+  letter-spacing: 0;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
 @utility display-lg {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
-  line-height: 1.02;
-  letter-spacing: -0.018em;
+  font-weight: 300;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
 @utility display-md {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(1.9rem, 3.6vw, 3rem);
-  line-height: 1.08;
-  letter-spacing: -0.015em;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
+/* Card titles. Vitrocsa sets these as small caps, not as small headlines. */
 @utility display-sm {
   font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: clamp(1.3rem, 2.1vw, 1.7rem);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  font-weight: 500;
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  line-height: 1.35;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 /* Data, not prose. Cormorant has no tabular figures, so a column of numbers set
@@ -203,16 +226,18 @@ html.nav-open body {
   letter-spacing: -0.01em;
 }
 
-/* The second half of a headline, set in italic gold — the live site's signature */
+/* The second half of a headline. It was italic Cormorant — the live site's
+   signature — but italic uppercase grotesque is unreadable, so the accent now
+   carries in colour and weight alone. The gold itself is untouched. */
 @utility display-em {
-  font-style: italic;
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 300;
   color: var(--color-gold-deep);
 }
 
 @utility display-em-light {
-  font-style: italic;
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 300;
   color: var(--color-gold-light);
 }
 
@@ -248,17 +273,19 @@ html.nav-open body {
 }
 
 /* ───── Controls ───── */
-/* Apple's pill, in champagne */
+/* Vitrocsa's control: a square 13px uppercase label in a hairline box. */
 @utility btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.8rem 1.6rem;
-  min-height: 46px;
-  border-radius: 999px;
-  font-size: 15px;
-  font-weight: 500;
+  padding: 1rem 2.1rem;
+  min-height: 48px;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
   transition:
@@ -270,7 +297,7 @@ html.nav-open body {
 
 @utility btn-gold {
   background: var(--color-gold);
-  color: var(--color-noir);
+  color: #fff;
   border: 1px solid var(--color-gold);
 }
 
@@ -286,13 +313,15 @@ html.nav-open body {
   border: 1px solid rgb(255 255 255 / 0.35);
 }
 
-/* Apple's blue chevron link, in gold */
+/* Vitrocsa's "VIEW DETAILS": a 12px uppercase label, widely tracked. */
 @utility chev {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 15px;
-  font-weight: 500;
+  gap: 0.4rem;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--color-gold-deep);
   transition: gap 300ms var(--ease-out-soft);
 }

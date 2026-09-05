@@ -22,8 +22,8 @@ export const SITE = {
 
 export const NAV = [
   { href: '/produkter', label: L('Produkter', 'Products'), key: 'produkter' },
-  { href: '/referencer', label: L('Referencer', 'References'), key: 'referencer' },
-  { href: '/om-os', label: L('Om os', 'About'), key: 'om-os' },
+  { href: '/#referencer', label: L('Referencer', 'References'), key: 'referencer' },
+  { href: '/#hvorfor', label: L('Om os', 'About'), key: 'om-os' },
   { href: '/kontakt', label: L('Kontakt', 'Contact'), key: 'kontakt' },
 ];
 
@@ -115,8 +115,8 @@ export const FOOTER = {
     {
       title: L('Udforsk', 'Explore'),
       links: [
-        { href: '/referencer', label: L('Referencer', 'References') },
-        { href: '/om-os', label: L('Om os', 'About us') },
+        { href: '/#referencer', label: L('Referencer', 'References') },
+        { href: '/#hvorfor', label: L('Om os', 'About us') },
         { href: '/kontakt', label: L('Kontakt', 'Contact') },
       ],
     },
