@@ -11,12 +11,13 @@ import { UI } from '@/content/site';
 
 /**
  * This homepage grid uses the same poster image the product page's video
- * falls back to — except for LED Film, which now has a real installation
- * render. Overridden only here, so the video and its own poster frame on
- * /led-film are untouched.
+ * falls back to — except where a real installation render exists. Overridden
+ * only here, so each video and its own poster frame on the product page
+ * stay untouched.
  */
 const TILE_IMAGE: Record<string, string> = {
   'led-film': '/assets/led-lounge.jpg',
+  '3d-media-glass': '/assets/media-glass-mall.jpg',
 };
 
 /**
