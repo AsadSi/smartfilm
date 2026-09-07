@@ -9,15 +9,15 @@ export default function Footer() {
   const t = useT();
 
   return (
-    <footer className="bg-noir text-white/70">
+    <footer className="band-sep-dark bg-noir text-white/70">
       <div className="shell grid gap-12 pt-[clamp(4rem,7vw,6rem)] pb-[clamp(2.5rem,4vw,3.5rem)] sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr]">
         <div>
           <Link href="/" aria-label="SmartFilm Danmark" className="inline-flex flex-col leading-none">
             <span className="text-[1.2rem] font-semibold uppercase tracking-[0.2em] text-white">
               Smartfilm
             </span>
-            <span className="mt-[5px] mb-[3px] h-px w-full bg-gold" />
-            <span className="text-[0.58rem] font-medium uppercase tracking-[0.38em] text-gold">
+            <span className="mt-[5px] mb-[3px] h-px w-full bg-gold-light" />
+            <span className="text-[0.58rem] font-medium uppercase tracking-[0.38em] text-gold-light">
               Danmark
             </span>
           </Link>

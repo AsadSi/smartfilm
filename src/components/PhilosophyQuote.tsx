@@ -14,18 +14,18 @@ export default function PhilosophyQuote() {
   const t = useT();
 
   return (
-    <section id="filosofi" className="band bg-sand">
+    <section id="filosofi" className="band bg-noir">
       <div className="shell-narrow flex flex-col items-center text-center">
         <Reveal>
-          <p className="eyebrow block">{t(OM_OS.quote.eyebrow)}</p>
+          <p className="eyebrow eyebrow-light block">{t(OM_OS.quote.eyebrow)}</p>
         </Reveal>
         <Reveal delay={120}>
-          <blockquote className="mt-8 text-[clamp(1.35rem,2.8vw,2.1rem)] leading-[1.35] font-light text-balance text-ink">
+          <blockquote className="mt-8 text-[clamp(1.35rem,2.8vw,2.1rem)] leading-[1.35] font-light text-balance text-white">
             {t(OM_OS.quote.text)}
           </blockquote>
         </Reveal>
         <Reveal delay={200}>
-          <cite className="micro mt-8 block not-italic">SmartFilm Danmark</cite>
+          <cite className="micro micro-light mt-8 block not-italic">SmartFilm Danmark</cite>
         </Reveal>
       </div>
     </section>

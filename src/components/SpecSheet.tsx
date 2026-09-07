@@ -25,10 +25,10 @@ export default function SpecSheet({ slug, name }: { slug: string; name: string }
   if (!groups.length) return null;
 
   return (
-    <section id="specifikationer" className="band anchor-below-subnav bg-sand">
+    <section id="specifikationer" className="band anchor-below-subnav bg-noir">
       <div className="shell-narrow">
-        <p className="eyebrow mb-5 block">{t(L('Specifikationer', 'Specifications'))}</p>
-        <h2 className="display-lg text-ink">{name}</h2>
+        <p className="eyebrow eyebrow-light mb-5 block">{t(L('Specifikationer', 'Specifications'))}</p>
+        <h2 className="display-lg text-white">{name}</h2>
 
         <Accordion.Root
           hiddenUntilFound
@@ -37,23 +37,23 @@ export default function SpecSheet({ slug, name }: { slug: string; name: string }
           // sake; the grouping still earns its place once the remaining
           // figures land.
           defaultValue={groups.map((group) => group.id)}
-          className="mt-[clamp(2rem,4vw,3rem)] border-t border-line-strong/60"
+          className="mt-[clamp(2rem,4vw,3rem)] border-t border-white/25"
         >
           {groups.map((group) => (
-            <Accordion.Item key={group.id} value={group.id} className="border-b border-line-strong/40">
+            <Accordion.Item key={group.id} value={group.id} className="border-b border-white/15">
               <Accordion.Header>
-                <Accordion.Trigger className="group flex w-full items-center justify-between gap-4 py-5 text-left transition-colors duration-300 hover:text-gold-deep">
+                <Accordion.Trigger className="group flex w-full items-center justify-between gap-4 py-5 text-left transition-colors duration-300 hover:text-gold-light">
                   <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <span className="text-[1.05rem] font-semibold text-ink">{t(group.title)}</span>
+                    <span className="text-[1.05rem] font-semibold text-white">{t(group.title)}</span>
                     {group.standard ? (
-                      <span className="text-[12.5px] text-mut">{t(group.standard)}</span>
+                      <span className="text-[12.5px] text-white/55">{t(group.standard)}</span>
                     ) : null}
                   </span>
                   <ChevronDown
                     size={18}
                     strokeWidth={2}
                     aria-hidden="true"
-                    className="shrink-0 text-mut transition-transform duration-300 group-data-[open]:rotate-180"
+                    className="shrink-0 text-white/55 transition-transform duration-300 group-data-[open]:rotate-180"
                   />
                 </Accordion.Trigger>
               </Accordion.Header>
@@ -63,14 +63,14 @@ export default function SpecSheet({ slug, name }: { slug: string; name: string }
                   {group.rows.map((row) => (
                     <div
                       key={t(row.label)}
-                      className="grid gap-1 border-t border-line py-3.5 sm:grid-cols-[1fr_1fr] sm:items-baseline sm:gap-6"
+                      className="grid gap-1 border-t border-white/12 py-3.5 sm:grid-cols-[1fr_1fr] sm:items-baseline sm:gap-6"
                     >
-                      <dt className="text-[14px] text-mut">{t(row.label)}</dt>
+                      <dt className="text-[14px] text-white/55">{t(row.label)}</dt>
                       <dd
                         className={
                           row.pending
-                            ? 'figure-sm text-[14px] text-mut italic'
-                            : 'figure-sm text-[15.5px] text-ink'
+                            ? 'figure-sm text-[14px] text-white/55 italic'
+                            : 'figure-sm text-[15.5px] text-white'
                         }
                       >
                         {t(row.value)}
@@ -83,12 +83,12 @@ export default function SpecSheet({ slug, name }: { slug: string; name: string }
           ))}
         </Accordion.Root>
 
-        <p className="mt-8 max-w-[62ch] text-[14px] leading-relaxed text-mut">
+        <p className="mt-8 max-w-[62ch] text-[14px] leading-relaxed text-white/60">
           {t(L(
             'Alle løsninger prissættes individuelt efter mål, pixelafstand og montering. Datablad, snitdetaljer og montagevejledning til projektmateriale rekvireres hos os.',
             'All solutions are priced individually by size, pixel pitch and installation. Datasheets, section details and installation guides for your project file are available on request.',
           ))}{' '}
-          <Link href="/kontakt" className="text-gold-deep underline underline-offset-4">
+          <Link href="/kontakt" className="text-gold-light underline underline-offset-4">
             {t(L('Skriv til os', 'Get in touch'))}
           </Link>
         </p>

@@ -7,15 +7,18 @@ import { useT } from './LanguageProvider';
 import { REFERENCER } from '@/content/pages';
 
 /**
- * The reference band's photography, in the order the cases are written.
- * Mediefacade and Butiksvindue got real LED-film installation renders; the
- * third case (privacy film in a meeting room) has no matching shot yet, so it
- * keeps the original placeholder photo.
+ * The reference band's photography, in the order the cases are written. Every
+ * photograph on this page now appears exactly once — these three were sharing
+ * led-facade-night and led-shopwindow with the "why" cards below, which made
+ * the page read as three views of the same two installations. Mediefacade
+ * carries a new client render of a retail media facade, Butiksvindue takes the
+ * retail shot the LED Film page no longer needs, and Mødelokale og klinik
+ * carries the 3D Media Glass photograph.
  */
 const SHOTS = [
-  { src: '/assets/led-facade-night.jpg', position: 'center' },
-  { src: '/assets/led-shopwindow.jpg', position: 'center 35%' },
-  { src: '/assets/gallery-3.jpg', position: 'center' },
+  { src: '/assets/led-mall-facade.jpg', position: 'center' },
+  { src: '/assets/gallery-2.jpg', position: 'center 40%' },
+  { src: '/assets/media-glass-mall.jpg', position: 'center 45%' },
 ];
 
 /**
@@ -31,13 +34,13 @@ export default function ProjectsTabs() {
   const current = items[active];
 
   return (
-    <section id="referencer" className="band bg-sand">
+    <section id="referencer" className="band bg-noir">
       <div className="shell">
         <Reveal>
           <div className="mx-auto max-w-[52rem] text-center">
-            <p className="eyebrow mb-5 block">{t(REFERENCER.cases.eyebrow)}</p>
-            <h2 className="display-lg text-ink">{t(REFERENCER.cases.title)}</h2>
-            <p className="lead mx-auto mt-6 max-w-[54ch]">{t(REFERENCER.lead)}</p>
+            <p className="eyebrow eyebrow-light mb-5 block">{t(REFERENCER.cases.eyebrow)}</p>
+            <h2 className="display-lg text-white">{t(REFERENCER.cases.title)}</h2>
+            <p className="lead lead-light mx-auto mt-6 max-w-[54ch]">{t(REFERENCER.lead)}</p>
           </div>
         </Reveal>
 
@@ -47,7 +50,7 @@ export default function ProjectsTabs() {
           <div
             role="tablist"
             aria-label={t(REFERENCER.cases.title)}
-            className="mt-[clamp(2.5rem,5vw,3.5rem)] flex flex-wrap justify-center gap-x-10 gap-y-4 border-b border-line"
+            className="mt-[clamp(2.5rem,5vw,3.5rem)] flex flex-wrap justify-center gap-x-10 gap-y-4 border-b border-white/15"
           >
             {items.map((item, i) => (
               <button
@@ -58,10 +61,10 @@ export default function ProjectsTabs() {
                 aria-selected={i === active}
                 aria-controls={`project-panel-${i}`}
                 onClick={() => setActive(i)}
-                className={`micro -mb-px border-b-2 pb-4 transition-colors duration-300 ${
+                className={`micro micro-light -mb-px border-b-2 pb-4 transition-colors duration-300 ${
                   i === active
-                    ? 'border-gold-deep text-ink'
-                    : 'border-transparent hover:text-ink'
+                    ? 'border-gold-light !text-white'
+                    : 'border-transparent hover:!text-white'
                 }`}
               >
                 {t(item.title)}
@@ -99,7 +102,7 @@ export default function ProjectsTabs() {
             </div>
 
             <div className="mt-8">
-              <p className="mx-auto max-w-[58ch] text-center text-[15.5px] leading-relaxed text-mut-2">
+              <p className="mx-auto max-w-[58ch] text-center text-[15.5px] leading-relaxed text-white/65">
                 {t(current.body)}
               </p>
             </div>

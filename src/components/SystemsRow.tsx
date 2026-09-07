@@ -14,10 +14,19 @@ import { UI } from '@/content/site';
  * falls back to — except where a real installation render exists. Overridden
  * only here, so each video and its own poster frame on the product page
  * stay untouched.
+ *
+ * The 3D Media Glass tile gave up media-glass-mall.jpg to the reference band's
+ * "Mødelokale og klinik" case and took the new interior render in its place, so
+ * neither photograph appears twice on the homepage.
+ *
+ * LED Film then had to move too: led-lounge.jpg and the new render both show
+ * the same model creative, and side by side in this row they read as one
+ * installation photographed twice. It swapped with the "why" cards below for
+ * the night facade, which has no figure in it at all.
  */
 const TILE_IMAGE: Record<string, string> = {
-  'led-film': '/assets/led-lounge.jpg',
-  '3d-media-glass': '/assets/media-glass-mall.jpg',
+  'led-film': '/assets/led-facade-night.jpg',
+  '3d-media-glass': '/assets/glass-lobby-cube.jpg',
 };
 
 /**

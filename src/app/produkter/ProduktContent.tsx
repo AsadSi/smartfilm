@@ -83,10 +83,10 @@ export default function ProduktContent() {
       </section>
 
       {/* The comparison matrix */}
-      <section id="sammenlign" className="band bg-sand">
+      <section id="sammenlign" className="band bg-noir">
         <div className="shell">
           <Reveal>
-            <SectionHead eyebrow={t(comparison.eyebrow)} title={t(comparison.title)} />
+            <SectionHead eyebrow={t(comparison.eyebrow)} title={t(comparison.title)} light />
           </Reveal>
 
           <Reveal delay={120}>
@@ -105,7 +105,7 @@ export default function ProduktContent() {
                       <th
                         key={product.slug}
                         scope="col"
-                        className="border-b-2 border-gold-deep/50 p-4 text-[1.05rem] font-semibold text-ink"
+                        className="border-b-2 border-gold-light/50 p-4 text-[1.05rem] font-semibold text-white"
                       >
                         {product.name}
                       </th>
@@ -114,14 +114,14 @@ export default function ProduktContent() {
                 </thead>
                 <tbody>
                   {comparison.rows.map((row) => (
-                    <tr key={t(row.label)} className="transition-colors duration-300 hover:bg-cream/70">
-                      <th scope="row" className="micro border-b border-line p-4 align-baseline">
+                    <tr key={t(row.label)} className="transition-colors duration-300 hover:bg-white/5">
+                      <th scope="row" className="micro micro-light border-b border-white/12 p-4 align-baseline">
                         {t(row.label)}
                       </th>
                       {row.values.map((value, i) => (
                         <td
                           key={`${t(row.label)}-${i}`}
-                          className="figure-sm border-b border-line p-4 align-baseline text-[15px] text-ink"
+                          className="figure-sm border-b border-white/12 p-4 align-baseline text-[15px] text-white"
                         >
                           {t(value)}
                         </td>
@@ -131,7 +131,7 @@ export default function ProduktContent() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-6 text-[13px] text-mut">{t(comparison.note)}</p>
+            <p className="mt-6 text-[13px] text-white/60">{t(comparison.note)}</p>
           </Reveal>
         </div>
       </section>

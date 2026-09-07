@@ -95,7 +95,7 @@ export const PRODUCTS: Product[] = [
       poster: '/assets/p2-poster.jpg',
     },
     photo: {
-      src: '/assets/gallery-2.jpg',
+      src: '/assets/led-shopwindow.jpg',
       alt: L('Transparent LED i et butiksvindue', 'Transparent LED in a shop window'),
       caption: L('Retail · transparent LED', 'Retail · transparent LED'),
     },

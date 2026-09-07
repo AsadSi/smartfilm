@@ -18,7 +18,7 @@ export default function ProcessBand() {
   const t = useT();
 
   return (
-    <section id="proces" className="band bg-noir">
+    <section id="proces" className="band band-sep-dark bg-noir">
       <div className="shell">
         <Reveal>
           <SectionHead
@@ -38,7 +38,7 @@ export default function ProcessBand() {
               className="flex h-full flex-col gap-4 border-t border-white/15 pt-5"
             >
               <div className="flex items-baseline justify-between gap-3">
-                <span className="figure-sm text-[13px] font-semibold tracking-[0.24em] text-gold">
+                <span className="figure-sm text-[13px] font-semibold tracking-[0.24em] text-gold-light">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="figure-sm text-[11px] tracking-[0.14em] text-white/55 uppercase">
