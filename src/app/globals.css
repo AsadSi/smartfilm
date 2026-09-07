@@ -3,50 +3,61 @@
 /* =============================================================================
    SmartFilm Danmark — design tokens
 
-   The palette is lifted from smartfilmdanmark.dk: warm cream ground, warm
-   near-black ink, champagne gold as the only accent. The *structure* is Apple's
-   — full-bleed media, one idea per band, huge centred display type, translucent
-   sticky nav, pill buttons and chevron links.
+   The palette is white, black and blue: pure white ground, true black bands,
+   neutral grey, and the client's blue as the only accent. The *structure* is
+   Apple's — full-bleed media, one idea per band, huge centred display type,
+   translucent sticky nav, pill buttons and chevron links.
    ============================================================================= */
 @theme {
   /* ---------------------------------------------------------------------
-     PALETTE — the client's, from the reference stylesheet he sent:
+     PALETTE — white, black and blue.
 
-       --paper #F4F7FB   --ink #0D1626   --accent #2F5FE0
-       --deep  #0D1B33   --line #DCE3ED  --muted  #5A667E
+     The blue accent (#2F5FE0) is the client's, from the stylesheet he sent.
+     Everything around it used to be blue too: the ground was a tinted paper
+     (#F4F7FB), the greys were blue-greys (#5A667E, #DCE3ED) and the dark bands
+     were navy (#0D1B33), so the page read as three values of one hue. The
+     neutrals are now genuinely neutral — pure white ground, true black bands,
+     grey mixed from black rather than from blue — which leaves the blue as the
+     only colour on the page and makes it read as an accent instead of a wash.
 
-     The token NAMES below are the originals (cream, sand, gold, noir) so that
-     no component has to change and flipping back to the champagne palette is a
-     single edit to this block. The names are historical; the values are blue.
+     The token NAMES are the originals (cream, sand, gold, noir) so that no
+     component has to change and the palette is a single edit to this block.
+     The names are historical; the values are white, black and blue.
      --------------------------------------------------------------------- */
 
-  /* Grounds */
-  --color-cream: #f4f7fb;      /* page ground — his --paper */
-  --color-sand: #ffffff;       /* alternating band / cards — white on paper */
-  --color-sand-deep: #e8eef6;  /* pressed / hover on sand */
-  --color-noir: #0d1b33;       /* full-bleed dark sections — his --deep */
-  --color-noir-2: #14274a;     /* elevated surface on noir */
-  --color-noir-3: #1b3159;
+  /* Grounds. There are two, white and black: the alternating band used to be a
+     light grey, and every section that had it now takes the black instead, so
+     the page is white or black and nothing in between. --color-sand survives
+     only as the hover state inside the white nav dropdown, where a ground has
+     to be a shade of the ground it sits on. */
+  --color-cream: #ffffff;      /* page ground — pure white */
+  --color-sand: #f5f5f5;       /* hover inside the white dropdown */
+  --color-sand-deep: #e8e8e8;  /* pressed on sand */
+  --color-noir: #000000;       /* every dark band — true black */
+  --color-noir-2: #101010;     /* elevated surface on noir */
+  --color-noir-3: #1c1c1c;
 
   /* Ink */
-  --color-ink: #0d1626;        /* body + headlines            16.2:1 on paper */
-  --color-mut: #5a667e;        /* secondary copy, labels       4.9:1 on paper */
-  --color-mut-2: #47536b;      /* body copy at length          7.1:1 on paper */
+  --color-ink: #0a0a0a;        /* body + headlines            19.8:1 on white */
+  --color-mut: #6b6b6b;        /* secondary copy, labels       5.3:1 on white */
+  --color-mut-2: #4a4a4a;      /* body copy at length          8.9:1 on white */
 
-  /* The accent. Unlike the champagne it replaces, this blue is legible as text
-     on the light ground (5.1:1), so --gold-deep is no longer a workaround — it
-     is simply the accent. As a FILL it takes white text at 5.5:1, where the
-     champagne took dark ink. */
+  /* The accent, and now the only hue in the palette. Legible as text on white
+     (5.5:1); as a FILL it takes white text at the same 5.5:1. */
   --color-gold: #2f5fe0;
-  --color-gold-light: #8fb0ff; /* accent text on noir          8.0:1          */
-  --color-gold-deep: #2f5fe0;  /* accent text on paper         5.1:1          */
+  --color-gold-light: #8fb0ff; /* accent text on black         9.8:1          */
+  --color-gold-deep: #2f5fe0;  /* accent text on white         5.5:1          */
+  /* The filled button's hover. It used to lighten to --gold-light, which left
+     the button's own white label at 2.1:1; darkening keeps it at 6.8:1 and
+     still reads as a state change against the black band. */
+  --color-gold-hover: #2451c9;
 
   /* Hairlines. --color-line is decorative and must not be the only boundary of
      an interactive control — those need --color-line-strong. */
-  --color-line: #dce3ed;
-  --color-line-soft: #e7ecf3;
-  --color-line-strong: #7c8aa3; /* control borders             3.2:1 on paper */
-  --color-line-dark: #24375c;
+  --color-line: #e4e4e4;
+  --color-line-soft: #efefef;
+  --color-line-strong: #8a8a8a; /* control borders             3.5:1 on white */
+  --color-line-dark: #262626;
 
   /* Vitrocsa sets its display type in Klavika — a light, squarish grotesque.
      Klavika is licensed, so the closest thing already loaded here is Inter at
@@ -101,7 +112,7 @@ video {
 
 ::selection {
   background: var(--color-gold);
-  color: var(--color-noir);
+  color: #fff;
 }
 
 :focus-visible {
@@ -160,6 +171,12 @@ html.nav-open body {
 /* Separates two sections that share a ground, so they still read as separate. */
 @utility band-sep {
   border-top: 1px solid var(--color-line);
+}
+
+/* The same, for the black ground. The page now ends on a run of black bands —
+   quote, process, closing ask, footer — and without this they read as one. */
+@utility band-sep-dark {
+  border-top: 1px solid rgb(255 255 255 / 0.12);
 }
 
 /* ───── Type ───── */
@@ -263,6 +280,12 @@ html.nav-open body {
   text-wrap: pretty;
 }
 
+/* Now that the second band ground is black rather than a light grey, the two
+   utilities that bake in a dark colour need a counterpart for it. */
+@utility lead-light {
+  color: rgb(255 255 255 / 0.68);
+}
+
 /* Micro-label used on specs, figures and captions */
 @utility micro {
   font-size: 10.5px;
@@ -270,6 +293,10 @@ html.nav-open body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-mut);
+}
+
+@utility micro-light {
+  color: rgb(255 255 255 / 0.6);
 }
 
 /* ───── Controls ───── */

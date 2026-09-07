@@ -6,21 +6,26 @@ import { ButtonLink } from './ui';
 import { HOME } from '@/content/pages';
 import { UI } from '@/content/site';
 
-/** The closing ask, on the sand band that separates it from the footer. */
+/**
+ * The closing ask. It sits on the black ground now rather than the light grey
+ * one, which puts it in a run of black bands on the front page — hence the top
+ * hairline, so it still reads as its own band and not as more of the process
+ * band above it.
+ */
 export default function EndCta() {
   const t = useT();
   const { endCta } = HOME;
 
   return (
-    <section className="band bg-sand">
+    <section className="band band-sep-dark bg-noir">
       <div className="shell-narrow flex flex-col items-center text-center">
         <Reveal>
-          <h2 className="display-lg text-ink">
-            {t(endCta.title)} <em className="display-em">{t(endCta.titleEm)}</em>
+          <h2 className="display-lg text-white">
+            {t(endCta.title)} <em className="display-em-light">{t(endCta.titleEm)}</em>
           </h2>
         </Reveal>
         <Reveal delay={120}>
-          <p className="mt-6 max-w-[46ch] text-mut-2">{t(endCta.body)}</p>
+          <p className="mt-6 max-w-[46ch] text-white/65">{t(endCta.body)}</p>
         </Reveal>
         <Reveal delay={200}>
           <div className="mt-9">

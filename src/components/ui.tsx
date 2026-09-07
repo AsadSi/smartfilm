@@ -22,11 +22,11 @@ type ButtonLinkProps = {
   className?: string;
 };
 
-/** The pill. Gold on light grounds, outlined when it sits over media. */
+/** The pill. Filled blue on either ground, outlined when it sits over media. */
 export function ButtonLink({ href, children, variant = 'gold', className = '' }: ButtonLinkProps) {
   const variantClass =
     variant === 'gold'
-      ? 'btn-gold hover:bg-gold-light hover:border-gold-light'
+      ? 'btn-gold hover:bg-gold-hover hover:border-gold-hover'
       : variant === 'ghost'
         ? 'btn-ghost hover:border-ink'
         : 'btn-ghost-light hover:bg-white/10 hover:border-white/60';

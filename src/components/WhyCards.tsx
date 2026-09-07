@@ -9,11 +9,18 @@ import { HOME, OM_OS } from '@/content/pages';
  * These were frame-grabs off the product videos (p1/p2/p3-poster.jpg) — soft,
  * low-bitrate, and in p3's case still showing a "FILMBASE" sponsor sign baked
  * into the shot, the same rights concern already flagged in
- * CONTENT-REQUEST.md. Swapped for the installation renders used elsewhere on
- * the page; the low-res frame grabs still do their real job as video posters
- * on the product pages, only their use as standalone photography here changes.
+ * CONTENT-REQUEST.md. Swapped for installation renders; the low-res frame grabs
+ * still do their real job as video posters on the product pages, only their use
+ * as standalone photography here changes.
+ *
+ * Two of the three were also running in the reference band above, so the page
+ * showed each of them twice within a couple of screens. These three are now
+ * unique to this band, and deliberately unalike: an interior LED wall, a
+ * daylight facade, and a hospitality interior. Only the first carries the model
+ * creative that recurs elsewhere on the page, and it is a screen away from the
+ * others that do.
  */
-const SHOTS = ['/assets/led-facade-night.jpg', '/assets/led-shopwindow.jpg', '/assets/media-glass-mall.jpg'];
+const SHOTS = ['/assets/led-lounge.jpg', '/assets/gallery-1.jpg', '/assets/gallery-3.jpg'];
 
 /**
  * Vitrocsa's "Why Vitrocsa": a heading and one paragraph of intro, centred and

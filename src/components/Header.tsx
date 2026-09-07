@@ -20,8 +20,12 @@ function Wordmark({ light }: { light: boolean }) {
       >
         Smartfilm
       </span>
-      <span className="mt-[5px] mb-[3px] h-px w-full bg-gold" />
-      <span className="text-[0.58rem] font-medium uppercase tracking-[0.38em] text-gold">
+      <span className={`mt-[5px] mb-[3px] h-px w-full ${light ? 'bg-gold-light' : 'bg-gold'}`} />
+      <span
+        className={`text-[0.58rem] font-medium uppercase tracking-[0.38em] transition-colors duration-300 ${
+          light ? 'text-gold-light' : 'text-gold'
+        }`}
+      >
         Danmark
       </span>
     </span>
@@ -175,7 +179,7 @@ export default function Header() {
                 <div
                   id="products-panel"
                   hidden={!panelOpen}
-                  className="absolute -left-6 top-[calc(100%+0.9rem)] w-[420px] border border-line/80 bg-cream/95 p-2 shadow-[0_30px_70px_-40px_rgba(34,31,26,0.55)] backdrop-blur-xl"
+                  className="absolute -left-6 top-[calc(100%+0.9rem)] w-[420px] border border-line/80 bg-cream/95 p-2 shadow-[0_30px_70px_-40px_rgba(0,0,0,0.45)] backdrop-blur-xl"
                 >
                   <ul>
                     {PRODUCTS.map((product) => (
