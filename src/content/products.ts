@@ -25,6 +25,22 @@ export type Product = {
   /** Three figures across the top of the product page. */
   figures: { value: string; label: Localized }[];
   media: { video: string; videoHevc: string; poster: string };
+  /**
+   * An optional short loop, shown as its own band directly under the claims —
+   * the claim, then the thing itself. Silent and endlessly repeating, so it
+   * behaves like a moving photograph rather than a film that must be watched.
+   */
+  loop?: {
+    video: string;
+    videoHevc: string;
+    poster: string;
+    /** Intrinsic size, so the band reserves its space before the file lands. */
+    width: number;
+    height: number;
+    /** Read to anyone who cannot see it; the caption alone would not explain it. */
+    label: Localized;
+    caption: Localized;
+  };
   /** A second photograph, so the product page is not carried by one video alone. */
   photo: { src: string; alt: Localized; caption: Localized };
 };
@@ -93,6 +109,18 @@ export const PRODUCTS: Product[] = [
       video: '/assets/product-ledfilm.mp4',
       videoHevc: '/assets/optimized/product-ledfilm.h265.mp4',
       poster: '/assets/p2-poster.jpg',
+    },
+    loop: {
+      video: '/assets/led-mall-loop.mp4',
+      videoHevc: '/assets/optimized/led-mall-loop.h265.mp4',
+      poster: '/assets/led-mall-loop-poster.jpg',
+      width: 1280,
+      height: 720,
+      label: L(
+        'En butiksfacade af klart glas, hvor LED-vævet tændes og lyser hen over ruden, mens butikken bagved stadig ses tydeligt igennem.',
+        'A clear glass shopfront where the LED mesh lights up across the pane while the store behind stays clearly visible through it.',
+      ),
+      caption: L('Visualisering · slukket, så tændt', 'Visualisation · off, then on'),
     },
     photo: {
       src: '/assets/led-shopwindow.jpg',
