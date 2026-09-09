@@ -34,7 +34,7 @@ const barlow = Barlow_Condensed({ subsets: ['latin'], weight: ['500', '600', '70
 
 export const metadata: Metadata = {
   title: 'SmartFilm — designskabeloner',
-  description: 'Fem designretninger for SmartFilm Danmark: Stage, Vitrine, Salon, Promenade og Lumen.',
+  description: 'Seks designretninger for SmartFilm Danmark: Stage, Vitrine, Salon, Promenade, Lumen og Klar.',
   // Templates are not pages anyone should find in search.
   robots: { index: false, follow: false },
 };
@@ -50,7 +50,27 @@ export default function V2Layout({ children }: { children: React.ReactNode }) {
       data-scroll-behavior="smooth"
       className={`${archivo.variable} ${inter.variable} ${bodoni.variable} ${barlow.variable} ${plexMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {/* Switzer is not on Google Fonts, so it cannot go through next/font.
+            Fontshare serves it free for commercial use, Typewolf has it on
+            current work, and The Design Shelf names Fontshare as where to go
+            when Inter will not do — F · Klar is the one template in the set not
+            set in a Google face.
+
+            These live inside <body>, not beside it: a <link> is not a legal
+            child of <html>, and putting one there costs a hydration error. React
+            hoists them into <head> from anywhere in the tree, and `precedence`
+            is what tells it where in the cascade the sheet belongs — without it
+            React refuses to hoist a stylesheet at all. */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          precedence="default"
+          href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@400,500,600&display=swap"
+        />
+        {children}
+      </body>
     </html>
   );
 }

@@ -29,6 +29,11 @@ export const IMG = {
   glassDepth: '/assets/pexels/glass-depth.jpg',
   glassArt: '/assets/pexels/glass-art.jpg',
   glassStructure: '/assets/pexels/glass-structure.jpg',
+  klarFrost: '/assets/pexels/klar-frost.jpg',
+  klarBloom: '/assets/pexels/klar-bloom.jpg',
+  klarNeon: '/assets/pexels/klar-neon.jpg',
+  klarGeometry: '/assets/pexels/klar-geometry.jpg',
+  klarReflect: '/assets/pexels/klar-reflect.jpg',
 } as const;
 
 export const ALT = {
@@ -44,6 +49,11 @@ export const ALT = {
   glassDepth: 'Neonrammer i hinanden, der giver dybde i en flad væg',
   glassArt: 'Silhuetter i en lysinstallation',
   glassStructure: 'Oplyst geometrisk konstruktion i en gård',
+  klarFrost: 'Matteret glasflade set tæt på',
+  klarBloom: 'Bylys set gennem en matteret rude',
+  klarNeon: 'Lys diffunderet gennem en mat glasflade',
+  klarGeometry: 'Riflede glaspaneler i en åbning',
+  klarReflect: 'Riflet glasfacade i modlys',
 } as const;
 
 /** SmartFilm's own footage. No stock library has PDLC glass switching. */
@@ -171,6 +181,16 @@ export const STAGES = [
     image: IMG.filmTexture,
     alt: ALT.filmTexture,
   },
+  {
+    slug: 'klar',
+    index: 'F',
+    name: 'Klar',
+    reference: 'Produktet selv',
+    room: 'Skiftende · panelvis',
+    blurb: 'Kontakten fører. Siden er bygget af helskærmspaneler, der ankommer mattede og klarner, når de glider på plads — og som skifter mellem mørk og lys hele vejen ned, så det at rulle er at se en rude skifte tilstand. Der er en rigtig MAT/KLAR-kontakt i kanten: slå den, og hele siden matteres. Sat i Switzer, den eneste skrift i sættet der ikke er fra Google.',
+    image: IMG.klarNeon,
+    alt: ALT.klarNeon,
+  },
 ];
 
 /** The two principles, used by templates B and C. */
@@ -249,7 +269,80 @@ export const FOOTER = {
   legal: ['© 2026 SmartFilm Danmark', 'Privatlivspolitik', 'Cookies', 'CVR 00000000'],
 };
 
-/** The five directions, for the chooser at /template. */
+/**
+ * The panel sequence for F · Klar.
+ *
+ * `state` decides whether a panel is mat (dark) or klar (light). They alternate
+ * the whole way down, so scrolling the page is watching a pane switch back and
+ * forth — which is the entire product in one gesture.
+ */
+export const PANELS = [
+  {
+    id: 'titel',
+    n: '00',
+    label: 'SmartFilm',
+    state: 'mat' as const,
+    headline: 'Mat. Klar. På under et sekund.',
+    body: 'Et lag film mellem to ruder gør et glasparti til en kontakt. Strøm på, og ruden er klar; strøm af, og den er privat.',
+    media: { kind: 'video' as const, src: '/assets/hero.mp4', hevc: '/assets/optimized/hero.h265.mp4', poster: '/assets/hero-poster.jpg', alt: '' },
+    cta: { label: 'Se serien', href: '#panel-1' },
+  },
+  {
+    id: 'smart-film',
+    n: '01',
+    label: 'Smart Film',
+    state: 'klar' as const,
+    headline: 'Privatliv, uden at slukke lyset.',
+    body: 'Persienner løser privatliv ved at fjerne dagslys. Det gør filmen ikke: i mat tilstand spreder ruden stadig lyset, så rummet bliver privat uden at blive mørkt.',
+    figure: { value: '92', unit: '%', label: 'Transparens i klar tilstand' },
+    media: { kind: 'image' as const, src: IMG.klarGeometry, alt: ALT.klarGeometry },
+    cta: { label: 'Specifikationer', href: '#panel-4' },
+  },
+  {
+    id: 'led-film',
+    n: '02',
+    label: 'LED Film',
+    state: 'mat' as const,
+    headline: 'Facaden vågner, når det bliver mørkt.',
+    body: 'To millimeter LED-væv på indersiden af glasset. Om dagen er det næsten ikke til at få øje på; om aftenen er hele fladen et billede.',
+    figure: { value: '2', unit: 'mm', label: 'Samlet tykkelse' },
+    media: { kind: 'image' as const, src: IMG.ledAirport, alt: ALT.ledAirport },
+    cta: { label: 'Specifikationer', href: '#panel-4' },
+  },
+  {
+    id: '3d-media-glass',
+    n: '03',
+    label: '3D Media Glass',
+    state: 'klar' as const,
+    headline: 'Dybde i en flade på få millimeter.',
+    body: 'Billedet står frit i glasset i stedet for at ligge på det. Det er den eneste af de tre, hvor folk standser op — og hele grunden til at vælge den.',
+    figure: { value: '360', unit: '°', label: 'Synsvinkel uden tab' },
+    media: { kind: 'image' as const, src: IMG.klarNeon, alt: ALT.klarNeon },
+    cta: { label: 'Specifikationer', href: '#panel-4' },
+  },
+  {
+    id: 'haandvaerket',
+    n: '04',
+    label: 'Håndværket',
+    state: 'mat' as const,
+    headline: 'Målt på stedet. Monteret af os.',
+    body: 'Vi laver ikke standardstørrelser. Hvert parti måles op, produceres til den præcise åbning og monteres af vores eget hold — i hele Danmark.',
+    media: { kind: 'image' as const, src: IMG.klarReflect, alt: ALT.klarReflect },
+    cta: { label: 'Kontakt', href: '#panel-6' },
+  },
+  {
+    id: 'kontakt',
+    n: '06',
+    label: 'Kontakt',
+    state: 'mat' as const,
+    headline: 'Fortæl os om åbningen.',
+    body: 'Mål, placering og den effekt du er ude efter. Så har du et tilbud inden for 24 timer på hverdage.',
+    media: { kind: 'image' as const, src: IMG.klarFrost, alt: ALT.klarFrost },
+    cta: { label: 'Forespørg et tilbud', href: 'mailto:kontakt@smartfilmdanmark.dk' },
+  },
+];
+
+/** The six directions, for the chooser at /template. */
 export const TEMPLATES = [
   {
     slug: 'stage',
@@ -300,5 +393,15 @@ export const TEMPLATES = [
     blurb: 'Præcisionen fører. Næsten hvidt, moderat typografi og meget luft. Den eneste retning i sættet med afrundede hjørner — og det ene greb flytter siden fra arkitektur til produkt, før man har læst et ord. Bento-felter, mono-labels og et svagt punktgitter bagved.',
     image: IMG.filmTexture,
     alt: ALT.filmTexture,
+  },
+  {
+    slug: 'klar',
+    index: 'F',
+    name: 'Klar',
+    reference: 'Produktet selv',
+    room: 'Skiftende · panelvis',
+    blurb: 'Kontakten fører. Siden er bygget af helskærmspaneler, der ankommer mattede og klarner, når de glider på plads — og som skifter mellem mørk og lys hele vejen ned, så det at rulle er at se en rude skifte tilstand. Der er en rigtig MAT/KLAR-kontakt i kanten: slå den, og hele siden matteres. Sat i Switzer, den eneste skrift i sættet der ikke er fra Google.',
+    image: IMG.klarNeon,
+    alt: ALT.klarNeon,
   },
 ];
