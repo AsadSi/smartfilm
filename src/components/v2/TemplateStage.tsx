@@ -229,9 +229,13 @@ function StageRange() {
     <section id="serien" className="v2-band bg-paper">
       <div className="v2-shell">
         <Reveal className="grid gap-x-8 gap-y-6 lg:grid-cols-12">
+          {/* No eyebrow, and no full stop. Everywhere else on this template a
+              period marks a statement — "Klart på et sekund." — so putting one
+              on a section label devalues it. Porsche's own heading here is the
+              single word "Models"; the explanation belongs beside it, not
+              stacked above it as a second heading saying the same thing. */}
           <div className="lg:col-span-5">
-            <p className="v2-label v2-tick">Serien</p>
-            <h2 className="v2-h2 mt-1">Tre teknologier. Ét materiale.</h2>
+            <h2 className="v2-h2">Serien</h2>
           </div>
           <p className="v2-lead lg:col-span-6 lg:col-start-7 lg:self-end">
             Alle tre lever i glasset frem for foran det. Forskellen er, hvad du vil have glasset til

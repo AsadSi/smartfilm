@@ -77,6 +77,21 @@
   --color-signal-light: #d8bc8a;  /* on graphite / void       9.7 / 10.8:1    */
 
   /* ---------------------------------------------------------------------
+     WARM GROUNDS — C · Salon and D · Promenade only.
+
+     Gold needs a warm ground. Put champagne on the cold #16181c used by the
+     first two templates and it turns faintly green; on #0e0c0a, which carries
+     the same few degrees of warmth the gold does, it reads as metal.
+     --------------------------------------------------------------------- */
+  --color-noir: #0e0c0a;      /* Salon ground — warm near-black              */
+  --color-noir-2: #16120d;    /* elevated surface inside the jewel box       */
+  --color-bone: #f2ede4;      /* Promenade ground — warm stone   12.3:1 ink  */
+  --color-stone: #e6dfd2;     /* Promenade alternating band                  */
+  --color-stone-ink: #2b2620; /* warm ink on bone               12.3:1       */
+  --color-stone-ink-2: #5d554a;/* warm secondary copy on bone    5.9:1        */
+  --color-gold-ink: #7a5c31;  /* gold as TEXT on bone            5.1:1       */
+
+  /* ---------------------------------------------------------------------
      TYPE. Two grotesques, and the split is by job, not by taste: Archivo is
      narrower and squarer, so it carries the display sizes where the extra
      width of a neutral face turns a five-word headline into three lines.
@@ -88,10 +103,12 @@
      --------------------------------------------------------------------- */
   --font-display: var(--font-archivo), "Archivo", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  /* B · Index sets its labels, index numbers and every figure in a mono. A
-     catalogue reads as a catalogue because the numbers line up in columns, and
-     nothing does that as unarguably as a monospace. */
-  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* C · Salon and D · Promenade. A didone is the typeface luxury retail
+     actually uses — hairline thins, sharp unbracketed serifs, and enough
+     contrast that at display size it reads as expensive before it reads as
+     words. It is also unusable below about 20px, which is exactly why both
+     templates pair it with tracked capitals for everything small. */
+  --font-serif: var(--font-bodoni), "Bodoni Moda", "Didot", "Times New Roman", serif;
   /* C · Vitrine. Lamborghini's display face is a bespoke heavy condensed
      grotesque; Barlow Condensed is the closest free thing in proportion, and
      condensed is what lets a six-word headline be set at 9vw without wrapping. */
@@ -601,64 +618,7 @@ html.v2-locked body {
 }
 
 /* =============================================================================
-   TEMPLATE B · INDEX  —  Audi, and the printed product catalogue
-   Typography-led, on white. No full-bleed anything: every image sits in a fixed
-   field with the page's margins visible around it, captions live out in the
-   margin, and the numbers are monospaced. It should read as a reference
-   document that happens to be a website.
-   ============================================================================= */
-
-@utility idx-display {
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
-  line-height: 1.12;
-  /* Uppercase runs ~40% wider than sentence case, so the ceiling is far lower
-     than template A's and the tracking has to open up or the caps close ranks
-     and stop being readable as words. */
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  text-wrap: balance;
-  max-width: 22ch;
-}
-
-@utility idx-display-lg {
-  font-family: var(--font-sans);
-  font-weight: 300;
-  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
-  line-height: 1.04;
-  letter-spacing: 0.005em;
-  text-transform: uppercase;
-  text-wrap: balance;
-  max-width: 18ch;
-}
-
-@utility idx-mono {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  color: var(--color-ink-3);
-}
-
-@utility idx-num {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-/* The index rule: a hairline that runs the full measure with the label sitting
-   on it. Used as the section divider throughout template B. */
-@utility idx-rule {
-  border-top: 1px solid var(--color-ink);
-}
-
-/* =============================================================================
-   TEMPLATE C · VITRINE  —  Lamborghini
+   TEMPLATE B · VITRINE  —  Lamborghini
    Dark, condensed, hard-edged. Where A rounds its buttons into pills, C squares
    everything off and fills it; where A whispers, C sets the same headline in
    uppercase condensed at twice the size. Champagne does real work here, because
@@ -742,4 +702,259 @@ html.v2-locked body {
    carry it without turning the page into origami. */
 @utility vit-cut {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), calc(100% - 2.5rem) 100%, 0 100%);
+}
+
+/* =============================================================================
+   TEMPLATE C · SALON  —  the jewel box
+
+   A watch vitrine at eleven at night. The room is warm near-black and every
+   piece in it is lit from inside its own case: panels carry a soft gold bloom
+   at the edges, rules are hairline gold, and the photography is dimmed so the
+   light appears to come from the product rather than from the page.
+
+   Two rules do most of the work and both are the opposite of the automotive
+   templates. Compositions are CENTRED and symmetrical — automotive is
+   relentlessly left-aligned, retail luxury is not. And the display face is a
+   didone, which means it may never be set below about 20px; every small thing
+   on the page is tracked capitals instead.
+   ============================================================================= */
+
+@utility salon-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6.4vw, 6rem);
+  line-height: 1.02;
+  /* A didone at display size needs NEGATIVE tracking; the thins are so fine
+     that default spacing makes the word fall apart into letters. */
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+@utility salon-h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.6vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* Everything small. The didone stops working below ~20px, so the entire
+   supporting layer of the page is one tracked-capital label style — which is
+   also exactly how a boutique signs itself. */
+@utility salon-label {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--color-signal-light);
+}
+
+@utility salon-label-dim {
+  color: rgb(255 255 255 / 0.45);
+}
+
+@utility salon-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgb(255 255 255 / 0.66);
+  text-wrap: pretty;
+}
+
+/* The case. A panel lit from within: a hairline gold edge and a bloom behind
+   it, so the thing appears to sit in its own vitrine rather than on a page. */
+@utility salon-case {
+  position: relative;
+  background: var(--color-noir-2);
+  border: 1px solid rgb(216 188 138 / 0.22);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.5),
+    0 40px 90px -50px rgb(216 188 138 / 0.35);
+}
+
+/* The hairline gold rule, used instead of borders anywhere two things need
+   separating. It fades at both ends, which is what stops it reading as a table. */
+@utility salon-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(216 188 138 / 0.45) 18%,
+    rgb(216 188 138 / 0.45) 82%,
+    transparent
+  );
+}
+
+/* The control: no fill, hairline gold, wide tracked capitals. A filled button
+   would be the loudest thing in a very quiet room. */
+@utility salon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  min-height: 56px;
+  padding-inline: 2.6rem;
+  border-radius: 0;
+  border: 1px solid rgb(216 188 138 / 0.5);
+  background: transparent;
+  color: var(--color-signal-light);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  line-height: 1;
+  transition:
+    background-color 480ms var(--ease-cold),
+    border-color 480ms var(--ease-cold),
+    color 480ms var(--ease-cold);
+}
+
+@utility salon-btn-fill {
+  background: var(--color-signal-light);
+  border-color: var(--color-signal-light);
+  color: var(--color-noir);
+}
+
+/* =============================================================================
+   D · PROMENADE  —  the concourse
+
+   The daylit half of the same building: a marble atrium at noon rather than a
+   boutique at night. Warm stone ground, ink that is warm rather than blue, and
+   gold reduced to a hairline.
+
+   Its voice is the one Salon does not use — airport wayfinding. Light weight,
+   capitals, tracked far apart, and set at a size where the tracking becomes the
+   texture of the page. Where Salon centres everything, Promenade runs a strict
+   left rail with the content indented off it, the way signage hangs off a wall.
+
+   Images sit in tall arched portals rather than rectangles. That is the one
+   ornamental decision in the whole set, and it is what makes the page read as
+   a colonnade of shopfronts instead of a grid of photographs.
+   ============================================================================= */
+
+@utility prom-display {
+  font-family: var(--font-sans);
+  font-weight: 200;
+  font-size: clamp(1.75rem, 4.4vw, 4rem);
+  line-height: 1.16;
+  /* The tracking IS the design here. Anything tighter reads as a normal
+     uppercase headline; this reads as a sign on a wall. */
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@utility prom-h2 {
+  font-family: var(--font-sans);
+  font-weight: 200;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* The one place a serif appears in this template — a single pull quote per
+   page, set large in the didone, so the stone has one warm moment in it. */
+@utility prom-quote {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  color: var(--color-stone-ink);
+  text-wrap: balance;
+}
+
+@utility prom-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--color-gold-ink);
+}
+
+@utility prom-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--color-stone-ink-2);
+  text-wrap: pretty;
+}
+
+/* The portal. A rectangle with an arched head — the shopfront in a colonnade.
+   The radius is in percentage units on the two top corners only, so the arch
+   stays proportional as the frame changes width. */
+@utility prom-portal {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50vw 50vw 0 0 / 22vw 22vw 0 0;
+  background: var(--color-stone);
+}
+
+/* The left rail every section hangs off. */
+@utility prom-rail {
+  border-left: 1px solid rgb(122 92 49 / 0.28);
+}
+
+@utility prom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  min-height: 54px;
+  padding-inline: 2.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-stone-ink);
+  background: transparent;
+  color: var(--color-stone-ink);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  line-height: 1;
+  transition:
+    background-color 480ms var(--ease-cold),
+    color 480ms var(--ease-cold);
+}
+
+@utility prom-btn-fill {
+  background: var(--color-stone-ink);
+  color: var(--color-bone);
+}
+
+/* =============================================================================
+   PAGE GROUND
+
+   Each template paints its own ground on a wrapper div, but the element the
+   browser actually paints behind everything is <html> — so on a dark or a bone
+   template, a macOS rubber-band scroll bounces the page down and flashes white
+   underneath it. `:has()` lets a page component reach the root element it does
+   not own; the alternative is a separate layout file per template for the sake
+   of one background colour.
+
+   `color-scheme` comes along for the ride, which is what turns the scrollbar
+   itself dark on the dark templates. On a page selling black glass, a bright
+   white scrollbar down the right edge is not a small thing.
+   ============================================================================= */
+html:has(.tpl-void) {
+  background: var(--color-void);
+  color-scheme: dark;
+}
+
+html:has(.tpl-noir) {
+  background: var(--color-noir);
+  color-scheme: dark;
+}
+
+html:has(.tpl-bone) {
+  background: var(--color-bone);
+  color-scheme: light;
 }

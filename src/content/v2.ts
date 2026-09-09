@@ -232,33 +232,46 @@ export const FOOTER = {
   legal: ['© 2026 SmartFilm Danmark', 'Privatlivspolitik', 'Cookies', 'CVR 00000000'],
 };
 
-/** The three templates, for the chooser at /template. */
+/** The four directions, for the chooser at /template. */
 export const TEMPLATES = [
   {
     slug: 'stage',
     index: 'A',
     name: 'Stage',
     reference: 'Porsche',
+    room: 'Fuldskærm · lys',
     blurb: 'Billedet fører. Siden er en række fuldskærmsbilleder med teksten sat ned i venstre hjørne af hvert af dem, korte sætninger og pilleknapper. Mindst tekst, størst effekt.',
     image: IMG.facadeMonolith,
     alt: ALT.facadeMonolith,
   },
   {
-    slug: 'index',
-    index: 'B',
-    name: 'Index',
-    reference: 'Audi · katalog',
-    blurb: 'Typografien fører. Hvidt, teknisk og opslagsværksagtigt: nummereret indholdsfortegnelse, versaler med bred spatiering, billeder i faste felter og billedtekster ude i margenen.',
-    image: IMG.facadeGeometric,
-    alt: ALT.facadeGeometric,
-  },
-  {
     slug: 'vitrine',
-    index: 'C',
+    index: 'B',
     name: 'Vitrine',
-    reference: 'Modehus',
-    blurb: 'Mørket fører. Næsten sort hele vejen, høj-kontrast antikva i stor grad, delt skærm hvor billedet står stille mens teksten ruller, og champagne brugt hvor den virker bedst.',
+    reference: 'Lamborghini',
+    room: 'Mørk · kondenseret',
+    blurb: 'Kraften fører. Næsten sort hele vejen, tunge versaler i kondenseret snit, hårde firkantede knapper, en skåret hjørne og en delt skærm hvor billedet står stille mens teksten ruller.',
     image: IMG.nightQuarter,
     alt: ALT.nightQuarter,
+  },
+  {
+    slug: 'salon',
+    index: 'C',
+    name: 'Salon',
+    reference: 'Smykkeskrinet',
+    room: 'Mørk · centreret',
+    blurb: 'Roen fører. Varmt næsten-sort, alt centreret og symmetrisk, hver flade lyst indefra med guldhårstreg om kanten. Antikva til udsagnene, spatierede versaler til alt andet. Butikken i lufthavnen klokken elleve om aftenen.',
+    image: IMG.officeDoors,
+    alt: ALT.officeDoors,
+  },
+  {
+    slug: 'promenade',
+    index: 'D',
+    name: 'Promenade',
+    reference: 'Atriet',
+    room: 'Lys · sten',
+    blurb: 'Materialet fører. Varm sten, varmt blæk og guld reduceret til en hårstreg. Skiltetypografi med bred spatiering, en skinne ned ad siden som alt hænger på, og billeder i høje buede portaler frem for firkanter.',
+    image: IMG.facadeGeometric,
+    alt: ALT.facadeGeometric,
   },
 ];
