@@ -7,6 +7,7 @@ import {
   CTA,
   FOOTER,
   HERO,
+  IMG,
   NAV,
   PRODUCTS,
   REFERENCES,
@@ -439,7 +440,7 @@ function StageCta() {
   return (
     <section id="kontakt" className="stage">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/assets/pexels/facade-lowangle.jpg" alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" loading="lazy" />
+      <img src={IMG.glassArt} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" loading="lazy" />
       <div aria-hidden="true" className="stage-scrim" />
       <Reveal className="v2-shell relative w-full pb-[clamp(3.5rem,9vh,7rem)]">
         <p className="v2-label v2-label-light v2-tick v2-tick-light">{CTA.label}</p>

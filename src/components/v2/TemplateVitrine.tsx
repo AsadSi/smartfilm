@@ -331,7 +331,7 @@ function VitrineFigures() {
   return (
     <section className="relative border-t border-hair-dark py-[clamp(4rem,9vw,8rem)]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={IMG.facadeDetail} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover opacity-25" loading="lazy" />
+      <img src={IMG.filmTexture} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover opacity-25" loading="lazy" />
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-void via-void/85 to-void/40" />
 
       <div className="v2-shell relative">
@@ -435,7 +435,7 @@ function VitrineCta() {
   return (
     <section id="kontakt" className="relative flex min-h-[80svh] items-end overflow-hidden border-t border-hair-dark">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={IMG.facadeCurved} alt={ALT.facadeCurved} className="absolute inset-0 size-full object-cover opacity-55" loading="lazy" />
+      <img src={IMG.ledFacade} alt={ALT.ledFacade} className="absolute inset-0 size-full object-cover opacity-55" loading="lazy" />
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-void via-void/60 to-transparent" />
 
       <Reveal className="v2-shell relative w-full pb-[clamp(3rem,7vw,6rem)] pt-[clamp(4rem,10vw,8rem)]">

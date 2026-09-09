@@ -3,8 +3,8 @@ import { BRAND, TEMPLATES } from '@/content/v2';
 import { Arrow, Reveal } from '@/components/v2/primitives';
 
 export const metadata = {
-  title: 'Fire designretninger — SmartFilm',
-  description: 'Vælg mellem Stage, Vitrine, Salon og Promenade.',
+  title: 'Fem designretninger — SmartFilm',
+  description: 'Vælg mellem Stage, Vitrine, Salon, Promenade og Lumen.',
 };
 
 /**
@@ -25,15 +25,15 @@ export default function TemplateChooser() {
       <div className="v2-shell py-[clamp(3rem,7vw,7rem)]">
         <Reveal>
           <p className="v2-label v2-tick">{BRAND.full} · designretninger</p>
-          <h1 className="v2-h2 mt-1">Fire retninger. Samme ord.</h1>
+          <h1 className="v2-h2 mt-1">Fem retninger. Samme ord.</h1>
           <p className="v2-lead mt-6 max-w-[58ch]">
-            De fire skabeloner nedenfor viser præcis den samme tekst, de samme tal og de samme
+            De fem skabeloner nedenfor viser præcis den samme tekst, de samme tal og de samme
             billeder. Alt hvad der adskiller dem, er designet — layout, typografi, farve og tempo.
             Vælg retningen, ikke indholdet.
           </p>
         </Reveal>
 
-        <ul className="mt-[clamp(2.5rem,5vw,4.5rem)] grid gap-x-8 gap-y-12 md:grid-cols-2 xl:grid-cols-4">
+        <ul className="mt-[clamp(2.5rem,5vw,4.5rem)] grid gap-x-8 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
           {TEMPLATES.map((t, i) => (
             <Reveal as="li" key={t.slug} delay={i * 80}>
               <article className="group flex h-full flex-col">
@@ -62,7 +62,8 @@ export default function TemplateChooser() {
 
         <Reveal delay={200}>
           <p className="v2-caption mt-[clamp(3rem,6vw,5rem)] max-w-[70ch] border-t border-hair pt-6">
-            Fotografierne er midlertidige og hentet fra Pexels — licens og kilde ligger i
+            Fotografierne er midlertidige og hentet fra Pexels — matteret glas, LED-flader og
+            lysinstallationer, altså det produkterne rent faktisk laver. Licens og kilde ligger i
             assets/pexels/CREDITS.md. Videoerne er SmartFilms egne: intet stockbibliotek har et klip
             af PDLC-glas, der skifter, og det er præcis dét, produktet gør.
           </p>
