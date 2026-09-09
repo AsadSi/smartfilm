@@ -20,7 +20,7 @@ const read = (f) => readFileSync(`src/${f}`, 'utf8');
 
 const pendingSpecs = (read('content/specs.ts').match(/\n\s*p\(L\(/g) ?? []).length;
 const cvrPending = /cvrPlaceholder: true/.test(read('content/site.ts'));
-const privacyPending = (read('app/privatlivspolitik/PrivacyContent.tsx').match(/pending: true/g) ?? [])
+const privacyPending = (read('app/(site)/privatlivspolitik/PrivacyContent.tsx').match(/pending: true/g) ?? [])
   .length;
 
 console.log('');

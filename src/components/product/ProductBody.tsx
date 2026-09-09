@@ -53,49 +53,6 @@ export function ClaimBands({ product }: { product: Product }) {
   );
 }
 
-/**
- * The product doing the one thing the claims just made a claim about.
- *
- * It sits in the page container rather than running full-bleed: the clip is
- * 1280px wide, and bled across a desktop viewport it would be upscaled and read
- * as soft — the same reasoning as the reference band. Muted, looping and
- * `playsInline` so it starts on its own everywhere, including iOS, and carries
- * no sound to interrupt anyone. Renders nothing for a product without a loop.
- */
-export function ProductLoop({ product }: { product: Product }) {
-  const t = useT();
-  const { loop } = product;
-  if (!loop) return null;
-
-  return (
-    <section className="band-tight">
-      <div className="shell">
-        <div className="media-frame relative isolate overflow-hidden bg-noir">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster={loop.poster}
-            width={loop.width}
-            height={loop.height}
-            aria-label={t(loop.label)}
-            className="h-auto max-h-[74vh] w-full object-contain"
-          >
-            <source src={loop.videoHevc} type='video/mp4; codecs=hvc1' />
-            <source src={loop.video} type="video/mp4" />
-          </video>
-
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-noir/85 to-transparent px-[clamp(1.25rem,3vw,2.5rem)] pt-[clamp(3rem,8vw,6rem)] pb-[clamp(1rem,2.5vw,1.75rem)]">
-            <p className="micro text-white/80">{t(loop.caption)}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /** A full-bleed photograph, so the page is not carried by the hero video alone. */
 export function ProductPhoto({ product }: { product: Product }) {
   const t = useT();

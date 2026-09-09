@@ -47,6 +47,32 @@ export const HOME = {
     ),
     cta: L('Se referencer', 'See references'),
   },
+  /**
+   * The short LED loop, shown as its own band on the homepage.
+   *
+   * It used to sit under the claims on /led-film, which left that page a band
+   * longer than the two others; the three product pages now run the same
+   * sequence. On the homepage it does more work anyway — it is the one place
+   * the principle behind the whole collection is shown moving rather than
+   * described.
+   */
+  loop: {
+    video: '/assets/led-mall-loop.mp4',
+    videoHevc: '/assets/optimized/led-mall-loop.h265.mp4',
+    poster: '/assets/led-mall-loop-poster.jpg',
+    /** Intrinsic size, so the band reserves its space before the file lands. */
+    width: 1280,
+    height: 720,
+    /** Which of the three this clip is — the caption already says it is a visualisation. */
+    eyebrow: L('LED Film', 'LED Film'),
+    /** Read to anyone who cannot see it; the caption alone would not explain it. */
+    label: L(
+      'En butiksfacade af klart glas, hvor LED-vævet tændes og lyser hen over ruden, mens butikken bagved stadig ses tydeligt igennem.',
+      'A clear glass shopfront where the LED mesh lights up across the pane while the store behind stays clearly visible through it.',
+    ),
+    caption: L('Visualisering · slukket, så tændt', 'Visualisation · off, then on'),
+    cta: L('Se LED Film', 'See LED Film'),
+  },
   endCta: {
     title: L('Skal vi se på', 'Shall we look at'),
     titleEm: L('dit glasparti?', 'your glass?'),
