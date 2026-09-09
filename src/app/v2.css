@@ -1113,3 +1113,179 @@ html:has(.tpl-lumen) {
   background: var(--color-lumen-bg);
   color-scheme: light;
 }
+
+/* =============================================================================
+   TEMPLATE F · KLAR  —  the switch as the layout
+
+   The other five borrow a structure from somewhere: a marque, a catalogue, a
+   boutique, a concourse, a SaaS landing page. This one is derived from the
+   product instead, which is the advice The Design Shelf actually gives — take a
+   structural idea, not a surface.
+
+   The product switches glass from opaque to clear. So does the page:
+
+    · Every panel arrives FROSTED — blurred, desaturated, scaled up a touch to
+      hide the soft edges — and clears when it snaps into view. The page is
+      demonstrating the thing it is selling, once per section.
+    · Panels ALTERNATE between mat and klar grounds, dark and light. Scrolling
+      through it is watching a pane switch state, over and over.
+    · There is a real MAT / KLAR switch pinned to the rail. Throw it and the
+      whole page frosts over. It is the single most persuasive control that
+      could exist on this particular website and it costs one class name.
+
+   Navigation is by panel rather than by scroll position: a fixed vertical index
+   down the right edge, numbered, with the current panel marked. That is the
+   other complete break from the set — the five before it are all documents you
+   scroll, and this is a sequence you step through.
+
+   Type is Switzer (Fontshare). Typewolf has it running on current work, it is
+   free for commercial use, and the shelf names Fontshare as where to go when
+   Inter will not do. It is the one typeface in the set that is not from Google.
+   ============================================================================= */
+
+@theme {
+  --font-switzer: "Switzer", var(--font-inter), "Inter", system-ui, sans-serif;
+
+  --color-klar-bg: #fafaf9;
+  --color-klar-ink: #101113;
+  --color-klar-ink-2: #5a5f66;
+  --color-klar-line: #e2e2e0;
+  --color-mat-bg: #0c0d0f;
+  --color-mat-ink-2: rgb(255 255 255 / 0.62);
+  --color-mat-line: rgb(255 255 255 / 0.14);
+}
+
+html:has(.tpl-klar) {
+  background: var(--color-mat-bg);
+  /* Proximity, not mandatory. Mandatory snapping makes a panel taller than the
+     viewport — the datasheet — genuinely hard to reach the bottom of, and a
+     page that fights the scroll wheel stops feeling expensive very fast. */
+  scroll-snap-type: y proximity;
+}
+
+@utility klar-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* The frost.
+   
+   CLEAR IS THE DEFAULT AND FROST IS THE ENHANCEMENT, and that direction is not
+   a style preference — it is the difference between a page that degrades and a
+   page that dies. Written the other way round, with the blur baked into the
+   base rule and JavaScript responsible for removing it, anything that stops the
+   script arriving — JS disabled, a hydration error, an IntersectionObserver
+   that never fires — leaves a black screen carrying invisible copy. This way
+   the worst case is that a visitor simply gets the page without the effect.
+   
+   So the frost only exists once the component has flagged that it is alive, via
+   data-js on the root. The scale hides the soft edge blur() leaves behind, and
+   1100ms is chosen because the real product switches in under a second: any
+   faster and it reads as a page-load artefact rather than as the product. */
+@utility klar-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    filter 1100ms var(--ease-cold),
+    transform 1400ms var(--ease-cold);
+}
+
+.tpl-klar[data-js='true'] [data-panel]:not([data-clear='true']) .klar-media,
+.tpl-klar[data-js='true'][data-frosted='true'] .klar-media {
+  filter: blur(22px) saturate(0.45);
+  transform: scale(1.08);
+}
+
+/* Copy rises a beat behind the glass, so the words appear to arrive *through*
+   the pane rather than on top of it. Same inversion, same reason. */
+@utility klar-copy {
+  transition:
+    opacity 900ms var(--ease-cold) 180ms,
+    transform 900ms var(--ease-cold) 180ms;
+}
+
+.tpl-klar[data-js='true'] [data-panel]:not([data-clear='true']) .klar-copy {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+@utility klar-display {
+  font-family: var(--font-switzer);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 6.6vw, 5.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.042em;
+  text-wrap: balance;
+  max-width: 15ch;
+}
+
+@utility klar-h2 {
+  font-family: var(--font-switzer);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+@utility klar-label {
+  font-family: var(--font-switzer);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@utility klar-body {
+  font-family: var(--font-switzer);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  text-wrap: pretty;
+}
+
+@utility klar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 50px;
+  padding-inline: 1.75rem;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+  font-family: var(--font-switzer);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition:
+    background-color 420ms var(--ease-cold),
+    color 420ms var(--ease-cold);
+}
+
+/* Nothing should blur for someone who asked for less motion — the global
+   reduced-motion block kills the transition, which would otherwise leave every
+   panel frozen permanently frosted. */
+@media (prefers-reduced-motion: reduce) {
+  .klar-media {
+    filter: none;
+    transform: none;
+  }
+
+  .klar-copy {
+    opacity: 1;
+    transform: none;
+  }
+
+  html:has(.tpl-klar) {
+    scroll-snap-type: none;
+  }
+}

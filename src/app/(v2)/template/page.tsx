@@ -3,8 +3,8 @@ import { BRAND, TEMPLATES } from '@/content/v2';
 import { Arrow, Reveal } from '@/components/v2/primitives';
 
 export const metadata = {
-  title: 'Fem designretninger — SmartFilm',
-  description: 'Vælg mellem Stage, Vitrine, Salon, Promenade og Lumen.',
+  title: 'Seks designretninger — SmartFilm',
+  description: 'Vælg mellem Stage, Vitrine, Salon, Promenade, Lumen og Klar.',
 };
 
 /**
@@ -25,9 +25,9 @@ export default function TemplateChooser() {
       <div className="v2-shell py-[clamp(3rem,7vw,7rem)]">
         <Reveal>
           <p className="v2-label v2-tick">{BRAND.full} · designretninger</p>
-          <h1 className="v2-h2 mt-1">Fem retninger. Samme ord.</h1>
+          <h1 className="v2-h2 mt-1">Seks retninger. Samme ord.</h1>
           <p className="v2-lead mt-6 max-w-[58ch]">
-            De fem skabeloner nedenfor viser præcis den samme tekst, de samme tal og de samme
+            De seks skabeloner nedenfor viser præcis den samme tekst, de samme tal og de samme
             billeder. Alt hvad der adskiller dem, er designet — layout, typografi, farve og tempo.
             Vælg retningen, ikke indholdet.
           </p>
