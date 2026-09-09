@@ -88,6 +88,14 @@
      --------------------------------------------------------------------- */
   --font-display: var(--font-archivo), "Archivo", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  /* B · Index sets its labels, index numbers and every figure in a mono. A
+     catalogue reads as a catalogue because the numbers line up in columns, and
+     nothing does that as unarguably as a monospace. */
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* C · Vitrine. Lamborghini's display face is a bespoke heavy condensed
+     grotesque; Barlow Condensed is the closest free thing in proportion, and
+     condensed is what lets a six-word headline be set at 9vw without wrapping. */
+  --font-condensed: var(--font-barlow), "Barlow Condensed", "Oswald", Impact, sans-serif;
 
   /* Long, decelerating, never bouncy. A spring would undo the whole register. */
   --ease-cold: cubic-bezier(0.19, 1, 0.22, 1);
@@ -556,4 +564,182 @@ html.v2-locked body {
     opacity: 1;
     transform: none;
   }
+}
+
+
+/* =============================================================================
+   TEMPLATE A · STAGE  —  Porsche
+   Image-led. The page is a sequence of full-viewport media stages with the
+   copy set into the bottom-left of each one, and the only round shape on it is
+   the pill. Restraint is the whole idea: short sentences, one action per stage.
+   ============================================================================= */
+
+/* A stage owns the viewport. 100svh rather than 100vh so mobile browser chrome
+   collapsing does not resize it mid-scroll; the min-height keeps it usable on a
+   short laptop window in landscape. */
+@utility stage {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 620px;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--color-void);
+  color: #fff;
+}
+
+/* Two scrims, not one. A single top-to-bottom gradient dark enough to carry
+   white text at the bottom also greys out the top of the frame; a strong bottom
+   scrim plus a light top one leaves the middle of the shot — the part the
+   photographer was actually paid for — untouched. */
+@utility stage-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgb(0 0 0 / 0.42) 0%, transparent 22%),
+    linear-gradient(to top, rgb(0 0 0 / 0.82) 0%, rgb(0 0 0 / 0.42) 34%, transparent 68%);
+}
+
+/* =============================================================================
+   TEMPLATE B · INDEX  —  Audi, and the printed product catalogue
+   Typography-led, on white. No full-bleed anything: every image sits in a fixed
+   field with the page's margins visible around it, captions live out in the
+   margin, and the numbers are monospaced. It should read as a reference
+   document that happens to be a website.
+   ============================================================================= */
+
+@utility idx-display {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+  line-height: 1.12;
+  /* Uppercase runs ~40% wider than sentence case, so the ceiling is far lower
+     than template A's and the tracking has to open up or the caps close ranks
+     and stop being readable as words. */
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+@utility idx-display-lg {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  max-width: 18ch;
+}
+
+@utility idx-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--color-ink-3);
+}
+
+@utility idx-num {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* The index rule: a hairline that runs the full measure with the label sitting
+   on it. Used as the section divider throughout template B. */
+@utility idx-rule {
+  border-top: 1px solid var(--color-ink);
+}
+
+/* =============================================================================
+   TEMPLATE C · VITRINE  —  Lamborghini
+   Dark, condensed, hard-edged. Where A rounds its buttons into pills, C squares
+   everything off and fills it; where A whispers, C sets the same headline in
+   uppercase condensed at twice the size. Champagne does real work here, because
+   a warm metal only properly reads against black.
+   ============================================================================= */
+
+@utility vit-display {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: clamp(3rem, 9vw, 8.5rem);
+  line-height: 0.88;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@utility vit-h2 {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@utility vit-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-signal-light);
+}
+
+/* Lamborghini's button, and the single clearest way to tell C from A at a
+   glance: a hard-edged filled block with the label centred and an arrow pushed
+   to the end, sized like a bar rather than like a control. */
+@utility vit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-width: min(22rem, 100%);
+  height: 64px;
+  padding-inline: 2.5rem;
+  border-radius: 0;
+  border: 1px solid #fff;
+  background: #fff;
+  color: var(--color-void);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  transition:
+    background-color 380ms var(--ease-cold),
+    color 380ms var(--ease-cold);
+}
+
+@utility vit-btn-ghost {
+  background: transparent;
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.45);
+}
+
+.vit-btn svg,
+.vit-btn-ghost svg {
+  transition: transform 420ms var(--ease-cold);
+}
+
+.vit-btn:hover svg,
+.vit-btn-ghost:hover svg {
+  transform: translateX(6px);
+}
+
+/* The angular cut. Lamborghini's whole shape language is the hexagon and the
+   diagonal, and one clipped corner on an otherwise square panel is enough to
+   carry it without turning the page into origami. */
+@utility vit-cut {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), calc(100% - 2.5rem) 100%, 0 100%);
 }

@@ -1,41 +1,73 @@
-import V2Cta from '@/components/v2/V2Cta';
-import V2Editorial from '@/components/v2/V2Editorial';
-import V2Features from '@/components/v2/V2Features';
-import V2Footer from '@/components/v2/V2Footer';
-import V2Header from '@/components/v2/V2Header';
-import V2Hero from '@/components/v2/V2Hero';
-import V2Range from '@/components/v2/V2Range';
-import V2Specs from '@/components/v2/V2Specs';
-import V2Statement from '@/components/v2/V2Statement';
+import Link from 'next/link';
+import { BRAND, TEMPLATES } from '@/content/v2';
+import { Arrow, Reveal } from '@/components/v2/primitives';
+
+export const metadata = {
+  title: 'Tre designretninger — SmartFilm',
+  description: 'Vælg mellem Stage, Index og Vitrine.',
+};
 
 /**
- * The v2 template.
+ * The chooser.
  *
- * One page, eight bands, and the whole sequence is the argument: film, range,
- * principle, principle, claim, data, proof, ask. That order is what the German
- * automotive sites all share underneath their different surfaces — desire
- * first, then the range, then the reason to believe, and only then the numbers.
- * Putting the specification table before the photography inverts it and the
- * page immediately reads as a catalogue.
+ * Deliberately plain — near-monochrome, no photography of its own beyond the
+ * three thumbnails, no personality at all. It sits in front of three designs
+ * that are each trying hard to have one, and anything decorative here would
+ * compete with the thing it is asking you to judge.
  *
- * The grounds alternate paper → fog → graphite → paper → fog → void, so no two
- * adjacent bands share a background and the page has a rhythm even when it is
- * scrolled past at speed.
+ * All three templates render the same words from the same content file. That is
+ * the point of showing them together: when the copy is identical, the only
+ * variable left is the design.
  */
-export default function TemplatePage() {
+export default function TemplateChooser() {
   return (
-    <>
-      <V2Header />
-      <main id="main">
-        <V2Hero />
-        <V2Range />
-        <V2Features />
-        <V2Statement />
-        <V2Specs />
-        <V2Editorial />
-        <V2Cta />
-      </main>
-      <V2Footer />
-    </>
+    <main id="main" className="min-h-svh bg-paper">
+      <div className="v2-shell py-[clamp(3rem,7vw,7rem)]">
+        <Reveal>
+          <p className="v2-label v2-tick">{BRAND.full} · designretninger</p>
+          <h1 className="v2-h2 mt-1">Tre retninger. Samme ord.</h1>
+          <p className="v2-lead mt-6 max-w-[58ch]">
+            De tre skabeloner nedenfor viser præcis den samme tekst, de samme tal og de samme
+            billeder. Alt hvad der adskiller dem, er designet — layout, typografi, farve og tempo.
+            Vælg retningen, ikke indholdet.
+          </p>
+        </Reveal>
+
+        <ul className="mt-[clamp(2.5rem,5vw,4.5rem)] grid gap-x-8 gap-y-12 md:grid-cols-3">
+          {TEMPLATES.map((t, i) => (
+            <Reveal as="li" key={t.slug} delay={i * 80}>
+              <article className="group flex h-full flex-col">
+                <Link href={`/template/${t.slug}`} className="v2-frame block aspect-[4/3] w-full">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={t.image}
+                    alt={t.alt}
+                    className="size-full object-cover transition-transform duration-[1200ms] ease-[var(--ease-cold)] group-hover:scale-[1.03]"
+                  />
+                  <span className="v2-label v2-label-light absolute left-5 top-5">{t.index}</span>
+                </Link>
+
+                <h2 className="v2-h3 mt-6">{t.name}</h2>
+                <p className="v2-label mt-2">Reference · {t.reference}</p>
+                <p className="v2-body mt-4 text-[0.9375rem]">{t.blurb}</p>
+
+                <Link href={`/template/${t.slug}`} className="v2-btn v2-btn-line mt-auto !mt-7 self-start">
+                  Åbn {t.name}
+                  <Arrow />
+                </Link>
+              </article>
+            </Reveal>
+          ))}
+        </ul>
+
+        <Reveal delay={200}>
+          <p className="v2-caption mt-[clamp(3rem,6vw,5rem)] max-w-[70ch] border-t border-hair pt-6">
+            Fotografierne er midlertidige og hentet fra Pexels — licens og kilde ligger i
+            assets/pexels/CREDITS.md. Videoerne er SmartFilms egne: intet stockbibliotek har et klip
+            af PDLC-glas, der skifter, og det er præcis dét, produktet gør.
+          </p>
+        </Reveal>
+      </div>
+    </main>
   );
 }
