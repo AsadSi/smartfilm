@@ -19,9 +19,9 @@ en preview-fil frem for en licenseret download. Vandmærket er nu klippet væk,
 men I bør bekræfte, at I har rettighederne til klippet.
 
 
-## AI-genereret visualisering på LED Film-siden
+## AI-genereret visualisering på forsiden
 
-Loopet under påstandene på `/led-film` (`led-mall-loop.mp4`, 4 sekunder) er
+Loopet på forsiden (`led-mall-loop.mp4`, 4 sekunder) er
 **AI-genereret** — det er ikke optagelser af en rigtig installation. Det er
 derfor tekstet "Visualisering", så ingen kan tage fejl af det. Klippet viser
 princippet korrekt: ruden er klar, LED-vævet tændes, og butikken bagved kan

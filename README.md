@@ -14,20 +14,45 @@ npm run build   # static export of all 9 routes
 npm run lint
 ```
 
+## Two design languages, one project
+
+`src/app` has **no top-level `layout.tsx`**. Instead there are two route groups,
+each of which is its own root layout, its own stylesheet and its own font stack:
+
+| group   | routes                        | stylesheet | look                                    |
+| ------- | ----------------------------- | ---------- | --------------------------------------- |
+| `(site)`| the eight live routes         | `globals.css` | the current site — uppercase Inter, blue accent |
+| `(v2)`  | `/template`                   | `v2.css`      | the makeover — German-automotive, Archivo display |
+
+They share nothing but `public/assets`, so work on the new design cannot break
+the live one. Navigating between the two triggers a full page load, which is the
+correct trade while both exist. When `(v2)` wins, `(site)` is deleted and the
+group wrapper comes off.
+
+`/template` is `noindex` and exists to be argued about, not shipped.
+
 ## Layout
 
 ```
 src/
-  app/                 one folder per route; each page.tsx holds only metadata
-    page.tsx             home
-    produkter/           comparison matrix + three product cards
-    smart-film/          ┐
-    led-film/            ├ all three render <ProductPage slug="…" />
-    3d-media-glass/      ┘
-    referencer/  om-os/  kontakt/
-    globals.css        design tokens + the utilities the whole site is built on
+  app/
+    (site)/            the live site — one folder per route
+      layout.tsx         its root layout: Header, Footer, LanguageProvider
+      page.tsx           home
+      produkter/         comparison matrix + three product cards
+      smart-film/        ┐
+      led-film/          ├ all three render <ProductPage slug="…" />
+      3d-media-glass/    ┘
+      kontakt/  privatlivspolitik/
+    (v2)/
+      layout.tsx         its root layout: Archivo + Inter, v2.css
+      template/          the makeover, one page
+    api/  robots.ts  sitemap.ts   shared by both groups
+    globals.css        (site) design tokens and utilities
+    v2.css             (v2) design tokens and utilities
   components/          section-level building blocks
     product/           the product-page sequence
+    v2/                the makeover's bands, used only by /template
   content/             every string and product fact on the site
 ```
 

@@ -1,0 +1,559 @@
+@import "tailwindcss";
+
+/* =============================================================================
+   SmartFilm — v2 design language  ·  "sharp and cold, yet luxury"
+
+   The reference is German automotive: porsche.com for structure and pacing,
+   Audi and Mercedes for restraint. What is taken from them is *structural*, not
+   surface — the things that survive being described in words:
+
+     · one idea per full-viewport band, and nothing competing inside it
+     · a very wide container (1600px) with air at the edges
+     · sentence-case display type, set huge, tracked tight, ending in a full
+       stop — "Cayenne." — never uppercase, never a serif
+     · zero radius on every surface, image and rule; the pill button is the
+       single exception, and it is the only round thing on the page
+     · neutrals shifted a few degrees toward blue so the greys read cold
+     · one signal colour, used perhaps twice per screen, never as a wash
+     · long decelerating motion; nothing bounces, nothing springs
+
+   Tokens live here so the entire language is one file to re-tune.
+   ============================================================================= */
+
+@theme {
+  /* ---------------------------------------------------------------------
+     GROUND — four values, no more. The page is paper, fog, graphite or void
+     and never anything between; a fifth grey is how a palette starts to look
+     accidental.
+     --------------------------------------------------------------------- */
+  --color-paper: #ffffff;    /* default ground                              */
+  --color-fog: #f4f5f7;      /* the alternating light band — cold, not warm  */
+  --color-graphite: #16181c; /* dark band                                    */
+  --color-void: #0a0b0d;     /* footer, hero scrim, the deepest surface      */
+
+  /* ---------------------------------------------------------------------
+     INK — three weights of the same cold near-black. The greys are blue-
+     shifted by a few degrees: a neutral grey next to pure white reads warm,
+     and warmth is the one thing this language cannot have.
+     --------------------------------------------------------------------- */
+  --color-ink: #0a0b0d;      /* headlines, body               19.4:1 on paper */
+  --color-ink-2: #43484f;    /* body copy at length            9.4:1 on paper */
+  --color-ink-3: #6f767f;    /* labels, captions, meta         4.9:1 on paper */
+
+  /* On the dark grounds. Pure white body copy on near-black is glare, so the
+     running text sits at 72% and only the headline takes the full white. */
+  --color-ink-light: #ffffff;
+  --color-ink-light-2: rgb(255 255 255 / 0.72);
+  --color-ink-light-3: rgb(255 255 255 / 0.52);
+
+  /* ---------------------------------------------------------------------
+     HAIRLINES. This language draws with rules rather than with boxes, so the
+     line colours matter more than usual. --color-hair is decorative; anything
+     a user can click needs --color-hair-strong to clear 3:1.
+     --------------------------------------------------------------------- */
+  --color-hair: #e4e7eb;
+  --color-hair-strong: #9aa1aa;   /* control borders           3.2:1 on paper */
+  --color-hair-dark: rgb(255 255 255 / 0.16);
+  --color-hair-dark-strong: rgb(255 255 255 / 0.42);
+
+  /* ---------------------------------------------------------------------
+     SIGNAL — the only hue on the page, and the only warm thing in it.
+
+     Champagne against cold near-black: the contrast between a warm metal and
+     a blue-shifted grey is what separates this from the cold-blue register
+     every other glass and LED supplier is already in. Hotel, not garage.
+
+     Used on the eyebrow rule, the focus ring and the list markers — roughly
+     twice per screen. It is never a background for a large area, because the
+     moment it fills a band it stops being a signal and becomes a brand wash.
+
+     Three values, because one champagne cannot do all three jobs. #b08d57 is
+     the brand colour and clears 3:1 on white, which is enough for a 2px rule
+     and not enough for a word; anything textual takes --signal-deep, and
+     anything on a dark ground takes --signal-light.
+     --------------------------------------------------------------------- */
+  --color-signal: #b08d57;        /* rules and marks on paper  3.1:1 (graphic) */
+  --color-signal-deep: #8a6a3b;   /* text and focus on paper   5.0:1          */
+  --color-signal-light: #d8bc8a;  /* on graphite / void       9.7 / 10.8:1    */
+
+  /* ---------------------------------------------------------------------
+     TYPE. Two grotesques, and the split is by job, not by taste: Archivo is
+     narrower and squarer, so it carries the display sizes where the extra
+     width of a neutral face turns a five-word headline into three lines.
+     Inter carries everything set below 20px, where Archivo's tighter
+     apertures start to close up.
+
+     Porsche sets everything in Porsche Next — licensed, so not an option.
+     Archivo is the closest free face in proportion and in temperature.
+     --------------------------------------------------------------------- */
+  --font-display: var(--font-archivo), "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Long, decelerating, never bouncy. A spring would undo the whole register. */
+  --ease-cold: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+:root {
+  --v2-header-h: 72px;
+  --v2-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --v2-shell: 1600px;
+  --v2-shell-narrow: 820px;
+  color-scheme: light;
+}
+
+/* ───── Base ───── */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal-deep);
+  outline-offset: 3px;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--v2-header-h) + 2rem);
+}
+
+html.v2-locked,
+html.v2-locked body {
+  overflow: hidden;
+}
+
+/* ───── Layout ───── */
+@utility v2-shell {
+  width: 100%;
+  max-width: var(--v2-shell);
+  margin-inline: auto;
+  padding-inline: var(--v2-gutter);
+}
+
+@utility v2-shell-narrow {
+  width: 100%;
+  max-width: var(--v2-shell-narrow);
+  margin-inline: auto;
+  padding-inline: var(--v2-gutter);
+}
+
+/* The vertical beat. Bands are taller than a typical marketing site because
+   the whole effect depends on each one owning the viewport on its own. */
+@utility v2-band {
+  padding-block: clamp(6rem, 12vw, 12rem);
+}
+
+@utility v2-band-tight {
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+}
+
+/* ───── Display type ─────
+   Sentence case, tracked tight, leading below 1. The full stop at the end of a
+   headline is Porsche's, and it is the cheapest single thing to steal: it turns
+   a label into a statement. */
+@utility v2-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.9rem, 7.4vw, 6.75rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  /* The measure lives on the heading itself. `ch` resolves against the
+     element's own font, so this is 15 characters of *display* type — put the
+     same value on a wrapper div and it silently means 15 characters of 16px
+     body text, which is a fifth of the width. */
+  max-width: 15ch;
+}
+
+@utility v2-h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 4.6vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+  max-width: 17ch;
+}
+
+@utility v2-h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+  line-height: 1.14;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+/* Card and list titles sit in Inter — below 20px Archivo's counters close up. */
+@utility v2-h4 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+@utility v2-lead {
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+@utility v2-lead-light {
+  color: var(--color-ink-light-2);
+}
+
+@utility v2-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+/* The small uppercase label. Widely tracked, tiny, and the only uppercase on
+   the page — which is what lets the display type stay sentence case. */
+@utility v2-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-ink-3);
+}
+
+@utility v2-label-light {
+  color: var(--color-ink-light-3);
+}
+
+/* Every number on the site. Tabular figures and negative tracking — a column of
+   proportional numerals that fails to line up is the single clearest tell that
+   a page was typeset by eye rather than engineered. */
+@utility v2-num {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-size: clamp(2.25rem, 4.4vw, 3.5rem);
+}
+
+@utility v2-num-sm {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.01em;
+}
+
+/* ───── Controls ─────
+   The pill is the one round shape in the language. Everything else — images,
+   cards, fields, rules — measures 0px, which is why the pill reads as a
+   deliberate control rather than as a rounded rectangle. */
+@utility v2-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 52px;
+  padding-inline: 2rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color 400ms var(--ease-cold),
+    color 400ms var(--ease-cold),
+    border-color 400ms var(--ease-cold);
+}
+
+@utility v2-btn-solid {
+  background: var(--color-ink);
+  color: #fff;
+  border-color: var(--color-ink);
+}
+
+@utility v2-btn-solid-light {
+  background: #fff;
+  color: var(--color-ink);
+  border-color: #fff;
+}
+
+/* Hairline buttons carry --color-hair-strong, not --color-hair: an outline is
+   the control's only boundary, so it has to clear 3:1 on its own. */
+@utility v2-btn-line {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-hair-strong);
+}
+
+@utility v2-btn-line-light {
+  background: transparent;
+  color: #fff;
+  border-color: var(--color-hair-dark-strong);
+}
+
+/* The text link. The arrow, not the colour, carries the affordance — it steps
+   forward 4px on hover, which is the only motion in the language that happens
+   on a pointer rather than on scroll. */
+@utility v2-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+@utility v2-arrow-light {
+  color: #fff;
+}
+
+.v2-arrow svg,
+.v2-arrow-light svg {
+  transition: transform 420ms var(--ease-cold);
+}
+
+.v2-arrow:hover svg,
+.v2-arrow-light:hover svg,
+.v2-arrow:focus-visible svg,
+.v2-arrow-light:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* ───── Rules ───── */
+@utility v2-rule {
+  border-top: 1px solid var(--color-hair);
+}
+
+@utility v2-rule-dark {
+  border-top: 1px solid var(--color-hair-dark);
+}
+
+/* The 32px signal tick that sits above an eyebrow.
+
+   `.v2-tick` is an unlayered rule and `v2-label` is a Tailwind `@utility`,
+   which lives in `@layer utilities` — so this `display: block` wins, and the
+   tick stacks above the label instead of becoming a flex item beside it. */
+.v2-tick {
+  display: block;
+}
+
+.v2-tick::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--color-signal);
+  margin-bottom: 1.25rem;
+}
+
+.v2-tick-light::before {
+  background: var(--color-signal-light);
+}
+
+/* ───── Media ───── */
+@utility v2-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  background: var(--color-graphite);
+}
+
+/* A slow, barely-perceptible zoom out on the hero footage. The point is that
+   the frame never sits completely still, not that anyone notices it moving. */
+@keyframes v2-drift {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.v2-drift {
+  animation: v2-drift 14s var(--ease-cold) forwards;
+}
+
+/* ───── Scroll reveal ─────
+   Two variants: content rises, media only fades. A photograph that slides is
+   the surest way to make an expensive image look like a slideshow. */
+.v2-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 900ms var(--ease-cold),
+    transform 900ms var(--ease-cold);
+}
+
+.v2-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.v2-reveal-fade {
+  transform: none;
+}
+
+/* ───── Scroll cue ───── */
+@keyframes v2-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.v2-cue span {
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(#fff, transparent);
+  animation: v2-cue 2.6s ease-in-out infinite;
+}
+
+/* The range layout, and the one place this language changes its mind at a
+   breakpoint.
+
+   Below 48rem it is a snap-scrolling rail, because three tall cards cannot
+   share a phone. Above it, it is three equal columns filling the shell and
+   divided by hairlines — the configurator rail is Porsche's answer to *twelve*
+   models, and with three it leaves a quarter of a 1600px viewport empty on the
+   right, which reads as an unfinished band rather than as a range that
+   continues.
+
+   The negative inset is what lets every column carry the same 2rem of internal
+   padding while the outer two still line their media up with the shell gutter;
+   without it the middle column's image would be 64px narrower than its
+   neighbours' and the row would look subtly broken. */
+@utility v2-range-grid {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--v2-gutter);
+  /* Without this the snapport is the border box, so the rail loads 20px
+     pre-scrolled with the first card clipped by the screen edge, and every
+     later card snaps flush against that edge instead of to the gutter. */
+  scroll-padding-inline: var(--v2-gutter);
+
+  @media (width >= 48rem) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    overflow: visible;
+    max-width: var(--v2-shell);
+    margin-inline: auto;
+    padding-inline: calc(var(--v2-gutter) - 2rem);
+  }
+}
+
+@utility v2-range-col {
+  width: min(78vw, 25rem);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+
+  @media (width >= 48rem) {
+    position: relative;
+    width: auto;
+    padding-inline: 2rem;
+  }
+}
+
+/* The dividers are drawn, not bordered.
+
+   A `border-left` on columns two and three takes a pixel out of their content
+   box, so their images come out 447px wide against the first column's 448 — an
+   invisible difference on its own and a visible one when three photographs are
+   meant to read as one row. An absolutely positioned rule costs no layout
+   width, and the adjacent-sibling selector means there is no first-child
+   exception to remember. */
+@media (width >= 48rem) {
+  .v2-range-col + .v2-range-col::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 1px;
+    background: var(--color-hair);
+  }
+}
+
+/* Sentence-case sibling of v2-label, for captions under a figure or a number,
+   where 0.2em of tracking on running words is unreadable. */
+@utility v2-caption {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-ink-3);
+}
+
+@utility v2-caption-light {
+  color: var(--color-ink-light-3);
+}
+
+/* Horizontal rails hide their scrollbar — the peeking fourth card is the
+   affordance, the way it is on every configurator. */
+.v2-rail {
+  scrollbar-width: none;
+}
+
+.v2-rail::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .v2-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

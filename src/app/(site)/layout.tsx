@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { LanguageProvider } from '@/components/LanguageProvider';
 import { META } from '@/content/pages';
 import { SITE } from '@/content/site';
-import './globals.css';
+import '../globals.css';
 
 // Display and body are both Inter now — 300 for the uppercase headlines,
 // 400/500 for copy and labels. Cormorant went with the italic headlines.
