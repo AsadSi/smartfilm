@@ -39,7 +39,7 @@ import { Arrow, Loop, Reveal } from './primitives';
  */
 export default function TemplateVitrine() {
   return (
-    <div className="bg-void text-white">
+    <div className="tpl-void bg-void text-white">
       <VitrineHeader />
       <main id="main">
         <VitrineHero />

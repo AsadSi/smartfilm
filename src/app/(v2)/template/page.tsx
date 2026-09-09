@@ -3,8 +3,8 @@ import { BRAND, TEMPLATES } from '@/content/v2';
 import { Arrow, Reveal } from '@/components/v2/primitives';
 
 export const metadata = {
-  title: 'Tre designretninger — SmartFilm',
-  description: 'Vælg mellem Stage, Index og Vitrine.',
+  title: 'Fire designretninger — SmartFilm',
+  description: 'Vælg mellem Stage, Vitrine, Salon og Promenade.',
 };
 
 /**
@@ -25,15 +25,15 @@ export default function TemplateChooser() {
       <div className="v2-shell py-[clamp(3rem,7vw,7rem)]">
         <Reveal>
           <p className="v2-label v2-tick">{BRAND.full} · designretninger</p>
-          <h1 className="v2-h2 mt-1">Tre retninger. Samme ord.</h1>
+          <h1 className="v2-h2 mt-1">Fire retninger. Samme ord.</h1>
           <p className="v2-lead mt-6 max-w-[58ch]">
-            De tre skabeloner nedenfor viser præcis den samme tekst, de samme tal og de samme
+            De fire skabeloner nedenfor viser præcis den samme tekst, de samme tal og de samme
             billeder. Alt hvad der adskiller dem, er designet — layout, typografi, farve og tempo.
             Vælg retningen, ikke indholdet.
           </p>
         </Reveal>
 
-        <ul className="mt-[clamp(2.5rem,5vw,4.5rem)] grid gap-x-8 gap-y-12 md:grid-cols-3">
+        <ul className="mt-[clamp(2.5rem,5vw,4.5rem)] grid gap-x-8 gap-y-12 md:grid-cols-2 xl:grid-cols-4">
           {TEMPLATES.map((t, i) => (
             <Reveal as="li" key={t.slug} delay={i * 80}>
               <article className="group flex h-full flex-col">
@@ -48,7 +48,7 @@ export default function TemplateChooser() {
                 </Link>
 
                 <h2 className="v2-h3 mt-6">{t.name}</h2>
-                <p className="v2-label mt-2">Reference · {t.reference}</p>
+                <p className="v2-label mt-2">{t.room} · {t.reference}</p>
                 <p className="v2-body mt-4 text-[0.9375rem]">{t.blurb}</p>
 
                 <Link href={`/template/${t.slug}`} className="v2-btn v2-btn-line mt-auto !mt-7 self-start">
