@@ -12,31 +12,38 @@
  * nothing else.
  */
 
-/** Photography. All Pexels, licence and provenance in assets/pexels/CREDITS.md. */
+/** Photography. All Pexels, licence and provenance in assets/pexels/CREDITS.md.
+    Named by the product each one stands in for rather than by what it literally
+    depicts, so replacing one with a real SmartFilm installation shot later is a
+    one-line swap and nothing else moves. */
 export const IMG = {
-  facadeMonolith: '/assets/pexels/facade-monolith.jpg',
-  facadeLowangle: '/assets/pexels/facade-lowangle.jpg',
-  facadeCurved: '/assets/pexels/facade-curved.jpg',
-  facadeDetail: '/assets/pexels/facade-detail.jpg',
-  facadeGeometric: '/assets/pexels/facade-geometric.jpg',
-  officePartitions: '/assets/pexels/office-partitions.jpg',
-  officeMeeting: '/assets/pexels/office-meeting.jpg',
-  officeDoors: '/assets/pexels/office-doors.jpg',
-  nightQuarter: '/assets/pexels/night-quarter.jpg',
-  nightBillboard: '/assets/pexels/night-billboard.jpg',
+  filmPrivacy: '/assets/pexels/film-privacy.jpg',
+  filmOffice: '/assets/pexels/film-office.jpg',
+  filmDoors: '/assets/pexels/film-doors.jpg',
+  filmTexture: '/assets/pexels/film-texture.jpg',
+  ledAirport: '/assets/pexels/led-airport.jpg',
+  ledFacade: '/assets/pexels/led-facade.jpg',
+  ledRetail: '/assets/pexels/led-retail.jpg',
+  ledCity: '/assets/pexels/led-city.jpg',
+  glassImmersive: '/assets/pexels/glass-immersive.jpg',
+  glassDepth: '/assets/pexels/glass-depth.jpg',
+  glassArt: '/assets/pexels/glass-art.jpg',
+  glassStructure: '/assets/pexels/glass-structure.jpg',
 } as const;
 
 export const ALT = {
-  facadeMonolith: 'Mørk glasfacade mod en lys himmel',
-  facadeLowangle: 'Glasfacade set nedefra',
-  facadeCurved: 'Buet glasfacade i blåt stål',
-  facadeDetail: 'Nærbillede af glasfacade med himmelspejling',
-  facadeGeometric: 'Skulpturel hvid facade i geometrisk mønster',
-  officePartitions: 'Kontor med sortrammede glaspartier',
-  officeMeeting: 'Møde bag en glasvæg med udsigt over byen',
-  officeDoors: 'Åbne glasdøre ind til et mødelokale',
-  nightQuarter: 'Oplyst bykvarter om aftenen',
-  nightBillboard: 'Stor LED-flade på en plads om aftenen',
+  filmPrivacy: 'To personer i silhuet bag en matteret glasvæg',
+  filmOffice: 'Kontorafsnit bag riflede glaspartier',
+  filmDoors: 'Lukkede matterede glasskydedøre',
+  filmTexture: 'Nærbillede af en struktureret glasflade',
+  ledAirport: 'Lufthavnsterminal med oplyste displaysøjler',
+  ledFacade: 'Butikscenterfacade med LED i fuld højde om aftenen',
+  ledRetail: 'Butiksfacade med lysende installation bag glasset',
+  ledCity: 'Højhuse beklædt med LED efter mørkets frembrud',
+  glassImmersive: 'Person i et rum af faldende lys',
+  glassDepth: 'Neonrammer i hinanden, der giver dybde i en flad væg',
+  glassArt: 'Silhuetter i en lysinstallation',
+  glassStructure: 'Oplyst geometrisk konstruktion i en gård',
 } as const;
 
 /** SmartFilm's own footage. No stock library has PDLC glass switching. */
@@ -95,8 +102,8 @@ export const PRODUCTS: Product[] = [
     long: 'Et mødelokale skal ikke ligne et showroom for et produkt. Filmen lamineres ind i glasset, kablingen føres i rammen, og kontakten sidder der, hvor lyskontakten allerede sad. Det eneste, nogen lægger mærke til, er at ruden skifter.',
     figure: { value: '92', unit: '%', label: 'Transparens i klar tilstand' },
     film: FILM.smartfilm,
-    photo: IMG.officeMeeting,
-    alt: ALT.officeMeeting,
+    photo: IMG.filmPrivacy,
+    alt: ALT.filmPrivacy,
     href: '#teknologi',
   },
   {
@@ -107,8 +114,8 @@ export const PRODUCTS: Product[] = [
     long: 'Facaden er allerede der. LED-vævet lægger sig på indersiden af glasset og lader både udsyn og dagslys passere, så bygningen bliver en medieflade om aftenen uden at blive en skærm om dagen.',
     figure: { value: '2', unit: 'mm', label: 'Samlet tykkelse' },
     film: FILM.ledfilm,
-    photo: IMG.nightQuarter,
-    alt: ALT.nightQuarter,
+    photo: IMG.ledFacade,
+    alt: ALT.ledFacade,
     href: '#teknologi',
   },
   {
@@ -119,8 +126,8 @@ export const PRODUCTS: Product[] = [
     long: 'Billedet står frit i glasset i stedet for at ligge på det. Det er den eneste af de tre teknologier, hvor folk standser op og bliver stående — og det er hele grunden til at vælge den.',
     figure: { value: '360', unit: '°', label: 'Synsvinkel uden tab' },
     film: FILM.glass,
-    photo: IMG.facadeGeometric,
-    alt: ALT.facadeGeometric,
+    photo: IMG.glassImmersive,
+    alt: ALT.glassImmersive,
     href: '#teknologi',
   },
 ];
@@ -133,8 +140,8 @@ export const STAGES = [
     headline: 'Privatliv på kommando.',
     lead: 'Fra mat til krystalklart på under et sekund. Rummet bliver privat uden at blive mørkt.',
     cta: 'Se Smart Film',
-    image: IMG.officeMeeting,
-    alt: ALT.officeMeeting,
+    image: IMG.filmPrivacy,
+    alt: ALT.filmPrivacy,
   },
   {
     key: 'ledfilm',
@@ -142,8 +149,8 @@ export const STAGES = [
     headline: 'Facaden vågner om aftenen.',
     lead: 'To millimeter LED-væv på indersiden af glasset. Dagslyset slipper stadig ind; udsynet bliver.',
     cta: 'Se LED Film',
-    image: IMG.nightQuarter,
-    alt: ALT.nightQuarter,
+    image: IMG.ledAirport,
+    alt: ALT.ledAirport,
   },
   {
     key: 'glass',
@@ -151,8 +158,18 @@ export const STAGES = [
     headline: 'Dybde i få millimeter.',
     lead: 'Til lobbyer og flagskibsbutikker, hvor det første indtryk skal holde i timevis.',
     cta: 'Se 3D Media Glass',
-    image: IMG.facadeMonolith,
-    alt: ALT.facadeMonolith,
+    image: IMG.glassImmersive,
+    alt: ALT.glassImmersive,
+  },
+  {
+    slug: 'lumen',
+    index: 'E',
+    name: 'Lumen',
+    reference: 'Linear · Vercel',
+    room: 'Lys · teknisk',
+    blurb: 'Præcisionen fører. Næsten hvidt, moderat typografi og meget luft. Den eneste retning i sættet med afrundede hjørner — og det ene greb flytter siden fra arkitektur til produkt, før man har læst et ord. Bento-felter, mono-labels og et svagt punktgitter bagved.',
+    image: IMG.filmTexture,
+    alt: ALT.filmTexture,
   },
 ];
 
@@ -164,8 +181,8 @@ export const PRINCIPLES = [
     headline: 'Teknologien skal forsvinde',
     body: 'Et mødelokale skal ikke ligne et showroom for et produkt. Filmen lamineres ind i glasset, kablingen føres i rammen, og kontakten sidder der, hvor lyskontakten allerede sad.',
     points: ['Lamineret i glasset, ikke monteret på det', 'Kabling skjult i profil og ramme', 'Styring via kontakt, fjernbetjening eller app'],
-    image: IMG.officePartitions,
-    alt: ALT.officePartitions,
+    image: IMG.filmOffice,
+    alt: ALT.filmOffice,
   },
   {
     index: '02',
@@ -173,8 +190,8 @@ export const PRINCIPLES = [
     headline: 'Dagslyset er ikke til forhandling',
     body: 'Persienner løser privatliv ved at fjerne lys. Det gør vores glas ikke: i mat tilstand spreder ruden stadig dagslyset. Rummet bliver privat uden at blive mørkt.',
     points: ['Diffust dagslys i mat tilstand', 'Ingen bevægelige dele at vedligeholde', 'Fungerer som projektionsflade'],
-    image: IMG.officeDoors,
-    alt: ALT.officeDoors,
+    image: IMG.filmDoors,
+    alt: ALT.filmDoors,
   },
 ];
 
@@ -209,10 +226,10 @@ export const SPECS = {
 };
 
 export const REFERENCES = [
-  { image: IMG.nightBillboard, alt: ALT.nightBillboard, title: 'Plads, medieflade', meta: 'LED Film · 340 m² · Udendørs' },
-  { image: IMG.officePartitions, alt: ALT.officePartitions, title: 'Hovedkontor, 4. sal', meta: 'Smart Film · 62 m² · Lamineret' },
-  { image: IMG.facadeCurved, alt: ALT.facadeCurved, title: 'Kontorhus, facade', meta: 'LED Film · 210 m² · Udendørs' },
-  { image: IMG.facadeDetail, alt: ALT.facadeDetail, title: 'Atrium, glasparti', meta: '3D Media Glass · 18 m² · Fritstående' },
+  { image: IMG.ledCity, alt: ALT.ledCity, title: 'Tårn, facadeflade', meta: 'LED Film · 340 m² · Udendørs' },
+  { image: IMG.filmTexture, alt: ALT.filmTexture, title: 'Hovedkontor, 4. sal', meta: 'Smart Film · 62 m² · Lamineret' },
+  { image: IMG.ledRetail, alt: ALT.ledRetail, title: 'Flagskibsbutik, gadeplan', meta: 'LED Film · 26 m² · Indendørs' },
+  { image: IMG.glassDepth, alt: ALT.glassDepth, title: 'Atrium, glasparti', meta: '3D Media Glass · 18 m² · Fritstående' },
 ];
 
 export const CTA = {
@@ -232,17 +249,17 @@ export const FOOTER = {
   legal: ['© 2026 SmartFilm Danmark', 'Privatlivspolitik', 'Cookies', 'CVR 00000000'],
 };
 
-/** The four directions, for the chooser at /template. */
+/** The five directions, for the chooser at /template. */
 export const TEMPLATES = [
   {
     slug: 'stage',
     index: 'A',
     name: 'Stage',
     reference: 'Porsche',
-    room: 'Fuldskærm · lys',
+    room: 'Fuldskærm · billede',
     blurb: 'Billedet fører. Siden er en række fuldskærmsbilleder med teksten sat ned i venstre hjørne af hvert af dem, korte sætninger og pilleknapper. Mindst tekst, størst effekt.',
-    image: IMG.facadeMonolith,
-    alt: ALT.facadeMonolith,
+    image: IMG.ledAirport,
+    alt: ALT.ledAirport,
   },
   {
     slug: 'vitrine',
@@ -251,8 +268,8 @@ export const TEMPLATES = [
     reference: 'Lamborghini',
     room: 'Mørk · kondenseret',
     blurb: 'Kraften fører. Næsten sort hele vejen, tunge versaler i kondenseret snit, hårde firkantede knapper, en skåret hjørne og en delt skærm hvor billedet står stille mens teksten ruller.',
-    image: IMG.nightQuarter,
-    alt: ALT.nightQuarter,
+    image: IMG.ledCity,
+    alt: ALT.ledCity,
   },
   {
     slug: 'salon',
@@ -261,8 +278,8 @@ export const TEMPLATES = [
     reference: 'Smykkeskrinet',
     room: 'Mørk · centreret',
     blurb: 'Roen fører. Varmt næsten-sort, alt centreret og symmetrisk, hver flade lyst indefra med guldhårstreg om kanten. Antikva til udsagnene, spatierede versaler til alt andet. Butikken i lufthavnen klokken elleve om aftenen.',
-    image: IMG.officeDoors,
-    alt: ALT.officeDoors,
+    image: IMG.glassImmersive,
+    alt: ALT.glassImmersive,
   },
   {
     slug: 'promenade',
@@ -271,7 +288,17 @@ export const TEMPLATES = [
     reference: 'Atriet',
     room: 'Lys · sten',
     blurb: 'Materialet fører. Varm sten, varmt blæk og guld reduceret til en hårstreg. Skiltetypografi med bred spatiering, en skinne ned ad siden som alt hænger på, og billeder i høje buede portaler frem for firkanter.',
-    image: IMG.facadeGeometric,
-    alt: ALT.facadeGeometric,
+    image: IMG.glassStructure,
+    alt: ALT.glassStructure,
+  },
+  {
+    slug: 'lumen',
+    index: 'E',
+    name: 'Lumen',
+    reference: 'Linear · Vercel',
+    room: 'Lys · teknisk',
+    blurb: 'Præcisionen fører. Næsten hvidt, moderat typografi og meget luft. Den eneste retning i sættet med afrundede hjørner — og det ene greb flytter siden fra arkitektur til produkt, før man har læst et ord. Bento-felter, mono-labels og et svagt punktgitter bagved.',
+    image: IMG.filmTexture,
+    alt: ALT.filmTexture,
   },
 ];

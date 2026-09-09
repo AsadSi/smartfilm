@@ -958,3 +958,158 @@ html:has(.tpl-bone) {
   background: var(--color-bone);
   color-scheme: light;
 }
+
+/* =============================================================================
+   TEMPLATE E · LUMEN  —  the high-end tech landing page
+
+   Linear, Vercel, Stripe. The register is precision rather than luxury, and it
+   gets there by doing almost nothing: near-white ground, moderate type, and an
+   enormous amount of air. It is the only template in the set that is quiet
+   because it is *confident* rather than because it is expensive.
+
+   Three things separate it from the other four, and the first is the one you
+   notice before you have read a word:
+
+    · IT HAS CORNERS. Every other template in this set measures 0px on every
+      surface — that was the whole architectural conceit. This one rounds
+      everything to 10–14px, which is the single fastest way to say software
+      rather than building. Nothing else needed to change for the page to read
+      as a different industry.
+    · Restraint of scale. The display size tops out around 60px where Vitrine
+      reaches 136. Tech landing pages never shout; they set a normal headline
+      and give it a screen of space, and the space does the work.
+    · Mono eyebrows and a visible grid. Small caps in a monospace over every
+      section, hairline borders around bento cells, and a faint dot grid in the
+      background — the aesthetic of something engineered and instrumented.
+   ============================================================================= */
+
+@theme {
+  /* Not pure white. Tech landings sit a hair off #fff so that a genuinely white
+     card can lift off the page without needing a shadow. */
+  --color-lumen-bg: #fbfbfc;
+  --color-lumen-card: #ffffff;
+  --color-lumen-ink: #0b0d10;
+  --color-lumen-ink-2: #55606d;   /* 6.9:1 on the ground */
+  --color-lumen-ink-3: #808b98;   /* 4.6:1 on the ground */
+  --color-lumen-line: #e7e9ed;
+  --color-lumen-line-2: #d3d8df;
+}
+
+@utility lumen-display {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 4.4vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  max-width: 18ch;
+}
+
+@utility lumen-h2 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.6vw, 2.125rem);
+  line-height: 1.15;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+@utility lumen-h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+@utility lumen-mono {
+  font-family: var(--font-plex-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--color-lumen-ink-3);
+}
+
+@utility lumen-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-lumen-ink-2);
+  text-wrap: pretty;
+}
+
+/* The bento cell. A white card on a near-white ground with a hairline and a
+   very small radius — the entire visual vocabulary of the genre in one rule. */
+@utility lumen-cell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-lumen-line);
+  border-radius: 14px;
+  background: var(--color-lumen-card);
+}
+
+/* The pill badge with a live dot, which every one of these pages puts above
+   its headline. */
+@utility lumen-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 30px;
+  padding-inline: 0.875rem;
+  border: 1px solid var(--color-lumen-line-2);
+  border-radius: 999px;
+  background: var(--color-lumen-card);
+  font-family: var(--font-plex-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-lumen-ink-2);
+}
+
+@utility lumen-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 44px;
+  padding-inline: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  transition:
+    background-color 260ms var(--ease-cold),
+    border-color 260ms var(--ease-cold),
+    color 260ms var(--ease-cold);
+}
+
+@utility lumen-btn-solid {
+  background: var(--color-lumen-ink);
+  border-color: var(--color-lumen-ink);
+  color: #fff;
+}
+
+@utility lumen-btn-line {
+  background: var(--color-lumen-card);
+  border-color: var(--color-lumen-line-2);
+  color: var(--color-lumen-ink);
+}
+
+/* The instrument grid. A dot lattice at 2% ink, masked so it fades out before
+   it reaches the edges — visible enough to register as a technical surface,
+   faint enough that nobody consciously sees it. */
+@utility lumen-grid-bg {
+  background-image: radial-gradient(circle at 1px 1px, rgb(11 13 16 / 0.09) 1px, transparent 0);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 78%);
+}
+
+html:has(.tpl-lumen) {
+  background: var(--color-lumen-bg);
+  color-scheme: light;
+}

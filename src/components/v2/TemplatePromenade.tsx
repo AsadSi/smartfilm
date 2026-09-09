@@ -340,7 +340,7 @@ function PromCta() {
         <Reveal fade delay={120} className="lg:col-span-5 lg:col-start-8">
           <div className="prom-portal aspect-[4/5] w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={IMG.facadeGeometric} alt={ALT.facadeGeometric} className="size-full object-cover" loading="lazy" />
+            <img src={IMG.glassDepth} alt={ALT.glassDepth} className="size-full object-cover" loading="lazy" />
           </div>
         </Reveal>
       </div>
