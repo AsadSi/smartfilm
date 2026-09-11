@@ -34,9 +34,55 @@ export const IMG = {
   klarNeon: '/assets/pexels/klar-neon.jpg',
   klarGeometry: '/assets/pexels/klar-geometry.jpg',
   klarReflect: '/assets/pexels/klar-reflect.jpg',
+  // G–K. Prefixed by template, because each was chosen to carry one scene of
+  // one reference video rather than to stand in for a product.
+  straaleOffice: '/assets/pexels/straale-office.jpg',
+  taarnTower: '/assets/pexels/taarn-tower.jpg',
+  taarnClouds: '/assets/pexels/taarn-clouds.jpg',
+  taarnFacade: '/assets/pexels/taarn-facade.jpg',
+  taarnInterior: '/assets/pexels/taarn-interior.jpg',
+  taarnView: '/assets/pexels/taarn-view.jpg',
+  paletSilk: '/assets/pexels/palet-silk.jpg',
+  paletGrass: '/assets/pexels/palet-grass.jpg',
+  paletPampas: '/assets/pexels/palet-pampas.jpg',
+  udsigtHero: '/assets/pexels/udsigt-hero.jpg',
+  udsigtPeak: '/assets/pexels/udsigt-peak.jpg',
+  udsigtOffice: '/assets/pexels/udsigt-office.jpg',
+  udsigtMeeting: '/assets/pexels/udsigt-meeting.jpg',
+  udsigtHotel: '/assets/pexels/udsigt-hotel.jpg',
+  udsigtHome: '/assets/pexels/udsigt-home.jpg',
+  udsigtSpa: '/assets/pexels/udsigt-spa.jpg',
+  udsigtBath: '/assets/pexels/udsigt-bath.jpg',
+  udsigtRetail: '/assets/pexels/udsigt-retail.jpg',
+  udsigtPool: '/assets/pexels/udsigt-pool.jpg',
+  udsigtWindow: '/assets/pexels/udsigt-window.jpg',
+  orbitRocks: '/assets/pexels/orbit-rocks.jpg',
+  orbitAlps: '/assets/pexels/orbit-alps.jpg',
 } as const;
 
 export const ALT = {
+  straaleOffice: 'Kontorgang med glasvægge ind til et mødelokale',
+  taarnTower: 'Et slankt højhus der rejser sig over et skydække',
+  taarnClouds: 'Skyer set fra oven',
+  taarnFacade: 'Glasfacade i et tæt gitter af vinduer',
+  taarnInterior: 'Stue med panoramavinduer ud over byen',
+  taarnView: 'Kvinde ved et panoramavindue over byen i skumringen',
+  paletSilk: 'Hvid silke i bløde folder',
+  paletGrass: 'Mørkt græs set tæt på',
+  paletPampas: 'Pampasgræs i modlys',
+  udsigtHero: 'Snedækket bjergtop over et skyhav i lyserødt aftenlys',
+  udsigtPeak: 'Bjergtinder der stikker op gennem skyerne',
+  udsigtOffice: 'Mødelokale med glasvægge og udsigt til sneklædt skov',
+  udsigtMeeting: 'Mødelokale bag glasvægge',
+  udsigtHotel: 'Hotelværelse med panoramavindue ud mod stranden',
+  udsigtHome: 'Moderne hus med store glaspartier ud mod haven',
+  udsigtSpa: 'Spaafdeling med liggestole og kar',
+  udsigtBath: 'Marmorbadeværelse med glasbruser',
+  udsigtRetail: 'Butik med tasker og sko på hylder',
+  udsigtPool: 'Kvinde i en infinitypool med udsigt til sneklædte bjerge',
+  udsigtWindow: 'Kvinde der kigger ud ad et højt vindue',
+  orbitRocks: 'Klippeformationer under en dramatisk himmel',
+  orbitAlps: 'Alpesø mellem bjerge under blå himmel',
   filmPrivacy: 'To personer i silhuet bag en matteret glasvæg',
   filmOffice: 'Kontorafsnit bag riflede glaspartier',
   filmDoors: 'Lukkede matterede glasskydedøre',
@@ -170,26 +216,6 @@ export const STAGES = [
     cta: 'Se 3D Media Glass',
     image: IMG.glassImmersive,
     alt: ALT.glassImmersive,
-  },
-  {
-    slug: 'lumen',
-    index: 'E',
-    name: 'Lumen',
-    reference: 'Linear · Vercel',
-    room: 'Lys · teknisk',
-    blurb: 'Præcisionen fører. Næsten hvidt, moderat typografi og meget luft. Den eneste retning i sættet med afrundede hjørner — og det ene greb flytter siden fra arkitektur til produkt, før man har læst et ord. Bento-felter, mono-labels og et svagt punktgitter bagved.',
-    image: IMG.filmTexture,
-    alt: ALT.filmTexture,
-  },
-  {
-    slug: 'klar',
-    index: 'F',
-    name: 'Klar',
-    reference: 'Produktet selv',
-    room: 'Skiftende · panelvis',
-    blurb: 'Kontakten fører. Siden er bygget af helskærmspaneler, der ankommer mattede og klarner, når de glider på plads — og som skifter mellem mørk og lys hele vejen ned, så det at rulle er at se en rude skifte tilstand. Der er en rigtig MAT/KLAR-kontakt i kanten: slå den, og hele siden matteres. Sat i Switzer, den eneste skrift i sættet der ikke er fra Google.',
-    image: IMG.klarNeon,
-    alt: ALT.klarNeon,
   },
 ];
 
@@ -404,4 +430,80 @@ export const TEMPLATES = [
     image: IMG.klarNeon,
     alt: ALT.klarNeon,
   },
+  {
+    slug: 'straale',
+    index: 'G',
+    name: 'Stråle',
+    reference: 'Huly',
+    room: 'Mørk · lysstråle',
+    blurb: 'Lyset fører. Næsten sort med blåt i, én lodret lysstråle i toppen og en orange glød forbeholdt det, man skal trykke på. Under strålen står styringen som et rigtigt app-vindue — vælg et rum, og ruden i forhåndsvisningen skifter. To gange skifter siden til en bleg, frostet grund, så den aldrig lægger sig fast som en mørk side.',
+    image: IMG.straaleOffice,
+    alt: ALT.straaleOffice,
+  },
+  {
+    slug: 'taarn',
+    index: 'H',
+    name: 'Tårn',
+    reference: 'Luksusbolig',
+    room: 'Skumring · gennem vinduet',
+    blurb: 'Udsigten fører. Et tårn i skyerne med overskriften delt på hver side af det, en hårfin didone i versaler og en støvet rosa skumring over det hele. Når man ruller, flyver siden ind i facaden og gennem et vindue — hvis ruder er mattede, indtil man er tæt nok på. Sat i Italiana.',
+    image: IMG.taarnTower,
+    alt: ALT.taarnTower,
+  },
+  {
+    slug: 'palet',
+    index: 'I',
+    name: 'Palet',
+    reference: 'Farvepaletter',
+    room: 'Lys · produktskærme',
+    blurb: 'Farven fører. En række produktskærme i tykke hvide rammer, hver med sin palet svævende over sig — og paletterne virker: vælg en, og skærmen farves om. Den første er altid grå, glasset slukket; de næste er glasset tændt. Kæmpeord i Unbounded med en glasrude stående foran.',
+    image: IMG.paletPampas,
+    alt: ALT.paletPampas,
+  },
+  {
+    slug: 'udsigt',
+    index: 'J',
+    name: 'Udsigt',
+    reference: 'LuxTrips',
+    room: 'Lys · rejsebrochure',
+    blurb: 'Stedet fører. Rosa sten og lilla dis, en let antikva sat enormt over landskabet og hele rejsesidens grammatik — søgefelt, rejsemål på en skinne, pakker, fliser og et "hvorfor os" over et bjerg — med rum der, hvor rejsemålene ville være. Sat i Cormorant Garamond.',
+    image: IMG.udsigtHero,
+    alt: ALT.udsigtHero,
+  },
+  {
+    slug: 'orbit',
+    index: 'K',
+    name: 'Orbit',
+    reference: 'Futuristisk',
+    room: 'Mørk · enhedsramme',
+    blurb: 'Formen fører. Hver skærm sidder i en enhedsramme med hak skåret ud af kanten: en kugle med en lysspalte, der skifter farve med produktet, en flade af orange og en blå himmel med en glasbue. Brede tekno-versaler i Michroma og mono til alt, der ligner en aflæsning.',
+    image: IMG.orbitRocks,
+    alt: ALT.orbitRocks,
+  },
+];
+
+/**
+ * The rooms on G · Stråle's control window. An illustration of the app, not a
+ * reference list — the window says "Eksempel" on it for that reason.
+ */
+export const ZONES = [
+  { id: 'moede', name: 'Mødelokale 1', floor: '4. sal', product: 'Smart Film', area: '12 m²', state: 'mat' as 'mat' | 'klar' },
+  { id: 'direktion', name: 'Direktionskontor', floor: '4. sal', product: 'Smart Film', area: '9 m²', state: 'klar' as 'mat' | 'klar' },
+  { id: 'reception', name: 'Reception', floor: 'Stuen', product: 'Smart Film', area: '18 m²', state: 'klar' as 'mat' | 'klar' },
+  { id: 'bad', name: 'Wellness, bad', floor: '1. sal', product: 'Smart Film', area: '6 m²', state: 'mat' as 'mat' | 'klar' },
+];
+
+/**
+ * The "destinations" of J · Udsigt. Uses, not installations: each is a kind of
+ * room the glass is made for, so none of them claims a customer.
+ */
+export const ROOMS = [
+  { key: 'moede', label: 'Mødelokaler', tag: 'Kontor', product: 'Smart Film', note: 'Privat på et tryk, lyst bagefter', image: IMG.udsigtOffice, alt: ALT.udsigtOffice },
+  { key: 'hotel', label: 'Hotelværelser', tag: 'Hotel', product: 'Smart Film', note: 'Badeværelse og soveværelse i ét', image: IMG.udsigtHotel, alt: ALT.udsigtHotel },
+  { key: 'bolig', label: 'Boliger', tag: 'Bolig', product: 'Smart Film', note: 'Ingen gardiner, ingen persienner', image: IMG.udsigtHome, alt: ALT.udsigtHome },
+  { key: 'butik', label: 'Butikker', tag: 'Detail', product: 'LED Film', note: 'Vinduet bliver en skærm om aftenen', image: IMG.udsigtRetail, alt: ALT.udsigtRetail },
+  { key: 'spa', label: 'Spa & wellness', tag: 'Hotel', product: 'Smart Film', note: 'Dagslys uden indkig', image: IMG.udsigtSpa, alt: ALT.udsigtSpa },
+  { key: 'bad', label: 'Badeværelser', tag: 'Bolig', product: 'Smart Film', note: 'En glasbruser, der kan blive mat', image: IMG.udsigtBath, alt: ALT.udsigtBath },
+  { key: 'lobby', label: 'Lobbyer', tag: 'Kontor', product: '3D Media Glass', note: 'Første indtryk, der holder', image: IMG.glassImmersive, alt: ALT.glassImmersive },
+  { key: 'facade', label: 'Facader', tag: 'Detail', product: 'LED Film', note: 'Medieflade uden at blive en skærm', image: IMG.ledFacade, alt: ALT.ledFacade },
 ];

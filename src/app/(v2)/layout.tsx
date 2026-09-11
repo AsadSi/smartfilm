@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Archivo, Barlow_Condensed, Bodoni_Moda, IBM_Plex_Mono, Inter } from 'next/font/google';
+import AnchorScroll from '@/components/v2/AnchorScroll';
 import '../v2.css';
 
 /**
@@ -34,7 +35,7 @@ const barlow = Barlow_Condensed({ subsets: ['latin'], weight: ['500', '600', '70
 
 export const metadata: Metadata = {
   title: 'SmartFilm — designskabeloner',
-  description: 'Seks designretninger for SmartFilm Danmark: Stage, Vitrine, Salon, Promenade, Lumen og Klar.',
+  description: 'Elleve designretninger for SmartFilm Danmark, fra Stage til Orbit.',
   // Templates are not pages anyone should find in search.
   robots: { index: false, follow: false },
 };
@@ -69,6 +70,7 @@ export default function V2Layout({ children }: { children: React.ReactNode }) {
           precedence="default"
           href="https://api.fontshare.com/v2/css?f%5B%5D=switzer@400,500,600&display=swap"
         />
+        <AnchorScroll />
         {children}
       </body>
     </html>

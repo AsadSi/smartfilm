@@ -1289,3 +1289,933 @@ html:has(.tpl-klar) {
     scroll-snap-type: none;
   }
 }
+
+/* =============================================================================
+   G–K · THE SECOND SET
+
+   Five templates taken from five reference videos rather than from five
+   marques. Each one keeps the structural idea of its reference and swaps the
+   subject for glass:
+
+     G · Stråle   huly.io              a beam of light and an app that runs the glass
+     H · Tårn     "whispers luxury"    a tower in the clouds, and a scroll that goes
+                                       through its window
+     I · Palet    "steal this palette" product frames that recolour on a swatch
+     J · Udsigt   LuxTrips             a travel brochure where the destinations are rooms
+     K · Orbit    "make it futuristic" a notched device frame, an orb, an arch
+
+   None of their faces is loaded by the shared layout. Each template's page
+   loads its own through next/font and sets the variable on a wrapper, which is
+   why every utility below names its font variable directly — a @theme token
+   would resolve on :root, where the variable does not exist.
+   ============================================================================= */
+
+/* ─── G · STRÅLE — huly.io ───────────────────────────────────────────────────
+   Near-black with a blue cast, one vertical beam of light standing in the hero,
+   and an orange glow reserved for the thing you should press. The page swaps
+   to a pale frosted ground twice so it never settles into being a dark site. */
+
+@theme {
+  --color-straale-bg: #06070b;
+  --color-straale-panel: #0c0e15;
+  --color-straale-line: rgb(255 255 255 / 0.09);
+  --color-straale-ink-2: rgb(232 235 245 / 0.66);
+  --color-straale-ink-3: rgb(232 235 245 / 0.46);
+  --color-straale-light: #f5f6f9;
+  --color-straale-light-ink: #0b0c11;
+  --color-straale-light-ink-2: #555b69;   /* 6.6:1 on the light ground */
+  --color-straale-flare: #ff7a30;
+}
+
+html:has(.tpl-straale) {
+  background: var(--color-straale-bg);
+  color-scheme: dark;
+}
+
+@utility straale-display {
+  font-family: var(--font-geist), "Geist", var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 5.8vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+@utility straale-h2 {
+  font-family: var(--font-geist), "Geist", var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+@utility straale-h3 {
+  font-family: var(--font-geist), "Geist", var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+@utility straale-body {
+  font-family: var(--font-geist), "Geist", var(--font-inter), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+@utility straale-label {
+  font-family: var(--font-geist), "Geist", var(--font-inter), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+@utility straale-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 44px;
+  padding-inline: 1.35rem;
+  border-radius: 999px;
+  font-family: var(--font-geist), "Geist", var(--font-inter), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    box-shadow 400ms var(--ease-cold),
+    background-color 400ms var(--ease-cold);
+}
+
+/* Huly's button: a near-white pill that looks lit from behind in orange. The
+   inset shadow is what makes it read as glowing rather than as outlined. */
+@utility straale-btn-glow {
+  background: linear-gradient(#ffffff, #f1ece8);
+  color: #0b0b0f;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.5),
+    0 0 22px 2px rgb(255 122 48 / 0.55),
+    inset 0 -10px 18px -6px rgb(255 122 48 / 0.55);
+
+  &:hover {
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.6),
+      0 0 34px 6px rgb(255 122 48 / 0.7),
+      inset 0 -10px 18px -6px rgb(255 122 48 / 0.7);
+  }
+}
+
+@utility straale-btn-ghost {
+  background: rgb(255 255 255 / 0.06);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+
+  &:hover {
+    background: rgb(255 255 255 / 0.1);
+  }
+}
+
+/* The beam. Three layers because a single gradient cannot be both a hairline
+   and a haze: a violet column blurred wide, the white-hot core, and the flare
+   where the light hits the product window at the bottom of the hero. */
+.straale-beam {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  --beam-x: 64%;
+}
+
+.straale-beam-haze {
+  position: absolute;
+  top: -10%;
+  bottom: 0;
+  left: var(--beam-x);
+  width: min(52vw, 720px);
+  transform: translateX(-50%);
+  background: radial-gradient(46% 78% at 50% 100%, rgb(112 118 255 / 0.55), rgb(76 58 220 / 0.22) 46%, transparent 76%);
+  filter: blur(34px);
+  animation: straale-breathe 7s ease-in-out infinite;
+}
+
+.straale-beam-core {
+  position: absolute;
+  top: 0;
+  bottom: 12%;
+  left: var(--beam-x);
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, rgb(150 165 255 / 0) 0%, rgb(180 190 255 / 0.5) 32%, #fff 96%);
+  box-shadow:
+    0 0 12px 2px rgb(160 170 255 / 0.85),
+    0 0 70px 14px rgb(100 110 255 / 0.42);
+}
+
+.straale-beam-flare {
+  position: absolute;
+  bottom: 4%;
+  left: var(--beam-x);
+  width: min(90vw, 1100px);
+  height: 26vh;
+  transform: translate(-50%, 50%);
+  background: radial-gradient(closest-side, #fff 0%, rgb(255 206 160 / 0.9) 6%, rgb(255 122 48 / 0.5) 20%, rgb(112 90 255 / 0.3) 44%, transparent 72%);
+  filter: blur(6px);
+  animation: straale-breathe 7s ease-in-out infinite;
+}
+
+@keyframes straale-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.78;
+  }
+}
+
+/* The app window under the hero. The upward shadow is the beam's light
+   catching its top edge. */
+@utility straale-window {
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: #0a0c12;
+  box-shadow:
+    0 -24px 120px -24px rgb(128 136 255 / 0.5),
+    0 50px 90px -40px #000;
+  overflow: hidden;
+}
+
+/* A card with an orange light running along its top edge — the "Sync with
+   GitHub" panel. The border is a masked gradient so only the top of it glows. */
+.straale-edge {
+  position: relative;
+  border-radius: 16px;
+  background: #0a0c12;
+}
+
+.straale-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom, rgb(255 150 80 / 0.95), rgb(255 110 40 / 0.18) 26%, rgb(255 255 255 / 0.08) 60%);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.straale-edge::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -50px;
+  height: 100px;
+  background: radial-gradient(closest-side, rgb(255 120 50 / 0.5), transparent);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+/* The pale sections. Not white: two cold washes of blue and violet over an
+   off-white, which is what Huly's light bands actually are. */
+@utility straale-frost {
+  background:
+    radial-gradient(55% 60% at 12% 20%, #dde7ff 0%, transparent 70%),
+    radial-gradient(50% 60% at 92% 80%, #ebe3ff 0%, transparent 70%),
+    var(--color-straale-light);
+  color: var(--color-straale-light-ink);
+}
+
+/* The closing ring. A conic gradient masked down to a band, doubled — one
+   sharp and one blurred — so it reads as light rather than as a graphic. */
+.straale-ring,
+.straale-ring-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, #ff7a30, #ff3d6e, #7a4bff, #2f7bff, #ff7a30);
+  mask: radial-gradient(closest-side, transparent 66%, #000 68%, #000 73%, transparent 75%);
+  animation: straale-spin 26s linear infinite;
+}
+
+.straale-ring-glow {
+  filter: blur(28px);
+  opacity: 0.9;
+}
+
+@keyframes straale-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── H · TÅRN — "your website whispers luxury" ─────────────────────────────
+   A dusk-mauve page set in a hairline didone capital. The hero is a tower
+   standing in cloud with the headline split either side of it, and scrolling
+   flies into the facade and through a window — whose panes are frosted until
+   you are close enough, which is the one liberty taken with the reference. */
+
+@theme {
+  --color-taarn-sky: #e2d5d3;
+  --color-taarn-dusk: #c7abac;
+  --color-taarn-ink: #33262a;
+  --color-taarn-ink-2: #5c484b;   /* 5.0:1 on --taarn-sky */
+  --color-taarn-plum: #1d1719;
+  --color-taarn-line: rgb(51 38 42 / 0.18);
+}
+
+html:has(.tpl-taarn) {
+  background: var(--color-taarn-plum);
+  color-scheme: light;
+}
+
+@utility taarn-display {
+  font-family: var(--font-italiana), "Italiana", "Didot", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 9.6vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@utility taarn-h2 {
+  font-family: var(--font-italiana), "Italiana", "Didot", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@utility taarn-h3 {
+  font-family: var(--font-italiana), "Italiana", "Didot", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@utility taarn-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@utility taarn-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+@utility taarn-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  min-height: 52px;
+  padding-inline: 2.2rem;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  line-height: 1;
+  transition:
+    background-color 500ms var(--ease-cold),
+    color 500ms var(--ease-cold);
+}
+
+/* The dusk grade. The tower photograph is a hard blue sky; this takes it down
+   to monochrome and lays one mauve over it with a `color` blend, which is how
+   the reference gets its single dusty-rose tone. Any photograph put here later
+   comes out the same colour without being re-edited. */
+.taarn-grade {
+  filter: grayscale(1) contrast(0.92) brightness(1.06);
+}
+
+.taarn-wash {
+  background: linear-gradient(to bottom, #b88c93, #c9a3a4 55%, #8e6b72);
+  mix-blend-mode: color;
+  opacity: 0.8;
+}
+
+/* The six faint columns over the hero — the layout grid the reference leaves
+   visible while it is being built, kept on purpose. */
+.taarn-columns {
+  background-image: linear-gradient(to right, rgb(255 255 255 / 0.18) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
+}
+
+/* The fly-through. Without script it is one viewport tall and shows only the
+   tower; the component flags itself live and only then does the section grow
+   long enough to scroll through. */
+.taarn-seq {
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+}
+
+.tpl-taarn[data-js="true"] .taarn-seq {
+  height: 460svh;
+}
+
+.taarn-stick {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+/* The window. Dark mullions with frosted panes between them; the panes clear
+   as --p4 runs from 0 to 1. */
+.taarn-pane {
+  backdrop-filter: blur(calc((1 - var(--p4, 1)) * 18px)) saturate(calc(1 - (1 - var(--p4, 1)) * 0.4));
+  background: rgb(240 230 230 / calc((1 - var(--p4, 1)) * 0.35));
+}
+
+/* ─── I · PALET — "steal this colour palette" ───────────────────────────────
+   Light grey ground, and on it a column of product screens in thick white
+   bezels, each with its palette floating above it as swatches. The swatches
+   work: pick one and the screen repaints. The first palette of every screen
+   is greyscale — the glass switched off — and the rest are the glass switched
+   on, which is the product told in colour. */
+
+html:has(.tpl-palet) {
+  background: #e8e8eb;
+  color-scheme: light;
+}
+
+.palet-ground {
+  background-color: #e8e8eb;
+  background-image:
+    radial-gradient(60% 40% at 50% 0%, rgb(255 255 255 / 0.9), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520' viewBox='0 0 520 520'%3E%3Cpath d='M-40 300 L130 130 Q150 110 170 130 L340 300' fill='none' stroke='%23ffffff' stroke-opacity='.28' stroke-width='38' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M220 560 L390 390 Q410 370 430 390 L600 560' fill='none' stroke='%23ffffff' stroke-opacity='.22' stroke-width='38' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 100% 900px, 520px 520px;
+  background-repeat: no-repeat, repeat;
+}
+
+@utility palet-display {
+  font-family: var(--font-unbounded), "Unbounded", "Arial Black", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.8rem, 10.4vw, 10.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+@utility palet-h2 {
+  font-family: var(--font-unbounded), "Unbounded", "Arial Black", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@utility palet-h3 {
+  font-family: var(--font-unbounded), "Unbounded", "Arial Black", sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+@utility palet-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+/* The screen. A thick white bezel and a long soft shadow — a browser window
+   photographed floating, the way every one of those palette videos presents
+   its work. Colour comes from three variables the palette swatches set. */
+@utility palet-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 7px solid #fff;
+  background: var(--pbg);
+  color: var(--pal-ink);
+  box-shadow:
+    0 40px 70px -40px rgb(20 20 30 / 0.45),
+    0 2px 8px rgb(20 20 30 / 0.06);
+  transition:
+    background-color 800ms var(--ease-cold),
+    color 800ms var(--ease-cold);
+}
+
+/* The notch: a white tab dropped from the top bezel with inverted corners, so
+   the logo sits in a cut-out rather than on the screen. */
+.palet-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(7rem, 16vw, 11rem);
+  height: 2.6rem;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 0 0 18px 18px;
+  color: #111;
+}
+
+.palet-notch::before,
+.palet-notch::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.palet-notch::before {
+  left: -18px;
+  background: radial-gradient(circle at 0 100%, transparent 17.5px, #fff 18px);
+}
+
+.palet-notch::after {
+  right: -18px;
+  background: radial-gradient(circle at 100% 100%, transparent 17.5px, #fff 18px);
+}
+
+.palet-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 6px 14px -6px rgb(0 0 0 / 0.45);
+  transition: transform 500ms var(--ease-cold);
+}
+
+.palet-swatch-set[aria-pressed="true"] .palet-swatch {
+  transform: translateY(-5px);
+}
+
+.palet-swatch-set:hover .palet-swatch {
+  transform: translateY(-3px);
+}
+
+/* The photograph inside a screen. Grey when the palette is the first one,
+   coloured by a blend-mode wash when it is not. */
+.palet-photo {
+  filter: grayscale(var(--gs, 1)) contrast(1.04);
+  transition: filter 900ms var(--ease-cold);
+}
+
+.palet-tint {
+  background: var(--tint, transparent);
+  mix-blend-mode: color;
+  opacity: var(--tint-o, 0);
+  transition:
+    opacity 900ms var(--ease-cold),
+    background-color 900ms var(--ease-cold);
+}
+
+/* The product. There is no object to photograph for a film that lives inside
+   glass, so the "product" on every screen is a pane of it — standing on a
+   pedestal like the speaker, frosted in the greyscale palette and clear in
+   the coloured ones. */
+.palet-pane {
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid rgb(255 255 255 / 0.75);
+  background: linear-gradient(155deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.1) 55%, rgb(255 255 255 / 0.28));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    inset 0 0 40px rgb(255 255 255 / 0.18),
+    0 50px 70px -36px rgb(0 0 0 / 0.55);
+  backdrop-filter: blur(var(--frost, 16px)) saturate(1.15);
+  transition: backdrop-filter 900ms var(--ease-cold);
+}
+
+.palet-pedestal {
+  border-radius: 50%;
+  background:
+    radial-gradient(60% 70% at 50% 30%, rgb(255 255 255 / 0.85), transparent 70%),
+    linear-gradient(to bottom, var(--ped-a, #d9d9dc), var(--ped-b, #8d8d92));
+  box-shadow: 0 18px 30px -10px rgb(0 0 0 / 0.45);
+  transition: background 900ms var(--ease-cold);
+}
+
+/* ─── J · UDSIGT — the LuxTrips travel brochure ─────────────────────────────
+   Blush stone and lilac haze, a light old-style serif set enormous over the
+   landscape, and the whole grammar of a travel site — search bar, destination
+   rail, packages, "book with us" tiles, why-us over a mountain — with rooms
+   where the destinations would be. */
+
+@theme {
+  --color-udsigt-bg: #e9dfdb;
+  --color-udsigt-haze: #e0dfe8;
+  --color-udsigt-ink: #2b2426;
+  --color-udsigt-ink-2: #5f5457;   /* 5.3:1 on --udsigt-bg */
+  --color-udsigt-line: rgb(43 36 38 / 0.16);
+}
+
+html:has(.tpl-udsigt) {
+  background: var(--color-udsigt-bg);
+  color-scheme: light;
+}
+
+@utility udsigt-display {
+  font-family: var(--font-cormorant), "Cormorant Garamond", "Times New Roman", serif;
+  font-weight: 300;
+  font-size: clamp(3.2rem, 11.5vw, 12rem);
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+@utility udsigt-h2 {
+  font-family: var(--font-cormorant), "Cormorant Garamond", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 3.8vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+@utility udsigt-h3 {
+  font-family: var(--font-cormorant), "Cormorant Garamond", "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+  line-height: 1.05;
+}
+
+@utility udsigt-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@utility udsigt-body {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--color-udsigt-ink-2);
+  text-wrap: pretty;
+}
+
+@utility udsigt-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding-inline: 1.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-udsigt-ink);
+  background: var(--color-udsigt-ink);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color 400ms var(--ease-cold),
+    color 400ms var(--ease-cold);
+}
+
+@utility udsigt-pill-line {
+  background: transparent;
+  color: var(--color-udsigt-ink);
+  border-color: rgb(43 36 38 / 0.45);
+}
+
+/* The thin rotated square every LuxTrips package card carries. */
+.udsigt-diamond::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 58%;
+  aspect-ratio: 1;
+  border: 1px solid rgb(255 255 255 / 0.5);
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* Images fade into the stone at their edges instead of stopping at a line —
+   the brochure never lets a photograph have a hard border. */
+.udsigt-fade-b {
+  mask-image: linear-gradient(to bottom, #000 62%, transparent);
+}
+
+.udsigt-fade-y {
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent);
+}
+
+.udsigt-rail {
+  scrollbar-width: none;
+}
+
+.udsigt-rail::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── K · ORBIT — "can you make my website look futuristic" ─────────────────
+   Every screen sits inside a device frame with notches cut out of its edges.
+   Teal-graphite and a cyan light for the hero, then a flood of orange, then a
+   pale sky with a glass arch. Wide techno capitals for display, mono for
+   everything that would be a readout. */
+
+@theme {
+  --color-orbit-void: #060809;
+  --color-orbit-shell: #10181a;
+  --color-orbit-ink-2: rgb(222 236 240 / 0.64);
+  --color-orbit-ink-3: rgb(222 236 240 / 0.44);
+  --color-orbit-line: rgb(190 235 245 / 0.14);
+  --color-orbit-orange: #ff4f12;
+}
+
+html:has(.tpl-orbit) {
+  background: var(--color-orbit-void);
+  color-scheme: dark;
+}
+
+@utility orbit-display {
+  font-family: var(--font-michroma), "Michroma", "Eurostile", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.2vw, 3.9rem);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* The word the product stands in. Michroma only ships one weight, so the
+   stroke is what gives it the mass the reference's extended black has. */
+@utility orbit-mega {
+  font-family: var(--font-michroma), "Michroma", "Eurostile", sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 11vw, 12rem);
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.02em currentColor;
+}
+
+@utility orbit-h3 {
+  font-family: var(--font-michroma), "Michroma", "Eurostile", sans-serif;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@utility orbit-label {
+  font-family: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@utility orbit-body {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+@utility orbit-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+@utility orbit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 40px;
+  padding-inline: 1.2rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-family: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color 400ms var(--ease-cold),
+    color 400ms var(--ease-cold);
+}
+
+/* A notch cut into a frame edge. It is painted in the colour of whatever is
+   behind the frame (--notch) with inverted corners either side, so it reads as
+   a cut-out and the tab content sits in it. `data-edge` picks top or bottom. */
+.orbit-notch {
+  position: absolute;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  transform: translateX(-50%);
+  background: var(--notch);
+}
+
+.orbit-notch[data-edge="top"] {
+  top: 0;
+  border-radius: 0 0 20px 20px;
+}
+
+.orbit-notch[data-edge="bottom"] {
+  bottom: 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.orbit-notch::before,
+.orbit-notch::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.orbit-notch[data-edge="top"]::before {
+  top: 0;
+  left: -20px;
+  background: radial-gradient(circle at 0 100%, transparent 19.5px, var(--notch) 20px);
+}
+
+.orbit-notch[data-edge="top"]::after {
+  top: 0;
+  right: -20px;
+  background: radial-gradient(circle at 100% 100%, transparent 19.5px, var(--notch) 20px);
+}
+
+.orbit-notch[data-edge="bottom"]::before {
+  bottom: 0;
+  left: -20px;
+  background: radial-gradient(circle at 0 0, transparent 19.5px, var(--notch) 20px);
+}
+
+.orbit-notch[data-edge="bottom"]::after {
+  bottom: 0;
+  right: -20px;
+  background: radial-gradient(circle at 100% 0, transparent 19.5px, var(--notch) 20px);
+}
+
+/* The orb: a dark sphere lit from the upper left, with a fine dot mesh over
+   it and a slit of light across its equator in whatever colour the selected
+   product carries. */
+.orbit-orb {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #56666b 0%, #1d292c 34%, #0a1011 70%);
+  box-shadow:
+    inset -34px -44px 90px rgb(0 0 0 / 0.85),
+    inset 14px 18px 44px rgb(150 210 220 / 0.16),
+    0 70px 120px -50px rgb(0 0 0 / 0.95);
+}
+
+.orbit-orb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.16) 1px, transparent 0);
+  background-size: 7px 7px;
+  mask-image: radial-gradient(circle at 40% 35%, #000 20%, transparent 72%);
+}
+
+.orbit-slit {
+  position: absolute;
+  top: 50%;
+  height: clamp(4px, 0.55vw, 7px);
+  width: 27%;
+  border-radius: 99px;
+  background: var(--slit);
+  box-shadow:
+    0 0 10px var(--slit),
+    0 0 36px var(--slit),
+    0 0 90px var(--slit);
+  transform: translateY(-50%);
+  transition:
+    background-color 700ms var(--ease-cold),
+    box-shadow 700ms var(--ease-cold);
+}
+
+/* Glass shards drifting around the orb — polygons with a lit face. */
+.orbit-shard {
+  position: absolute;
+  background: linear-gradient(140deg, #6b7a7e 0%, #2a3437 30%, #0b1112 72%);
+  transition: transform 1200ms var(--ease-cold);
+}
+
+/* The arch in the sky section: a thick glass band bent into a semicircle. */
+.orbit-arch {
+  position: absolute;
+  border-radius: 999px 999px 0 0;
+  border: clamp(8px, 1.2vw, 16px) solid rgb(255 255 255 / 0.4);
+  border-bottom: 0;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0.14), transparent 60%);
+  box-shadow:
+    inset 0 0 40px rgb(255 255 255 / 0.3),
+    0 0 50px rgb(90 130 255 / 0.35);
+  backdrop-filter: blur(2px);
+}
+
+@keyframes orbit-bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0) rotate(-5deg);
+  }
+  50% {
+    transform: translate(-50%, -16px) rotate(-3deg);
+  }
+}
+
+.orbit-bob {
+  animation: orbit-bob 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .straale-beam-haze,
+  .straale-beam-flare,
+  .straale-ring,
+  .straale-ring-glow,
+  .orbit-bob {
+    animation: none;
+  }
+
+  .tpl-taarn[data-js="true"] .taarn-seq {
+    height: 100svh;
+  }
+}
