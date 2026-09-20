@@ -1,134 +1,258 @@
-import { L, type Localized } from './types';
+/**
+ * Every word on the site, in one file.
+ *
+ * Danish only and deliberately un-localised: this is a one-page site for a
+ * Danish installer of Danish glass, and a DA/EN pair on every string would
+ * double the file without changing a single sentence anyone will read.
+ *
+ * The copy is the client's approved copy, carried over unchanged from the
+ * page this replaced. The one addition is SMART_FILM, which is the product
+ * they asked to add.
+ */
 
 export const SITE = {
-  name: 'SmartFilm Danmark',
+  name: 'SmartFilm',
+  full: 'SmartFilm Danmark',
   url: 'https://smartfilmdanmark.dk',
   email: 'kontakt@smartfilmdanmark.dk',
   phone: '+45 28 68 90 50',
-  phoneHref: '+4528689050',
-  /** The form posts here; the endpoint mails the enquiry on. */
-  /**
-   * Enquiries post to our own route handler, which validates the payload and
-   * mails it on. They previously went straight to a free third-party relay with
-   * captcha disabled, while the form promised confidentiality — a GDPR problem
-   * as much as a credibility one, since project details left our control before
-   * they reached anyone at SmartFilm.
-   */
-  formEndpoint: '/api/enquiry',
-  /** Danish businesses are expected to state this; its absence reads as a shell. */
-  cvr: '00000000',
-  cvrPlaceholder: true,
+  phoneHref: 'tel:+4528689050',
+  area: 'Levering og montering i hele Danmark',
+  reply: 'Tilbud inden for 24 timer på hverdage',
+  /** Fill this in and it appears after the copyright line, e.g. ', CVR 12345678'. */
+  cvr: '',
 };
 
-export const NAV = [
-  { href: '/produkter', label: L('Produkter', 'Products'), key: 'produkter' },
-  { href: '/#referencer', label: L('Referencer', 'References'), key: 'referencer' },
-  { href: '/#hvorfor', label: L('Om os', 'About'), key: 'om-os' },
-  { href: '/kontakt', label: L('Kontakt', 'Contact'), key: 'kontakt' },
+/**
+ * Two either side of the wordmark. Spørgsmål is deliberately absent: five
+ * items plus a wordmark and a button left 8px of slack at 1140, and an even
+ * split is the point of putting the wordmark in the middle. It is in the
+ * footer, one scroll away.
+ */
+export const NAV_LEFT = [
+  { href: '#saadan', label: 'Sådan virker det' },
+  { href: '#specs', label: 'Specifikationer' },
 ];
 
-/** Strings that appear in more than one place, so they only get written once. */
-export const UI = {
-  requestQuote: L('Forespørg et tilbud', 'Request a quote'),
-  requestPrice: L('Forespørg pris', 'Request pricing'),
-  requestShort: L('Forespørg', 'Enquire'),
-  seeCollection: L('Se produkterne', 'See the products'),
-  compareAll: L('Sammenlign alle tre', 'Compare all three'),
-  allProducts: L('Alle produkter og sammenligning', 'All products and comparison'),
-  specifications: L('Specifikationer', 'Specifications'),
-  overview: L('Overblik', 'Overview'),
-  collection: L('Teknologierne', 'The technologies'),
-  menu: L('Menu', 'Menu'),
-  skipToContent: L('Gå til indhold', 'Skip to content'),
-  closeMenu: L('Luk menu', 'Close menu'),
-  contact: L('Kontakt', 'Contact'),
-  privacy: L('Privatlivspolitik', 'Privacy policy'),
+export const NAV_RIGHT = [
+  { href: '#klar', label: 'Klar eller mat' },
+  { href: '#anvendelse', label: 'Anvendelse' },
+];
+
+export const HERO = {
+  kicker: 'Transparent LED-film',
+  headline: 'Usynlig. Indtil den tændes.',
+  sub: '2 mm film på glasset gør ruden til en skærm, uden at lukke dagslyset ude.',
+  strap: 'Transparent LED-film · Levering og montering i hele Danmark',
+  cta: 'Få et tilbud',
+  chip: '02 mm film',
+  video: '/assets/hero-scrub.mp4',
+  poster: '/assets/hero-poster.jpg',
+  still: '/assets/hero-static.jpg',
 };
 
-export const CONTACT_DETAILS: {
-  key: string;
-  label: Localized;
-  value: Localized;
-  href?: string;
-}[] = [
-  { key: 'mail', label: L('E-mail', 'Email'), value: L(SITE.email, SITE.email), href: `mailto:${SITE.email}` },
-  { key: 'phone', label: L('Telefon', 'Phone'), value: L(SITE.phone, SITE.phone), href: `tel:${SITE.phoneHref}` },
-  {
-    key: 'area',
-    label: L('Område', 'Area'),
-    value: L('Levering og montering i hele Danmark', 'Delivery and installation across Denmark'),
-  },
-  {
-    key: 'response',
-    label: L('Svartid', 'Response time'),
-    value: L('Tilbud inden for 24 timer på hverdage', 'Quote within 24 hours on weekdays'),
-  },
-];
-
-export const FORM = {
-  name: { label: L('Navn', 'Name'), placeholder: L('Dit navn', 'Your name') },
-  email: { label: L('E-mail', 'Email'), placeholder: L('din@email.dk', 'your@email.com') },
-  phone: { label: L('Telefon', 'Phone'), placeholder: L('Dit telefonnummer', 'Your phone number') },
-  interest: { label: L('Interesse', 'Interest') },
-  interestOptions: [
-    L('Smart Film (PDLC)', 'Smart Film (PDLC)'),
-    L('LED Film – indendørs', 'LED Film – indoor'),
-    L('LED Film – udendørs', 'LED Film – outdoor'),
-    L('3D Media Glass', '3D Media Glass'),
-    L('Rådgivning – jeg er ikke sikker endnu', 'Consultation – I am not sure yet'),
+export const STEPS = {
+  kicker: 'Sådan virker det',
+  headline: 'Tre skridt. Butikken holder åbent.',
+  lede: 'Filmen sættes på indefra. Der skal ikke bygges noget, og facaden ændres ikke.',
+  items: [
+    {
+      n: '01',
+      title: 'Vi måler glasset',
+      body: 'Mål, glastype og retning mod solen. Det afgør pixelafstand og lysstyrke, og dermed prisen.',
+    },
+    {
+      n: '02',
+      title: 'Filmen sættes på indefra',
+      body: 'Den klæbes direkte på ruden. Intet stillads, ingen ny konstruktion, ingen lukkedage.',
+    },
+    {
+      n: '03',
+      title: 'Du styrer indholdet',
+      body: 'Skift kampagne, åbningstider eller video fra din telefon. Planlæg det i forvejen og lad den køre.',
+    },
   ],
-  project: {
-    label: L('Projektet', 'Project'),
-    placeholder: L(
-      'Størrelse på glasparti (ca. m²), placering, ønsket effekt…',
-      'Glass area size (approx. m²), location, desired effect…',
-    ),
+};
+
+export const SPECS = {
+  kicker: 'Specifikationer',
+  headline: 'Tallene, med betingelserne på.',
+  lede: 'Et tal uden en betingelse er en skuffelse, der venter. Her er begge dele.',
+  items: [
+    { value: '99 %', label: 'Transparens', note: 'Op til. Falder, mens indhold spiller.' },
+    { value: '2 mm', label: 'Tykkelse', note: 'Klæbes på ruden indefra.' },
+    { value: '160°', label: 'Synsvinkel', note: 'Læsbar fra hele fortovet.' },
+    { value: '150+', label: 'Patenter', note: 'Bag teknologien i filmen.' },
+  ],
+};
+
+export const DEMO = {
+  kicker: 'Prøv det',
+  headline: 'Hold for at tænde.',
+  lede: 'Slukket er den næsten ikke der. Tændt er den hele vinduet. Hold knappen nede, og se hvad ruden bliver til.',
+  word: 'Åbent',
+  hold: 'Hold nede',
+  holding: 'Bliv ved…',
+  lit: 'Tændt',
+  hint: 'Hold museknappen eller fingeren nede. Slipper du, falder lyset tilbage.',
+  /** Each line arrives at its own point on the way up, hence the threshold. */
+  reveals: [
+    { at: 0.34, text: 'Indholdet skiftes på minutter, ikke på en uge med ny folie.' },
+    { at: 0.52, text: 'Slukket om natten er ruden bare en rude igen.' },
+    { at: 0.7, text: 'Én flade, mange budskaber, og plads til at sælge annoncetid videre.' },
+  ],
+};
+
+/**
+ * The second product, and the only thing on the page the reader operates
+ * rather than reads. It is built as a switch because the product is a switch,
+ * and the readout reports the change in the electrician's terms: clear costs
+ * power, matte is the resting state.
+ */
+export const SMART_FILM = {
+  kicker: 'Smart Film',
+  headline: 'Klart eller mat. På en kontakt.',
+  lede: 'Et lag film lamineret ind i ruden. Strøm på, og glasset er klart; strøm af, og det er mat. Kontakten sidder der, hvor lyskontakten allerede sad.',
+  states: { mat: 'Mat', klar: 'Klar' },
+  readout: { mat: 'Strøm fra · ruden er privat', klar: 'Strøm til · ruden er klar' },
+  action: 'Mattér ruden',
+  figures: [
+    { value: '92 %', label: 'Transparens, klar' },
+    { value: '<1 sek.', label: 'Skiftetid' },
+    { value: '5 W/m²', label: 'Forbrug, klar' },
+  ],
+  note: 'Mat er ikke mørkt. Filmen spreder dagslyset i stedet for at lukke det ude, så rummet bliver privat uden at blive mørkt — og det er hele forskellen på film og persienner.',
+  /**
+   * PLACEHOLDER. Every photograph here is an LED visualisation, so this one is
+   * zoomed hard into its right-hand third — the reception behind plain glass —
+   * to keep the campaign on the left out of frame. Clear glass revealing an
+   * advert would read as the wrong product. Wants a real Smart Film shot: one
+   * tripod position, matte and clear.
+   */
+  image: '/assets/vis-klinik.jpg',
+  alt: {
+    mat: 'Glasparti ind til en klinik. De tre ruder står mattede, så receptionen bagved kun anes som lys og skygge.',
+    klar: 'Glasparti ind til en klinik. Ruderne er klare, og receptionen og indretningen bagved ses tydeligt.',
   },
-  submit: L('Send forespørgsel', 'Send enquiry'),
-  note: L('Vi behandler dine oplysninger fortroligt.', 'We handle your information confidentially.'),
-  sending: L('Sender…', 'Sending…'),
-  success: L(
-    'Tak! Din forespørgsel er sendt – vi vender tilbage inden for 24 timer.',
-    'Thanks! Your enquiry has been sent – we will get back to you within 24 hours.',
-  ),
-  error: L(
-    'Noget gik galt. Vi åbner din mail i stedet – tryk send der.',
-    'Something went wrong. Opening your email app instead – hit send there.',
-  ),
+};
+
+export const REFS = {
+  kicker: 'Anvendelse',
+  headline: 'Sådan kan det se ud.',
+  lede: 'Visualiseringer af transparent LED-film i danske sammenhænge, fra en hel kontorfacade til en enkelt rude mod gågaden.',
+  badge: 'Visualisering',
+  items: [
+    {
+      image: '/assets/vis-kontor.jpg',
+      width: 625,
+      height: 621,
+      alt: 'Visualisering af en kontorbygning om aftenen, hvor glasfacaden viser store lysende motiver i blå og orange.',
+      title: 'Kontorer og hovedsæder',
+      body: 'Hele facaden bliver til budskabet, uden at der bygges noget udenpå.',
+    },
+    {
+      image: '/assets/vis-storcenter.jpg',
+      width: 943,
+      height: 621,
+      alt: 'Visualisering af et storcenter i skumringen, hvor de buede glaspartier over indgangen viser farverige motiver.',
+      title: 'Storcentre',
+      body: 'Store glaspartier uden tunge konstruktioner. Én flade, mange budskaber.',
+    },
+    {
+      image: '/assets/vis-butik.jpg',
+      width: 943,
+      height: 621,
+      alt: 'Visualisering af en butiksfacade i et indkøbscenter, hvor ruden viser en kampagne, mens butikken bagved stadig ses.',
+      title: 'Butiksvinduer',
+      body: 'Kampagnen skifter på minutter i stedet for en uge med ny folie.',
+    },
+    {
+      image: '/assets/vis-klinik.jpg',
+      width: 943,
+      height: 621,
+      alt: 'Visualisering af en klinik i et indkøbscenter, hvor ruden viser en rolig kampagne med receptionen synlig bagved.',
+      title: 'Klinikker og wellness',
+      body: 'Diskret og professionelt, uden at lukke af for det lyse indtryk indenfor.',
+    },
+  ],
+};
+
+export const FAQ = {
+  kicker: 'Spørgsmål',
+  headline: 'Det folk spørger om først.',
+  lede: 'Også de spørgsmål, hvor det ærlige svar er "det kommer an på".',
+  items: [
+    {
+      q: 'Kan man se den i dagslys?',
+      a: 'Det afhænger af lysstyrken og hvilken vej ruden vender. En film til indendørs brug ligger typisk på 800 til 2.000 nits, og den taber mod et vindue i direkte sol. Vender ruden mod gaden eller mod syd, skal du have en udendørsserie med væsentligt højere lysstyrke. Vi spørger altid om verdenshjørnet, før vi giver en pris, for det er den hyppigste årsag til skuffelse i den her branche.',
+    },
+    {
+      q: 'Skjuler den mine varer i vinduet?',
+      a: 'Delvist, mens der spiller indhold. Transparensen på databladet gælder den slukkede film. Når billedet kører, er der lys i vejen, og udstillingen bagved træder tilbage. Derfor planlægger vi placeringen efter, hvad der står i vinduet: en film over udstillingen eller på et sidefag giver dig skærmen uden at lukke for varerne.',
+    },
+    {
+      q: 'Er den helt usynlig, når den er slukket?',
+      a: 'Nej, og det skal du ikke købe den på. På afstand forsvinder den. Står du tæt på ruden, kan du se gitteret af ledninger og dioder, ligesom du kan se trådene i et insektnet. Folk der forventer usynligt glas bliver skuffede. Folk der forventer en næsten usynlig skærm bliver glade.',
+    },
+    {
+      q: 'Passer den på mit glas?',
+      a: 'Som regel, men det skal tjekkes først. Hærdet, lamineret, buet og energiruder med belægning opfører sig forskelligt, og på nogle typer må filmen ikke klæbes direkte. Send os et billede og målene, så siger vi det inden du bruger penge.',
+    },
+    {
+      q: 'Hvad koster det?',
+      a: 'Det prissættes individuelt efter mål, pixelafstand, lysstyrke og montering. Vi giver ikke en kvadratmeterpris uden at kende ruden, fordi det tal altid bliver forkert. Skriv målene og hvad ruden bruges til, så har du et rigtigt tilbud inden for et døgn på hverdage.',
+    },
+  ],
+};
+
+export const QUOTE = {
+  kicker: 'Få et tilbud',
+  headline: 'Fortæl os om ruden.',
+  lede: 'Mål og et billede er nok til at komme i gang. Du får et rigtigt tal tilbage, ikke et spænd.',
+  submit: 'Send forespørgsel',
+  hint: 'Knappen åbner dit eget mailprogram med beskeden klar. Felter med * er påkrævede.',
+  summary: 'Ret venligst følgende, før du sender:',
+  sent: {
+    title: 'Dit mailprogram er åbnet',
+    body: 'Beskeden ligger klar til kontakt@smartfilmdanmark.dk. Tryk send i dit mailprogram, så har du svar inden for 24 timer på hverdage.',
+  },
+  fields: {
+    name: { label: 'Navn', error: 'Skriv venligst dit navn.' },
+    company: { label: 'Firma' },
+    email: { label: 'E-mail', error: 'Skriv en gyldig e-mailadresse, fx navn@firma.dk.' },
+    phone: { label: 'Telefon' },
+    size: { label: 'Mål på glasset', placeholder: 'Fx 6 x 3 meter, mod gågaden' },
+    message: { label: 'Besked', placeholder: 'Hvad skal ruden bruges til, og hvilken vej vender den?' },
+  },
 };
 
 export const FOOTER = {
-  tagline: L(
-    'Arkitektonisk lysteknologi i absolut topklasse – smart film, transparent LED og 3D medieglas.',
-    'Architectural light technology at the top tier – smart film, transparent LED and 3D media glass.',
-  ),
+  tagline: 'Transparent LED-film og smart film til glas. Levering og montering i hele Danmark.',
   columns: [
     {
-      title: UI.collection,
+      title: 'Indhold',
       links: [
-        { href: '/smart-film', label: L('Smart Film', 'Smart Film') },
-        { href: '/led-film', label: L('LED Film', 'LED Film') },
-        { href: '/3d-media-glass', label: L('3D Media Glass', '3D Media Glass') },
-        { href: '/produkter', label: L('Sammenlign', 'Compare') },
-      ],
-    },
-    {
-      title: L('Udforsk', 'Explore'),
-      links: [
-        { href: '/#referencer', label: L('Referencer', 'References') },
-        { href: '/#hvorfor', label: L('Om os', 'About us') },
-        { href: '/kontakt', label: L('Kontakt', 'Contact') },
+        { href: '#saadan', label: 'Sådan virker det' },
+        { href: '#specs', label: 'Specifikationer' },
+        { href: '#klar', label: 'Klar eller mat' },
+        { href: '#anvendelse', label: 'Anvendelse' },
+        { href: '#faq', label: 'Spørgsmål' },
       ],
     },
   ],
-  copyright: L('© 2026 · Alle rettigheder forbeholdes', '© 2026 · All rights reserved'),
 };
 
+/**
+ * The three grounds the client is choosing between. Same page, same type,
+ * same layout — only the colour moves, which is the only honest way to judge
+ * colour. The values themselves live in globals.css; this is the picker's
+ * list, and the swatches are each theme's ground and accent, the two colours
+ * that actually decide how the page feels.
+ */
+export const THEMES = [
+  { id: 'dagslys', label: 'Dagslys', bg: '#F8F5F1', fg: '#1E63C4' },
+  { id: 'teknisk', label: 'Teknisk', bg: '#070910', fg: '#4D9FFF' },
+  { id: 'luksus', label: 'Luksus', bg: '#141110', fg: '#C9A227' },
+] as const;
 
-export const STATS: { value: number; suffix?: string; label: Localized }[] = [
-  { value: 150, suffix: '+', label: L('Patenter', 'Patents') },
-  { value: 3, label: L('Teknologier', 'Technologies') },
-  { value: 24, suffix: 't', label: L('Svartid', 'Response time') },
-  { value: 100, suffix: '%', label: L('Skræddersyet', 'Custom-built') },
-];
-
+export type ThemeId = (typeof THEMES)[number]['id'];

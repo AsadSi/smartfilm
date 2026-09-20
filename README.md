@@ -1,83 +1,93 @@
-# SmartFilm Danmark — Next.js
+# SmartFilm Danmark
 
-A ground-up rebuild of the SmartFilm Danmark site: **apple.com's structure**
-(full-bleed media, one idea per band, sticky product sub-nav, huge centred
-display type, pill buttons and chevron links) dressed in the **live site's
-aesthetic** — warm cream ground, champagne gold accent, warm near-black ink,
-Cormorant Garamond over Inter.
-
-## Running it
+The smartfilmdanmark.dk one-pager, in Next.js. One route, no database, no
+server state — `npm run build` produces a static page.
 
 ```bash
 npm run dev     # http://localhost:3000
-npm run build   # static export of all 9 routes
+npm run build
 npm run lint
 ```
 
-## Two design languages, one project
+## What this is
 
-`src/app` has **no top-level `layout.tsx`**. Instead there are two route groups,
-each of which is its own root layout, its own stylesheet and its own font stack:
+The site sells two things a pane of glass can be told to do. Transparent LED
+film turns the window into a screen; smart film turns it opaque. The page
+demonstrates both rather than describing them, which is the whole of its
+argument: an LED panel you hold a button to light, and a window whose panes go
+matte on a switch.
 
-| group   | routes                        | stylesheet | look                                    |
-| ------- | ----------------------------- | ---------- | --------------------------------------- |
-| `(site)`| the eight live routes         | `globals.css` | the current site — uppercase Inter, blue accent |
-| `(v2)`  | `/template`                   | `v2.css`      | the makeover — German-automotive, Archivo display |
-
-They share nothing but `public/assets`, so work on the new design cannot break
-the live one. Navigating between the two triggers a full page load, which is the
-correct trade while both exist. When `(v2)` wins, `(site)` is deleted and the
-group wrapper comes off.
-
-`/template` is `noindex` and exists to be argued about, not shipped.
+The copy is the client's own, carried over unchanged from the page this
+replaced. The Smart Film section is the one addition.
 
 ## Layout
 
 ```
 src/
   app/
-    (site)/            the live site — one folder per route
-      layout.tsx         its root layout: Header, Footer, LanguageProvider
-      page.tsx           home
-      produkter/         comparison matrix + three product cards
-      smart-film/        ┐
-      led-film/          ├ all three render <ProductPage slug="…" />
-      3d-media-glass/    ┘
-      kontakt/  privatlivspolitik/
-    (v2)/
-      layout.tsx         its root layout: Archivo + Inter, v2.css
-      template/          the makeover, one page
-    api/  robots.ts  sitemap.ts   shared by both groups
-    globals.css        (site) design tokens and utilities
-    v2.css             (v2) design tokens and utilities
-  components/          section-level building blocks
-    product/           the product-page sequence
-    v2/                the makeover's bands, used only by /template
-  content/             every string and product fact on the site
+    layout.tsx     fonts, metadata, the remembered colour scheme
+    page.tsx       the whole site, in the order it argues
+    globals.css    every rule on the page
+  components/      one file per section; client only where something moves
+  content/site.ts  every word, in one file
+public/assets/     the client's own photography and footage
 ```
 
-### Content lives in `src/content`
+`content/site.ts` exists so that changing a sentence is a content edit rather
+than a hunt through JSX, and so the whole of what the site claims can be read
+in one sitting.
 
-Nothing user-facing is hard-coded in a component. Copy is authored as
-Danish/English pairs (`L('dansk', 'english')`) and resolved through `useT()`,
-so the DA/EN switch in the header covers the whole site with no route
-duplication. Adding a product is a matter of appending to `PRODUCTS` in
-`content/products.ts` and creating a two-line route file.
+## The design
 
-### Design tokens
+Warm paper, one hairline didone capital carrying every headline, and hairlines
+instead of boxes — the spec row, the form and the reference badges are all
+ruled rather than framed. It came from the Tårn direction in the template set,
+with the client's notes applied: lighter, same layout, no fly-through.
 
-`globals.css` defines the palette and the type scale as Tailwind v4 `@theme`
-tokens and `@utility` classes (`shell`, `band`, `display-xl`, `eyebrow`, `btn`,
-`chev`, …). Components compose those rather than re-deriving spacing and colour,
-which is what keeps the eight pages looking like one site.
+The photography is the deliberate exception and stays dark. It is night
+footage of a lit facade, because the product it sells only exists after dark,
+so the page goes pale around it instead of fighting it.
 
-### Language
+The header puts the wordmark in the middle with two menu items either side,
+and marks the section you are in with the dichroic hairline it already used
+for hover. Its breakpoint is measured, not guessed: the outer columns are
+symmetric, so the heavier right-hand side is charged twice and the header
+needs 1038px before anything touches. Below 1080 it is the wordmark and the
+one action; the footer carries the full menu.
 
-The choice is remembered in `localStorage` and applied after first paint, so
-the server-rendered Danish never mismatches during hydration.
+## Three grounds — DEMO ONLY
 
-## Media
+A picker sits bottom-right so the client can see the same page on three
+grounds: **Dagslys** (warm paper, blue), **Teknisk** (near-black, ice — the
+site as it stood before this rebuild) and **Luksus** (warm black, champagne —
+the accent from the makeover pitch). Same type, same layout; only the colour
+moves, which is the only honest way to judge colour.
 
-`public/assets` holds the product footage and photography. Videos ship an
-H.265 source first with an H.264 fallback, and every one carries a poster so
-the hero has something to show before it plays.
+Every colour is a custom property, so a theme is a list of values rather than
+a search through the stylesheet. Adding a fourth is one block in `globals.css`
+and one entry in `THEMES`.
+
+**It is not part of the site.** Four pieces come out together, each marked
+`DEMO ONLY`: the `<script>` and the `THEMES`/`ThemePicker` mount in
+`layout.tsx` and `page.tsx`, the component itself, and the `.picker` block in
+`globals.css`. Delete them and whichever `:root` values you keep become the
+single scheme.
+
+## Things worth knowing before touching it
+
+- **The enquiry form opens the sender's own mail client.** No mailbox, no
+  relay, no key in an environment variable — and the sender keeps a copy in
+  their outbox. The cost is that the page cannot know whether it was sent, so
+  it says the mail client opened and claims nothing about delivery. The
+  previous project had an `/api/enquiry` route for this; it is gone, and it is
+  in git history if it is ever wanted back.
+- **The photograph in the Smart Film section is a stand-in.** Every image here
+  is an LED visualisation, so it borrows `vis-klinik.jpg` zoomed hard into its
+  right-hand third — otherwise "clear" reveals an advert, which is the wrong
+  product. It wants one real photograph: a clinic or meeting-room wall, one
+  tripod position, shot matte and clear. Then `scale` goes back to `1` in
+  `.pane-shot img`.
+- **`.rise` starts at opacity 0.** Anything that stops the reveal observer
+  running hides the page. Scripting being off is covered by a `<noscript>`
+  rule in the layout; a thrown error during hydration is not.
+- See `CONTENT-REQUEST.md` for what is still missing from the client.

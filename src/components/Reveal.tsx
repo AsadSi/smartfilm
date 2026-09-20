@@ -1,54 +1,63 @@
 'use client';
 
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from 'react';
-
-type RevealProps = {
-  children: ReactNode;
-  /** Stagger within a group, in milliseconds. */
-  delay?: number;
-  className?: string;
-  as?: ElementType;
-};
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 /**
- * Fades and lifts its children into place the first time they cross into view.
- * One observer per element is cheap and keeps the component self-contained.
+ * Reveal on scroll.
+ *
+ * Carries both jobs the stylesheet expects of it: `.in.rise` reveals the
+ * element itself, and `.in .rise` reveals `.rise` children on a stagger. So a
+ * group like the three steps is one Reveal with `.rise` children, and a single
+ * block is a Reveal with nothing inside it that cares.
+ *
+ * `done` lands a beat later and retires the stagger delays, or a hover on the
+ * third step inherits a 270ms wait for the rest of the session.
+ *
+ * There is no fallback for a missing IntersectionObserver. `.rise` starts at
+ * opacity 0, so anything that stops this running hides the page — and the case
+ * that actually matters is scripting being off altogether, which a <noscript>
+ * rule in the layout covers for every element at once.
  */
-export default function Reveal({ children, delay = 0, className = '', as }: RevealProps) {
-  const Tag: ElementType = as ?? 'div';
+export function Reveal({
+  children,
+  as: Tag = 'div',
+  className = '',
+  id,
+  style,
+}: {
+  children: ReactNode;
+  as?: 'div' | 'section' | 'ul' | 'article';
+  className?: string;
+  id?: string;
+  style?: React.CSSProperties;
+}) {
   const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [state, setState] = useState<'' | 'in' | 'in done'>('');
 
   useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
+    const el = ref.current;
+    if (!el) return;
 
-    if (!('IntersectionObserver' in window)) {
-      const frame = requestAnimationFrame(() => setVisible(true));
-      return () => cancelAnimationFrame(frame);
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setVisible(true);
-          observer.disconnect();
-        }
+    let timer: ReturnType<typeof setTimeout>;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setState('in');
+        timer = setTimeout(() => setState('in done'), 1200);
+        io.disconnect();
       },
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.08 },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.08 },
     );
 
-    observer.observe(node);
-    return () => observer.disconnect();
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
-    <Tag
-      ref={ref}
-      className={`reveal ${className}`}
-      data-visible={visible ? 'true' : 'false'}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
+    <Tag ref={ref as React.Ref<never>} id={id} style={style} className={`rise ${state} ${className}`.trim()}>
       {children}
     </Tag>
   );

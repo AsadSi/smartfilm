@@ -1,431 +1,679 @@
-@import "tailwindcss";
+/* ============================================================
+   TOKENS: daylight
 
-/* =============================================================================
-   SmartFilm Danmark — design tokens
+   The page used to be a night shot of itself — near-black ground, ice blue
+   glowing on it. It is now printed on warm paper instead, and every colour
+   had to be re-derived rather than inverted: the accent blue is taken down
+   four stops so it still passes on paper, and the two dichroic companions
+   with it, or the signature hairline turns into a highlighter.
 
-   The palette is white, black and blue: pure white ground, true black bands,
-   neutral grey, and the client's blue as the only accent. The *structure* is
-   Apple's — full-bleed media, one idea per band, huge centred display type,
-   translucent sticky nav, pill buttons and chevron links.
-   ============================================================================= */
-@theme {
-  /* ---------------------------------------------------------------------
-     PALETTE — white, black and blue.
+   The photography is the exception. Footage of a lit facade at night is dark
+   because the thing being sold only exists after dark, so the hero and the
+   LED panel keep their own black and the page goes pale around them.
+   ============================================================ */
+:root,
+[data-theme="dagslys"]{
+  --canvas:#F8F5F1; --canvas-2:#F1ECE6; --panel:#E7E1D9;
+  --line:rgba(40,34,30,.13); --line-strong:rgba(40,34,30,.26);
+  --text:#221F1C; --text-dim:#635C54;   /* 6.1:1 on --canvas */
 
-     The blue accent (#2F5FE0) is the client's, from the stylesheet he sent.
-     Everything around it used to be blue too: the ground was a tinted paper
-     (#F4F7FB), the greys were blue-greys (#5A667E, #DCE3ED) and the dark bands
-     were navy (#0D1B33), so the page read as three values of one hue. The
-     neutrals are now genuinely neutral — pure white ground, true black bands,
-     grey mixed from black rather than from blue — which leaves the blue as the
-     only colour on the page and makes it read as an accent instead of a wash.
+  --ice:#1E63C4; --ice-hi:#154C9B;      /* THE accent, 5.3:1 on --canvas */
+  --frame:#4A433C;                      /* the window's mullions */
+  --aqua:#1B8C86; --rose:#C4407E;       /* dichroic edge only */
+  --on-accent:#FFFFFF;
 
-     The token NAMES are the originals (cream, sand, gold, noir) so that no
-     component has to change and the palette is a single edit to this block.
-     The names are historical; the values are white, black and blue.
-     --------------------------------------------------------------------- */
+  --hdr-bg:rgba(248,245,241,.90);       /* the header once it has left the hero */
+  --badge-bg:rgba(248,245,241,.92);
+  --frost:rgba(243,240,236,.44);        /* the matte pane */
+  --dot:rgba(40,34,30,.55);             /* the drifting grid */
+  --glow:rgba(30,99,196,.09);
+  --err:var(--err); --err-wash:var(--err-wash);
+  --theme-color:#F8F5F1;
 
-  /* Grounds. There are two, white and black: the alternating band used to be a
-     light grey, and every section that had it now takes the black instead, so
-     the page is white or black and nothing in between. --color-sand survives
-     only as the hover state inside the white nav dropdown, where a ground has
-     to be a shade of the ground it sits on. */
-  --color-cream: #ffffff;      /* page ground — pure white */
-  --color-sand: #f5f5f5;       /* hover inside the white dropdown */
-  --color-sand-deep: #e8e8e8;  /* pressed on sand */
-  --color-noir: #000000;       /* every dark band — true black */
-  --color-noir-2: #101010;     /* elevated surface on noir */
-  --color-noir-3: #1c1c1c;
+  --dichroic:linear-gradient(90deg,var(--aqua),var(--ice),var(--rose),var(--ice),var(--aqua));
 
-  /* Ink */
-  --color-ink: #0a0a0a;        /* body + headlines            19.8:1 on white */
-  --color-mut: #6b6b6b;        /* secondary copy, labels       5.3:1 on white */
-  --color-mut-2: #4a4a4a;      /* body copy at length          8.9:1 on white */
+  /* The three faces come from next/font, which self-hosts them and hands each
+     one a variable — so there is no render-blocking request to Google and no
+     flash of the fallback. */
+  --display:var(--font-italiana),'Didot','Times New Roman',serif;
+  --body:var(--font-manrope),-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --mono:var(--font-mono),ui-monospace,'SF Mono',Menlo,monospace;
 
-  /* The accent, and now the only hue in the palette. Legible as text on white
-     (5.5:1); as a FILL it takes white text at the same 5.5:1. */
-  --color-gold: #2f5fe0;
-  --color-gold-light: #8fb0ff; /* accent text on black         9.8:1          */
-  --color-gold-deep: #2f5fe0;  /* accent text on white         5.5:1          */
-  /* The filled button's hover. It used to lighten to --gold-light, which left
-     the button's own white label at 2.1:1; darkening keeps it at 6.8:1 and
-     still reads as a state change against the black band. */
-  --color-gold-hover: #2451c9;
-
-  /* Hairlines. --color-line is decorative and must not be the only boundary of
-     an interactive control — those need --color-line-strong. */
-  --color-line: #e4e4e4;
-  --color-line-soft: #efefef;
-  --color-line-strong: #8a8a8a; /* control borders             3.5:1 on white */
-  --color-line-dark: #262626;
-
-  /* Vitrocsa sets its display type in Klavika — a light, squarish grotesque.
-     Klavika is licensed, so the closest thing already loaded here is Inter at
-     300, set uppercase. The serif is gone: an uppercase Cormorant headline is
-     the one thing that cannot be made to read as architectural. */
-  --font-display: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-
-  /* Vitrocsa rounds nothing. Every control and every image on that site
-     measures 0px, and it is most of why it reads as architecture. */
-  --radius-media: 0px;
-
-  /* Apple's easing — long, decelerating, never bouncy */
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px; --s8:128px;
+  --maxw:1240px; --nav-h:70px;
+  --e-out:cubic-bezier(.16,1,.3,1);
+  --e-io:cubic-bezier(.65,0,.35,1);
+  --tshadow:0 1px 2px rgba(4,5,10,.95),0 3px 12px rgba(4,5,10,.8),0 10px 44px rgba(4,5,10,.82);
 }
 
-:root {
-  --header-h: 68px;
-  --gutter: clamp(1.25rem, 5vw, 4rem);
-  --container: 1200px;
-  --container-wide: 1440px;
-  --container-narrow: 720px;
-  color-scheme: light;
+/* ============================================================
+   THE OTHER TWO GROUNDS
+
+   Same page, same type, same layout — only the colour moves, which is the
+   only way a client can actually judge colour. Both of these are dark, and
+   both therefore get the photography for free: the hero footage and the LED
+   panel are night shots, so on a dark ground they stop being the one bright
+   exception and simply belong.
+
+   TEKNISK is the site as it stands today, kept so the new ground can be held
+   against the old one rather than described. LUKSUS is champagne on a warm
+   near-black — the accent from the smartfilm-next makeover, which is the
+   house's own luxury language rather than a fourth opinion.
+   ============================================================ */
+[data-theme="teknisk"]{
+  --canvas:#070910; --canvas-2:#0B0E18; --panel:#111624;
+  --line:rgba(170,196,255,.14); --line-strong:rgba(170,196,255,.30);
+  --text:#EDF1F8; --text-dim:#98A3B8;   /* 7.6:1 on --canvas */
+
+  --ice:#4D9FFF; --ice-hi:#7FB9FF;      /* 7.3:1 on --canvas */
+  --frame:#1A2132;
+  --aqua:#5FE0D8; --rose:#FF86C4;
+  --on-accent:#070910;
+
+  --hdr-bg:rgba(7,9,16,.86);
+  --badge-bg:rgba(7,9,16,.86);
+  --frost:rgba(186,205,238,.20);
+  --dot:rgba(170,196,255,.5);
+  --glow:rgba(77,159,255,.13);
+  --err:#FF9E94; --err-wash:rgba(255,158,148,.07);
+  --theme-color:#070910;
 }
 
-/* ───── Base ───── */
-* {
-  -webkit-tap-highlight-color: transparent;
+[data-theme="luksus"]{
+  --canvas:#141110; --canvas-2:#1B1713; --panel:#241E18;
+  --line:rgba(201,162,39,.17); --line-strong:rgba(201,162,39,.36);
+  --text:#F2EBDD; --text-dim:#A79C86;   /* 7.0:1 on --canvas */
+
+  --ice:#C9A227; --ice-hi:#E0BC4A;      /* champagne, 7.8:1 on --canvas */
+  --frame:#2B241A;
+  --aqua:#9A8A4B; --rose:#C98B5A;       /* the dichroic rule, taken to metal */
+  --on-accent:#141110;
+
+  --hdr-bg:rgba(20,17,16,.88);
+  --badge-bg:rgba(20,17,16,.88);
+  --frost:rgba(242,235,221,.15);
+  --dot:rgba(201,162,39,.46);
+  --glow:rgba(201,162,39,.10);
+  --err:#E7A08F; --err-wash:rgba(231,160,143,.07);
+  --theme-color:#141110;
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:hidden;overflow-x:clip}
+/* anchor jumps must clear the fixed header, or the kicker lands under it */
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 28px)}
+section[id]{scroll-margin-top:calc(var(--nav-h) + 28px)}
+body{
+  margin:0;background:var(--canvas);color:var(--text);
+  font-family:var(--body);font-size:17px;font-weight:300;line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  opacity:0;transition:opacity .7s var(--e-out);
+}
+body.lit{opacity:1}
+img,video,svg{display:block;max-width:100%}
+p{margin:0}
+a{color:inherit}
+/* One hairline didone capital carries every headline. It is the whole of the
+   new look: at 400 weight and .03em it needs the size to read, so the clamps
+   are larger than a bold face would need at the same rank. */
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1;letter-spacing:.03em;text-transform:uppercase;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.5rem,6.4vw,5.4rem)}
+h2{font-size:clamp(1.95rem,4.4vw,3.5rem)}
+h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:22px}
+@media (min-width:820px){ .wrap{padding-inline:48px} }
+.section{position:relative;padding-block:clamp(80px,10vw,var(--s8))}
+.lede{color:var(--text-dim);font-size:clamp(1rem,1.5vw,1.13rem);max-width:54ch}
+
+.kicker{
+  font-family:var(--mono);font-size:.7rem;font-weight:500;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--ice);
+  margin-bottom:var(--s3);
 }
 
-body {
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.6;
-  font-weight: 400;
-  overflow-x: hidden;
+:focus-visible{outline:2px solid var(--ice);outline-offset:4px;border-radius:2px}
+:focus:not(:focus-visible){outline:none}
+
+.skip{
+  position:absolute;left:14px;top:-120px;z-index:300;
+  background:var(--ice);color:var(--on-accent);font-weight:500;font-size:.85rem;
+  padding:13px 20px;text-decoration:none;transition:top .2s var(--e-out);
+}
+.skip:focus{top:14px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* The dichroic edge: the signature element */
+.edge{position:relative;height:1px;border:0;margin:0;background:var(--dichroic);background-size:300% 100%;animation:drift 14s linear infinite;opacity:.9}
+@keyframes drift{to{background-position:300% 0}}
+
+/* ============================================================
+   FIXED ENVIRONMENT LAYER
+   ============================================================ */
+.env{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.env::before{
+  content:"";position:absolute;inset:-10%;
+  background-image:radial-gradient(circle,var(--dot) .8px,transparent .9px);
+  background-size:34px 34px;opacity:.05;
+  animation:envdrift 90s linear infinite;animation-delay:-30s;
+}
+.env::after{
+  content:"";position:absolute;left:50%;top:38%;width:min(120vw,1500px);aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--glow),transparent 62%);
+  animation:breathe 70s ease-in-out infinite;animation-delay:-22s;
+}
+@keyframes envdrift{to{transform:translate(34px,34px)}}
+@keyframes breathe{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:.95;transform:translate(-50%,-50%) scale(1.22)}}
+.page{position:relative;z-index:1}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  min-height:52px;padding:15px 32px;
+  font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;white-space:nowrap;border:1px solid transparent;border-radius:0;
+  transition:background-color .3s var(--e-out),color .3s var(--e-out),border-color .3s var(--e-out);
+}
+.btn-primary{background:var(--ice);color:var(--on-accent);border-color:var(--ice)}
+.btn-primary:hover{background:var(--ice-hi);border-color:var(--ice-hi)}
+.btn-line{background:transparent;color:var(--text);border-color:var(--line-strong)}
+.btn-line:hover{border-color:var(--ice);color:var(--ice)}
+
+@media (pointer:coarse){ .btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center} }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+/* The wordmark sits in the middle with the menu parted around it. The header
+   crosses two grounds — the dark hero, then paper — so it carries no colour of
+   its own: it is white over the footage and flips to ink the moment the page
+   starts scrolling, and everything in it inherits that. */
+.hdr{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
+  display:flex;align-items:center;color:#fff;
+  background:linear-gradient(to bottom,rgba(8,10,16,.52),rgba(8,10,16,0));
+  transition:background-color .4s var(--e-out),color .4s var(--e-out),backdrop-filter .4s var(--e-out);
+}
+.hdr.solid{color:var(--text);background:var(--hdr-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+/* Every item is placed by column rather than left to auto-flow. The two menus
+   are display:none below the breakpoint, which takes them out of the grid
+   entirely — without this the wordmark slides into the first column and stops
+   being centred on exactly the widths where there is least to look at. */
+.hdr .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:var(--s2)}
+.nav-l{grid-column:1}
+.brand{grid-column:2}
+.hdr-r{grid-column:3}
+.brand{display:flex;flex-direction:column;align-items:center;text-decoration:none;min-height:44px;justify-content:center}
+/* text-indent puts back the trailing letter-space, or tracked caps sit left of
+   true centre by half a space and the whole header looks a pixel off */
+.brand b{font-family:var(--display);font-weight:400;font-size:1.2rem;letter-spacing:.28em;text-indent:.28em;text-transform:uppercase;line-height:1}
+.brand span{font-family:var(--mono);font-size:.54rem;letter-spacing:.34em;text-indent:.34em;margin-top:6px;opacity:.72}
+.hdr.solid .brand span{color:var(--text-dim);opacity:1}
+.hdr-r{display:flex;align-items:center;justify-content:flex-end;gap:var(--s1)}
+/* Measured, not guessed. The outer columns are 1fr, so both are as wide as the
+   heavier one — the right, which carries the menu and the button — and the
+   whole header needs 1038px before anything touches. 1080 is that number with
+   room to breathe. Under it the header is the wordmark and the one action;
+   the footer carries the full menu. */
+.nav{display:none;gap:6px}
+@media (min-width:1080px){ .nav{display:flex} }
+.nav a{
+  position:relative;padding:12px 10px;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:inherit;opacity:.76;text-decoration:none;transition:opacity .3s var(--e-out),color .3s var(--e-out);
+}
+/* The dichroic rule does two jobs: it follows the pointer, and it marks the
+   section you are actually in. Same mark for both — you cannot be hovering one
+   item and reading another at the same time, so there is nothing to tell
+   apart. It grows out of its own middle rather than fading in place. */
+.nav a::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:8px;height:1px;
+  background:var(--dichroic);background-size:300% 100%;
+  opacity:0;transform:scaleX(.25);
+  transition:opacity .34s var(--e-out),transform .34s var(--e-out);
+  animation:drift 14s linear infinite;
+}
+.nav a:hover,.nav a[aria-current]{opacity:1}
+.nav a:hover::after,.nav a[aria-current]::after{opacity:1;transform:none}
+.hdr.solid .nav a{color:var(--text-dim);opacity:1}
+.hdr.solid .nav a:hover,.hdr.solid .nav a[aria-current]{color:var(--text)}
+.hdr .btn-line{color:inherit;border-color:currentColor;opacity:.8}
+.hdr .btn-line:hover{opacity:1;color:inherit;border-color:currentColor}
+.hdr.solid .btn-line{opacity:1;color:var(--text);border-color:var(--line-strong)}
+.hdr.solid .btn-line:hover{color:var(--ice);border-color:var(--ice)}
+.hdr .btn{display:none}
+/* The header's button is set at the menu's size rather than the page's. It is
+   the quiet, always-there version of an action the hero already makes loudly,
+   and at full size it was wide enough to push the menu off its own breakpoint:
+   the outer columns are symmetric, so every pixel it costs is charged twice. */
+@media (min-width:640px){
+  .hdr .btn{display:inline-flex;min-height:44px;padding:12px 14px;font-size:.68rem;letter-spacing:.16em}
 }
 
-img,
-video {
-  display: block;
-  max-width: 100%;
-}
+/* ============================================================
+   HERO
+   ============================================================ */
+/* The video plays itself on a loop, so the hero is one screen tall.
+   (It was 450vh when scroll drove the playhead.) */
+.hero{position:relative}
+.stage{position:relative;height:100svh;overflow:hidden;background:#04050A}
+.stage .poster,.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage .poster{background-size:cover;background-position:center;transition:opacity .8s var(--e-out)}
+.stage video{opacity:0;transition:opacity .8s var(--e-out);will-change:transform;transform:translateZ(0)}
+.stage.video-ready video{opacity:1}
+.stage.video-ready .poster{opacity:0}
+.stage.video-failed video{display:none}
 
-::selection {
-  background: var(--color-gold);
-  color: #fff;
-}
+/* layer 1: the global base scrim */
+.scrim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 120% 92% at 46% 46%,rgba(6,7,14,0) 30%,rgba(6,7,14,.66) 100%)}
+.vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(7,9,16,.72) 0%,transparent 22%,transparent 76%,rgba(7,9,16,.88) 100%)}
 
-:focus-visible {
-  outline: 2px solid var(--color-gold-deep);
-  outline-offset: 3px;
-  border-radius: 2px;
+/* The persistent hero CTA. The footage carries its own headline, so the page
+   adds one clickable action in the dark strip at the bottom and nothing else. */
+.hero-cta{
+  position:absolute;left:0;right:0;bottom:0;z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:var(--s3);
+  padding:var(--s8) 22px calc(var(--s6) + 18px);
+  pointer-events:none;
+  background:linear-gradient(to top,rgba(5,6,12,.93) 18%,rgba(5,6,12,.6) 58%,rgba(5,6,12,0) 100%);
 }
-
-/* Anything anchored has to clear the fixed header */
-[id] {
-  scroll-margin-top: calc(var(--header-h) + 2rem);
+.hero-cta p{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(237,241,248,.82);text-align:center;text-shadow:var(--tshadow);
 }
+.hero-cta .btn{pointer-events:auto}
+@media (min-width:820px){ .hero-cta{padding-inline:48px} }
 
-/* On product pages the sticky sub-nav sits below the header too */
-@utility anchor-below-subnav {
-  scroll-margin-top: calc(var(--header-h) + 3.5rem + 1.5rem);
+.chip{
+  position:absolute;left:22px;bottom:26px;z-index:3;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 14px;border-radius:2px;
+  background:rgba(8,10,18,.55);border:1px solid rgba(120,150,210,.28);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-dim);text-shadow:0 1px 3px rgba(4,5,10,.9);
+  transition:opacity .4s var(--e-out);
 }
+@media (min-width:820px){ .chip{left:48px} }
+.chip i{width:5px;height:5px;border-radius:50%;background:var(--ice);font-style:normal;box-shadow:0 0 8px var(--ice)}
 
-/* Locks the page behind the mobile nav sheet without losing scroll position */
-html.nav-open,
-html.nav-open body {
-  overflow: hidden;
+.w{display:inline-block;white-space:pre}
+.c{display:inline-block;will-change:transform,opacity}
+
+/* ============================================================
+   SHARED SECTION FURNITURE
+   ============================================================ */
+.head{max-width:min(760px,94%);margin-bottom:clamp(48px,6vw,var(--s7))}
+/* every hr.edge is a short rule with breathing room, inside a .head or not */
+hr.edge{width:52px;margin-block:var(--s3)}
+
+.rise{opacity:0;transform:translateY(26px)}
+.in.rise,.in .rise{opacity:1;transform:none;transition:opacity .85s var(--e-out),transform .85s var(--e-out)}
+.in .rise:nth-child(2){transition-delay:.09s}
+.in .rise:nth-child(3){transition-delay:.18s}
+.in .rise:nth-child(4){transition-delay:.27s}
+/* retire the stagger so later hovers do not inherit it (specificity must beat nth-child) */
+.in.done .rise:nth-child(2),.in.done .rise:nth-child(3),.in.done .rise:nth-child(4){transition-delay:0s!important}
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.steps{position:relative;display:grid;gap:var(--s5)}
+@media (min-width:880px){ .steps{grid-template-columns:repeat(3,1fr);gap:var(--s6)} }
+.thread{position:absolute;left:0;right:0;top:34px;height:2px;display:none;pointer-events:none}
+@media (min-width:880px){ .thread{display:block} }
+.thread svg{width:100%;height:2px;overflow:visible}
+.step{position:relative}
+.step .no{
+  width:68px;height:68px;display:grid;place-items:center;margin-bottom:var(--s3);
+  border:1px solid var(--line-strong);border-radius:50%;background:var(--canvas);
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;color:var(--ice);position:relative;z-index:2;
 }
+.step .no::after{content:"";position:absolute;inset:-1px;border-radius:50%;box-shadow:0 0 0 1px var(--ice);opacity:0;transition:opacity .6s var(--e-out)}
+.in .step .no::after{opacity:.35}
+.step h3{margin-bottom:12px}
+.step p{color:var(--text-dim);font-size:.97rem;max-width:34ch}
 
-/* ───── Layout helpers ───── */
-@utility shell {
-  width: 100%;
-  max-width: var(--container);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+/* ============================================================
+   SPECS
+   ============================================================ */
+/* Four cells in a ruled box became four columns on hairlines. Nothing here is
+   a container any more — the same move as the form and the reference badges. */
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--line-strong)}
+@media (min-width:860px){ .specs{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.spec{background:transparent;padding:var(--s5) var(--s3) var(--s5) 0;text-align:left;border-bottom:1px solid var(--line)}
+@media (min-width:860px){
+  .spec{border-bottom:0;border-left:1px solid var(--line);padding-left:var(--s4)}
+  .spec:first-child{border-left:0;padding-left:0}
 }
+.spec b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,4vw,3.1rem);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.spec span{display:block;margin-top:12px;font-family:var(--mono);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
+.spec small{display:block;margin-top:8px;font-size:.78rem;color:var(--text-dim);opacity:.8;line-height:1.5}
 
-@utility shell-wide {
-  width: 100%;
-  max-width: var(--container-wide);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+/* ============================================================
+   THE INTERACTIVE MOMENT
+   ============================================================ */
+.demo{background:var(--canvas-2);border-block:1px solid var(--line)}
+.demo-grid{display:grid;gap:var(--s5);align-items:center}
+@media (min-width:940px){ .demo-grid{grid-template-columns:1.05fr .95fr;gap:var(--s7)} }
+.panel{
+  position:relative;aspect-ratio:16/9;background:#04050A;
+  border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;
 }
-
-@utility shell-narrow {
-  width: 100%;
-  max-width: var(--container-narrow);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+.panel svg{width:88%;height:auto}
+.panel .node{fill:var(--ice);opacity:calc(clamp(0,(var(--lit,0)*var(--n,1) - var(--i,0)),1)*.92);
+  transition:opacity .12s linear}
+.panel .glass{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.05) 0%,transparent 34%,transparent 66%,rgba(255,255,255,.035) 100%)}
+.panel .word{
+  position:absolute;left:0;right:0;bottom:12%;text-align:center;
+  font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3.4vw,2.4rem);letter-spacing:.02em;
+  opacity:clamp(0,(var(--lit,0) - .72)*3.6,1);color:#fff;
+  text-shadow:0 0 26px rgba(77,159,255,.75),0 0 60px rgba(77,159,255,.4);
 }
-
-/* The section rhythm — Apple's generous, consistent vertical beat */
-@utility band {
-  padding-block: clamp(5.5rem, 11vw, 11rem);
+.holder{margin-top:var(--s4)}
+.hold-btn{
+  -webkit-user-select:none;user-select:none;touch-action:none;
+  position:relative;overflow:hidden;width:100%;max-width:330px;
 }
-
-@utility band-tight {
-  padding-block: clamp(3.5rem, 7vw, 7rem);
+.hold-btn .fill{position:absolute;inset:0 auto 0 0;width:calc(var(--lit,0)*100%);background:var(--ice);opacity:.18;pointer-events:none;transition:width .1s linear}
+.hold-btn span{position:relative;z-index:1}
+.demo .lede{margin-bottom:var(--s3)}
+.reveal-list{list-style:none;padding:0;margin:var(--s4) 0 0;display:grid;gap:14px}
+.reveal-list li{
+  display:flex;gap:14px;align-items:flex-start;color:var(--text-dim);font-size:.97rem;
+  opacity:clamp(0,(var(--lit,0) - var(--d,0))*6,1);
+  transform:translateY(calc((1 - clamp(0,(var(--lit,0) - var(--d,0))*6,1))*8px));
+  transition:opacity .3s var(--e-out),transform .3s var(--e-out);
 }
+.reveal-list i{flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--ice);font-style:normal}
 
-/* Separates two sections that share a ground, so they still read as separate. */
-@utility band-sep {
-  border-top: 1px solid var(--color-line);
+/* ============================================================
+   CLEAR OR MATTE — the second product
+
+   The page sold one thing: film that turns a window into a screen. This band
+   adds the other one, the film that turns a window opaque, and it is built as
+   a switch rather than as a paragraph — the product IS a switch, and a
+   paragraph claiming "under a second" is weaker than a pane that does it.
+
+   The frost sits on the panes, never on the photograph. Blurring the whole
+   picture would take the frame and the mullions with it, and a real
+   installation keeps those sharp: only the glass between them goes matte.
+   ============================================================ */
+.klar{background:var(--canvas-2);border-block:1px solid var(--line)}
+.klar-grid{display:grid;gap:var(--s5);align-items:center}
+@media (min-width:940px){ .klar-grid{grid-template-columns:1.08fr .92fr;gap:var(--s7)} }
+
+.pane-shot{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--panel)}
+/* PLACEHOLDER IMAGERY. Every photograph on this site is an LED visualisation,
+   so this one is zoomed hard into the right-hand third — the reception behind
+   plain glass — to keep the campaign on the left out of the frame. Clear glass
+   revealing an LED advert would read as the wrong product. Swap in a real
+   Smart Film photograph and drop the scale back to 1. */
+.pane-shot img{width:100%;height:100%;object-fit:cover;object-position:86% 44%;scale:1.62;transform-origin:86% 44%}
+/* the frame, drawn over the photograph */
+.panes{
+  position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.45fr 1fr;
+  gap:clamp(9px,1.3vw,20px);border:clamp(13px,1.9vw,28px) solid var(--frame);
+  pointer-events:none;
 }
-
-/* The same, for the black ground. The page now ends on a run of black bands —
-   quote, process, closing ask, footer — and without this they read as one. */
-@utility band-sep-dark {
-  border-top: 1px solid rgb(255 255 255 / 0.12);
+.pane{
+  position:relative;box-shadow:0 0 0 clamp(4px,.65vw,10px) var(--frame);
+  background-color:transparent;
+  -webkit-backdrop-filter:blur(0px) saturate(1);backdrop-filter:blur(0px) saturate(1);
+  transition:backdrop-filter .9s var(--e-out),-webkit-backdrop-filter .9s var(--e-out),background-color .9s var(--e-out);
 }
-
-/* ───── Type ───── */
-@utility display-xl {
-  font-family: var(--font-display);
-  font-weight: 300;
-  /* Uppercase runs ~40% wider than sentence case, so the ceiling comes down
-     from 7rem — Vitrocsa's own h1 resolves to 61px on a desktop viewport. */
-  font-size: clamp(2.3rem, 6.2vw, 4.6rem);
-  line-height: 1.06;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  text-wrap: balance;
+.klar[data-mat="true"] .pane{
+  -webkit-backdrop-filter:blur(15px) saturate(.7);backdrop-filter:blur(15px) saturate(.7);
+  background-color:var(--frost);
 }
+/* Panes wired in series do not arrive together. 70ms apart reads as one
+   gesture and is still visible on the second look. */
+.pane:nth-child(2){transition-delay:70ms}
+.pane:nth-child(3){transition-delay:140ms}
 
-@utility display-lg {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(1.9rem, 4vw, 3rem);
-  line-height: 1.1;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  text-wrap: balance;
+/* The control is a track with a knob that travels, not a button that says
+   "toggle". The word that is currently true is the one set in ink. */
+.switcher{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-top:var(--s5);padding-block:var(--s4);border-block:1px solid var(--line)}
+.sw{display:inline-flex;align-items:center;gap:15px;background:none;border:0;padding:8px 0;min-height:44px;cursor:pointer;color:inherit}
+.sw .lab{font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--text-dim);transition:color .4s var(--e-out)}
+.klar[data-mat="true"] .sw .lab-mat,
+.klar[data-mat="false"] .sw .lab-klar{color:var(--text)}
+.track{display:inline-flex;align-items:center;width:64px;height:30px;padding:3px;border:1px solid var(--line-strong);border-radius:999px;transition:border-color .4s var(--e-out)}
+.klar[data-mat="false"] .track{border-color:var(--ice)}
+.knob{display:block;width:22px;height:22px;border-radius:999px;background:var(--text);transition:translate .5s var(--e-out),background-color .5s var(--e-out)}
+.klar[data-mat="false"] .knob{translate:32px;background:var(--ice)}
+.readout{font-family:var(--mono);font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin-left:auto}
+
+.klar-figs{list-style:none;padding:0;margin:var(--s4) 0 0;display:grid;gap:14px}
+@media (min-width:560px){ .klar-figs{grid-template-columns:repeat(3,1fr);gap:var(--s3)} }
+/* Side by side on a phone the conditions wrap into each other's column and the
+   row stops reading as three separate figures, so they only go into columns
+   once there is room. */
+.klar-figs li{display:flex;align-items:baseline;gap:12px}
+@media (min-width:560px){ .klar-figs li{display:block} }
+.klar-figs b{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1;letter-spacing:.02em}
+.klar-figs span{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
+@media (min-width:560px){ .klar-figs span{margin-top:10px} }
+.klar-note{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--line);font-size:.88rem;color:var(--text-dim);max-width:46ch}
+
+/* ============================================================
+   REFERENCES
+   ============================================================ */
+.refs{display:grid;gap:var(--s4)}
+@media (min-width:880px){ .refs{grid-template-columns:repeat(2,1fr);gap:var(--s5) var(--s4)} }
+.ref figure{margin:0}
+.ref .shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.badge{
+  position:absolute;top:0;left:0;z-index:2;
+  padding:8px 15px;background:var(--badge-bg);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);
 }
+.ref .shot img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--e-out)}
+.ref:hover .shot img{transform:scale(1.045)}
+.ref figcaption{padding-top:var(--s3)}
+.ref h3{margin-bottom:8px}
+.ref p{color:var(--text-dim);font-size:.94rem}
 
-@utility display-md {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  text-wrap: balance;
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq{max-width:min(900px,100%)}
+.qa{border-top:1px solid var(--line)}
+.qa:last-child{border-bottom:1px solid var(--line)}
+.qa button{
+  width:100%;display:flex;gap:var(--s3);align-items:center;justify-content:space-between;
+  background:none;border:0;padding:var(--s4) 0;min-height:64px;cursor:pointer;text-align:left;
+  font-family:var(--body);font-weight:500;font-size:clamp(1.02rem,1.7vw,1.22rem);color:var(--text);
+  transition:color .3s var(--e-out);
 }
+.qa button:hover{color:var(--ice)}
+.qa .pm{flex:none;width:22px;height:22px;position:relative}
+.qa .pm::before,.qa .pm::after{content:"";position:absolute;background:var(--ice);transition:transform .4s var(--e-out),opacity .4s var(--e-out)}
+.qa .pm::before{left:0;right:0;top:50%;height:1px;margin-top:-.5px}
+.qa .pm::after{top:0;bottom:0;left:50%;width:1px;margin-left:-.5px}
+.qa[open] .pm::after{transform:rotate(90deg);opacity:0}
+.qa .a{overflow:hidden;color:var(--text-dim);font-size:1rem}
+.qa .a p{padding-bottom:var(--s4);max-width:64ch}
 
-/* Card titles. Vitrocsa sets these as small caps, not as small headlines. */
-@utility display-sm {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
-  line-height: 1.35;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+/* ============================================================
+   THE FORM
+   ============================================================ */
+.cta{background:var(--canvas-2);border-top:1px solid var(--line)}
+.cta-grid{display:grid;gap:var(--s6)}
+@media (min-width:940px){ .cta-grid{grid-template-columns:.85fr 1.15fr;gap:var(--s7);align-items:start} }
+.facts{list-style:none;padding:0;margin:var(--s5) 0 0;display:grid;gap:var(--s3)}
+.facts div{font-family:var(--mono);font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);margin-bottom:6px}
+.facts a,.facts p{color:var(--text);text-decoration:none;font-size:1rem}
+.facts a{display:inline-block;min-height:26px;border-bottom:1px solid transparent;transition:border-color .3s var(--e-out)}
+.facts a:hover{border-color:var(--ice)}
+
+.form{background:transparent;border:0;border-top:1px solid var(--line-strong);padding:clamp(28px,3.6vw,var(--s5)) 0 0}
+.row{display:grid;gap:var(--s3)}
+@media (min-width:620px){ .row.two{grid-template-columns:1fr 1fr} }
+.field{display:flex;flex-direction:column;gap:9px;margin-bottom:var(--s3)}
+.field label{font-family:var(--mono);font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)}
+.req{color:var(--ice);margin-left:4px}
+.field input,.field textarea{
+  width:100%;min-height:52px;padding:14px 0;background:transparent;color:var(--text);
+  border:0;border-bottom:1px solid var(--line-strong);border-radius:0;
+  font-family:var(--body);font-size:1rem;font-weight:300;transition:border-color .3s var(--e-out);
 }
+.field textarea{min-height:108px;resize:vertical;line-height:1.6}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-dim);opacity:.55}
+.field input:hover,.field textarea:hover,.field input:focus,.field textarea:focus{border-bottom-color:var(--ice)}
+.hint{font-size:.83rem;color:var(--text-dim)}
+.err{display:none;font-size:.83rem;color:var(--err)}
+.field.bad input,.field.bad textarea{border-bottom-color:var(--err)}
+.field.bad .err{display:block}
+.summary{display:none;margin-bottom:var(--s4);padding:var(--s3);border:1px solid var(--err);border-left-width:3px;background:var(--err-wash)}
+.summary.show{display:block}
+.summary p{font-weight:500;font-size:.93rem;color:var(--err);margin-bottom:10px}
+.summary ul{margin:0;padding-left:20px;font-size:.89rem}
+.summary a{color:var(--err);display:inline-block;padding-block:5px}
+.sent{display:none;text-align:center;padding:var(--s5) var(--s2)}
+.sent.show{display:block}
+.sent .tick{width:58px;height:58px;margin:0 auto var(--s3);display:grid;place-items:center;border:1px solid var(--ice);border-radius:50%;color:var(--ice)}
+.sent h3{margin-bottom:12px;font-size:1.5rem}
+.sent p{color:var(--text-dim);font-size:.96rem;max-width:40ch;margin-inline:auto}
 
-/* Data, not prose. Cormorant has no tabular figures, so a column of numbers set
-   in it never lines up — the clearest "not engineered" tell on the old site.
-   Every figure, stat and spec value uses this. */
-@utility figure {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum' 1, 'cv05' 1;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.ftr{border-top:1px solid var(--line);padding-block:var(--s6) var(--s4)}
+.ftr-grid{display:grid;gap:var(--s5);margin-bottom:var(--s6)}
+@media (min-width:780px){ .ftr-grid{grid-template-columns:1.7fr 1fr 1fr} }
+.ftr h4{font-family:var(--mono);font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);margin:0 0 var(--s2);font-weight:500}
+.ftr ul{list-style:none;margin:0;padding:0}
+.ftr ul a,.ftr ul span{display:inline-block;padding-block:8px;color:var(--text-dim);text-decoration:none;font-size:.95rem;transition:color .3s var(--e-out)}
+.ftr ul a:hover{color:var(--ice)}
+.ftr-tag{color:var(--text-dim);font-size:.95rem;max-width:34ch;margin-top:var(--s3)}
+.ftr-bot{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);justify-content:space-between;padding-top:var(--s3);border-top:1px solid var(--line);font-size:.8rem;color:var(--text-dim)}
+
+/* ============================================================
+   THE THEME PICKER  —  DEMO ONLY, NOT PART OF THE SITE
+
+   Deliberately does not match anything else on the page: a dark capsule,
+   rounded, floating clear of the layout. A client deciding between three
+   grounds has to be able to tell the switch apart from the thing it is
+   switching, or they end up judging the control.
+
+   Comes out in three pieces, all marked DEMO ONLY: this block, the .picker
+   markup at the end of .page, and the script under THEME PICKER.
+   ============================================================ */
+.picker{
+  position:fixed;z-index:200;right:16px;bottom:16px;
+  display:flex;align-items:center;gap:4px;padding:6px;
+  background:rgba(18,18,20,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.14);border-radius:999px;
+  box-shadow:0 8px 30px rgba(0,0,0,.28);
 }
-
-@utility figure-sm {
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum' 1;
-  letter-spacing: -0.01em;
+.picker b{
+  font-family:var(--mono);font-weight:400;font-size:.56rem;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(255,255,255,.44);padding:0 8px 0 10px;
 }
-
-/* The second half of a headline. It was italic Cormorant — the live site's
-   signature — but italic uppercase grotesque is unreadable, so the accent now
-   carries in colour and weight alone. The gold itself is untouched. */
-@utility display-em {
-  font-style: normal;
-  font-weight: 300;
-  color: var(--color-gold-deep);
+@media (max-width:560px){ .picker b{display:none} }
+.picker button{
+  display:inline-flex;align-items:center;gap:7px;
+  min-height:34px;padding:7px 13px 7px 8px;
+  background:none;border:0;border-radius:999px;cursor:pointer;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);
+  transition:background-color .25s var(--e-out),color .25s var(--e-out);
 }
-
-@utility display-em-light {
-  font-style: normal;
-  font-weight: 300;
-  color: var(--color-gold-light);
+.picker button:hover{color:#fff;background:rgba(255,255,255,.08)}
+.picker button[aria-pressed="true"]{color:#fff;background:rgba(255,255,255,.14)}
+/* Each swatch is the ground it switches to, ringed in that theme's accent —
+   the two colours that actually decide how the page feels. */
+.picker i{
+  width:15px;height:15px;border-radius:50%;flex:none;
+  background:var(--sw-bg);box-shadow:inset 0 0 0 2px var(--sw-fg);
 }
+.picker [data-set="dagslys"]{--sw-bg:#F8F5F1;--sw-fg:#1E63C4}
+.picker [data-set="teknisk"]{--sw-bg:#070910;--sw-fg:#4D9FFF}
+.picker [data-set="luksus"]{--sw-bg:#141110;--sw-fg:#C9A227}
 
-/* Small caps label above a headline */
-@utility eyebrow {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--color-gold-deep);
-}
-
-@utility eyebrow-light {
-  color: var(--color-gold-light);
-}
-
-@utility lead {
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  line-height: 1.65;
-  font-weight: 400;
-  color: var(--color-mut-2);
-  text-wrap: pretty;
-}
-
-/* Now that the second band ground is black rather than a light grey, the two
-   utilities that bake in a dark colour need a counterpart for it. */
-@utility lead-light {
-  color: rgb(255 255 255 / 0.68);
-}
-
-/* Micro-label used on specs, figures and captions */
-@utility micro {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-mut);
-}
-
-@utility micro-light {
-  color: rgb(255 255 255 / 0.6);
-}
-
-/* ───── Controls ───── */
-/* Vitrocsa's control: a square 13px uppercase label in a hairline box. */
-@utility btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 2.1rem;
-  min-height: 48px;
-  border-radius: 0;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1;
-  white-space: nowrap;
-  transition:
-    background 320ms var(--ease-out-soft),
-    color 320ms var(--ease-out-soft),
-    border-color 320ms var(--ease-out-soft),
-    transform 320ms var(--ease-out-soft);
-}
-
-@utility btn-gold {
-  background: var(--color-gold);
-  color: #fff;
-  border: 1px solid var(--color-gold);
-}
-
-@utility btn-ghost {
-  background: transparent;
-  color: var(--color-ink);
-  border: 1px solid var(--color-line);
-}
-
-@utility btn-ghost-light {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgb(255 255 255 / 0.35);
-}
-
-/* Vitrocsa's "VIEW DETAILS": a 12px uppercase label, widely tracked. */
-@utility chev {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-gold-deep);
-  transition: gap 300ms var(--ease-out-soft);
-}
-
-@utility chev-light {
-  color: var(--color-gold-light);
-}
-
-/* ───── Media ───── */
-@utility media-frame {
-  overflow: hidden;
-  border-radius: var(--radius-media);
-  background: var(--color-noir-2);
-}
-
-/* ───── Reveal on scroll ───── */
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 640ms var(--ease-out-soft),
-    transform 640ms var(--ease-out-soft);
-}
-
-.reveal[data-visible="true"] {
-  opacity: 1;
-  transform: none;
-}
-
-/* ───── Scroll cue ───── */
-@keyframes drip {
-  0% {
-    transform: translateY(-100%);
+/* ============================================================
+   SMALL-SCREEN LAYOUT
+   Phones and portrait tablets get the stacked text hero. The video still
+   plays behind it: only reduced motion turns the video off (block below).
+   ============================================================ */
+.static-hero{display:none}
+@media (max-width:720px),
+       (orientation:portrait) and (max-width:1024px),
+       (orientation:portrait) and (pointer:coarse),
+       (orientation:landscape) and (pointer:coarse) and (max-height:560px){
+  .hero{height:auto}
+  .stage{
+    position:relative;height:auto;min-height:88svh;
+    background:#04050A url('/assets/hero-static.jpg') center/cover no-repeat;
   }
-  55%,
-  100% {
-    transform: translateY(100%);
+  /* the corner chip, ring and desktop CTA have no room here */
+  .chip,.hero-cta{display:none!important}
+  .static-hero{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    position:relative;z-index:2;min-height:88svh;
+    padding-block:calc(var(--nav-h) + 40px) var(--s6);
+    text-shadow:var(--tshadow);
   }
-}
-
-.scroll-cue span {
-  display: block;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(var(--color-gold-light), transparent);
-  animation: drip 2.4s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  /* Dark at BOTH ends: the bottom carries the text, and the top damps the
+     "SMARTFILM DANMARK" title baked into the footage, which would otherwise
+     sit right under the header wordmark and say the brand name twice. */
+  .static-hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to top,
+      rgba(5,6,12,.94) 0%, rgba(5,6,12,.9) 34%,
+      rgba(5,6,12,.5) 60%, rgba(5,6,12,.58) 82%, rgba(5,6,12,.86) 100%);
   }
+  .static-hero > *{position:relative;z-index:1}
+  .static-hero .col{max-width:min(430px,86vw)}
+  .static-hero h1{font-size:clamp(2.3rem,8.5vw,3.4rem)}
+  .static-hero .sub{margin-top:var(--s3);color:rgba(237,241,248,.9);max-width:34ch}
+  .static-hero .btn{margin-top:var(--s5);align-self:flex-start}
+}
+@media (max-height:560px){ .chip{display:none} }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+/* ============================================================
+   REDUCED MOTION
+   The only condition that turns the video off. Must match the JS gate list.
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  body{opacity:1}
+  .rise{opacity:1;transform:none}
+  .ref:hover .shot img{transform:none}
+  .env::before,.env::after{animation:none}
+
+  /* no video at all: the composed still carries the hero */
+  .hero{height:auto}
+  .stage{
+    position:relative;height:auto;min-height:88svh;
+    background:#04050A url('/assets/hero-static.jpg') center/cover no-repeat;
   }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
+  .stage video,.chip,.hero-cta{display:none!important}
+  .static-hero{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    position:relative;z-index:2;min-height:88svh;
+    padding-block:calc(var(--nav-h) + 40px) var(--s6);
+    text-shadow:var(--tshadow);
   }
+  .static-hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to top,rgba(5,6,12,.94) 0%,rgba(5,6,12,.9) 34%,rgba(5,6,12,.52) 62%,rgba(5,6,12,.08) 100%);
+  }
+  .static-hero > *{position:relative;z-index:1}
+  .static-hero .col{max-width:min(430px,86vw)}
+  .static-hero h1{font-size:clamp(2.3rem,8.5vw,3.4rem)}
+  .static-hero .sub{margin-top:var(--s3);color:rgba(237,241,248,.9);max-width:34ch}
+  .static-hero .btn{margin-top:var(--s5);align-self:flex-start}
 }
-
-/* ───── Base UI collapsible panels ─────
-   Base UI measures the panel and exposes the result as a custom property, which
-   is the only way to transition to a height the browser otherwise reports as
-   `auto`. Reduced-motion is handled by the global block above. */
-.spec-panel {
-  height: var(--accordion-panel-height);
-  transition: height 280ms var(--ease-out-soft);
-}
-
-.spec-panel[data-starting-style],
-.spec-panel[data-ending-style] {
-  height: 0;
-}
+body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
