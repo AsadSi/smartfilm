@@ -5,14 +5,23 @@ const nextConfig: NextConfig = {
   turbopack: { root: __dirname },
 
   /**
-   * /referencer and /om-os were real routes and are linked to from outside the
-   * site. Their content now lives in sections of the front page, so they
-   * redirect there permanently rather than 404ing and losing the ranking.
+   * Every route the site used to have is now a section of the one page, or is
+   * gone entirely. These are the paths that existed long enough to be linked
+   * to from outside, so they land on the nearest thing rather than 404ing.
+   *
+   * The two that used to point at #referencer and #hvorfor were left aiming at
+   * anchors this page does not have, which is a redirect to nowhere in
+   * particular — #anvendelse is where that content actually went.
    */
   async redirects() {
     return [
-      { source: '/referencer', destination: '/#referencer', permanent: true },
-      { source: '/om-os', destination: '/#hvorfor', permanent: true },
+      { source: '/referencer', destination: '/#anvendelse', permanent: true },
+      { source: '/om-os', destination: '/', permanent: true },
+      { source: '/produkter', destination: '/', permanent: true },
+      { source: '/smart-film', destination: '/#klar', permanent: true },
+      { source: '/led-film', destination: '/#demo', permanent: true },
+      { source: '/3d-media-glass', destination: '/', permanent: true },
+      { source: '/kontakt', destination: '/#tilbud', permanent: true },
     ];
   },
 };
