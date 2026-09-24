@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { HERO } from '@/content/site';
+import { BlurText } from './BlurText';
 
 /**
  * The hero is one screen of the client's own footage.
@@ -84,10 +85,17 @@ export function Hero() {
         {/* Phones, portrait tablets, reduced motion */}
         <div className="static-hero wrap">
           <p className="kicker">{HERO.kicker}</p>
-          <div className="col"><h1>{HERO.headline}</h1></div>
+          <div className="col"><BlurText text={HERO.headline} /></div>
           <p className="sub">{HERO.sub}</p>
           <a className="btn btn-primary" href="#tilbud">{HERO.cta}</a>
         </div>
+
+        {/* The hero is exactly one screen, so nothing below it shows — this is
+            the only sign there is more. A link, so it also takes you there. */}
+        <a className="scroll-cue" href={HERO.scroll.href} aria-label={HERO.scroll.label}>
+          <span>{HERO.scroll.text}</span>
+          <i aria-hidden="true" />
+        </a>
       </div>
     </section>
   );

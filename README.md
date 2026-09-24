@@ -67,6 +67,10 @@ deliberate:
   screen the picture goes back to the left, as approved.
 - **The hero text is light on every ground.** The still is dark whatever the
   scheme, and the page's own ink vanished into it.
+- **The hero is exactly one screen**, so a "Rul ned" cue at the bottom is the
+  only sign there is more. The headline is React Bits' BlurText (`BlurText.tsx`,
+  on Motion): the words arrive frosted and settle clear, the Smart Film switch
+  played once. The `<noscript>` rule keeps it readable without scripting.
 - **The references are a swipe row** under 820px, and the steps put their
   number beside the text instead of above it.
 - **In-page links scroll without writing a `#fragment`** to the address bar,

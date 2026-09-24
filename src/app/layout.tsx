@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             nothing would ever turn it on, so the whole page would be blank —
             one rule covers every element at once. */}
         <noscript>
-          <style>{`.rise{opacity:1!important;transform:none!important}body{opacity:1!important}`}</style>
+          <style>{`.rise{opacity:1!important;transform:none!important}body{opacity:1!important}.blur-text span{opacity:1!important;filter:none!important;transform:none!important}`}</style>
         </noscript>
       </head>
       <body>{children}</body>

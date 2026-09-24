@@ -46,6 +46,7 @@ export const HERO = {
   strap: 'Transparent LED-film · Levering og montering i hele Danmark',
   cta: 'Få et tilbud',
   chip: '02 mm film',
+  scroll: { text: 'Rul ned', label: 'Rul ned til produkterne', href: '#produkter' },
   video: '/assets/hero-scrub.mp4',
   poster: '/assets/hero-poster.jpg',
   still: '/assets/hero-static.jpg',

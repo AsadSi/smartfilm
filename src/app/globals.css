@@ -103,9 +103,10 @@
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box}
 html,body{overflow-x:hidden;overflow-x:clip}
-/* anchor jumps must clear the fixed header, or the kicker lands under it */
+/* Anchor jumps must clear the fixed header, or the kicker lands under it.
+   Only here: a scroll-margin on the sections as well adds on top of this, and
+   parked every jump 196px down with a quarter of a phone of the section above. */
 html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 28px)}
-section[id]{scroll-margin-top:calc(var(--nav-h) + 28px)}
 body{
   margin:0;background:var(--canvas);color:var(--text);
   font-family:var(--body);font-size:17px;font-weight:300;line-height:1.72;
@@ -178,8 +179,10 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
   min-height:52px;padding:15px 32px;
   font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
   text-decoration:none;cursor:pointer;white-space:nowrap;border:1px solid transparent;border-radius:0;
-  transition:background-color .3s var(--e-out),color .3s var(--e-out),border-color .3s var(--e-out);
+  transition:background-color .3s var(--e-out),color .3s var(--e-out),border-color .3s var(--e-out),scale .16s var(--e-out);
 }
+/* Everything you press gives under the finger, on the way down, not on release. */
+.btn:active,.sw:active{scale:.97}
 .btn-primary{background:var(--ice);color:var(--on-accent);border-color:var(--ice)}
 .btn-primary:hover{background:var(--ice-hi);border-color:var(--ice-hi)}
 .btn-line{background:transparent;color:var(--text);border-color:var(--line-strong)}
@@ -309,7 +312,7 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
 .hero-cta{
   position:absolute;left:0;right:0;bottom:0;z-index:4;
   display:flex;flex-direction:column;align-items:center;gap:var(--s3);
-  padding:var(--s8) 22px calc(var(--s6) + 18px);
+  padding:var(--s8) 22px calc(var(--s6) + 44px);
   pointer-events:none;
   background:linear-gradient(to top,rgba(5,6,12,.93) 18%,rgba(5,6,12,.6) 58%,rgba(5,6,12,0) 100%);
 }
@@ -331,6 +334,30 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
   transition:opacity .4s var(--e-out);
 }
 @media (min-width:820px){ .chip{left:48px} }
+/* The hero is exactly one screen, so this is the only sign there is more: a
+   light that runs down a hairline, on a loop, under a label. Transform only.
+   Reduced motion parks the light halfway down instead of hiding it. */
+.scroll-cue{
+  position:absolute;left:50%;bottom:16px;z-index:5;translate:-50% 0;
+  display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 14px;
+  color:rgba(237,241,248,.78);text-decoration:none;text-shadow:var(--tshadow);
+  font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.28em;text-indent:.28em;text-transform:uppercase;
+  transition:color .3s var(--e-out);
+}
+@media (hover:hover) and (pointer:fine){ .scroll-cue:hover{color:#fff} }
+.scroll-cue i{position:relative;width:1px;height:34px;overflow:hidden;background:rgba(237,241,248,.22)}
+.scroll-cue i::after{
+  content:"";position:absolute;left:0;top:0;width:1px;height:14px;
+  background:linear-gradient(to bottom,rgba(255,255,255,0),#fff);
+  animation:cue 2.4s cubic-bezier(.77,0,.175,1) infinite;
+}
+@keyframes cue{0%{transform:translateY(-14px)}65%,100%{transform:translateY(34px)}}
+@media (prefers-reduced-motion:reduce){ .scroll-cue i::after{animation:none!important;transform:translateY(10px)} }
+@media (max-height:420px){ .scroll-cue{display:none} }
+
+/* React Bits' BlurText: each word is its own box, so it can rise on its own */
+.blur-text span{display:inline-block}
+
 .chip i{width:5px;height:5px;border-radius:50%;background:var(--ice);font-style:normal;box-shadow:0 0 8px var(--ice)}
 
 .w{display:inline-block;white-space:pre}
@@ -492,7 +519,7 @@ hr.edge{width:52px;margin-block:var(--s3)}
 /* The control is a track with a knob that travels, not a button that says
    "toggle". The word that is currently true is the one set in ink. */
 .switcher{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);padding-block:var(--s4);border-block:1px solid var(--line)}
-.sw{display:inline-flex;align-items:center;gap:15px;background:none;border:0;padding:8px 0;min-height:44px;cursor:pointer;color:inherit}
+.sw{display:inline-flex;align-items:center;gap:15px;background:none;border:0;padding:8px 0;min-height:44px;cursor:pointer;color:inherit;transition:scale .16s var(--e-out)}
 .sw .lab{font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--text-dim);transition:color .4s var(--e-out)}
 .klar[data-mat="true"] .sw .lab-mat,
 .klar[data-mat="false"] .sw .lab-klar{color:var(--text)}
@@ -716,15 +743,15 @@ hr.edge{width:52px;margin-block:var(--s3)}
        (orientation:landscape) and (pointer:coarse) and (max-height:560px){
   .hero{height:auto}
   .stage{
-    position:relative;height:auto;min-height:88svh;
+    position:relative;height:auto;min-height:100svh;
     background:#04050A url('/assets/hero-static.jpg') center/cover no-repeat;
   }
   /* the corner chip, ring and desktop CTA have no room here */
   .chip,.hero-cta{display:none!important}
   .static-hero{
     display:flex;flex-direction:column;justify-content:flex-end;
-    position:relative;z-index:2;min-height:88svh;
-    padding-block:calc(var(--nav-h) + 40px) var(--s6);
+    position:relative;z-index:2;min-height:100svh;
+    padding-block:calc(var(--nav-h) + 40px) 108px;
     text-shadow:var(--tshadow);
   }
   /* Dark at BOTH ends: the bottom carries the text, and the top damps the
@@ -737,10 +764,10 @@ hr.edge{width:52px;margin-block:var(--s3)}
       rgba(5,6,12,.5) 60%, rgba(5,6,12,.58) 82%, rgba(5,6,12,.86) 100%);
   }
   .static-hero > *{position:relative;z-index:1}
-  .static-hero .col{max-width:min(430px,86vw)}
-  .static-hero h1{font-size:clamp(2.3rem,8.5vw,3.4rem)}
+  .static-hero .col{max-width:min(460px,90vw)}
+  .static-hero h1{font-size:clamp(2.6rem,11vw,3.8rem);line-height:.98}
   .static-hero .sub{margin-top:var(--s3);color:rgba(237,241,248,.9);max-width:34ch}
-  .static-hero .btn{margin-top:var(--s5);align-self:flex-start}
+  .static-hero .btn{margin-top:var(--s4);align-self:flex-start}
 }
 @media (max-height:560px){ .chip{display:none} }
 
@@ -758,14 +785,14 @@ hr.edge{width:52px;margin-block:var(--s3)}
   /* no video at all: the composed still carries the hero */
   .hero{height:auto}
   .stage{
-    position:relative;height:auto;min-height:88svh;
+    position:relative;height:auto;min-height:100svh;
     background:#04050A url('/assets/hero-static.jpg') center/cover no-repeat;
   }
   .stage video,.chip,.hero-cta{display:none!important}
   .static-hero{
     display:flex;flex-direction:column;justify-content:flex-end;
-    position:relative;z-index:2;min-height:88svh;
-    padding-block:calc(var(--nav-h) + 40px) var(--s6);
+    position:relative;z-index:2;min-height:100svh;
+    padding-block:calc(var(--nav-h) + 40px) 108px;
     text-shadow:var(--tshadow);
   }
   .static-hero::before{
@@ -773,9 +800,9 @@ hr.edge{width:52px;margin-block:var(--s3)}
     background:linear-gradient(to top,rgba(5,6,12,.94) 0%,rgba(5,6,12,.9) 34%,rgba(5,6,12,.52) 62%,rgba(5,6,12,.08) 100%);
   }
   .static-hero > *{position:relative;z-index:1}
-  .static-hero .col{max-width:min(430px,86vw)}
-  .static-hero h1{font-size:clamp(2.3rem,8.5vw,3.4rem)}
+  .static-hero .col{max-width:min(460px,90vw)}
+  .static-hero h1{font-size:clamp(2.6rem,11vw,3.8rem);line-height:.98}
   .static-hero .sub{margin-top:var(--s3);color:rgba(237,241,248,.9);max-width:34ch}
-  .static-hero .btn{margin-top:var(--s5);align-self:flex-start}
+  .static-hero .btn{margin-top:var(--s4);align-self:flex-start}
 }
 body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}

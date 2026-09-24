@@ -64,10 +64,9 @@ export function Header() {
      * wildly different heights, and an observer leaves two lit at once
      * whenever a short one sits inside the viewport with its neighbour.
      *
-     * 150, not something smaller: a jump from the menu parks the target's top
-     * 196px down, because the sections carry scroll-margin-top and the page
-     * carries scroll-padding-top and both apply. A shallower line marks the
-     * section above the one you just asked for.
+     * 150 below the header: a jump from the menu parks the target's top 98px
+     * down (the page's scroll-padding-top), well inside the line, so the menu
+     * marks the section you asked for rather than the one above it.
      */
     const mark = () => {
       const line = window.scrollY + hdr.offsetHeight + 150;
