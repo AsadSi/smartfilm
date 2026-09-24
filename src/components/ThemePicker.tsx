@@ -58,7 +58,7 @@ export function ThemePicker() {
           style={{ '--sw-bg': t.bg, '--sw-fg': t.fg } as React.CSSProperties}
         >
           <i aria-hidden="true" />
-          {t.label}
+          <span>{t.label}</span>
         </button>
       ))}
     </div>

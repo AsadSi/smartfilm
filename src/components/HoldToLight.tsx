@@ -59,7 +59,17 @@ export function HoldToLight() {
   return (
     <section className="section demo" id="demo">
       <div className="wrap">
+        {/* Copy, panel, control — the order a phone stacks them in, so the
+            button sits right under the film it lights. A wide screen puts the
+            panel back on the left and the copy and control beside it. */}
         <div className="demo-grid">
+          <Reveal className="demo-copy">
+            <p className="kicker">{DEMO.kicker}</p>
+            <h2>{DEMO.headline}</h2>
+            <hr className="edge" />
+            <p className="lede">{DEMO.lede}</p>
+          </Reveal>
+
           <Reveal className="panel" style={style}>
             <svg viewBox="0 0 480 200" aria-hidden="true">
               {DOTS.map((d, i) => (
@@ -77,12 +87,7 @@ export function HoldToLight() {
             <div className="word" aria-hidden="true">{DEMO.word}</div>
           </Reveal>
 
-          <Reveal style={style}>
-            <p className="kicker">{DEMO.kicker}</p>
-            <h2>{DEMO.headline}</h2>
-            <hr className="edge" />
-            <p className="lede">{DEMO.lede}</p>
-
+          <Reveal className="demo-ctl" style={style}>
             <div className="holder">
               <button
                 type="button"

@@ -52,8 +52,25 @@ The header puts the wordmark in the middle with two menu items either side,
 and marks the section you are in with the dichroic hairline it already used
 for hover. Its breakpoint is measured, not guessed: the outer columns are
 symmetric, so the heavier right-hand side is charged twice and the header
-needs 1038px before anything touches. Below 1080 it is the wordmark and the
-one action; the footer carries the full menu.
+needs 1038px before anything touches. Below 1080 a Menu button on the left
+drops the full list under the header; on a phone the right side is a call link.
+
+## On a phone
+
+The page was first judged on desktop and read badly on a phone, so these are
+deliberate:
+
+- **The two products are named under the hero** (`Products.tsx`), each with
+  what it does, three facts, where it belongs and a link into its demo.
+- **Both demos stack copy, picture, control** — in that order — so the hold
+  button and the matte switch sit right under the thing they change. On a wide
+  screen the picture goes back to the left, as approved.
+- **The hero text is light on every ground.** The still is dark whatever the
+  scheme, and the page's own ink vanished into it.
+- **The references are a swipe row** under 820px, and the steps put their
+  number beside the text instead of above it.
+- **In-page links scroll without writing a `#fragment`** to the address bar,
+  and one that arrives in a shared link is removed after the jump.
 
 ## Three grounds — DEMO ONLY
 

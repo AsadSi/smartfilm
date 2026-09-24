@@ -1,20 +1,56 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { NAV_LEFT, NAV_RIGHT, SITE } from '@/content/site';
+import { FOOTER, NAV_LEFT, NAV_RIGHT, SITE } from '@/content/site';
 
 const LINKS = [...NAV_LEFT, ...NAV_RIGHT];
+const MENU = FOOTER.columns[0].links;
 
 /**
  * The wordmark sits in the middle with the menu parted around it, two items
  * either side. It crosses two grounds — the dark hero, then paper — so it
  * carries no colour of its own: white over the footage, ink the moment the
  * page starts scrolling, and everything in it inherits that.
+ *
+ * Under 1080 the parted menu has no room, so the left column becomes a Menu
+ * button that drops the full list under the header, and on a phone the right
+ * column is a call link — the one action that is a thumb away on a phone.
  */
 export function Header() {
   const ref = useRef<HTMLElement>(null);
   const [solid, setSolid] = useState(false);
+  const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  /**
+   * Every in-page link on the page scrolls without writing a #fragment to the
+   * address bar. The hrefs stay real, so they still work with scripting off,
+   * and a fragment that arrives in a shared link is scrolled to by the browser
+   * and then taken off the URL.
+   */
+  useEffect(() => {
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as Element).closest('a[href^="#"]');
+      const target = a && document.getElementById(a.getAttribute('href')!.slice(1));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView();
+      target.focus({ preventScroll: true });
+    };
+
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
 
   useEffect(() => {
     const hdr = ref.current;
@@ -79,9 +115,20 @@ export function Header() {
     </a>
   );
 
+  const close = () => setOpen(false);
+
   return (
-    <header ref={ref} className={`hdr${solid ? ' solid' : ''}`}>
+    <header ref={ref} className={`hdr${solid || open ? ' solid' : ''}`}>
       <div className="wrap">
+        <button
+          type="button"
+          className="hdr-link menu-btn"
+          aria-expanded={open}
+          aria-controls="menu"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? 'Luk' : 'Menu'}
+        </button>
         <nav className="nav nav-l" aria-label="Hovedmenu">{NAV_LEFT.map(item)}</nav>
 
         <a className="brand" href="#top">
@@ -94,8 +141,17 @@ export function Header() {
         <div className="hdr-r">
           <nav className="nav" aria-label="Genveje">{NAV_RIGHT.map(item)}</nav>
           <a className="btn btn-line" href="#tilbud">Få et tilbud</a>
+          <a className="hdr-link hdr-call" href={SITE.phoneHref}>Ring</a>
         </div>
       </div>
+
+      <nav id="menu" className="menu" aria-label="Menu" hidden={!open}>
+        {MENU.map((l) => (
+          <a key={l.href} href={l.href} onClick={close}>{l.label}</a>
+        ))}
+        <a className="btn btn-primary" href="#tilbud" onClick={close}>Få et tilbud</a>
+        <a className="menu-tel" href={SITE.phoneHref}>{SITE.phone}</a>
+      </nav>
     </header>
   );
 }

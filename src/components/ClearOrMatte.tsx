@@ -23,7 +23,16 @@ export function ClearOrMatte() {
   return (
     <section className="section klar" id="klar" data-mat={mat ? 'true' : 'false'}>
       <div className="wrap">
+        {/* Copy, picture, switch — stacked in that order on a phone, so the
+            switch is on screen with the panes it frosts. */}
         <div className="klar-grid">
+          <Reveal className="klar-copy">
+            <p className="kicker">{S.kicker}</p>
+            <h2>{S.headline}</h2>
+            <hr className="edge" />
+            <p className="lede">{S.lede}</p>
+          </Reveal>
+
           <Reveal as="div" className="pane-shot">
             <Image
               src={S.image}
@@ -39,12 +48,7 @@ export function ClearOrMatte() {
             </div>
           </Reveal>
 
-          <Reveal>
-            <p className="kicker">{S.kicker}</p>
-            <h2>{S.headline}</h2>
-            <hr className="edge" />
-            <p className="lede">{S.lede}</p>
-
+          <Reveal className="klar-ctl">
             <div className="switcher">
               {/* aria-pressed carries the state so the name can stay put. A
                   control that renames itself every time you throw it is read

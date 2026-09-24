@@ -5,12 +5,14 @@ import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { HoldToLight } from '@/components/HoldToLight';
 import { Lit } from '@/components/Lit';
+import { Products } from '@/components/Products';
 import { QuoteForm } from '@/components/QuoteForm';
 import { Steps } from '@/components/Steps';
 import { ThemePicker } from '@/components/ThemePicker';
 
 /**
- * One page, in the order it argues: the product working, how it is fitted,
+ * One page, in the order it argues: the product working, the two products
+ * named side by side, how it is fitted,
  * the numbers with their conditions, the LED film demonstrated, the second
  * product demonstrated, where it goes, what people ask, and the form.
  *
@@ -29,6 +31,7 @@ export default function Page() {
 
         <main id="main" tabIndex={-1}>
           <Hero />
+          <Products />
           <Steps />
           <Specs />
           <HoldToLight />

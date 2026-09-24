@@ -27,7 +27,7 @@ export const SITE = {
  * Two either side of the wordmark. Spørgsmål is deliberately absent: five
  * items plus a wordmark and a button left 8px of slack at 1140, and an even
  * split is the point of putting the wordmark in the middle. It is in the
- * footer, one scroll away.
+ * footer and the phone menu.
  */
 export const NAV_LEFT = [
   { href: '#saadan', label: 'Sådan virker det' },
@@ -49,6 +49,48 @@ export const HERO = {
   video: '/assets/hero-scrub.mp4',
   poster: '/assets/hero-poster.jpg',
   still: '/assets/hero-static.jpg',
+};
+
+/**
+ * What the site sells, named straight under the hero. The page used to reach
+ * the second product only halfway down, so a reader on a phone scrolled four
+ * screens of LED film before learning there was anything else for sale.
+ *
+ * Nothing here is a new claim: every figure and phrase is lifted from the
+ * client's own copy further down the page, except the Smart Film "egnet til"
+ * rooms, which come from CONTENT-REQUEST.md.
+ */
+export const PRODUCTS = {
+  kicker: 'Produkter',
+  headline: 'To slags film til glas.',
+  lede: 'Den ene gør ruden til en skærm. Den anden gør den mat på en kontakt. Vi leverer og monterer begge i hele Danmark.',
+  forLabel: 'Egnet til',
+  items: [
+    {
+      name: 'Transparent LED-film',
+      claim: 'Ruden bliver en skærm.',
+      body: '2 mm film klæbes på glasset indefra og viser video og kampagner, uden at lukke dagslyset ude.',
+      points: ['Op til 99 % transparens', 'Skift indhold fra din telefon', 'Intet stillads, ingen lukkedage'],
+      for: 'Butiksvinduer, storcentre, kontorer og klinikker',
+      href: '#demo',
+      cta: 'Se den tænde',
+      image: '/assets/vis-butik.jpg',
+      alt: 'Visualisering af en butiksfacade, hvor ruden viser en kampagne, mens butikken bagved stadig ses.',
+    },
+    {
+      name: 'Smart Film',
+      claim: 'Ruden bliver mat. På en kontakt.',
+      body: 'Et lag film lamineret ind i ruden. Strøm på, og glasset er klart; strøm af, og det er mat.',
+      points: ['92 % transparens, klar', 'Skifter på under et sekund', 'Privat uden at blive mørkt'],
+      for: 'Mødelokaler, klinikker og badeværelser',
+      href: '#klar',
+      cta: 'Prøv kontakten',
+      /** The same stand-in as the Smart Film section — see SMART_FILM.image. */
+      image: '/assets/vis-klinik.jpg',
+      alt: 'Glasparti ind til en klinik. Den venstre rude er mat, den højre er klar, så receptionen bagved ses.',
+      panes: ['Mat', 'Klar'],
+    },
+  ],
 };
 
 export const STEPS = {
@@ -87,7 +129,7 @@ export const SPECS = {
 };
 
 export const DEMO = {
-  kicker: 'Prøv det',
+  kicker: 'Transparent LED-film',
   headline: 'Hold for at tænde.',
   lede: 'Slukket er den næsten ikke der. Tændt er den hele vinduet. Hold knappen nede, og se hvad ruden bliver til.',
   word: 'Åbent',
@@ -231,7 +273,9 @@ export const FOOTER = {
   columns: [
     {
       title: 'Indhold',
+      /** Also the phone menu, which is the full menu for every width under 1080. */
       links: [
+        { href: '#produkter', label: 'Produkter' },
         { href: '#saadan', label: 'Sådan virker det' },
         { href: '#specs', label: 'Specifikationer' },
         { href: '#klar', label: 'Klar eller mat' },
