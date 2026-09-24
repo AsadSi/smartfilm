@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { HERO } from '@/content/site';
+import { DA } from '@/content/site';
 import { BlurText } from './BlurText';
+import { useT } from './lang';
 
 /**
  * The hero is one screen of the client's own footage.
@@ -22,6 +23,7 @@ const saveData = () =>
   (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
 
 export function Hero() {
+  const { HERO } = useT();
   const ref = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
 
@@ -36,7 +38,7 @@ export function Hero() {
         return;
       }
       if (!video.getAttribute('src')) {
-        video.src = HERO.video;
+        video.src = DA.HERO.video;
         video.play().catch(() => {
           // Autoplay refused. The poster is already the right picture, so
           // there is nothing to recover from and nothing to tell the reader.
@@ -81,7 +83,7 @@ export function Hero() {
         {/* Phones, portrait tablets, reduced motion */}
         <div className="static-hero wrap">
           <p className="kicker">{HERO.kicker}</p>
-          <div className="col"><BlurText text={HERO.headline} /></div>
+          <div className="col"><BlurText key={HERO.headline} text={HERO.headline} /></div>
           <p className="sub">{HERO.sub}</p>
           <a className="btn btn-primary" href="#tilbud">{HERO.cta}</a>
         </div>

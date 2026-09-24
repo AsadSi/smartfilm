@@ -1,6 +1,10 @@
-import { FOOTER, SITE } from '@/content/site';
+'use client';
+
+import { SITE } from '@/content/site';
+import { useT } from './lang';
 
 export function Footer() {
+  const { FOOTER, UI } = useT();
   return (
     <footer className="ftr">
       <div className="wrap">
@@ -22,7 +26,7 @@ export function Footer() {
           ))}
 
           <div>
-            <h4>Kontakt</h4>
+            <h4>{UI.contact}</h4>
             <ul>
               <li><a href={SITE.phoneHref}>{SITE.phone}</a></li>
               <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
@@ -32,7 +36,7 @@ export function Footer() {
 
         <div className="ftr-bot">
           <span>© {new Date().getFullYear()} {SITE.full}{SITE.cvr ? `, CVR ${SITE.cvr}` : ''}</span>
-          <span>{SITE.area}</span>
+          <span>{UI.area}</span>
         </div>
       </div>
     </footer>

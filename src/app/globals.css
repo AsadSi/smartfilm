@@ -210,7 +210,7 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
    being centred on exactly the widths where there is least to look at. */
 .hdr .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:var(--s2)}
 .hdr .wrap > *{grid-row:1}
-.nav-l{grid-column:1}
+.hdr-l{grid-column:1;display:flex;align-items:center;gap:var(--s2)}
 .brand{grid-column:2}
 .hdr-r{grid-column:3}
 .brand{display:flex;flex-direction:column;align-items:center;text-decoration:none;min-height:44px;justify-content:center}
@@ -268,7 +268,10 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
   background:none;border:0;cursor:pointer;color:inherit;text-decoration:none;
   font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
 }
-.menu-btn{grid-column:1;justify-self:start}
+/* The language switch: a globe and the code of the language it goes to. */
+.lang-btn{gap:6px;opacity:.86}
+.lang-btn svg{flex:none}
+@media (hover:hover) and (pointer:fine){ .lang-btn:hover{opacity:1} }
 .hdr-call{display:none}
 @media (max-width:639px){ .hdr-call{display:inline-flex} }
 

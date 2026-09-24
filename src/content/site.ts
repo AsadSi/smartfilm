@@ -1,9 +1,7 @@
 /**
- * Every word on the site, in one file.
- *
- * Danish only and deliberately un-localised: this is a one-page site for a
- * Danish installer of Danish glass, and a DA/EN pair on every string would
- * double the file without changing a single sentence anyone will read.
+ * Every Danish word on the site, in one file. The English twin is en.ts,
+ * typed against DA at the bottom of this file, so a string added here and
+ * forgotten there is a type error rather than a gap on the page.
  *
  * The copy is the client's approved copy, carried over unchanged from the
  * page this replaced. The one addition is SMART_FILM, which is the product
@@ -17,10 +15,26 @@ export const SITE = {
   email: 'kontakt@smartfilmdanmark.dk',
   phone: '+45 28 68 90 50',
   phoneHref: 'tel:+4528689050',
-  area: 'Levering og montering i hele Danmark',
-  reply: 'Tilbud inden for 24 timer på hverdage',
   /** Fill this in and it appears after the copyright line, e.g. ', CVR 12345678'. */
   cvr: '',
+};
+
+/** The words that belong to no section — the header, the form's facts, the footer. */
+export const UI = {
+  title: 'SmartFilm Danmark · Transparent LED-film og smart film til glas',
+  skip: 'Gå til indhold',
+  mainNav: 'Hovedmenu',
+  shortcuts: 'Genveje',
+  menu: 'Menu',
+  close: 'Luk',
+  call: 'Ring',
+  cta: 'Få et tilbud',
+  contact: 'Kontakt',
+  area: 'Levering og montering i hele Danmark',
+  reply: 'Tilbud inden for 24 timer på hverdage',
+  facts: { email: 'E-mail', phone: 'Telefon', area: 'Område', reply: 'Svartid' },
+  /** The switch names the language it goes to, in that language. */
+  switchTo: { lang: 'en', code: 'EN', label: 'Read in English' },
 };
 
 /**
@@ -253,6 +267,7 @@ export const QUOTE = {
   headline: 'Fortæl os om ruden.',
   lede: 'Mål og et billede er nok til at komme i gang. Du får et rigtigt tal tilbage, ikke et spænd.',
   submit: 'Send forespørgsel',
+  subject: 'Forespørgsel fra smartfilmdanmark.dk',
   hint: 'Knappen åbner dit eget mailprogram med beskeden klar. Felter med * er påkrævede.',
   summary: 'Ret venligst følgende, før du sender:',
   sent: {
@@ -301,3 +316,8 @@ export const THEMES = [
 ] as const;
 
 export type ThemeId = (typeof THEMES)[number]['id'];
+
+/** Everything a reader sees, bundled so en.ts can mirror it exactly. */
+export const DA = { UI, NAV_LEFT, NAV_RIGHT, HERO, PRODUCTS, STEPS, SPECS, DEMO, SMART_FILM, REFS, FAQ, QUOTE, FOOTER };
+
+export type Content = typeof DA;

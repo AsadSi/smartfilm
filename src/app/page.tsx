@@ -23,7 +23,6 @@ export default function Page() {
   return (
     <>
       <Lit />
-      <a className="skip" href="#main">Gå til indhold</a>
       <div className="env" aria-hidden="true" />
 
       <div className="page">

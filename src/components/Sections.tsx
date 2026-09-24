@@ -1,8 +1,12 @@
+'use client';
+
 import Image from 'next/image';
-import { FAQ, REFS, SPECS } from '@/content/site';
+import { CountUp } from './CountUp';
+import { useT } from './lang';
 import { Reveal } from './Reveal';
 
 export function Specs() {
+  const { SPECS } = useT();
   return (
     <section className="section" id="specs" style={{ paddingTop: 0 }}>
       <div className="wrap">
@@ -16,7 +20,7 @@ export function Specs() {
         <Reveal className="specs">
           {SPECS.items.map((s) => (
             <div className="spec" key={s.label}>
-              <b>{s.value}</b>
+              <b><CountUp value={s.value} /></b>
               <span>{s.label}</span>
               <small>{s.note}</small>
             </div>
@@ -28,6 +32,7 @@ export function Specs() {
 }
 
 export function Applications() {
+  const { REFS } = useT();
   return (
     <section className="section" id="anvendelse">
       <div className="wrap">
@@ -73,6 +78,7 @@ export function Applications() {
  * control.
  */
 export function Faq() {
+  const { FAQ } = useT();
   return (
     <section className="section" id="faq">
       <div className="wrap">

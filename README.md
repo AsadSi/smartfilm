@@ -29,13 +29,26 @@ src/
     page.tsx       the whole site, in the order it argues
     globals.css    every rule on the page
   components/      one file per section; client only where something moves
-  content/site.ts  every word, in one file
+  content/site.ts  every Danish word, in one file
+  content/en.ts    the English twin, typed against the Danish
 public/assets/     the client's own photography and footage
 ```
 
 `content/site.ts` exists so that changing a sentence is a content edit rather
 than a hunt through JSX, and so the whole of what the site claims can be read
-in one sitting.
+in one sitting. `content/en.ts` is typed as the same shape, so a Danish string
+without an English one is a type error.
+
+## Danish and English
+
+The globe at the left of the header switches the whole page between Danish
+and English in place — no reload, no second URL, scroll position kept. `<html
+lang>` is the one source of truth (`components/lang.ts`): the switch writes
+it, every component reads it, and a head script in the layout restores the
+reader's last choice before the first paint. The server always renders Danish,
+which is also what search engines index; English is for the reader, not for
+ranking. If an indexable English page is ever wanted, that is `/en` with its
+own root layout — a bigger change, deliberately not made.
 
 ## The design
 
@@ -75,6 +88,10 @@ deliberate:
   number beside the text instead of above it.
 - **In-page links scroll without writing a `#fragment`** to the address bar,
   and one that arrives in a shared link is removed after the jump.
+- **The hero video plays on phones too.** Only reduced motion or Save-Data get
+  the still (and iOS Low Power Mode, which refuses autoplay by itself).
+- **The figures count up** (React Bits' CountUp, `CountUp.tsx`) as they scroll
+  in — only the ones of 10 or more. The finished figure is in the HTML.
 
 ## Three grounds — DEMO ONLY
 

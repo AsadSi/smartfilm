@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { SMART_FILM as S } from '@/content/site';
+import { CountUp } from './CountUp';
+import { useT } from './lang';
 import { Reveal } from './Reveal';
 
 /**
@@ -18,6 +19,7 @@ import { Reveal } from './Reveal';
  * no signal — and because it leaves the reader something to do.
  */
 export function ClearOrMatte() {
+  const { SMART_FILM: S } = useT();
   const [mat, setMat] = useState(true);
 
   return (
@@ -64,7 +66,7 @@ export function ClearOrMatte() {
 
             <ul className="klar-figs">
               {S.figures.map((f) => (
-                <li key={f.label}><b>{f.value}</b><span>{f.label}</span></li>
+                <li key={f.label}><b><CountUp value={f.value} /></b><span>{f.label}</span></li>
               ))}
             </ul>
 

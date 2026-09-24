@@ -1,10 +1,12 @@
 'use client';
 
+import { Globe } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { FOOTER, NAV_LEFT, NAV_RIGHT, SITE } from '@/content/site';
+import { DA, SITE } from '@/content/site';
+import { setLang, useT } from './lang';
 
-const LINKS = [...NAV_LEFT, ...NAV_RIGHT];
-const MENU = FOOTER.columns[0].links;
+// Only the hrefs are read, and they are the same in both languages.
+const LINKS = [...DA.NAV_LEFT, ...DA.NAV_RIGHT];
 
 /**
  * The wordmark sits in the middle with the menu parted around it, two items
@@ -15,12 +17,21 @@ const MENU = FOOTER.columns[0].links;
  * Under 1080 the parted menu has no room, so the left column becomes a Menu
  * button that drops the full list under the header, and on a phone the right
  * column is a call link — the one action that is a thumb away on a phone.
+ *
+ * The language switch leads the left column at every width. The left side is
+ * the lighter one — the right carries the button — so it costs the measured
+ * breakpoint nothing.
  */
 export function Header() {
+  const t = useT();
   const ref = useRef<HTMLElement>(null);
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.title = t.UI.title;
+  }, [t]);
 
   useEffect(() => {
     if (!open) return;
@@ -118,17 +129,28 @@ export function Header() {
 
   return (
     <header ref={ref} className={`hdr${solid || open ? ' solid' : ''}`}>
+      <a className="skip" href="#main">{t.UI.skip}</a>
+
       <div className="wrap">
-        <button
-          type="button"
-          className="hdr-link menu-btn"
-          aria-expanded={open}
-          aria-controls="menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? 'Luk' : 'Menu'}
-        </button>
-        <nav className="nav nav-l" aria-label="Hovedmenu">{NAV_LEFT.map(item)}</nav>
+        <div className="hdr-l">
+          <button
+            type="button"
+            className="hdr-link menu-btn"
+            aria-expanded={open}
+            aria-controls="menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? t.UI.close : t.UI.menu}
+          </button>
+          {/* Named in the language it switches to, and marked as such, so a
+              screen reader says "Read in English" in English. */}
+          <button type="button" className="hdr-link lang-btn" lang={t.UI.switchTo.lang} onClick={() => setLang(t.UI.switchTo.lang)}>
+            <Globe aria-hidden="true" size={14} strokeWidth={1.5} />
+            {t.UI.switchTo.code}
+            <span className="sr"> · {t.UI.switchTo.label}</span>
+          </button>
+          <nav className="nav nav-l" aria-label={t.UI.mainNav}>{t.NAV_LEFT.map(item)}</nav>
+        </div>
 
         <a className="brand" href="#top">
           <b>{SITE.name}</b>
@@ -138,17 +160,17 @@ export function Header() {
         {/* The button cannot live inside .nav: the nav is display:none below
             1080px and the one action in the header would go with it. */}
         <div className="hdr-r">
-          <nav className="nav" aria-label="Genveje">{NAV_RIGHT.map(item)}</nav>
-          <a className="btn btn-line" href="#tilbud">Få et tilbud</a>
-          <a className="hdr-link hdr-call" href={SITE.phoneHref}>Ring</a>
+          <nav className="nav" aria-label={t.UI.shortcuts}>{t.NAV_RIGHT.map(item)}</nav>
+          <a className="btn btn-line" href="#tilbud">{t.UI.cta}</a>
+          <a className="hdr-link hdr-call" href={SITE.phoneHref}>{t.UI.call}</a>
         </div>
       </div>
 
-      <nav id="menu" className="menu" aria-label="Menu" hidden={!open}>
-        {MENU.map((l) => (
+      <nav id="menu" className="menu" aria-label={t.UI.menu} hidden={!open}>
+        {t.FOOTER.columns[0].links.map((l) => (
           <a key={l.href} href={l.href} onClick={close}>{l.label}</a>
         ))}
-        <a className="btn btn-primary" href="#tilbud" onClick={close}>Få et tilbud</a>
+        <a className="btn btn-primary" href="#tilbud" onClick={close}>{t.UI.cta}</a>
         <a className="menu-tel" href={SITE.phoneHref}>{SITE.phone}</a>
       </nav>
     </header>

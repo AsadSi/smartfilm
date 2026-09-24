@@ -28,6 +28,12 @@ export const viewport: Viewport = {
 };
 
 /**
+ * The remembered language, before the first paint — the key is the one
+ * components/lang.ts writes. Not demo: the switch is part of the site.
+ */
+const REMEMBER_LANG = `try{var l=localStorage.getItem('sf-lang');if(l)document.documentElement.lang=l}catch(e){}`;
+
+/**
  * DEMO ONLY. Applies the remembered colour scheme before the first paint —
  * in the picker's own component this would run after hydration, and a client
  * reloading would watch the page load light and then turn dark.
@@ -36,8 +42,10 @@ const REMEMBER_THEME = `try{var t=localStorage.getItem('sf-theme');if(t)document
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="da" className={`${italiana.variable} ${manrope.variable} ${mono.variable}`}>
+    // The head scripts may change lang and data-theme before React arrives.
+    <html lang="da" suppressHydrationWarning className={`${italiana.variable} ${manrope.variable} ${mono.variable}`}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: REMEMBER_LANG }} />
         <script dangerouslySetInnerHTML={{ __html: REMEMBER_THEME }} />
         {/* Everything that animates in starts at opacity 0. With scripting off
             nothing would ever turn it on, so the whole page would be blank —

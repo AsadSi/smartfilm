@@ -1,5 +1,7 @@
+'use client';
+
 import Image from 'next/image';
-import { PRODUCTS as P, REFS } from '@/content/site';
+import { useT } from './lang';
 import { Reveal } from './Reveal';
 
 /**
@@ -11,6 +13,7 @@ import { Reveal } from './Reveal';
  * cannot throw the switch, and that contrast is the whole product.
  */
 export function Products() {
+  const { PRODUCTS: P, REFS } = useT();
   return (
     <section className="section" id="produkter">
       <div className="wrap">

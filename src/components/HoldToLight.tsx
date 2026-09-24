@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { DEMO } from '@/content/site';
+import { useT } from './lang';
 import { Reveal } from './Reveal';
 
 const COLS = 24;
@@ -18,6 +18,7 @@ const N = COLS * ROWS;
  * being made is that off is the ordinary state and on is the event.
  */
 export function HoldToLight() {
+  const { DEMO } = useT();
   const [holding, setHolding] = useState(false);
   const [lit, setLit] = useState(0);
   // The animation restarts whenever the button is pressed or released, so the

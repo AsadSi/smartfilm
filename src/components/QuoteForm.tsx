@@ -1,15 +1,9 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { QUOTE, SITE } from '@/content/site';
+import { SITE } from '@/content/site';
+import { useT } from './lang';
 import { Reveal } from './Reveal';
-
-type Field = { id: string; label: string; error?: string };
-
-const REQUIRED: Field[] = [
-  { id: 'name', label: QUOTE.fields.name.label, error: QUOTE.fields.name.error },
-  { id: 'email', label: QUOTE.fields.email.label, error: QUOTE.fields.email.error },
-];
 
 // Deliberately permissive: the mail client is the real validator, and a regex
 // that rejects a valid address loses a lead.
@@ -25,6 +19,11 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  * opened rather than claiming anything about delivery.
  */
 export function QuoteForm() {
+  const { QUOTE, UI } = useT();
+  const REQUIRED = [
+    { id: 'name', label: QUOTE.fields.name.label },
+    { id: 'email', label: QUOTE.fields.email.label },
+  ];
   const [bad, setBad] = useState<string[]>([]);
   const [sent, setSent] = useState(false);
   const summaryRef = useRef<HTMLDivElement>(null);
@@ -45,18 +44,19 @@ export function QuoteForm() {
     }
 
     const body = [
-      `Navn: ${get('name')}`,
-      `Firma: ${get('company')}`,
-      `E-mail: ${get('email')}`,
-      `Telefon: ${get('phone')}`,
-      `Mål på glasset: ${get('size')}`,
+      `${QUOTE.fields.name.label}: ${get('name')}`,
+      `${QUOTE.fields.company.label}: ${get('company')}`,
+      `${QUOTE.fields.email.label}: ${get('email')}`,
+      `${QUOTE.fields.phone.label}: ${get('phone')}`,
+      `${QUOTE.fields.size.label}: ${get('size')}`,
       '',
       get('message'),
     ].join('\n');
 
-    window.location.href =
-      `mailto:${SITE.email}?subject=${encodeURIComponent('Forespørgsel fra smartfilmdanmark.dk')}` +
-      `&body=${encodeURIComponent(body)}`;
+    window.location.assign(
+      `mailto:${SITE.email}?subject=${encodeURIComponent(QUOTE.subject)}` +
+      `&body=${encodeURIComponent(body)}`,
+    );
     setSent(true);
   };
 
@@ -81,10 +81,10 @@ export function QuoteForm() {
             <hr className="edge" />
             <p className="lede">{QUOTE.lede}</p>
             <ul className="facts">
-              <li><div>E-mail</div><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-              <li><div>Telefon</div><a href={SITE.phoneHref}>{SITE.phone}</a></li>
-              <li><div>Område</div><p>{SITE.area}</p></li>
-              <li><div>Svartid</div><p>{SITE.reply}</p></li>
+              <li><div>{UI.facts.email}</div><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+              <li><div>{UI.facts.phone}</div><a href={SITE.phoneHref}>{SITE.phone}</a></li>
+              <li><div>{UI.facts.area}</div><p>{UI.area}</p></li>
+              <li><div>{UI.facts.reply}</div><p>{UI.reply}</p></li>
             </ul>
           </Reveal>
 

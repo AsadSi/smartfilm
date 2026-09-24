@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { STEPS } from '@/content/site';
+import { useT } from './lang';
 import { Reveal } from './Reveal';
 
 /**
@@ -12,6 +12,7 @@ import { Reveal } from './Reveal';
  * against it at all.
  */
 export function Steps() {
+  const { STEPS } = useT();
   const ref = useRef<HTMLDivElement>(null);
   const line = useRef<SVGLineElement>(null);
 
