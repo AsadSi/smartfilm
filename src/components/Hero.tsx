@@ -13,28 +13,24 @@ import { BlurText } from './BlurText';
  * ring — went with it. What is left is a poster that hands over to a looping
  * video, which is all the markup ever actually used.
  *
- * Phones, portrait tablets and anyone who asked for less motion get the
- * composed still instead. That is decided in CSS, so the layout is right on
- * the first paint; this only stops the file being fetched at all.
+ * It plays on phones too — it is four seconds and 2 MB, muted and inline, and
+ * a phone is where most of this page is read. Only someone who asked for less
+ * motion or for less data gets the still; the file is then never fetched.
+ * (iOS in Low Power Mode refuses autoplay on its own, and the poster stays.)
  */
-const STILL_ONLY = [
-  '(max-width:720px)',
-  '(orientation:portrait) and (max-width:1024px)',
-  '(orientation:portrait) and (pointer:coarse)',
-  '(orientation:landscape) and (pointer:coarse) and (max-height:560px)',
-  '(prefers-reduced-motion:reduce)',
-];
+const saveData = () =>
+  (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
 
 export function Hero() {
   const ref = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const queries = STILL_ONLY.map((q) => window.matchMedia(q));
+    const reduced = window.matchMedia('(prefers-reduced-motion:reduce)');
     const apply = () => {
       const video = ref.current;
       if (!video) return;
-      if (queries.some((q) => q.matches)) {
+      if (saveData() || reduced.matches) {
         video.removeAttribute('src');
         setReady(false);
         return;
@@ -49,8 +45,8 @@ export function Hero() {
     };
 
     apply();
-    queries.forEach((q) => q.addEventListener('change', apply));
-    return () => queries.forEach((q) => q.removeEventListener('change', apply));
+    reduced.addEventListener('change', apply);
+    return () => reduced.removeEventListener('change', apply);
   }, []);
 
   return (
