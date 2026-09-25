@@ -255,7 +255,7 @@ export const EN: Content = {
       {
         title: 'Who is responsible',
         body: [
-          `${SITE.full}, CVR no. ${SITE.cvr}, is the data controller for the information we process about you. You can always reach us at ${SITE.email} or ${SITE.phone}.`,
+          `${SITE.full} is run by ${SITE.company}, ${SITE.street}, ${SITE.city}, CVR no. ${SITE.cvr}, which is the data controller for the information we process about you. You can always reach us at ${SITE.email} or ${SITE.phone}.`,
         ],
       },
       {

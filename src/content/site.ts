@@ -15,6 +15,10 @@ export const SITE = {
   email: 'kontakt@smartfilmdanmark.dk',
   phone: '+45 28 68 90 50',
   phoneHref: 'tel:+4528689050',
+  /** The company behind the name, as the CVR register has it. */
+  company: 'Nitrogen Danmark ApS',
+  street: 'Industriholmen 82',
+  city: '2650 Hvidovre',
   /** Digits only. The label in front of it is UI.cvr, so it follows the language. */
   cvr: '38155385',
 };
@@ -319,7 +323,7 @@ export const PRIVACY = {
     {
       title: 'Hvem er ansvarlig',
       body: [
-        `${SITE.full}, CVR-nr. ${SITE.cvr}, er dataansvarlig for de oplysninger, vi behandler om dig. Du kan altid kontakte os på ${SITE.email} eller ${SITE.phone}.`,
+        `${SITE.full} drives af ${SITE.company}, ${SITE.street}, ${SITE.city}, CVR-nr. ${SITE.cvr}, som er dataansvarlig for de oplysninger, vi behandler om dig. Du kan altid kontakte os på ${SITE.email} eller ${SITE.phone}.`,
       ],
     },
     {

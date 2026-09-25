@@ -35,13 +35,14 @@ export function Footer({ base = '' }: { base?: string }) {
             <ul>
               <li><a href={SITE.phoneHref}>{SITE.phone}</a></li>
               <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+              <li><span>{SITE.street}<br />{SITE.city}</span></li>
             </ul>
           </div>
         </div>
 
         <div className="ftr-bot">
           <span>
-            © {new Date().getFullYear()} {SITE.full} · {UI.cvr} {SITE.cvr} · <Link href="/privatlivspolitik">{FOOTER.privacy}</Link>
+            © {new Date().getFullYear()} {SITE.full} · {SITE.company} · {UI.cvr} {SITE.cvr} · <Link href="/privatlivspolitik">{FOOTER.privacy}</Link>
           </span>
           <span>{UI.area}</span>
         </div>
