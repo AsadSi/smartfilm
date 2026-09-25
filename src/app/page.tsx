@@ -8,7 +8,6 @@ import { Lit } from '@/components/Lit';
 import { Products } from '@/components/Products';
 import { QuoteForm } from '@/components/QuoteForm';
 import { Steps } from '@/components/Steps';
-import { ThemePicker } from '@/components/ThemePicker';
 
 /**
  * One page, in the order it argues: the product working, the two products
@@ -41,9 +40,6 @@ export default function Page() {
         </main>
 
         <Footer />
-
-        {/* DEMO ONLY · remove before launch */}
-        <ThemePicker />
       </div>
     </>
   );

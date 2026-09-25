@@ -23,8 +23,12 @@ export const metadata: Metadata = {
   },
 };
 
+/** The browser chrome on a phone takes the page's own ground in both modes. */
 export const viewport: Viewport = {
-  themeColor: '#F8F5F1',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F8F5F1' },
+    { media: '(prefers-color-scheme: dark)', color: '#070910' },
+  ],
 };
 
 /**
@@ -33,20 +37,12 @@ export const viewport: Viewport = {
  */
 const REMEMBER_LANG = `try{var l=localStorage.getItem('sf-lang');if(l)document.documentElement.lang=l}catch(e){}`;
 
-/**
- * DEMO ONLY. Applies the remembered colour scheme before the first paint —
- * in the picker's own component this would run after hydration, and a client
- * reloading would watch the page load light and then turn dark.
- */
-const REMEMBER_THEME = `try{var t=localStorage.getItem('sf-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // The head scripts may change lang and data-theme before React arrives.
+    // The head script may change lang before React arrives.
     <html lang="da" suppressHydrationWarning className={`${italiana.variable} ${manrope.variable} ${mono.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: REMEMBER_LANG }} />
-        <script dangerouslySetInnerHTML={{ __html: REMEMBER_THEME }} />
         {/* Everything that animates in starts at opacity 0. With scripting off
             nothing would ever turn it on, so the whole page would be blank —
             one rule covers every element at once. */}

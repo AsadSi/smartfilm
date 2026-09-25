@@ -11,8 +11,8 @@
    because the thing being sold only exists after dark, so the hero and the
    LED panel keep their own black and the page goes pale around them.
    ============================================================ */
-:root,
-[data-theme="dagslys"]{
+:root{
+  color-scheme:light;
   --canvas:#F8F5F1; --canvas-2:#F1ECE6; --panel:#E7E1D9;
   --line:rgba(40,34,30,.13); --line-strong:rgba(40,34,30,.26);
   --text:#221F1C; --text-dim:#635C54;   /* 6.1:1 on --canvas */
@@ -27,8 +27,7 @@
   --frost:rgba(243,240,236,.44);        /* the matte pane */
   --dot:rgba(40,34,30,.55);             /* the drifting grid */
   --glow:rgba(30,99,196,.09);
-  --err:var(--err); --err-wash:var(--err-wash);
-  --theme-color:#F8F5F1;
+  --err:#B3261E; --err-wash:rgba(179,38,30,.06);   /* 6.0:1 on --canvas */
 
   --dichroic:linear-gradient(90deg,var(--aqua),var(--ice),var(--rose),var(--ice),var(--aqua));
 
@@ -47,55 +46,33 @@
 }
 
 /* ============================================================
-   THE OTHER TWO GROUNDS
+   DARK MODE
 
-   Same page, same type, same layout — only the colour moves, which is the
-   only way a client can actually judge colour. Both of these are dark, and
-   both therefore get the photography for free: the hero footage and the LED
-   panel are night shots, so on a dark ground they stop being the one bright
-   exception and simply belong.
-
-   TEKNISK is the site as it stands today, kept so the new ground can be held
-   against the old one rather than described. LUKSUS is champagne on a warm
-   near-black — the accent from the smartfilm-next makeover, which is the
-   house's own luxury language rather than a fourth opinion.
+   The page follows the reader's own light or dark setting. Dark is the
+   near-black and ice blue the site had before this rebuild, and it gets the
+   photography for free: the hero footage and the LED panel are night shots,
+   so on a dark ground they stop being the one bright exception and simply
+   belong.
    ============================================================ */
-[data-theme="teknisk"]{
-  --canvas:#070910; --canvas-2:#0B0E18; --panel:#111624;
-  --line:rgba(170,196,255,.14); --line-strong:rgba(170,196,255,.30);
-  --text:#EDF1F8; --text-dim:#98A3B8;   /* 7.6:1 on --canvas */
+@media (prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --canvas:#070910; --canvas-2:#0B0E18; --panel:#111624;
+    --line:rgba(170,196,255,.14); --line-strong:rgba(170,196,255,.30);
+    --text:#EDF1F8; --text-dim:#98A3B8;   /* 7.6:1 on --canvas */
 
-  --ice:#4D9FFF; --ice-hi:#7FB9FF;      /* 7.3:1 on --canvas */
-  --frame:#1A2132;
-  --aqua:#5FE0D8; --rose:#FF86C4;
-  --on-accent:#070910;
+    --ice:#4D9FFF; --ice-hi:#7FB9FF;      /* 7.3:1 on --canvas */
+    --frame:#1A2132;
+    --aqua:#5FE0D8; --rose:#FF86C4;
+    --on-accent:#070910;
 
-  --hdr-bg:rgba(7,9,16,.86);
-  --badge-bg:rgba(7,9,16,.86);
-  --frost:rgba(186,205,238,.20);
-  --dot:rgba(170,196,255,.5);
-  --glow:rgba(77,159,255,.13);
-  --err:#FF9E94; --err-wash:rgba(255,158,148,.07);
-  --theme-color:#070910;
-}
-
-[data-theme="luksus"]{
-  --canvas:#141110; --canvas-2:#1B1713; --panel:#241E18;
-  --line:rgba(201,162,39,.17); --line-strong:rgba(201,162,39,.36);
-  --text:#F2EBDD; --text-dim:#A79C86;   /* 7.0:1 on --canvas */
-
-  --ice:#C9A227; --ice-hi:#E0BC4A;      /* champagne, 7.8:1 on --canvas */
-  --frame:#2B241A;
-  --aqua:#9A8A4B; --rose:#C98B5A;       /* the dichroic rule, taken to metal */
-  --on-accent:#141110;
-
-  --hdr-bg:rgba(20,17,16,.88);
-  --badge-bg:rgba(20,17,16,.88);
-  --frost:rgba(242,235,221,.15);
-  --dot:rgba(201,162,39,.46);
-  --glow:rgba(201,162,39,.10);
-  --err:#E7A08F; --err-wash:rgba(231,160,143,.07);
-  --theme-color:#141110;
+    --hdr-bg:rgba(7,9,16,.86);
+    --badge-bg:rgba(7,9,16,.86);
+    --frost:rgba(186,205,238,.20);
+    --dot:rgba(170,196,255,.5);
+    --glow:rgba(77,159,255,.13);
+    --err:#FF9E94; --err-wash:rgba(255,158,148,.07);   /* 10:1 on --canvas */
+  }
 }
 
 /* ============================================================
@@ -700,57 +677,6 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .legal section p + p{margin-top:var(--s2)}
 .back{gap:6px}
 .back svg{flex:none}
-
-/* ============================================================
-   THE THEME PICKER  —  DEMO ONLY, NOT PART OF THE SITE
-
-   Deliberately does not match anything else on the page: a dark capsule,
-   rounded, floating clear of the layout. A client deciding between three
-   grounds has to be able to tell the switch apart from the thing it is
-   switching, or they end up judging the control.
-
-   Comes out in three pieces, all marked DEMO ONLY: this block, the .picker
-   markup at the end of .page, and the script under THEME PICKER.
-   ============================================================ */
-.picker{
-  position:fixed;z-index:200;right:16px;bottom:16px;
-  display:flex;align-items:center;gap:4px;padding:6px;
-  background:rgba(18,18,20,.82);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.14);border-radius:999px;
-  box-shadow:0 8px 30px rgba(0,0,0,.28);
-}
-.picker b{
-  font-family:var(--mono);font-weight:400;font-size:.56rem;letter-spacing:.22em;
-  text-transform:uppercase;color:rgba(255,255,255,.44);padding:0 8px 0 10px;
-}
-/* On a phone it is the three swatches alone, so it covers a corner rather
-   than a line of text on every screen. */
-@media (max-width:560px){
-  .picker b{display:none}
-  .picker button{padding:9px;min-height:40px}
-  .picker span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .ftr{padding-bottom:88px}
-}
-.picker button{
-  display:inline-flex;align-items:center;gap:7px;
-  min-height:34px;padding:7px 13px 7px 8px;
-  background:none;border:0;border-radius:999px;cursor:pointer;
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.62);
-  transition:background-color .25s var(--e-out),color .25s var(--e-out);
-}
-.picker button:hover{color:#fff;background:rgba(255,255,255,.08)}
-.picker button[aria-pressed="true"]{color:#fff;background:rgba(255,255,255,.14)}
-/* Each swatch is the ground it switches to, ringed in that theme's accent —
-   the two colours that actually decide how the page feels. */
-.picker i{
-  width:15px;height:15px;border-radius:50%;flex:none;
-  background:var(--sw-bg);box-shadow:inset 0 0 0 2px var(--sw-fg);
-}
-.picker [data-set="dagslys"]{--sw-bg:#F8F5F1;--sw-fg:#1E63C4}
-.picker [data-set="teknisk"]{--sw-bg:#070910;--sw-fg:#4D9FFF}
-.picker [data-set="luksus"]{--sw-bg:#141110;--sw-fg:#C9A227}
 
 /* ============================================================
    SMALL-SCREEN LAYOUT

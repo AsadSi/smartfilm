@@ -94,23 +94,13 @@ deliberate:
 - **The figures count up** (React Bits' CountUp, `CountUp.tsx`) as they scroll
   in — only the ones of 10 or more. The finished figure is in the HTML.
 
-## Three grounds — DEMO ONLY
+## Light and dark
 
-A picker sits bottom-right so the client can see the same page on three
-grounds: **Dagslys** (warm paper, blue), **Teknisk** (near-black, ice — the
-site as it stood before this rebuild) and **Luksus** (warm black, champagne —
-the accent from the makeover pitch). Same type, same layout; only the colour
-moves, which is the only honest way to judge colour.
-
-Every colour is a custom property, so a theme is a list of values rather than
-a search through the stylesheet. Adding a fourth is one block in `globals.css`
-and one entry in `THEMES`.
-
-**It is not part of the site.** Four pieces come out together, each marked
-`DEMO ONLY`: the `<script>` and the `THEMES`/`ThemePicker` mount in
-`layout.tsx` and `page.tsx`, the component itself, and the `.picker` block in
-`globals.css`. Delete them and whichever `:root` values you keep become the
-single scheme.
+The page follows the reader's own light or dark setting — no switch, nothing
+stored. Light is warm paper with blue; dark is near-black with ice blue, the
+site as it stood before this rebuild. Every colour is a custom property:
+the light values are in `:root` at the top of `globals.css`, and dark mode
+overrides the same names in one `prefers-color-scheme` block below them.
 
 ## Things worth knowing before touching it
 

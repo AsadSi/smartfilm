@@ -374,21 +374,6 @@ export const PRIVACY = {
   ],
 };
 
-/**
- * The three grounds the client is choosing between. Same page, same type,
- * same layout — only the colour moves, which is the only honest way to judge
- * colour. The values themselves live in globals.css; this is the picker's
- * list, and the swatches are each theme's ground and accent, the two colours
- * that actually decide how the page feels.
- */
-export const THEMES = [
-  { id: 'dagslys', label: 'Dagslys', bg: '#F8F5F1', fg: '#1E63C4' },
-  { id: 'teknisk', label: 'Teknisk', bg: '#070910', fg: '#4D9FFF' },
-  { id: 'luksus', label: 'Luksus', bg: '#141110', fg: '#C9A227' },
-] as const;
-
-export type ThemeId = (typeof THEMES)[number]['id'];
-
 /** Everything a reader sees, bundled so en.ts can mirror it exactly. */
 export const DA = { UI, NAV_LEFT, NAV_RIGHT, HERO, PRODUCTS, STEPS, SPECS, DEMO, SMART_FILM, REFS, FAQ, QUOTE, FOOTER, PRIVACY };
 

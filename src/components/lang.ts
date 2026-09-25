@@ -6,9 +6,9 @@ import { DA, type Content } from '@/content/site';
 const KEY = 'sf-lang';
 
 /**
- * <html lang> is the single source of truth, the way <html data-theme> is for
- * the colour picker: a head script sets it from storage before the first
- * paint, the switch writes it, and every component reads it here. There is
+ * <html lang> is the single source of truth: a head script sets it from
+ * storage before the first paint, the switch writes it, and every component
+ * reads it here. There is
  * nothing to keep in step, and the attribute a screen reader and the browser's
  * translate offer go by is always the one the page is actually in.
  *
