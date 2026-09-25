@@ -21,7 +21,7 @@ export function Footer({ base = '' }: { base?: string }) {
 
           {FOOTER.columns.map((col) => (
             <div key={col.title}>
-              <h4>{col.title}</h4>
+              <h2>{col.title}</h2>
               <ul>
                 {col.links.map((l) => (
                   <li key={l.href}><a href={base + l.href}>{l.label}</a></li>
@@ -31,11 +31,11 @@ export function Footer({ base = '' }: { base?: string }) {
           ))}
 
           <div>
-            <h4>{UI.contact}</h4>
+            <h2>{UI.contact}</h2>
             <ul>
               <li><a href={SITE.phoneHref}>{SITE.phone}</a></li>
               <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-              <li><span>{SITE.street}<br />{SITE.city}</span></li>
+              <li><span>{SITE.street}<br />{SITE.postcode} {SITE.town}</span></li>
             </ul>
           </div>
         </div>

@@ -18,7 +18,8 @@ export const SITE = {
   /** The company behind the name, as the CVR register has it. */
   company: 'Nitrogen Danmark ApS',
   street: 'Industriholmen 82',
-  city: '2650 Hvidovre',
+  postcode: '2650',
+  town: 'Hvidovre',
   /** Digits only. The label in front of it is UI.cvr, so it follows the language. */
   cvr: '38155385',
 };
@@ -324,7 +325,7 @@ export const PRIVACY = {
     {
       title: 'Hvem er ansvarlig',
       body: [
-        `${SITE.full} drives af ${SITE.company}, ${SITE.street}, ${SITE.city}, CVR-nr. ${SITE.cvr}, som er dataansvarlig for de oplysninger, vi behandler om dig. Du kan altid kontakte os på ${SITE.email} eller ${SITE.phone}.`,
+        `${SITE.full} drives af ${SITE.company}, ${SITE.street}, ${SITE.postcode} ${SITE.town}, CVR-nr. ${SITE.cvr}, som er dataansvarlig for de oplysninger, vi behandler om dig. Du kan altid kontakte os på ${SITE.email} eller ${SITE.phone}.`,
       ],
     },
     {
@@ -374,7 +375,16 @@ export const PRIVACY = {
   ],
 };
 
+/** The page for an address that does not exist. */
+export const NOT_FOUND = {
+  title: 'Siden findes ikke · SmartFilm Danmark',
+  kicker: 'Fejl 404',
+  headline: 'Siden findes ikke',
+  body: 'Linket er måske gammelt, eller siden er flyttet. Alt om LED-film og smart film ligger på forsiden.',
+  cta: 'Til forsiden',
+};
+
 /** Everything a reader sees, bundled so en.ts can mirror it exactly. */
-export const DA = { UI, NAV_LEFT, NAV_RIGHT, HERO, PRODUCTS, STEPS, SPECS, DEMO, SMART_FILM, REFS, FAQ, QUOTE, FOOTER, PRIVACY };
+export const DA = { UI, NAV_LEFT, NAV_RIGHT, HERO, PRODUCTS, STEPS, SPECS, DEMO, SMART_FILM, REFS, FAQ, QUOTE, FOOTER, PRIVACY, NOT_FOUND };
 
 export type Content = typeof DA;

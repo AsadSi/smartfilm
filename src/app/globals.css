@@ -400,7 +400,7 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .spec b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,4vw,3.1rem);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 /* Only the label: the figure's own count-up spans sit inside the <b>. */
 .spec > span{display:block;margin-top:12px;font-family:var(--mono);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
-.spec small{display:block;margin-top:8px;font-size:.78rem;color:var(--text-dim);opacity:.8;line-height:1.5}
+.spec small{display:block;margin-top:8px;font-size:.78rem;color:var(--text-dim);line-height:1.5}
 
 /* ============================================================
    THE INTERACTIVE MOMENT
@@ -654,7 +654,7 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .ftr{border-top:1px solid var(--line);padding-block:var(--s6) var(--s4)}
 .ftr-grid{display:grid;gap:var(--s5);margin-bottom:var(--s6)}
 @media (min-width:780px){ .ftr-grid{grid-template-columns:1.7fr 1fr 1fr} }
-.ftr h4{font-family:var(--mono);font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);margin:0 0 var(--s2);font-weight:500}
+.ftr h2{font-family:var(--mono);font-size:.63rem;line-height:inherit;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);margin:0 0 var(--s2);font-weight:500}
 .ftr ul{list-style:none;margin:0;padding:0}
 .ftr ul a,.ftr ul span{display:inline-block;padding-block:8px;color:var(--text-dim);text-decoration:none;font-size:.95rem;transition:color .3s var(--e-out)}
 .ftr ul a:hover{color:var(--ice)}
@@ -678,6 +678,10 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .legal section p + p{margin-top:var(--s2)}
 .back{gap:6px}
 .back svg{flex:none}
+
+/* The 404 reuses the policy's column, with the way home under it. */
+.nf{min-height:72svh}
+.nf .btn{display:inline-flex;margin-top:var(--s4)}
 
 /* ============================================================
    SMALL-SCREEN LAYOUT

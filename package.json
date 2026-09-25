@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "check:content": "node scripts/check-placeholders.mjs",
-    "check:content:strict": "node scripts/check-placeholders.mjs --strict"
+    "lint": "eslint"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

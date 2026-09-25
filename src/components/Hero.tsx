@@ -71,6 +71,10 @@ export function Hero() {
         {/* No overlay headline: this footage carries its own in every frame,
             so the page adds one action and gets out of the way. */}
         <div className="hero-cta">
+          {/* The footage carries the headline in its frames; this is the same
+              line for search engines and screen readers. Hidden with the rest
+              of .hero-cta wherever the stacked hero, and its own h1, takes over. */}
+          <h1 className="sr">{HERO.headline}</h1>
           <p>{HERO.strap}</p>
           <a className="btn btn-primary" href="#tilbud">{HERO.cta}</a>
         </div>

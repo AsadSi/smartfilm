@@ -28,6 +28,8 @@ src/
     layout.tsx     fonts, metadata, the remembered colour scheme
     page.tsx       the whole site, in the order it argues
     privatlivspolitik/page.tsx  the privacy policy, linked from the footer
+    not-found.tsx  the 404, in the same frame as the policy
+    icon.svg, favicon.ico, apple-icon.png  the tab and home-screen icon
     globals.css    every rule on the page
   components/      one file per section; client only where something moves
   content/site.ts  every Danish word, in one file

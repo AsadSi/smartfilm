@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Applications, Faq, Specs } from '@/components/Sections';
 import { ClearOrMatte } from '@/components/ClearOrMatte';
 import { Footer } from '@/components/Footer';
@@ -8,6 +9,37 @@ import { Lit } from '@/components/Lit';
 import { Products } from '@/components/Products';
 import { QuoteForm } from '@/components/QuoteForm';
 import { Steps } from '@/components/Steps';
+import { SITE } from '@/content/site';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
+
+/**
+ * Who is behind the site, for search engines: the same name, address, CVR and
+ * contact details the footer shows. A company that serves all of Denmark from
+ * one address is an Organization rather than a LocalBusiness, which would
+ * imply customers come to the door.
+ */
+const ORGANIZATION = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.full,
+  legalName: SITE.company,
+  url: SITE.url,
+  logo: `${SITE.url}/icon.svg`,
+  email: SITE.email,
+  telephone: SITE.phoneHref.replace('tel:', ''),
+  vatID: `DK${SITE.cvr}`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.street,
+    postalCode: SITE.postcode,
+    addressLocality: SITE.town,
+    addressCountry: 'DK',
+  },
+  areaServed: { '@type': 'Country', name: 'Danmark' },
+};
 
 /**
  * One page, in the order it argues: the product working, the two products
@@ -21,6 +53,10 @@ import { Steps } from '@/components/Steps';
 export default function Page() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION).replace(/</g, '\\u003c') }}
+      />
       <Lit />
       <div className="env" aria-hidden="true" />
 

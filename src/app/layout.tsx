@@ -21,6 +21,8 @@ export const metadata: Metadata = {
     url: '/',
     images: ['/assets/hero-ending.jpg'],
   },
+  // A large picture when the link is shared; the text comes from openGraph.
+  twitter: { card: 'summary_large_image' },
 };
 
 /** The browser chrome on a phone takes the page's own ground in both modes. */

@@ -256,7 +256,7 @@ export const EN: Content = {
       {
         title: 'Who is responsible',
         body: [
-          `${SITE.full} is run by ${SITE.company}, ${SITE.street}, ${SITE.city}, CVR no. ${SITE.cvr}, which is the data controller for the information we process about you. You can always reach us at ${SITE.email} or ${SITE.phone}.`,
+          `${SITE.full} is run by ${SITE.company}, ${SITE.street}, ${SITE.postcode} ${SITE.town}, CVR no. ${SITE.cvr}, which is the data controller for the information we process about you. You can always reach us at ${SITE.email} or ${SITE.phone}.`,
         ],
       },
       {
@@ -304,5 +304,12 @@ export const EN: Content = {
         ],
       },
     ],
+  },
+  NOT_FOUND: {
+    title: 'Page not found · SmartFilm Danmark',
+    kicker: 'Error 404',
+    headline: 'Page not found',
+    body: 'The link may be old, or the page has moved. Everything about LED film and smart film is on the front page.',
+    cta: 'Go to the front page',
   },
 };
