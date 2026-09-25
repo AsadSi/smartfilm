@@ -611,13 +611,14 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .faq{max-width:min(900px,100%)}
 .qa{border-top:1px solid var(--line)}
 .qa:last-child{border-bottom:1px solid var(--line)}
-.qa button{
-  width:100%;display:flex;gap:var(--s3);align-items:center;justify-content:space-between;
-  background:none;border:0;padding:var(--s4) 0;min-height:64px;cursor:pointer;text-align:left;
+.qa summary{
+  display:flex;gap:var(--s3);align-items:center;justify-content:space-between;list-style:none;
+  padding:var(--s4) 0;min-height:64px;cursor:pointer;
   font-family:var(--body);font-weight:500;font-size:clamp(1.02rem,1.7vw,1.22rem);color:var(--text);
   transition:color .3s var(--e-out);
 }
-.qa button:hover{color:var(--ice)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:hover{color:var(--ice)}
 .qa .pm{flex:none;width:22px;height:22px;position:relative}
 .qa .pm::before,.qa .pm::after{content:"";position:absolute;background:var(--ice);transition:transform .4s var(--e-out),opacity .4s var(--e-out)}
 .qa .pm::before{left:0;right:0;top:50%;height:1px;margin-top:-.5px}

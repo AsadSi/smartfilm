@@ -73,9 +73,9 @@ export function Applications() {
 
 /**
  * Real <details>, so it works with the script blocked and the browser's own
- * find-in-page can open an answer. The button inside the summary is there to
- * carry the styling and is hidden from assistive tech; the summary is the
- * control.
+ * find-in-page can open an answer. The summary is the control and carries the
+ * styling itself: a button inside it takes the click for its own, and the
+ * answer never opens.
  */
 export function Faq() {
   const { FAQ } = useT();
@@ -92,11 +92,9 @@ export function Faq() {
         <Reveal className="faq">
           {FAQ.items.map((item) => (
             <details className="qa" key={item.q}>
-              <summary style={{ listStyle: 'none' }}>
-                <button type="button" tabIndex={-1} aria-hidden="true">
-                  {item.q}
-                  <span className="pm" aria-hidden="true" />
-                </button>
+              <summary>
+                {item.q}
+                <span className="pm" aria-hidden="true" />
               </summary>
               <div className="a"><p>{item.a}</p></div>
             </details>
