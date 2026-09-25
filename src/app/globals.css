@@ -398,7 +398,8 @@ hr.edge{width:52px;margin-block:var(--s3)}
   .spec:first-child{border-left:0;padding-left:0}
 }
 .spec b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,4vw,3.1rem);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.02em}
-.spec span{display:block;margin-top:12px;font-family:var(--mono);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
+/* Only the label: the figure's own count-up spans sit inside the <b>. */
+.spec > span{display:block;margin-top:12px;font-family:var(--mono);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
 .spec small{display:block;margin-top:8px;font-size:.78rem;color:var(--text-dim);opacity:.8;line-height:1.5}
 
 /* ============================================================
@@ -519,8 +520,8 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .klar-figs li{display:flex;align-items:baseline;gap:12px}
 @media (min-width:560px){ .klar-figs li{display:block} }
 .klar-figs b{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1;letter-spacing:.02em}
-.klar-figs span{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
-@media (min-width:560px){ .klar-figs span{margin-top:10px} }
+.klar-figs li > span{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
+@media (min-width:560px){ .klar-figs li > span{margin-top:10px} }
 .klar-note{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--line);font-size:.88rem;color:var(--text-dim);max-width:46ch}
 
 /* ============================================================
