@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The plain-HTML copy of the site is browser JavaScript, not part of the app.
+    "static-site/**",
   ]),
 ]);
 

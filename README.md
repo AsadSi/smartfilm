@@ -23,6 +23,19 @@ npm run lint
 To try it on a computer first: install Node.js 20.9 or later, then
 `npm install` and `npm run dev`.
 
+## Plain HTML version
+
+`static-site/` is the same site as plain files — `index.html`,
+`privatlivspolitik.html`, `404.html`, `styles.css`, `script.js` and the
+`assets/` folder — with no build step. Open `index.html` in a browser, or put
+the folder's contents on any web host (GitHub Pages, a web hotel, Vercel).
+Keep the folders: the pages need `styles.css`, `script.js` and `assets/` next
+to them. Both languages are in the HTML: the English sits in `data-en`
+attributes beside the Danish.
+
+It is a copy of the Next.js site, not generated on every build, so a change
+made to one has to be made to the other.
+
 ## What this is
 
 The site sells two things a pane of glass can be told to do. Transparent LED
