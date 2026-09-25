@@ -15,8 +15,8 @@ export const SITE = {
   email: 'kontakt@smartfilmdanmark.dk',
   phone: '+45 28 68 90 50',
   phoneHref: 'tel:+4528689050',
-  /** Fill this in and it appears after the copyright line, e.g. ', CVR 12345678'. */
-  cvr: '',
+  /** Appears after the copyright line in the footer, as ', CVR DK38155385'. */
+  cvr: 'DK38155385',
 };
 
 /** The words that belong to no section — the header, the form's facts, the footer. */

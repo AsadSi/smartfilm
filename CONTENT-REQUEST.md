@@ -1,13 +1,10 @@
 # Indhold vi mangler fra SmartFilm
 
-Sitet kan gå live som det er. Intet herunder vises som et tomt felt — men de
-to første punkter er noget, et dansk erhvervssite forventes at have på plads.
+Sitet kan gå live som det er. Intet herunder vises som et tomt felt — men det
+første punkt er noget, et dansk erhvervssite forventes at have på plads.
 
 ## Inden lancering
 
-- **CVR-nummer** — `SITE.cvr` i `src/content/site.ts` står tom, og så vises
-  linjen slet ikke i footeren. Udfyld den, så står nummeret efter
-  copyright-linjen.
 - **Privatlivspolitik** — den gamle side er væk sammen med resten af det
   tidligere site. Formularen indsamler nu ingenting: den åbner afsenderens
   eget mailprogram, så beskeden går direkte fra dem til jer og rører aldrig
