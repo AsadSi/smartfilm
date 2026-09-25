@@ -22,6 +22,7 @@ export const EN: Content = {
     facts: { email: 'Email', phone: 'Phone', area: 'Area', reply: 'Response' },
     cvr: 'CVR no.',
     home: 'Home',
+    theme: { toBlue: 'Switch to dark blue', toWhite: 'Switch to white' },
     switchTo: { lang: 'da', code: 'DA', label: 'Læs på dansk' },
   },
 
@@ -292,7 +293,7 @@ export const EN: Content = {
         title: 'Cookies and visits to the site',
         body: [
           'The site uses no cookies and no statistics or marketing tools, and it loads nothing from other services.',
-          'If you choose a language on the site, your browser saves the choice so the site can remember it next time. That only happens when you choose, and it stays in your browser — we never receive it. Because you asked for it yourself, it needs no consent.',
+          'If you choose a language or colour on the site, your browser saves the choice so the site can remember it next time. That only happens when you choose, and it stays in your browser — we never receive it. Because you asked for it yourself, it needs no consent.',
           'As with every website, the server that delivers the page receives technical information such as your IP address. It is used only to deliver the page and keep it secure, and it is kept no longer than that requires. The basis is our legitimate interest in being able to show the site (Article 6(1)(f)).',
         ],
       },

@@ -40,6 +40,7 @@ export const UI = {
   facts: { email: 'E-mail', phone: 'Telefon', area: 'Område', reply: 'Svartid' },
   cvr: 'CVR-nr.',
   home: 'Forsiden',
+  theme: { toBlue: 'Skift til mørkeblå', toWhite: 'Skift til hvid' },
   /** The switch names the language it goes to, in that language. */
   switchTo: { lang: 'en', code: 'EN', label: 'Read in English' },
 };
@@ -361,7 +362,7 @@ export const PRIVACY = {
       title: 'Cookies og besøg på siden',
       body: [
         'Siden bruger ingen cookies og ingen værktøjer til statistik eller markedsføring, og den henter intet fra andre tjenester.',
-        'Vælger du sprog på siden, gemmer din browser dit valg, så siden kan huske det næste gang. Det sker kun, når du selv vælger, og det bliver i din browser — vi får det ikke. Fordi du selv har bedt om det, kræver det ikke samtykke.',
+        'Vælger du sprog eller farve på siden, gemmer din browser dit valg, så siden kan huske det næste gang. Det sker kun, når du selv vælger, og det bliver i din browser — vi får det ikke. Fordi du selv har bedt om det, kræver det ikke samtykke.',
         'Som ved alle hjemmesider modtager serveren, der viser siden, teknisk information som din IP-adresse. Den bruges kun til at levere siden og holde den sikker, og den gemmes ikke længere, end det kræver. Grundlaget er vores legitime interesse i at kunne vise siden (artikel 6, stk. 1, litra f).',
       ],
     },

@@ -46,33 +46,30 @@
 }
 
 /* ============================================================
-   DARK MODE
+   BLUE
 
-   The page follows the reader's own light or dark setting. Dark is the
-   near-black and ice blue the site had before this rebuild, and it gets the
-   photography for free: the hero footage and the LED panel are night shots,
-   so on a dark ground they stop being the one bright exception and simply
-   belong.
+   The one alternative to the white page, chosen with the button in the
+   header: the near-black and ice blue the site had before this rebuild. It
+   gets the photography for free — the hero footage and the LED panel are
+   night shots, so on a dark ground they simply belong.
    ============================================================ */
-@media (prefers-color-scheme:dark){
-  :root{
-    color-scheme:dark;
-    --canvas:#070910; --canvas-2:#0B0E18; --panel:#111624;
-    --line:rgba(170,196,255,.14); --line-strong:rgba(170,196,255,.30);
-    --text:#EDF1F8; --text-dim:#98A3B8;   /* 7.6:1 on --canvas */
+:root[data-theme="blue"]{
+  color-scheme:dark;
+  --canvas:#070910; --canvas-2:#0B0E18; --panel:#111624;
+  --line:rgba(170,196,255,.14); --line-strong:rgba(170,196,255,.30);
+  --text:#EDF1F8; --text-dim:#98A3B8;   /* 7.6:1 on --canvas */
 
-    --ice:#4D9FFF; --ice-hi:#7FB9FF;      /* 7.3:1 on --canvas */
-    --frame:#1A2132;
-    --aqua:#5FE0D8; --rose:#FF86C4;
-    --on-accent:#070910;
+  --ice:#4D9FFF; --ice-hi:#7FB9FF;      /* 7.3:1 on --canvas */
+  --frame:#1A2132;
+  --aqua:#5FE0D8; --rose:#FF86C4;
+  --on-accent:#070910;
 
-    --hdr-bg:rgba(7,9,16,.86);
-    --badge-bg:rgba(7,9,16,.86);
-    --frost:rgba(186,205,238,.20);
-    --dot:rgba(170,196,255,.5);
-    --glow:rgba(77,159,255,.13);
-    --err:#FF9E94; --err-wash:rgba(255,158,148,.07);   /* 10:1 on --canvas */
-  }
+  --hdr-bg:rgba(7,9,16,.86);
+  --badge-bg:rgba(7,9,16,.86);
+  --frost:rgba(186,205,238,.20);
+  --dot:rgba(170,196,255,.5);
+  --glow:rgba(77,159,255,.13);
+  --err:#FF9E94; --err-wash:rgba(255,158,148,.07);   /* 10:1 on --canvas */
 }
 
 /* ============================================================
@@ -249,6 +246,14 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
 .lang-btn{gap:6px;opacity:.86}
 .lang-btn svg{flex:none}
 @media (hover:hover) and (pointer:fine){ .lang-btn:hover{opacity:1} }
+/* The colour switch: an icon beside the language in the header — on a phone
+   there is no room, so it is a line in the menu instead. */
+.theme-btn{gap:10px;opacity:.86}
+.theme-btn svg{flex:none}
+@media (hover:hover) and (pointer:fine){ .theme-btn:hover{opacity:1} }
+.hdr-l .theme-btn{margin-left:-6px}
+@media (max-width:1079px){ .hdr-l .theme-btn{display:none} }
+.menu .theme-btn{min-height:56px;border-bottom:1px solid var(--line);font-size:.74rem;letter-spacing:.18em;color:var(--text-dim)}
 .hdr-call{display:none}
 @media (max-width:639px){ .hdr-call{display:inline-flex} }
 

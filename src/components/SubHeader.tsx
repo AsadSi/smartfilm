@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { SITE } from '@/content/site';
 import { setLang, useT } from './lang';
+import { ThemeToggle } from './ThemeToggle';
 
 /**
  * The header for the pages that are not the one-pager — the privacy policy
@@ -37,6 +38,7 @@ export function SubHeader({ title }: { title: string }) {
         </Link>
 
         <div className="hdr-r">
+          <ThemeToggle />
           <button type="button" className="hdr-link lang-btn" lang={t.UI.switchTo.lang} onClick={() => setLang(t.UI.switchTo.lang)}>
             <Globe aria-hidden="true" size={14} strokeWidth={1.5} />
             {t.UI.switchTo.code}

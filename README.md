@@ -23,19 +23,6 @@ npm run lint
 To try it on a computer first: install Node.js 20.9 or later, then
 `npm install` and `npm run dev`.
 
-## Plain HTML version
-
-`static-site/` is the same site as plain files — `index.html`,
-`privatlivspolitik.html`, `404.html`, `styles.css`, `script.js` and the
-`assets/` folder — with no build step. Open `index.html` in a browser, or put
-the folder's contents on any web host (GitHub Pages, a web hotel, Vercel).
-Keep the folders: the pages need `styles.css`, `script.js` and `assets/` next
-to them. Both languages are in the HTML: the English sits in `data-en`
-attributes beside the Danish.
-
-It is a copy of the Next.js site, not generated on every build, so a change
-made to one has to be made to the other.
-
 ## What this is
 
 The site sells two things a pane of glass can be told to do. Transparent LED
@@ -123,13 +110,15 @@ deliberate:
 - **The figures count up** (React Bits' CountUp, `CountUp.tsx`) as they scroll
   in — only the ones of 10 or more. The finished figure is in the HTML.
 
-## Light and dark
+## White and blue
 
-The page follows the reader's own light or dark setting — no switch, nothing
-stored. Light is warm paper with blue; dark is near-black with ice blue, the
-site as it stood before this rebuild. Every colour is a custom property:
-the light values are in `:root` at the top of `globals.css`, and dark mode
-overrides the same names in one `prefers-color-scheme` block below them.
+White — warm paper with blue — is the page, whatever the reader's device is
+set to. A button in the header (in the menu on a phone) switches to dark blue,
+the near-black and ice blue the site had before this rebuild, and the browser
+remembers the choice. `<html data-theme="blue">` is the switch: a head script
+in the layout sets it from storage before the first paint, and every colour
+is a custom property, so the blue theme in `globals.css` is one block that
+redefines them.
 
 ## Things worth knowing before touching it
 

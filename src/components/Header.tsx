@@ -4,6 +4,7 @@ import { Globe } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { DA, SITE } from '@/content/site';
 import { setLang, useT } from './lang';
+import { ThemeToggle } from './ThemeToggle';
 
 // Only the hrefs are read, and they are the same in both languages.
 const LINKS = [...DA.NAV_LEFT, ...DA.NAV_RIGHT];
@@ -149,6 +150,7 @@ export function Header() {
             {t.UI.switchTo.code}
             <span className="sr"> · {t.UI.switchTo.label}</span>
           </button>
+          <ThemeToggle />
           <nav className="nav nav-l" aria-label={t.UI.mainNav}>{t.NAV_LEFT.map(item)}</nav>
         </div>
 
@@ -170,6 +172,7 @@ export function Header() {
         {t.FOOTER.columns[0].links.map((l) => (
           <a key={l.href} href={l.href} onClick={close}>{l.label}</a>
         ))}
+        <ThemeToggle withText />
         <a className="btn btn-primary" href="#tilbud" onClick={close}>{t.UI.cta}</a>
         <a className="menu-tel" href={SITE.phoneHref}>{SITE.phone}</a>
       </nav>

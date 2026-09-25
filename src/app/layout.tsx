@@ -25,12 +25,9 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
 };
 
-/** The browser chrome on a phone takes the page's own ground in both modes. */
+/** The browser chrome on a phone takes the page's own ground. */
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#F8F5F1' },
-    { media: '(prefers-color-scheme: dark)', color: '#070910' },
-  ],
+  themeColor: '#F8F5F1',
 };
 
 /**
@@ -39,12 +36,16 @@ export const viewport: Viewport = {
  */
 const REMEMBER_LANG = `try{var l=localStorage.getItem('sf-lang');if(l)document.documentElement.lang=l}catch(e){}`;
 
+/** The remembered colour, the same way — the key is the one components/ThemeToggle.tsx writes. */
+const REMEMBER_THEME = `try{if(localStorage.getItem('sf-theme')==='blue')document.documentElement.setAttribute('data-theme','blue')}catch(e){}`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // The head script may change lang before React arrives.
+    // The head scripts may change lang and data-theme before React arrives.
     <html lang="da" suppressHydrationWarning className={`${italiana.variable} ${manrope.variable} ${mono.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: REMEMBER_LANG }} />
+        <script dangerouslySetInnerHTML={{ __html: REMEMBER_THEME }} />
         {/* Everything that animates in starts at opacity 0. With scripting off
             nothing would ever turn it on, so the whole page would be blank —
             one rule covers every element at once. */}
