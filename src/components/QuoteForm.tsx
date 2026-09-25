@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { SITE } from '@/content/site';
 import { useT } from './lang';
@@ -139,7 +140,9 @@ export function QuoteForm() {
                 <button className="btn btn-primary" type="submit" style={{ width: '100%' }}>
                   {QUOTE.submit}
                 </button>
-                <p className="hint" style={{ marginTop: 16 }}>{QUOTE.hint}</p>
+                <p className="hint" style={{ marginTop: 16 }}>
+                  {QUOTE.hint} <Link href="/privatlivspolitik">{QUOTE.privacy}</Link>.
+                </p>
               </form>
             )}
           </Reveal>

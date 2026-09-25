@@ -275,6 +275,7 @@ export const QUOTE = {
   submit: 'Send forespørgsel',
   subject: 'Forespørgsel fra smartfilmdanmark.dk',
   hint: 'Knappen åbner dit eget mailprogram med beskeden klar. Felter med * er påkrævede.',
+  privacy: 'Sådan behandler vi dine oplysninger',
   summary: 'Ret venligst følgende, før du sender:',
   sent: {
     title: 'Dit mailprogram er åbnet',
@@ -331,6 +332,7 @@ export const PRIVACY = {
       body: [
         'Når du skriver eller ringer til os, får vi de oplysninger, du selv giver: typisk navn, firma, e-mail, telefonnummer og oplysninger om den rude, opgaven drejer sig om.',
         'Formularen på siden gemmer ingenting. Den åbner dit eget mailprogram, og beskeden går direkte fra dig til os.',
+        'Du bestemmer selv, hvad du fortæller os. Uden kontaktoplysninger kan vi bare ikke svare dig eller give dig et tilbud.',
       ],
     },
     {
@@ -338,12 +340,14 @@ export const PRIVACY = {
       body: [
         'Vi bruger oplysningerne til at besvare din henvendelse, give dig et tilbud og, hvis du bliver kunde, levere, montere og fakturere opgaven.',
         'Grundlaget er, at vi skal kunne give dig et tilbud og opfylde en aftale med dig (databeskyttelsesforordningens artikel 6, stk. 1, litra b), og at bogføringsloven kræver, at vi gemmer regnskabsbilag (litra c).',
+        'Vi bruger ikke automatiske afgørelser eller profilering.',
       ],
     },
     {
       title: 'Hvem vi deler dem med',
       body: [
         'Vi sælger aldrig dine oplysninger. De kan blive behandlet af de leverandører, vi bruger til at drive virksomheden — fx e-mail, hosting og regnskab — og kun på vores vegne. Ellers videregiver vi dem kun, hvis loven kræver det.',
+        'Behandler en leverandør oplysninger uden for EU/EØS, sker det kun med et lovligt grundlag for overførslen, fx EU-Kommissionens standardkontraktbestemmelser.',
       ],
     },
     {
@@ -353,10 +357,11 @@ export const PRIVACY = {
       ],
     },
     {
-      title: 'Cookies',
+      title: 'Cookies og besøg på siden',
       body: [
-        'Vi bruger ikke cookies til statistik eller markedsføring. Siden husker kun dine egne valg, fx sprog, og det gemmes i din browser — ikke hos os.',
-        'Som ved alle hjemmesider modtager serveren, der viser siden, teknisk information som din IP-adresse. Den bruges kun til at sende siden til dig.',
+        'Siden bruger ingen cookies og ingen værktøjer til statistik eller markedsføring, og den henter intet fra andre tjenester.',
+        'Vælger du sprog på siden, gemmer din browser dit valg, så siden kan huske det næste gang. Det sker kun, når du selv vælger, og det bliver i din browser — vi får det ikke. Fordi du selv har bedt om det, kræver det ikke samtykke.',
+        'Som ved alle hjemmesider modtager serveren, der viser siden, teknisk information som din IP-adresse. Den bruges kun til at levere siden og holde den sikker, og den gemmes ikke længere, end det kræver. Grundlaget er vores legitime interesse i at kunne vise siden (artikel 6, stk. 1, litra f).',
       ],
     },
     {

@@ -214,6 +214,7 @@ export const EN: Content = {
     submit: 'Send enquiry',
     subject: 'Enquiry from smartfilmdanmark.dk',
     hint: 'The button opens your own email program with the message ready. Fields marked * are required.',
+    privacy: 'How we handle your information',
     summary: 'Please correct the following before sending:',
     sent: {
       title: 'Your email program has opened',
@@ -263,6 +264,7 @@ export const EN: Content = {
         body: [
           'When you write to us or call, we receive what you give us yourself: usually your name, company, email, phone number and details of the window the job is about.',
           'The form on the site stores nothing. It opens your own mail program, and the message goes straight from you to us.',
+          'What you tell us is up to you. Without contact details, though, we cannot reply or give you a quote.',
         ],
       },
       {
@@ -270,12 +272,14 @@ export const EN: Content = {
         body: [
           'We use the information to answer your enquiry, give you a quote and, if you become a customer, deliver, install and invoice the job.',
           'The basis is that we need it to give you a quote and carry out an agreement with you (Article 6(1)(b) of the GDPR), and that the Danish Bookkeeping Act requires us to keep accounting records (Article 6(1)(c)).',
+          'We do not use automated decision-making or profiling.',
         ],
       },
       {
         title: 'Who we share it with',
         body: [
           'We never sell your information. It may be processed by the suppliers we use to run the business — email, hosting and accounting, for example — and only on our behalf. Otherwise we pass it on only when the law requires it.',
+          'If a supplier processes information outside the EU/EEA, it happens only on a lawful basis for the transfer, such as the European Commission\'s standard contractual clauses.',
         ],
       },
       {
@@ -285,10 +289,11 @@ export const EN: Content = {
         ],
       },
       {
-        title: 'Cookies',
+        title: 'Cookies and visits to the site',
         body: [
-          'We do not use cookies for statistics or marketing. The site only remembers your own choices, such as language, and that is stored in your browser — not with us.',
-          'As with every website, the server that delivers the page receives technical information such as your IP address. It is used only to send the page to you.',
+          'The site uses no cookies and no statistics or marketing tools, and it loads nothing from other services.',
+          'If you choose a language on the site, your browser saves the choice so the site can remember it next time. That only happens when you choose, and it stays in your browser — we never receive it. Because you asked for it yourself, it needs no consent.',
+          'As with every website, the server that delivers the page receives technical information such as your IP address. It is used only to deliver the page and keep it secure, and it is kept no longer than that requires. The basis is our legitimate interest in being able to show the site (Article 6(1)(f)).',
         ],
       },
       {

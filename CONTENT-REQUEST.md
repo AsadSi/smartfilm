@@ -1,7 +1,7 @@
 # Indhold vi mangler fra SmartFilm
 
-Sitet kan gå live som det er. Intet herunder vises som et tomt felt — men det
-første punkt skal I læse igennem inden lancering.
+Sitet kan gå live som det er. Intet herunder vises som et tomt felt — men de
+to første punkter skal I have styr på inden lancering.
 
 ## Inden lancering
 
@@ -10,6 +10,10 @@ første punkt skal I læse igennem inden lancering.
   `src/content/site.ts` (og på engelsk i `en.ts`). Læs den igennem, og ret
   især sletningen, hvis den ikke passer: der står, at henvendelser, som ikke
   bliver til en opgave, slettes senest efter et år.
+- **Databehandleraftaler** — politikken siger, at leverandører af e-mail,
+  hosting og regnskab kun behandler oplysninger på jeres vegne. GDPR
+  (artikel 28) kræver en databehandleraftale med hver af dem. De store
+  udbydere har en standardaftale i deres vilkår; tjek, at den er accepteret.
 
 ## AI-genererede visualiseringer
 

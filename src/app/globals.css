@@ -653,6 +653,8 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .field input::placeholder,.field textarea::placeholder{color:var(--text-dim);opacity:.55}
 .field input:hover,.field textarea:hover,.field input:focus,.field textarea:focus{border-bottom-color:var(--ice)}
 .hint{font-size:.83rem;color:var(--text-dim)}
+.hint a{text-underline-offset:3px;transition:color .3s var(--e-out)}
+.hint a:hover{color:var(--ice)}
 .err{display:none;font-size:.83rem;color:var(--err)}
 .field.bad input,.field.bad textarea{border-bottom-color:var(--err)}
 .field.bad .err{display:block}
