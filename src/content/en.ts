@@ -1,4 +1,4 @@
-import { DA, type Content } from './site';
+import { DA, SITE, type Content } from './site';
 
 /**
  * The English page, sentence for sentence against the Danish in site.ts —
@@ -20,6 +20,8 @@ export const EN: Content = {
     area: 'Delivery and installation across Denmark',
     reply: 'A quote within 24 hours on working days',
     facts: { email: 'Email', phone: 'Phone', area: 'Area', reply: 'Response' },
+    cvr: 'CVR no.',
+    home: 'Home',
     switchTo: { lang: 'da', code: 'DA', label: 'Læs på dansk' },
   },
 
@@ -228,6 +230,7 @@ export const EN: Content = {
   },
 
   FOOTER: {
+    privacy: 'Privacy policy',
     tagline: 'Transparent LED film and smart film for glass. Delivery and installation across Denmark.',
     columns: [
       {
@@ -239,6 +242,60 @@ export const EN: Content = {
           { href: '#klar', label: 'Clear or matte' },
           { href: '#anvendelse', label: 'Applications' },
           { href: '#faq', label: 'Questions' },
+        ],
+      },
+    ],
+  },
+  PRIVACY: {
+    title: 'Privacy policy · SmartFilm Danmark',
+    headline: 'Privacy policy',
+    updated: 'Last updated 25 September 2026',
+    lede: 'What we learn about you, what we use it for, and the rights you have.',
+    sections: [
+      {
+        title: 'Who is responsible',
+        body: [
+          `${SITE.full}, CVR no. ${SITE.cvr}, is the data controller for the information we process about you. You can always reach us at ${SITE.email} or ${SITE.phone}.`,
+        ],
+      },
+      {
+        title: 'What we receive',
+        body: [
+          'When you write to us or call, we receive what you give us yourself: usually your name, company, email, phone number and details of the window the job is about.',
+          'The form on the site stores nothing. It opens your own mail program, and the message goes straight from you to us.',
+        ],
+      },
+      {
+        title: 'What we use it for',
+        body: [
+          'We use the information to answer your enquiry, give you a quote and, if you become a customer, deliver, install and invoice the job.',
+          'The basis is that we need it to give you a quote and carry out an agreement with you (Article 6(1)(b) of the GDPR), and that the Danish Bookkeeping Act requires us to keep accounting records (Article 6(1)(c)).',
+        ],
+      },
+      {
+        title: 'Who we share it with',
+        body: [
+          'We never sell your information. It may be processed by the suppliers we use to run the business — email, hosting and accounting, for example — and only on our behalf. Otherwise we pass it on only when the law requires it.',
+        ],
+      },
+      {
+        title: 'How long we keep it',
+        body: [
+          'If an enquiry does not lead to a job, we delete it once it is no longer relevant, and after one year at the latest. If you become a customer, we keep invoices and accounting records for five years, as the Bookkeeping Act requires.',
+        ],
+      },
+      {
+        title: 'Cookies',
+        body: [
+          'We do not use cookies for statistics or marketing. The site only remembers your own choices, such as language, and that is stored in your browser — not with us.',
+          'As with every website, the server that delivers the page receives technical information such as your IP address. It is used only to send the page to you.',
+        ],
+      },
+      {
+        title: 'Your rights',
+        body: [
+          'You have the right to see the information we hold about you and to have it corrected or deleted. You can also object to how we process it, ask us to restrict it, or have your information handed over to you. Write to us and we will reply within one month at the latest.',
+          'If you are unhappy with how we handle your information, you can complain to the Danish Data Protection Agency (Datatilsynet) at datatilsynet.dk.',
         ],
       },
     ],

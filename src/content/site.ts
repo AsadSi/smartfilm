@@ -4,8 +4,8 @@
  * forgotten there is a type error rather than a gap on the page.
  *
  * The copy is the client's approved copy, carried over unchanged from the
- * page this replaced. The one addition is SMART_FILM, which is the product
- * they asked to add.
+ * page this replaced. The additions are SMART_FILM, which is the product
+ * they asked to add, and PRIVACY, the privacy policy the old site lost.
  */
 
 export const SITE = {
@@ -15,8 +15,8 @@ export const SITE = {
   email: 'kontakt@smartfilmdanmark.dk',
   phone: '+45 28 68 90 50',
   phoneHref: 'tel:+4528689050',
-  /** Appears after the copyright line in the footer, as ', CVR DK38155385'. */
-  cvr: 'DK38155385',
+  /** Digits only. The label in front of it is UI.cvr, so it follows the language. */
+  cvr: '38155385',
 };
 
 /** The words that belong to no section — the header, the form's facts, the footer. */
@@ -33,6 +33,8 @@ export const UI = {
   area: 'Levering og montering i hele Danmark',
   reply: 'Tilbud inden for 24 timer på hverdage',
   facts: { email: 'E-mail', phone: 'Telefon', area: 'Område', reply: 'Svartid' },
+  cvr: 'CVR-nr.',
+  home: 'Forsiden',
   /** The switch names the language it goes to, in that language. */
   switchTo: { lang: 'en', code: 'EN', label: 'Read in English' },
 };
@@ -285,6 +287,7 @@ export const QUOTE = {
 };
 
 export const FOOTER = {
+  privacy: 'Privatlivspolitik',
   tagline: 'Transparent LED-film og smart film til glas. Levering og montering i hele Danmark.',
   columns: [
     {
@@ -297,6 +300,66 @@ export const FOOTER = {
         { href: '#klar', label: 'Klar eller mat' },
         { href: '#anvendelse', label: 'Anvendelse' },
         { href: '#faq', label: 'Spørgsmål' },
+      ],
+    },
+  ],
+};
+
+/**
+ * The privacy policy at /privatlivspolitik. Written for what the site actually
+ * does: the form opens the reader's own mail program, nothing is stored on a
+ * server, and the only thing kept in the browser is the reader's own choices.
+ */
+export const PRIVACY = {
+  title: 'Privatlivspolitik · SmartFilm Danmark',
+  headline: 'Privatlivspolitik',
+  updated: 'Senest opdateret 25. september 2026',
+  lede: 'Her kan du læse, hvilke oplysninger vi får om dig, hvad vi bruger dem til, og hvilke rettigheder du har.',
+  sections: [
+    {
+      title: 'Hvem er ansvarlig',
+      body: [
+        `${SITE.full}, CVR-nr. ${SITE.cvr}, er dataansvarlig for de oplysninger, vi behandler om dig. Du kan altid kontakte os på ${SITE.email} eller ${SITE.phone}.`,
+      ],
+    },
+    {
+      title: 'Hvilke oplysninger vi får',
+      body: [
+        'Når du skriver eller ringer til os, får vi de oplysninger, du selv giver: typisk navn, firma, e-mail, telefonnummer og oplysninger om den rude, opgaven drejer sig om.',
+        'Formularen på siden gemmer ingenting. Den åbner dit eget mailprogram, og beskeden går direkte fra dig til os.',
+      ],
+    },
+    {
+      title: 'Hvad vi bruger dem til',
+      body: [
+        'Vi bruger oplysningerne til at besvare din henvendelse, give dig et tilbud og, hvis du bliver kunde, levere, montere og fakturere opgaven.',
+        'Grundlaget er, at vi skal kunne give dig et tilbud og opfylde en aftale med dig (databeskyttelsesforordningens artikel 6, stk. 1, litra b), og at bogføringsloven kræver, at vi gemmer regnskabsbilag (litra c).',
+      ],
+    },
+    {
+      title: 'Hvem vi deler dem med',
+      body: [
+        'Vi sælger aldrig dine oplysninger. De kan blive behandlet af de leverandører, vi bruger til at drive virksomheden — fx e-mail, hosting og regnskab — og kun på vores vegne. Ellers videregiver vi dem kun, hvis loven kræver det.',
+      ],
+    },
+    {
+      title: 'Hvor længe vi gemmer dem',
+      body: [
+        'Fører en henvendelse ikke til en opgave, sletter vi den, når den ikke længere er relevant, og senest efter et år. Bliver du kunde, gemmer vi fakturaer og regnskabsbilag i fem år, som bogføringsloven kræver.',
+      ],
+    },
+    {
+      title: 'Cookies',
+      body: [
+        'Vi bruger ikke cookies til statistik eller markedsføring. Siden husker kun dine egne valg, fx sprog, og det gemmes i din browser — ikke hos os.',
+        'Som ved alle hjemmesider modtager serveren, der viser siden, teknisk information som din IP-adresse. Den bruges kun til at sende siden til dig.',
+      ],
+    },
+    {
+      title: 'Dine rettigheder',
+      body: [
+        'Du har ret til at se de oplysninger, vi har om dig, og til at få dem rettet eller slettet. Du kan også gøre indsigelse mod vores behandling, bede os begrænse den eller få dine oplysninger udleveret. Skriv til os, så svarer vi senest inden for en måned.',
+        'Er du utilfreds med, hvordan vi behandler dine oplysninger, kan du klage til Datatilsynet på datatilsynet.dk.',
       ],
     },
   ],
@@ -318,6 +381,6 @@ export const THEMES = [
 export type ThemeId = (typeof THEMES)[number]['id'];
 
 /** Everything a reader sees, bundled so en.ts can mirror it exactly. */
-export const DA = { UI, NAV_LEFT, NAV_RIGHT, HERO, PRODUCTS, STEPS, SPECS, DEMO, SMART_FILM, REFS, FAQ, QUOTE, FOOTER };
+export const DA = { UI, NAV_LEFT, NAV_RIGHT, HERO, PRODUCTS, STEPS, SPECS, DEMO, SMART_FILM, REFS, FAQ, QUOTE, FOOTER, PRIVACY };
 
 export type Content = typeof DA;

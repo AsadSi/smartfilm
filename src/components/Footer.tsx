@@ -1,16 +1,21 @@
 'use client';
 
+import Link from 'next/link';
 import { SITE } from '@/content/site';
 import { useT } from './lang';
 
-export function Footer() {
+/**
+ * On the one-pager the links are in-page anchors. Anywhere else they need the
+ * page in front of them, which base supplies.
+ */
+export function Footer({ base = '' }: { base?: string }) {
   const { FOOTER, UI } = useT();
   return (
     <footer className="ftr">
       <div className="wrap">
         <div className="ftr-grid">
           <div>
-            <a className="brand" href="#top"><b>{SITE.name}</b><span>DANMARK</span></a>
+            <a className="brand" href={`${base}#top`}><b>{SITE.name}</b><span>DANMARK</span></a>
             <p className="ftr-tag">{FOOTER.tagline}</p>
           </div>
 
@@ -19,7 +24,7 @@ export function Footer() {
               <h4>{col.title}</h4>
               <ul>
                 {col.links.map((l) => (
-                  <li key={l.href}><a href={l.href}>{l.label}</a></li>
+                  <li key={l.href}><a href={base + l.href}>{l.label}</a></li>
                 ))}
               </ul>
             </div>
@@ -35,7 +40,9 @@ export function Footer() {
         </div>
 
         <div className="ftr-bot">
-          <span>© {new Date().getFullYear()} {SITE.full}{SITE.cvr ? `, CVR ${SITE.cvr}` : ''}</span>
+          <span>
+            © {new Date().getFullYear()} {SITE.full} · {UI.cvr} {SITE.cvr} · <Link href="/privatlivspolitik">{FOOTER.privacy}</Link>
+          </span>
           <span>{UI.area}</span>
         </div>
       </div>

@@ -1,7 +1,7 @@
 # SmartFilm Danmark
 
-The smartfilmdanmark.dk one-pager, in Next.js. One route, no database, no
-server state — `npm run build` produces a static page.
+The smartfilmdanmark.dk one-pager, in Next.js. One page plus a privacy
+policy, no database, no server state — `npm run build` produces a static page.
 
 ```bash
 npm run dev     # http://localhost:3000
@@ -27,6 +27,7 @@ src/
   app/
     layout.tsx     fonts, metadata, the remembered colour scheme
     page.tsx       the whole site, in the order it argues
+    privatlivspolitik/page.tsx  the privacy policy, linked from the footer
     globals.css    every rule on the page
   components/      one file per section; client only where something moves
   content/site.ts  every Danish word, in one file

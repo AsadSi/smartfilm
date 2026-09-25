@@ -1,15 +1,15 @@
 # Indhold vi mangler fra SmartFilm
 
 Sitet kan gå live som det er. Intet herunder vises som et tomt felt — men det
-første punkt er noget, et dansk erhvervssite forventes at have på plads.
+første punkt skal I læse igennem inden lancering.
 
 ## Inden lancering
 
-- **Privatlivspolitik** — den gamle side er væk sammen med resten af det
-  tidligere site. Formularen indsamler nu ingenting: den åbner afsenderens
-  eget mailprogram, så beskeden går direkte fra dem til jer og rører aldrig
-  serveren. Det gør kravet mindre, men en kort politik hører stadig til på et
-  erhvervssite.
+- **Privatlivspolitik** — en kort politik ligger nu på `/privatlivspolitik`
+  og er linket fra footeren. Teksten står i `PRIVACY` i
+  `src/content/site.ts` (og på engelsk i `en.ts`). Læs den igennem, og ret
+  især sletningen, hvis den ikke passer: der står, at henvendelser, som ikke
+  bliver til en opgave, slettes senest efter et år.
 
 ## AI-genererede visualiseringer
 
