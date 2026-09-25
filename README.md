@@ -9,6 +9,20 @@ npm run build
 npm run lint
 ```
 
+## Put it on Vercel
+
+1. On GitHub, **Code → Download ZIP**, and unzip it.
+2. Make a new, empty repository and upload **what is inside** the unzipped
+   folder. `package.json` has to sit at the top of the repository, not in a
+   folder of its own — otherwise Vercel finds nothing to build.
+3. On vercel.com, **Add New → Project**, import the repository and press
+   **Deploy**. Nothing needs changing: `vercel.json` tells Vercel it is a
+   Next.js site, and `package.json` asks for a Node.js version new enough for
+   it (20.9 or later).
+
+To try it on a computer first: install Node.js 20.9 or later, then
+`npm install` and `npm run dev`.
+
 ## What this is
 
 The site sells two things a pane of glass can be told to do. Transparent LED
