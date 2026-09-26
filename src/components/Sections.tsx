@@ -5,10 +5,12 @@ import { CountUp } from './CountUp';
 import { useT } from './lang';
 import { Reveal } from './Reveal';
 
+/** The figures, on a photograph of the film at work — the page's one band. */
 export function Specs() {
   const { SPECS } = useT();
   return (
-    <section className="section" id="specs" style={{ paddingTop: 0 }}>
+    <section className="section band" id="specs">
+      <Image className="band-bg" src={SPECS.image} alt="" fill sizes="100vw" />
       <div className="wrap">
         <Reveal className="head">
           <p className="kicker">{SPECS.kicker}</p>
@@ -24,46 +26,6 @@ export function Specs() {
               <span>{s.label}</span>
               <small>{s.note}</small>
             </div>
-          ))}
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-export function Applications() {
-  const { REFS } = useT();
-  return (
-    <section className="section" id="anvendelse">
-      <div className="wrap">
-        <Reveal className="head">
-          <p className="kicker">{REFS.kicker}</p>
-          <h2>{REFS.headline}</h2>
-          <hr className="edge" />
-          <p className="lede">{REFS.lede}</p>
-        </Reveal>
-
-        <Reveal className="refs">
-          {REFS.items.map((r, i) => (
-            <article className="ref rise" key={r.title}>
-              <figure>
-                <div className="shot">
-                  <span className="badge">{REFS.badge}</span>
-                  <Image
-                    src={r.image}
-                    alt={r.alt}
-                    width={r.width}
-                    height={r.height}
-                    loading={i < 2 ? 'eager' : 'lazy'}
-                    sizes="(min-width:880px) 46vw, 100vw"
-                  />
-                </div>
-                <figcaption>
-                  <h3>{r.title}</h3>
-                  <p>{r.body}</p>
-                </figcaption>
-              </figure>
-            </article>
           ))}
         </Reveal>
       </div>

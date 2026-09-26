@@ -18,7 +18,7 @@ export const EN: Content = {
     cta: 'Get a quote',
     contact: 'Contact',
     area: 'Delivery and installation across Denmark',
-    reply: 'A quote within 24 hours on working days',
+    reply: 'We reply as soon as we can',
     facts: { email: 'Email', phone: 'Phone', area: 'Area', reply: 'Response' },
     cvr: 'CVR no.',
     home: 'Home',
@@ -32,7 +32,6 @@ export const EN: Content = {
   ],
 
   NAV_RIGHT: [
-    { href: '#klar', label: 'Clear or matte' },
     { href: '#anvendelse', label: 'Applications' },
   ],
 
@@ -100,6 +99,7 @@ export const EN: Content = {
   },
 
   SPECS: {
+    ...DA.SPECS,
     kicker: 'Specifications',
     headline: 'The numbers, with the conditions attached.',
     lede: 'A number without its condition is a disappointment waiting to happen. Here are both.',
@@ -113,17 +113,19 @@ export const EN: Content = {
 
   DEMO: {
     kicker: 'Transparent LED film',
-    headline: 'Hold to light it.',
-    lede: 'Off, it is barely there. On, it is the whole window. Hold the button down and see what the window becomes.',
-    word: 'Open',
-    hold: 'Hold down',
-    holding: 'Keep holding…',
-    lit: 'Lit',
-    hint: 'Hold the mouse button or your finger down. Let go, and the light falls back.',
-    reveals: [
-      { at: 0.34, text: 'Content changes in minutes, not over a week of new vinyl.' },
-      { at: 0.52, text: 'Switched off at night, the window is just a window again.' },
-      { at: 0.7, text: 'One surface, many messages, and room to sell advertising time on.' },
+    headline: 'Change what it shows, whenever you like.',
+    lede: 'Off, it is barely there. On, it is the whole window, and you choose what it shows. Tap an item, or let the window change by itself.',
+    pick: 'Choose what the window shows',
+    channels: [
+      { name: 'Campaign', text: 'WEEKEND OFFER' },
+      { name: 'New collection', text: 'NEW COLLECTION' },
+      { name: 'Opening hours', text: 'OPEN TODAY' },
+      { name: 'Video', text: '' },
+    ],
+    points: [
+      'Content changes in minutes, not over a week of new vinyl.',
+      'Switched off at night, the window is just a window again.',
+      'One surface, many messages, and room to sell advertising time on.',
     ],
   },
 
@@ -203,7 +205,7 @@ export const EN: Content = {
       },
       {
         q: 'What does it cost?',
-        a: 'It is priced individually by size, pixel pitch, brightness and installation. We do not give a price per square metre without knowing the window, because that number is always wrong. Send the measurements and what the window is used for, and you will have a real quote within one working day.',
+        a: 'It is priced individually by size, pixel pitch, brightness and installation. We do not give a price per square metre without knowing the window, because that number is always wrong. Send the measurements and what the window is used for, and we will come back with a real quote as soon as we can.',
       },
     ],
   },
@@ -219,7 +221,7 @@ export const EN: Content = {
     summary: 'Please correct the following before sending:',
     sent: {
       title: 'Your email program has opened',
-      body: 'The message is ready for kontakt@smartfilmdanmark.dk. Press send in your email program, and you will have an answer within 24 hours on working days.',
+      body: 'The message is ready for kontakt@smartfilmdanmark.dk. Press send in your email program, and we will answer as soon as we can.',
     },
     fields: {
       name: { label: 'Name', error: 'Please enter your name.' },
@@ -241,7 +243,6 @@ export const EN: Content = {
           { href: '#produkter', label: 'Products' },
           { href: '#saadan', label: 'How it works' },
           { href: '#specs', label: 'Specifications' },
-          { href: '#klar', label: 'Clear or matte' },
           { href: '#anvendelse', label: 'Applications' },
           { href: '#faq', label: 'Questions' },
         ],

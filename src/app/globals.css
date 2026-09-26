@@ -352,6 +352,15 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
    SHARED SECTION FURNITURE
    ============================================================ */
 .head{max-width:min(760px,94%);margin-bottom:clamp(48px,6vw,var(--s7))}
+/* On a wide screen the head spreads across the page: the headline on the
+   left, the paragraph on the right, finishing on the rule's line. Every
+   section used to open on a screen with its right half empty. */
+@media (min-width:1080px){
+  .head{max-width:none;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--s7);align-items:end}
+  .head > *{grid-column:1}
+  .head hr.edge{margin-bottom:0}
+  .head .lede{grid-column:2;grid-row:1 / 4;align-self:end}
+}
 /* every hr.edge is a short rule with breathing room, inside a .head or not */
 hr.edge{width:52px;margin-block:var(--s3)}
 
@@ -364,31 +373,242 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .in.done .rise:nth-child(2),.in.done .rise:nth-child(3),.in.done .rise:nth-child(4){transition-delay:0s!important}
 
 /* ============================================================
-   HOW IT WORKS
+   HOW IT WORKS — one shop window, acted out
+
+   Measured, filmed, lit: three scenes on the same drawing, each running for
+   as long as its step's thread takes to fill. Every element's resting style
+   is the state its scene ENDS in, so a scene fading out as the next arrives
+   never snaps back to its start. The scenes are sequences, so they are
+   keyframes; the list's own state changes are transitions.
    ============================================================ */
-.steps{position:relative;display:grid;gap:var(--s5)}
-@media (min-width:880px){ .steps{grid-template-columns:repeat(3,1fr);gap:var(--s6)} }
-.thread{position:absolute;left:0;right:0;top:34px;height:2px;display:none;pointer-events:none}
-@media (min-width:880px){ .thread{display:block} }
-.thread svg{width:100%;height:2px;overflow:visible}
-.step{position:relative}
-.step .no{
-  width:68px;height:68px;display:grid;place-items:center;margin-bottom:var(--s3);
+.how{--d1:6s;--d2:6s;--d3:7.5s}
+.how-grid{display:grid;gap:var(--s5)}
+@media (min-width:940px){
+  .how-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s7);align-items:center}
+  .how-stage{grid-column:2;grid-row:1}
+}
+
+/* the list is the timeline */
+.how-steps{list-style:none;margin:0;padding:0;display:grid;gap:var(--s4)}
+.how-step{position:relative;display:grid;grid-template-columns:52px 1fr;column-gap:var(--s3);transition:scale .16s var(--e-out)}
+.how-step:nth-child(1){--dur:var(--d1)}
+.how-step:nth-child(2){--dur:var(--d2)}
+.how-step:nth-child(3){--dur:var(--d3)}
+.how-step:has(button:active){scale:.98}
+.how-step .no{
+  grid-row:span 2;width:52px;height:52px;display:grid;place-items:center;
   border:1px solid var(--line-strong);border-radius:50%;background:var(--canvas);
-  font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;color:var(--ice);position:relative;z-index:2;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;color:var(--text-dim);
+  transition:border-color .4s var(--e-out),color .4s var(--e-out),box-shadow .4s var(--e-out);
 }
-.step .no::after{content:"";position:absolute;inset:-1px;border-radius:50%;box-shadow:0 0 0 1px var(--ice);opacity:0;transition:opacity .6s var(--e-out)}
-.in .step .no::after{opacity:.35}
-.step h3{margin-bottom:12px}
-.step p{color:var(--text-dim);font-size:.97rem;max-width:34ch}
-/* On a phone the number sits beside its step rather than on top of it: three
-   68px rings stacked over three headings cost a whole screen for three lines. */
-@media (max-width:879px){
-  .steps{gap:var(--s4)}
-  .step{display:grid;grid-template-columns:52px 1fr;column-gap:var(--s3)}
-  .step .no{grid-row:span 2;width:52px;height:52px;margin:0}
-  .step h3{margin:17px 0 10px}
+.how-step[data-state="now"] .no{border-color:var(--ice);color:var(--ice);box-shadow:0 0 0 5px var(--glow)}
+.how-step h3{margin:16px 0 10px}
+/* the whole step is the target; the button carries the name */
+.how-step h3 button{
+  font:inherit;letter-spacing:inherit;text-transform:inherit;text-align:left;
+  color:var(--text-dim);background:none;border:0;padding:0;cursor:pointer;transition:color .4s var(--e-out);
 }
+.how-step h3 button::after{content:"";position:absolute;inset:0}
+.how-step[data-state="now"] h3 button{color:var(--text)}
+@media (hover:hover) and (pointer:fine){ .how-step h3 button:hover{color:var(--text)} }
+.how-step p{color:var(--text-dim);font-size:.97rem;max-width:34ch}
+.thread{position:absolute;left:25px;top:60px;bottom:calc(8px - var(--s4));width:2px;background:var(--line);overflow:hidden}
+.how-step:last-child .thread{bottom:0}
+/* one aqua-to-rose thread across all three, a third of it in each step */
+.thread i{
+  position:absolute;inset:0;transform-origin:top;transform:scaleY(0);
+  background:linear-gradient(var(--aqua),var(--ice),var(--rose));background-size:100% 300%;
+}
+.how-step:nth-child(2) .thread i{background-position:0 50%}
+.how-step:nth-child(3) .thread i{background-position:0 100%}
+.how-step:not([data-state="next"]) .thread i{transform:none}
+.how-step[data-state="now"] .thread i{animation:how-fill var(--dur) linear both}
+
+/* the stage */
+.how-stage{
+  position:relative;aspect-ratio:4/3;overflow:hidden;container-type:inline-size;
+  background:var(--canvas-2);border:1px solid var(--line);
+  --sheen:rgba(255,255,255,.34);--glint:rgba(255,255,255,.85);
+}
+:root[data-theme="blue"] .how-stage{--sheen:rgba(170,196,255,.05);--glint:rgba(127,185,255,.3)}
+.how-stage > svg{position:absolute;inset:0;width:100%;height:100%}
+.how-stage text{font-family:var(--mono);font-size:10px;letter-spacing:.06em;fill:var(--text)}
+.how .ground{fill:var(--panel);opacity:.6}
+.how .wall{fill:var(--canvas);stroke:var(--line-strong);stroke-width:.75}
+.how .hair,.how .plate{fill:none;stroke:var(--line-strong);stroke-width:.75}
+.how .inside{fill:color-mix(in srgb,var(--ice) 6%,var(--canvas-2))}
+.how .lamps{fill:var(--text-dim);stroke:var(--text-dim);stroke-width:.75;opacity:.3}
+.how .frame{fill:var(--frame);stroke:var(--line-strong);stroke-width:.5}
+.how .handle{fill:var(--canvas)}
+.how .sheen{fill:var(--sheen)}
+.how .fig,.how .cap{fill:var(--text);opacity:.82}
+.how .cap{opacity:1}
+.how .blade{fill:var(--ice)}
+
+.how .sc{opacity:0;transition:opacity .45s var(--e-out)}
+.how-stage[data-step="0"] .sc1,
+.how-stage[data-step="1"] .sc2,
+.how-stage:not([data-step="0"]) .sc-film,
+.how-stage[data-step="2"] .sc3{opacity:1}
+
+/* 01 · a tape across the top, a dimension down the side, the sun, the glass */
+.how .m-tape{stroke:var(--ice);stroke-width:4;stroke-dasharray:1}
+.how .m-ticks{stroke:var(--canvas);stroke-width:4;stroke-dasharray:.6 5.4}
+.how .m-case,.how .m-hook{fill:var(--text)}
+.how .m-case circle{fill:var(--canvas)}
+.how .m-dim,.how .m-ends{stroke:var(--ice);stroke-width:1;stroke-dasharray:1}
+.how .m-ends{stroke-dasharray:none}
+.how .sun{fill:var(--rose)}
+.how .rays{stroke:var(--rose);stroke-width:1.3;stroke-linecap:round;transform-box:fill-box;transform-origin:center}
+.how .m-beams{stroke:var(--rose);stroke-width:.8;stroke-dasharray:3 3;opacity:.75}
+.how .dial{fill:var(--canvas);stroke:var(--line-strong);stroke-width:.75}
+.how .needle{fill:var(--text-dim)}
+.how .needle.south{fill:var(--rose)}
+.how .chip-bg{fill:var(--canvas);stroke:var(--line-strong);stroke-width:.75}
+.how .pane{fill:var(--ice)}
+.how .m-g text{font-size:8.5px}
+
+.how-stage[data-step="0"] .m-case{animation:how-fade .4s var(--e-out) .2s both}
+.how-stage[data-step="0"] .m-tape{animation:how-draw 1.3s var(--e-io) .5s both}
+.how-stage[data-step="0"] .m-hook{--from:-187px;animation:how-x 1.3s var(--e-io) .5s both}
+.how-stage[data-step="0"] .m-ticks{animation:how-op .3s var(--e-out) 1.7s both}
+.how-stage[data-step="0"] .m-w{animation:how-fade .5s var(--e-out) 1.6s both}
+.how-stage[data-step="0"] .m-dim{animation:how-draw 1s var(--e-io) 1.9s both}
+.how-stage[data-step="0"] .m-ends{animation:how-op .3s var(--e-out) 1.9s both}
+.how-stage[data-step="0"] .m-h{animation:how-fade .5s var(--e-out) 2.7s both}
+.how-stage[data-step="0"] .m-sun-x{--from:36px;animation:how-x 1.4s linear 3s both}
+.how-stage[data-step="0"] .m-sun-y{--from:30px;animation:how-y 1.4s var(--e-out) 3s both}
+.how-stage[data-step="0"] .rays{animation:how-spin 3s var(--e-out) 3s both}
+.how-stage[data-step="0"] .m-beams{animation:how-op .6s var(--e-out) 4s both}
+.how-stage[data-step="0"] .m-s{animation:how-fade .5s var(--e-out) 4.2s both}
+.how-stage[data-step="0"] .m-g{animation:how-fade .5s var(--e-out) 4.6s both}
+
+/* 02 · the fitter crosses the pane and the film follows the squeegee. The
+   wipe starts when the blade reaches the glass and ends when it leaves, so
+   its delay and length are the walk's, cut to the pane. */
+.how .walker{transform:translateX(290px)}
+.how .arm{transform:translateY(-14px)}
+.how-film{clip-path:inset(0)}
+.how-stage[data-step="1"] .walker{animation:how-walk 4.4s linear .4s both}
+.how-stage[data-step="1"] .arm{animation:how-stroke .55s var(--e-io) .4s 8 alternate both}
+.how-stage[data-step="1"] .how-film{animation:how-wipe 3.25s linear .82s both}
+.how-stage[data-step="1"] .how-film::after{animation:how-glint 1.1s var(--e-io) 4.6s both}
+
+/* 03 · a phone rises, a row is tapped, the pane shows it — three times */
+.how .p-body{fill:#111418;stroke:var(--line-strong);stroke-width:.75}
+.how .p-screen{fill:#1B1F27}
+.how .p-notch{fill:#0B0D11}
+.how .p-bar{fill:rgba(255,255,255,.4)}
+.how .p-bar.dim{fill:rgba(255,255,255,.18)}
+.how .p-row{fill:rgba(255,255,255,.06)}
+.how .p-hi{fill:color-mix(in srgb,var(--ice) 22%,transparent);stroke:var(--ice);stroke-width:1;transform:translateY(52px)}
+.how .p-txt{fill:#fff;font-size:8px}
+.how .p-ico{fill:none;stroke:#fff;stroke-width:1.1;stroke-linecap:round}
+.how .p-play{fill:#fff}
+.how .p-tap{fill:#fff;opacity:0;transform-box:fill-box;transform-origin:center}
+.how-stage[data-step="2"] .p-rise{--from:130px;animation:how-y .8s var(--e-out) .2s both}
+.how-stage[data-step="2"] .p-hi{animation:how-pick var(--d3) var(--e-out) both}
+.how-stage[data-step="2"] .t1{animation:how-tap .6s var(--e-out) .95s forwards}
+.how-stage[data-step="2"] .t2{animation:how-tap .6s var(--e-out) 3.5s forwards}
+.how-stage[data-step="2"] .t3{animation:how-tap .6s var(--e-out) 5.55s forwards}
+.how-stage[data-step="2"] .led-a{animation:how-a var(--d3) var(--e-out) both}
+.how-stage[data-step="2"] .led-b{animation:how-b var(--d3) var(--e-out) both}
+.how-stage[data-step="2"] .led-c{animation:how-c var(--d3) var(--e-out) both,drift 5s linear infinite}
+
+/* the film and what it shows, laid over the glass: x45 y85 w214 h150 of 400×300 */
+.how-film,.how-led{position:absolute;left:11.25%;top:28.333%;width:53.5%;height:50%}
+.how-film{
+  overflow:hidden;
+  background:radial-gradient(circle,color-mix(in srgb,var(--ice) 42%,transparent) 0 18%,transparent 24%) 0 0/.85cqw .85cqw,
+             color-mix(in srgb,var(--ice) 5%,transparent);
+}
+.how-film::after{content:"";position:absolute;inset:0;transform:translateX(110%);
+  background:linear-gradient(105deg,transparent 32%,var(--glint) 50%,transparent 68%)}
+.how-led{filter:drop-shadow(0 0 .9cqw color-mix(in srgb,var(--ice) 60%,transparent))}
+/* one dot mask over everything lit, on the film's own pitch */
+.led-dots{
+  position:absolute;inset:0;display:grid;place-items:center;color:var(--ice);
+  -webkit-mask:radial-gradient(circle,#000 0 40%,transparent 46%) 0 0/.85cqw .85cqw;
+  mask:radial-gradient(circle,#000 0 40%,transparent 46%) 0 0/.85cqw .85cqw;
+}
+.led-dots > *{grid-area:1/1}
+.led-dots b{font-family:var(--body);font-weight:800;line-height:1;letter-spacing:-.01em}
+.led-a{font-size:15cqw;opacity:0}
+.led-b{display:flex;align-items:center;gap:2.4cqw;opacity:0}
+.led-b b{font-size:11cqw}
+.led-b svg{width:9cqw;height:9cqw}
+.led-c{position:absolute;inset:0;background:linear-gradient(110deg,var(--aqua),var(--ice),var(--rose),var(--ice),var(--aqua));background-size:300% 100%}
+
+@keyframes how-fill{from{transform:scaleY(0)}}
+@keyframes how-fade{from{opacity:0;transform:translateY(4px)}}
+@keyframes how-op{from{opacity:0}}
+@keyframes how-draw{from{stroke-dashoffset:1}}
+@keyframes how-x{from{transform:translateX(var(--from))}}
+@keyframes how-y{from{transform:translateY(var(--from))}}
+@keyframes how-spin{from{transform:rotate(-70deg)}}
+@keyframes how-walk{from{transform:translateX(0)}}
+@keyframes how-stroke{from{transform:translateY(-14px)}to{transform:translateY(24px)}}
+@keyframes how-wipe{from{clip-path:inset(0 100% 0 0)}}
+@keyframes how-glint{from{transform:translateX(-110%)}}
+@keyframes how-tap{from{opacity:.55;transform:scale(.4)}to{opacity:0;transform:scale(1.7)}}
+@keyframes how-pick{
+  0%,12%{opacity:0;transform:none}
+  15%,44%{opacity:1;transform:none}
+  48%,71%{opacity:1;transform:translateY(26px)}
+  75%,100%{opacity:1;transform:translateY(52px)}
+}
+@keyframes how-a{0%,14%{opacity:0;transform:scale(.94)} 18%,45%{opacity:1;transform:none} 48%,100%{opacity:0}}
+@keyframes how-b{0%,47%{opacity:0;transform:scale(.94)} 51%,72%{opacity:1;transform:none} 75%,100%{opacity:0}}
+@keyframes how-c{0%,74%{opacity:0} 79%,100%{opacity:1}}
+
+/* off screen, the whole sequence holds where it is */
+.how[data-play="false"] .how-stage *,
+.how[data-play="false"] .how-stage *::after,
+.how[data-play="false"] .thread i{animation-play-state:paused}
+
+/* Nothing plays and nothing advances; each step is a still of its scene,
+   chosen from the list. The stills are mid-scene rather than the end states
+   the scenes rest in: the fitter halfway across, the first thing lit. */
+@media (prefers-reduced-motion:reduce){
+  .how-stage *,.how-stage *::after,.how .thread i{animation:none!important}
+  .how .walker{transform:translateX(130px)}
+  .how .how-film{clip-path:inset(0 52% 0 0)}
+  .how-stage[data-step="2"] .how-film{clip-path:inset(0)}
+  .how .p-hi{transform:none}
+  .how .led-a{opacity:1}
+  .how .led-c{opacity:0}
+}
+
+/* ============================================================
+   THE BAND — the figures on a photograph
+
+   The one section that sits on a picture: a night shot of the film at work,
+   darkened most where the words are. It re-declares the page's tokens as
+   light-on-dark, so everything inside it — kicker, rule, figures, hairlines —
+   follows without a rule of its own, on either ground. Where the browser can
+   tie an animation to scrolling, the picture drifts a little slower than the
+   page; elsewhere it simply holds still.
+   ============================================================ */
+.band{
+  isolation:isolate;overflow:hidden;background:#04050A;color:var(--text);
+  min-height:min(100svh,880px);display:flex;flex-direction:column;justify-content:flex-end;
+  --text:#EDF1F8;--text-dim:rgba(237,241,248,.74);
+  --line:rgba(237,241,248,.16);--line-strong:rgba(237,241,248,.32);
+  --ice:#7FB9FF;--aqua:#5FE0D8;--rose:#FF86C4;
+  --dichroic:linear-gradient(90deg,var(--aqua),var(--ice),var(--rose),var(--ice),var(--aqua));
+}
+.band > .wrap{position:relative}
+.band-bg{object-fit:cover;z-index:-2}
+.band::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to top,rgba(4,5,10,.95) 0%,rgba(4,5,10,.84) 48%,rgba(4,5,10,.5) 100%);
+}
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .band-bg{animation:band-drift linear both;animation-timeline:view()}
+  }
+}
+@keyframes band-drift{from{transform:translateY(-5%) scale(1.12)}to{transform:translateY(5%) scale(1.12)}}
 
 /* ============================================================
    SPECS
@@ -424,39 +644,42 @@ hr.edge{width:52px;margin-block:var(--s3)}
   .demo-copy,.klar-copy{grid-area:copy;align-self:end}
   .demo-ctl,.klar-ctl{grid-area:ctl;align-self:start}
 }
+/* The picture is shorter than the words beside it, so on a screen tall
+   enough to hold it, it keeps pace with them: it waits under the header while
+   the copy and the controls scroll past, and leaves with the section. */
+@media (min-width:940px) and (min-height:700px){
+  .demo-grid > .panel,.klar-grid > .pane-shot{align-self:start;position:sticky;top:calc(var(--nav-h) + 48px)}
+}
 .panel{
   position:relative;aspect-ratio:16/9;background:#04050A;
   border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;
 }
-.panel svg{width:88%;height:auto}
-.panel .node{fill:var(--ice);opacity:calc(clamp(0,(var(--lit,0)*var(--n,1) - var(--i,0)),1)*.92);
-  transition:opacity .12s linear}
+.panel canvas{position:absolute;inset:0;width:100%;height:100%}
 .panel .glass{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(115deg,rgba(255,255,255,.05) 0%,transparent 34%,transparent 66%,rgba(255,255,255,.035) 100%)}
-.panel .word{
-  position:absolute;left:0;right:0;bottom:12%;text-align:center;
-  font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3.4vw,2.4rem);letter-spacing:.02em;
-  opacity:clamp(0,(var(--lit,0) - .72)*3.6,1);color:#fff;
-  text-shadow:0 0 26px rgba(77,159,255,.75),0 0 60px rgba(77,159,255,.4);
+
+/* the playlist: a numbered row per channel, the one on air in ink, with a
+   thread along its foot filling until the next one comes on */
+.channels{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.channels button{
+  position:relative;display:flex;align-items:center;gap:var(--s3);width:100%;min-height:56px;padding:12px 0;
+  background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer;text-align:left;
+  font:inherit;font-size:1.02rem;color:var(--text-dim);
+  transition:color .3s var(--e-out),scale .16s var(--e-out);
 }
-.hold-btn{
-  -webkit-user-select:none;user-select:none;touch-action:none;-webkit-touch-callout:none;
-  position:relative;overflow:hidden;width:100%;max-width:330px;
+.channels button:active{scale:.98}
+@media (hover:hover) and (pointer:fine){ .channels button:hover{color:var(--text)} }
+.channels [aria-pressed="true"]{color:var(--text)}
+.ch-no{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;color:var(--text-dim);transition:color .3s var(--e-out)}
+.channels [aria-pressed="true"] .ch-no{color:var(--ice)}
+.channels button i{
+  position:absolute;left:0;right:0;bottom:-1px;height:1px;transform-origin:left;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--aqua),var(--ice),var(--rose));
 }
-.hold-btn .fill{position:absolute;inset:0 auto 0 0;width:calc(var(--lit,0)*100%);background:var(--ice);opacity:.18;pointer-events:none;transition:width .1s linear}
-.hold-btn span{position:relative;z-index:1}
+.channels [aria-pressed="true"] i{transform:scaleX(var(--p,0))}
+
 .reveal-list{list-style:none;padding:0;margin:var(--s4) 0 0;display:grid;gap:14px}
-.reveal-list li{
-  display:flex;gap:14px;align-items:flex-start;color:var(--text-dim);font-size:.97rem;
-  opacity:clamp(0,(var(--lit,0) - var(--d,0))*6,1);
-  transform:translateY(calc((1 - clamp(0,(var(--lit,0) - var(--d,0))*6,1))*8px));
-  transition:opacity .3s var(--e-out),transform .3s var(--e-out);
-}
-/* Stacked on a phone, three invisible lines are a quarter-screen of nothing
-   under the button, so there they wait dimmed rather than absent. */
-@media (max-width:939px){
-  .reveal-list li{opacity:clamp(.3,(var(--lit,0) - var(--d,0))*6,1)}
-}
+.reveal-list li{display:flex;gap:14px;align-items:flex-start;color:var(--text-dim);font-size:.97rem}
 .reveal-list i{flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--ice);font-style:normal}
 
 /* ============================================================
@@ -557,12 +780,14 @@ hr.edge{width:52px;margin-block:var(--s3)}
 @media (max-width:639px){ .prod .btn{align-self:stretch} }
 
 /* ============================================================
-   REFERENCES
+   APPLICATIONS
+
+   Two by two on a wide screen, words under each picture. On a phone each
+   picture fills the screen in a row you swipe, with the words on it — the
+   photographs are night shots, so there the reel keeps its own black and
+   everything written on it is light.
    ============================================================ */
-.refs{display:grid;gap:var(--s4)}
-@media (min-width:880px){ .refs{grid-template-columns:repeat(2,1fr);gap:var(--s5) var(--s4)} }
-.ref figure{margin:0}
-.ref .shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+/* the "visualisation" label, here and on the two product pictures */
 .badge{
   position:absolute;top:0;left:0;z-index:2;
   padding:8px 15px;background:var(--badge-bg);
@@ -570,28 +795,59 @@ hr.edge{width:52px;margin-block:var(--s3)}
   border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);
   font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);
 }
-.ref .shot img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--e-out)}
-.ref:hover .shot img{transform:scale(1.045)}
-@media (hover:none){ .ref:hover .shot img{transform:none} }
-/* On a phone the four visualisations are a row you swipe rather than four
-   screens you scroll past; the next one peeks in from the right edge. */
+.reel{position:relative;max-width:var(--maxw);margin-inline:auto;padding-inline:48px}
+.reel-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s5) var(--s4)}
+.slide{margin:0}
+.shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.shot img{object-fit:cover;transition:transform .9s var(--e-out)}
+@media (hover:hover) and (pointer:fine){ .slide:hover .shot img{transform:scale(1.045)} }
+.slide figcaption{padding-top:var(--s3)}
+.slide h3{margin-bottom:8px}
+.slide p{color:var(--text-dim);font-size:.94rem}
+.reel-count{display:none}
+
+/* A phone swipes the row. The next picture shows a sliver at the edge, and
+   the count and its thread, top right, say where in the row you are. */
 @media (max-width:819px){
-  .refs{
-    grid-auto-flow:column;grid-auto-columns:84%;gap:var(--s2);
-    overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
-    margin-inline:-22px;padding-inline:22px;scroll-padding-inline:22px;
+  .apps{padding-bottom:0}
+  .reel{padding-inline:0}
+  .reel-track{
+    display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;scrollbar-width:none;
   }
-  .refs::-webkit-scrollbar{display:none}
-  .ref{scroll-snap-align:start}
+  .reel-track::-webkit-scrollbar{display:none}
+  .slide{position:relative;flex:0 0 calc(100% - 28px);height:100svh;overflow:hidden;background:#04050A;scroll-snap-align:start}
+  .shot{position:absolute;inset:0;aspect-ratio:auto;border:0;background:none}
+  .slide::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to top,rgba(4,5,10,.9) 0%,rgba(4,5,10,.55) 24%,transparent 52%);
+  }
+  /* clear of the fixed header when the picture fills the screen */
+  .slide .badge{top:var(--nav-h)}
+  .slide figcaption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 22px clamp(28px,7vh,72px);color:#EDF1F8}
+  .slide h3{font-size:1.9rem;margin-bottom:14px;text-shadow:var(--tshadow)}
+  .slide p{max-width:44ch;color:rgba(237,241,248,.86);font-size:.98rem}
+  .reel-count{
+    display:flex;align-items:center;gap:12px;position:absolute;z-index:2;
+    top:calc(var(--nav-h) + 8px);right:50px;margin:0;
+    font-family:var(--mono);font-size:.64rem;letter-spacing:.24em;color:#EDF1F8;text-shadow:var(--tshadow);
+  }
+  .reel-count i{display:block;width:56px;height:1px;background:rgba(237,241,248,.3)}
+  .reel-count b{display:block;height:100%;background:linear-gradient(90deg,#5FE0D8,#4D9FFF,#FF86C4);transform-origin:left;transform:scaleX(var(--p,0))}
 }
-.ref figcaption{padding-top:var(--s3)}
-.ref h3{margin-bottom:8px}
-.ref p{color:var(--text-dim);font-size:.94rem}
 
 /* ============================================================
    FAQ
    ============================================================ */
 .faq{max-width:min(900px,100%)}
+/* A wide screen keeps the question-and-answer head in view on the left while
+   the answers run down the right. */
+@media (min-width:1080px){
+  #faq .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--s7);align-items:start}
+  #faq .head{display:block;position:sticky;top:calc(var(--nav-h) + 40px);margin-bottom:0}
+  #faq .head hr.edge{margin-bottom:var(--s3)}
+  .faq{max-width:none}
+}
 .qa{border-top:1px solid var(--line)}
 .qa:last-child{border-bottom:1px solid var(--line)}
 .qa summary{
@@ -663,6 +919,8 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .ftr ul{list-style:none;margin:0;padding:0}
 .ftr ul a,.ftr ul span{display:inline-block;padding-block:8px;color:var(--text-dim);text-decoration:none;font-size:.95rem;transition:color .3s var(--e-out)}
 .ftr ul a:hover{color:var(--ice)}
+/* the wordmark centres on itself, and the box sits on the column's left edge */
+.ftr .brand{display:inline-flex}
 .ftr-tag{color:var(--text-dim);font-size:.95rem;max-width:34ch;margin-top:var(--s3)}
 .ftr-bot{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);justify-content:space-between;padding-top:var(--s3);border-top:1px solid var(--line);font-size:.8rem;color:var(--text-dim)}
 .ftr-bot a{text-underline-offset:3px;transition:color .3s var(--e-out)}
@@ -739,7 +997,7 @@ hr.edge{width:52px;margin-block:var(--s3)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
   body{opacity:1}
   .rise{opacity:1;transform:none}
-  .ref:hover .shot img{transform:none}
+  .slide:hover .shot img{transform:none}
   .env::before,.env::after{animation:none}
 
   /* no video at all: the composed still carries the hero */

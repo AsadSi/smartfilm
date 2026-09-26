@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { Applications, Faq, Specs } from '@/components/Sections';
+import { Applications } from '@/components/Applications';
+import { Channels } from '@/components/Channels';
 import { ClearOrMatte } from '@/components/ClearOrMatte';
+import { Faq, Specs } from '@/components/Sections';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
-import { HoldToLight } from '@/components/HoldToLight';
 import { Lit } from '@/components/Lit';
 import { Products } from '@/components/Products';
 import { QuoteForm } from '@/components/QuoteForm';
@@ -68,7 +69,7 @@ export default function Page() {
           <Products />
           <Steps />
           <Specs />
-          <HoldToLight />
+          <Channels />
           <ClearOrMatte />
           <Applications />
           <Faq />

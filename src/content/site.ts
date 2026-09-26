@@ -36,7 +36,7 @@ export const UI = {
   cta: 'Få et tilbud',
   contact: 'Kontakt',
   area: 'Levering og montering i hele Danmark',
-  reply: 'Tilbud inden for 24 timer på hverdage',
+  reply: 'Vi svarer så hurtigt som muligt',
   facts: { email: 'E-mail', phone: 'Telefon', area: 'Område', reply: 'Svartid' },
   cvr: 'CVR-nr.',
   home: 'Forsiden',
@@ -57,7 +57,6 @@ export const NAV_LEFT = [
 ];
 
 export const NAV_RIGHT = [
-  { href: '#klar', label: 'Klar eller mat' },
   { href: '#anvendelse', label: 'Anvendelse' },
 ];
 
@@ -140,6 +139,8 @@ export const STEPS = {
 };
 
 export const SPECS = {
+  /** Behind the figures, darkened; decorative, so it has no alt text. */
+  image: '/assets/hero-static.jpg',
   kicker: 'Specifikationer',
   headline: 'Tallene, med betingelserne på.',
   lede: 'Et tal uden en betingelse er en skuffelse, der venter. Her er begge dele.',
@@ -153,18 +154,20 @@ export const SPECS = {
 
 export const DEMO = {
   kicker: 'Transparent LED-film',
-  headline: 'Hold for at tænde.',
-  lede: 'Slukket er den næsten ikke der. Tændt er den hele vinduet. Hold knappen nede, og se hvad ruden bliver til.',
-  word: 'Åbent',
-  hold: 'Hold nede',
-  holding: 'Bliv ved…',
-  lit: 'Tændt',
-  hint: 'Hold museknappen eller fingeren nede. Slipper du, falder lyset tilbage.',
-  /** Each line arrives at its own point on the way up, hence the threshold. */
-  reveals: [
-    { at: 0.34, text: 'Indholdet skiftes på minutter, ikke på en uge med ny folie.' },
-    { at: 0.52, text: 'Slukket om natten er ruden bare en rude igen.' },
-    { at: 0.7, text: 'Én flade, mange budskaber, og plads til at sælge annoncetid videre.' },
+  headline: 'Skift indholdet, når du vil.',
+  lede: 'Slukket er den næsten ikke der. Tændt er den hele vinduet, og det, den viser, vælger du. Tryk på et indslag, eller lad ruden skifte selv.',
+  pick: 'Vælg, hvad ruden viser',
+  /** `text` is what the panel says; the video channel says nothing. */
+  channels: [
+    { name: 'Kampagne', text: 'WEEKENDTILBUD' },
+    { name: 'Ny kollektion', text: 'NY KOLLEKTION' },
+    { name: 'Åbningstider', text: 'ÅBENT I DAG' },
+    { name: 'Video', text: '' },
+  ],
+  points: [
+    'Indholdet skiftes på minutter, ikke på en uge med ny folie.',
+    'Slukket om natten er ruden bare en rude igen.',
+    'Én flade, mange budskaber, og plads til at sælge annoncetid videre.',
   ],
 };
 
@@ -265,7 +268,7 @@ export const FAQ = {
     },
     {
       q: 'Hvad koster det?',
-      a: 'Det prissættes individuelt efter mål, pixelafstand, lysstyrke og montering. Vi giver ikke en kvadratmeterpris uden at kende ruden, fordi det tal altid bliver forkert. Skriv målene og hvad ruden bruges til, så har du et rigtigt tilbud inden for et døgn på hverdage.',
+      a: 'Det prissættes individuelt efter mål, pixelafstand, lysstyrke og montering. Vi giver ikke en kvadratmeterpris uden at kende ruden, fordi det tal altid bliver forkert. Skriv målene og hvad ruden bruges til, og vi vender tilbage med et rigtigt tilbud hurtigst muligt.',
     },
   ],
 };
@@ -281,7 +284,7 @@ export const QUOTE = {
   summary: 'Ret venligst følgende, før du sender:',
   sent: {
     title: 'Dit mailprogram er åbnet',
-    body: 'Beskeden ligger klar til kontakt@smartfilmdanmark.dk. Tryk send i dit mailprogram, så har du svar inden for 24 timer på hverdage.',
+    body: 'Beskeden ligger klar til kontakt@smartfilmdanmark.dk. Tryk send i dit mailprogram, og vi svarer så hurtigt som muligt.',
   },
   fields: {
     name: { label: 'Navn', error: 'Skriv venligst dit navn.' },
@@ -304,7 +307,6 @@ export const FOOTER = {
         { href: '#produkter', label: 'Produkter' },
         { href: '#saadan', label: 'Sådan virker det' },
         { href: '#specs', label: 'Specifikationer' },
-        { href: '#klar', label: 'Klar eller mat' },
         { href: '#anvendelse', label: 'Anvendelse' },
         { href: '#faq', label: 'Spørgsmål' },
       ],
