@@ -28,11 +28,12 @@ To try it on a computer first: install Node.js 20.9 or later, then
 The site sells two things a pane of glass can be told to do. Transparent LED
 film turns the window into a screen; smart film turns it opaque. The page
 demonstrates both rather than describing them, which is the whole of its
-argument: an LED panel you hold a button to light, and a window whose panes go
-matte on a switch.
+argument: an LED panel that changes what it plays when you pick from its
+list, and a window whose panes go matte on a switch.
 
 The copy is the client's own, carried over unchanged from the page this
-replaced. The Smart Film section is the one addition.
+replaced. The additions are the Smart Film section and the LED panel's
+headline, introduction and channel names.
 
 ## Layout
 
