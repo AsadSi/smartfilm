@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useT } from './lang';
+import { ProductShot } from './ProductShot';
 import { Reveal } from './Reveal';
 
 /**
@@ -16,7 +16,7 @@ import { Reveal } from './Reveal';
 const PAGES = ['/led-film', '/smart-film'];
 
 export function Products() {
-  const { PRODUCTS: P, REFS } = useT();
+  const { PRODUCTS: P } = useT();
   return (
     <section className="section" id="produkter">
       <div className="wrap">
@@ -30,17 +30,7 @@ export function Products() {
         <Reveal className="prods">
           {P.items.map((p, i) => (
             <article className="prod rise" key={p.name}>
-              <div className={`prod-shot${p.panes ? ' pane-shot' : ''}`}>
-                <span className="badge">{REFS.badge}</span>
-                <Image src={p.image} alt={p.alt} width={943} height={621} sizes="(min-width:880px) 46vw, 100vw" />
-                {p.panes ? (
-                  <div className="panes split" aria-hidden="true">
-                    {p.panes.map((label, i) => (
-                      <i className={`pane${i === 0 ? ' frost' : ''}`} key={label}><b>{label}</b></i>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
+              <ProductShot item={p} sizes="(min-width:880px) 46vw, 100vw" />
 
               <h3><a href={PAGES[i]}>{p.name}</a></h3>
               <p className="prod-claim">{p.claim}</p>
