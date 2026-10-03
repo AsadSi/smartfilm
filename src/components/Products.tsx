@@ -12,6 +12,9 @@ import { Reveal } from './Reveal';
  * states at once — one pane matte, one clear — because a still photograph
  * cannot throw the switch, and that contrast is the whole product.
  */
+/** The product pages, in the order of PRODUCTS.items. */
+const PAGES = ['/led-film', '/smart-film'];
+
 export function Products() {
   const { PRODUCTS: P, REFS } = useT();
   return (
@@ -25,7 +28,7 @@ export function Products() {
         </Reveal>
 
         <Reveal className="prods">
-          {P.items.map((p) => (
+          {P.items.map((p, i) => (
             <article className="prod rise" key={p.name}>
               <div className={`prod-shot${p.panes ? ' pane-shot' : ''}`}>
                 <span className="badge">{REFS.badge}</span>
@@ -39,7 +42,7 @@ export function Products() {
                 ) : null}
               </div>
 
-              <h3>{p.name}</h3>
+              <h3><a href={PAGES[i]}>{p.name}</a></h3>
               <p className="prod-claim">{p.claim}</p>
               <p className="prod-text">{p.body}</p>
               <ul className="prod-points">

@@ -37,8 +37,6 @@ const nextConfig: NextConfig = {
       { source: '/referencer', destination: '/#anvendelse', permanent: true },
       { source: '/om-os', destination: '/', permanent: true },
       { source: '/produkter', destination: '/', permanent: true },
-      { source: '/smart-film', destination: '/#klar', permanent: true },
-      { source: '/led-film', destination: '/#demo', permanent: true },
       { source: '/3d-media-glass', destination: '/', permanent: true },
       { source: '/kontakt', destination: '/#tilbud', permanent: true },
     ];

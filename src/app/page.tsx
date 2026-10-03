@@ -10,7 +10,8 @@ import { Lit } from '@/components/Lit';
 import { Products } from '@/components/Products';
 import { QuoteForm } from '@/components/QuoteForm';
 import { Steps } from '@/components/Steps';
-import { SITE } from '@/content/site';
+import { JsonLd } from '@/components/JsonLd';
+import { FAQ, SITE } from '@/content/site';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -42,6 +43,17 @@ const ORGANIZATION = {
   areaServed: { '@type': 'Country', name: 'Danmark' },
 };
 
+/** The FAQ the page already shows, so search engines can show its questions. */
+const FAQ_PAGE = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.items.map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
+};
+
 /**
  * One page, in the order it argues: the product working, the two products
  * named side by side, how it is fitted,
@@ -54,10 +66,8 @@ const ORGANIZATION = {
 export default function Page() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION).replace(/</g, '\\u003c') }}
-      />
+      <JsonLd data={ORGANIZATION} />
+      <JsonLd data={FAQ_PAGE} />
       <Lit />
       <div className="env" aria-hidden="true" />
 

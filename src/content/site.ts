@@ -11,7 +11,7 @@
 export const SITE = {
   name: 'SmartFilm',
   full: 'SmartFilm Danmark',
-  url: 'https://smartfilmdanmark.dk',
+  url: 'https://www.smartfilmdanmark.dk',
   email: 'kontakt@smartfilmdanmark.dk',
   phone: '+45 28 68 90 50',
   phoneHref: 'tel:+4528689050',
