@@ -11,22 +11,21 @@ import { Reveal } from './Reveal';
  * rather than reads. Built as a switch because the product is a switch — a
  * paragraph claiming "under a second" is weaker than a pane that does it.
  *
- * The frost sits on the three panes, never on the photograph. Blurring the
- * whole picture would take the frame and the mullions with it, and a real
- * installation keeps those sharp: only the glass between them goes matte.
+ * Two photographs from one camera position, the matte one fading over the
+ * clear one, so only the glass changes and the frame stays sharp.
  *
  * Matte on arrival, because that is the product's resting state — no power,
  * no signal — and because it leaves the reader something to do.
  */
 export function ClearOrMatte() {
-  const { SMART_FILM: S } = useT();
+  const { SMART_FILM: S, REFS } = useT();
   const [mat, setMat] = useState(true);
 
   return (
     <section className="section klar" id="klar" data-mat={mat ? 'true' : 'false'}>
       <div className="wrap">
         {/* Copy, picture, switch — stacked in that order on a phone, so the
-            switch is on screen with the panes it frosts. */}
+            switch is on screen with the glass it frosts. */}
         <div className="klar-grid">
           <Reveal className="klar-copy">
             <p className="kicker">{S.kicker}</p>
@@ -36,18 +35,9 @@ export function ClearOrMatte() {
           </Reveal>
 
           <Reveal as="div" className="pane-shot">
-            <Image
-              src={S.image}
-              alt={mat ? S.alt.mat : S.alt.klar}
-              width={943}
-              height={621}
-              sizes="(min-width:940px) 52vw, 100vw"
-            />
-            <div className="panes" aria-hidden="true">
-              <i className="pane" />
-              <i className="pane" />
-              <i className="pane" />
-            </div>
+            <span className="badge">{REFS.badge}</span>
+            <Image src={S.images.klar} alt={mat ? S.alt.mat : S.alt.klar} width={1600} height={904} sizes="(min-width:940px) 52vw, 100vw" />
+            <Image src={S.images.mat} alt="" aria-hidden="true" className="mat-shot" width={1600} height={904} sizes="(min-width:940px) 52vw, 100vw" />
           </Reveal>
 
           <Reveal className="klar-ctl">

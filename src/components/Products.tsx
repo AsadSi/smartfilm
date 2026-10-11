@@ -9,7 +9,7 @@ import { Reveal } from './Reveal';
  * belongs and a way into its own demonstration further down.
  *
  * The Smart Film picture is the Smart Film section's frame at rest in both
- * states at once — one pane matte, one clear — because a still photograph
+ * states at once — half matte, half clear — because a still photograph
  * cannot throw the switch, and that contrast is the whole product.
  */
 /** The product pages, in the order of PRODUCTS.items. */

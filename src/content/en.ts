@@ -69,8 +69,9 @@ export const EN: Content = {
         points: ['92% transparency, clear', 'Switches in under a second', 'Private without going dark'],
         for: 'Meeting rooms, clinics and bathrooms',
         cta: 'Try the switch',
-        alt: 'Glass partition into a clinic. The left pane is matte, the right is clear, so the reception behind can be seen.',
+        alt: 'Glass wall into a meeting room. The left half is matte, the right is clear, so the table behind can be seen.',
         panes: ['Matte', 'Clear'],
+        matte: DA.SMART_FILM.images.mat,
       },
     ],
   },
@@ -144,8 +145,8 @@ export const EN: Content = {
     ],
     note: 'Matte is not dark. The film diffuses the daylight instead of shutting it out, so the room turns private without turning dark — and that is the whole difference between film and blinds.',
     alt: {
-      mat: 'Glass partition into a clinic. The three panes are matte, so the reception behind shows only as light and shadow.',
-      klar: 'Glass partition into a clinic. The panes are clear, and the reception and the room behind are plainly visible.',
+      mat: 'Glass wall into a meeting room. The glass is matte, so the table and chairs behind show only as pale shapes.',
+      klar: 'Glass wall into a meeting room. The glass is clear, and the table, chairs and windows behind are plainly visible.',
     },
   },
 

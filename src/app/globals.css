@@ -24,7 +24,6 @@
 
   --hdr-bg:rgba(248,245,241,.90);       /* the header once it has left the hero */
   --badge-bg:rgba(248,245,241,.92);
-  --frost:rgba(243,240,236,.44);        /* the matte pane */
   --dot:rgba(40,34,30,.55);             /* the drifting grid */
   --glow:rgba(30,99,196,.09);
   --err:#B3261E; --err-wash:rgba(179,38,30,.06);   /* 6.0:1 on --canvas */
@@ -66,7 +65,6 @@
 
   --hdr-bg:rgba(7,9,16,.86);
   --badge-bg:rgba(7,9,16,.86);
-  --frost:rgba(186,205,238,.20);
   --dot:rgba(170,196,255,.5);
   --glow:rgba(77,159,255,.13);
   --err:#FF9E94; --err-wash:rgba(255,158,148,.07);   /* 10:1 on --canvas */
@@ -690,40 +688,15 @@ hr.edge{width:52px;margin-block:var(--s3)}
    a switch rather than as a paragraph — the product IS a switch, and a
    paragraph claiming "under a second" is weaker than a pane that does it.
 
-   The frost sits on the panes, never on the photograph. Blurring the whole
-   picture would take the frame and the mullions with it, and a real
-   installation keeps those sharp: only the glass between them goes matte.
+   Two photographs from one camera position: the matte one fades over the
+   clear one, so only the glass changes and the frame stays sharp.
    ============================================================ */
 .klar{background:var(--canvas-2);border-block:1px solid var(--line)}
 
 .pane-shot{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--panel)}
-/* PLACEHOLDER IMAGERY. Every photograph on this site is an LED visualisation,
-   so this one is zoomed hard into the right-hand third — the reception behind
-   plain glass — to keep the campaign on the left out of the frame. Clear glass
-   revealing an LED advert would read as the wrong product. Swap in a real
-   Smart Film photograph and drop the scale back to 1. */
-.pane-shot img{width:100%;height:100%;object-fit:cover;object-position:86% 44%;scale:1.62;transform-origin:86% 44%}
-/* the frame, drawn over the photograph */
-.panes{
-  position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.45fr 1fr;
-  gap:clamp(9px,1.3vw,20px);border:clamp(13px,1.9vw,28px) solid var(--frame);
-  pointer-events:none;
-}
-.pane{
-  position:relative;box-shadow:0 0 0 clamp(4px,.65vw,10px) var(--frame);
-  background-color:transparent;
-  -webkit-backdrop-filter:blur(0px) saturate(1);backdrop-filter:blur(0px) saturate(1);
-  transition:backdrop-filter .9s var(--e-out),-webkit-backdrop-filter .9s var(--e-out),background-color .9s var(--e-out);
-}
-.klar[data-mat="true"] .pane,
-.pane.frost{
-  -webkit-backdrop-filter:blur(15px) saturate(.7);backdrop-filter:blur(15px) saturate(.7);
-  background-color:var(--frost);
-}
-/* Panes wired in series do not arrive together. 70ms apart reads as one
-   gesture and is still visible on the second look. */
-.pane:nth-child(2){transition-delay:70ms}
-.pane:nth-child(3){transition-delay:140ms}
+.pane-shot img{width:100%;height:100%;object-fit:cover}
+.pane-shot .mat-shot{position:absolute;inset:0;opacity:0;transition:opacity .9s var(--e-out)}
+.klar[data-mat="true"] .mat-shot{opacity:1}
 
 /* The control is a track with a knob that travels, not a button that says
    "toggle". The word that is currently true is the one set in ink. */
@@ -758,11 +731,13 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .prods{display:grid;gap:var(--s6)}
 @media (min-width:880px){ .prods{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s5)} }
 .prod{display:flex;flex-direction:column}
-/* after .pane-shot, whose 4:3 this overrides so the two pictures match */
 .prod-shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--panel);border:1px solid var(--line);margin-bottom:var(--s4)}
 .prod-shot > img{width:100%;height:100%;object-fit:cover}
-.panes.split{grid-template-columns:1fr 1fr}
-.pane b{
+.prod-shot > .half{position:absolute;inset:0;clip-path:inset(0 50% 0 0)}
+.split{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;pointer-events:none}
+.split i{position:relative}
+.split i:first-child{box-shadow:1px 0 0 rgba(255,255,255,.55)}
+.split b{
   position:absolute;left:50%;bottom:12px;translate:-50% 0;padding:6px 11px;line-height:1;font-style:normal;
   background:var(--badge-bg);color:var(--text);
   font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;

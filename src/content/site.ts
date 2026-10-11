@@ -107,9 +107,10 @@ export const PRODUCTS = {
       for: 'Mødelokaler, klinikker og badeværelser',
       href: '#klar',
       cta: 'Prøv kontakten',
-      /** The same stand-in as the Smart Film section — see SMART_FILM.image. */
-      image: '/assets/vis-klinik.jpg',
-      alt: 'Glasparti ind til en klinik. Den venstre rude er mat, den højre er klar, så receptionen bagved ses.',
+      /** The Smart Film section's two photographs, matte on the left half. */
+      image: '/assets/sf-klar.jpg',
+      matte: '/assets/sf-mat.jpg',
+      alt: 'Glasvæg ind til et mødelokale. Den venstre halvdel er mat, den højre er klar, så mødebordet bagved ses.',
       panes: ['Mat', 'Klar'],
     },
   ],
@@ -191,16 +192,13 @@ export const SMART_FILM = {
   ],
   note: 'Mat er ikke mørkt. Filmen spreder dagslyset i stedet for at lukke det ude, så rummet bliver privat uden at blive mørkt — og det er hele forskellen på film og persienner.',
   /**
-   * PLACEHOLDER. Every photograph here is an LED visualisation, so this one is
-   * zoomed hard into its right-hand third — the reception behind plain glass —
-   * to keep the campaign on the left out of frame. Clear glass revealing an
-   * advert would read as the wrong product. Wants a real Smart Film shot: one
-   * tripod position, matte and clear.
+   * One camera position, matte and clear. AI visualisations, so they carry the
+   * badge; swap in a real installation shot with the same pair when there is one.
    */
-  image: '/assets/vis-klinik.jpg',
+  images: { mat: '/assets/sf-mat.jpg', klar: '/assets/sf-klar.jpg' },
   alt: {
-    mat: 'Glasparti ind til en klinik. De tre ruder står mattede, så receptionen bagved kun anes som lys og skygge.',
-    klar: 'Glasparti ind til en klinik. Ruderne er klare, og receptionen og indretningen bagved ses tydeligt.',
+    mat: 'Glasvæg ind til et mødelokale. Glasset står mat, så bordet og stolene bagved kun anes som lyse former.',
+    klar: 'Glasvæg ind til et mødelokale. Glasset er klart, og bordet, stolene og vinduerne bagved ses tydeligt.',
   },
 };
 
