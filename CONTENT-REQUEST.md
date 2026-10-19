@@ -36,5 +36,5 @@ fra en udført opgave, så snart I har dem:
 
 ## Rettigheder
 
-Hero-klippet (`hero-scrub.mp4`) og billederne bag det er AI-genererede til
-sitet, så der er ingen fremmede rettigheder at afklare.
+Bekræft at I har rettighederne til hero-klippet (`hero-scrub.mp4`), hvis det
+ikke er jeres egen optagelse.
