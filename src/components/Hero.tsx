@@ -15,11 +15,12 @@ import { useT } from './lang';
  * video, which is all the markup ever actually used.
  *
  * The footage is brand/hero-video, a HyperFrames edit: the facade with its
- * film off, a sweep that switches it on, two scenes of lit glass, then smart
- * film going matte, looping back to the dark facade. It carries no words, so
+ * film off, a sweep that switches it on, then smart film twice — a clinic's
+ * glass clearing, a meeting room's going matte — looping back to the dark
+ * facade. It carries no words, so
  * it serves Danish and English alike; the headline is page text over it.
  *
- * It plays on phones too — it is eleven seconds and 2 MB, muted and inline, and
+ * It plays on phones too — it is ten seconds and 1.6 MB, muted and inline, and
  * a phone is where most of this page is read. Only someone who asked for less
  * motion or for less data gets the still; the file is then never fetched.
  * (iOS in Low Power Mode refuses autoplay on its own, and the poster stays.)
