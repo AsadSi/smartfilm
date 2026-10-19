@@ -222,7 +222,7 @@ export const EN: Content = {
     summary: 'Please correct the following before sending:',
     sent: {
       title: 'Your email program has opened',
-      body: 'The message is ready for kontakt@smartfilmdanmark.dk. Press send in your email program, and we will answer as soon as we can.',
+      body: 'The message is ready for info@smartfilmdanmark.dk. Press send in your email program, and we will answer as soon as we can.',
     },
     fields: {
       name: { label: 'Name', error: 'Please enter your name.' },

@@ -12,7 +12,7 @@ export const SITE = {
   name: 'SmartFilm',
   full: 'SmartFilm Danmark',
   url: 'https://www.smartfilmdanmark.dk',
-  email: 'kontakt@smartfilmdanmark.dk',
+  email: 'info@smartfilmdanmark.dk',
   phone: '+45 28 68 90 50',
   phoneHref: 'tel:+4528689050',
   /** The company behind the name, as the CVR register has it. */
@@ -285,7 +285,7 @@ export const QUOTE = {
   summary: 'Ret venligst følgende, før du sender:',
   sent: {
     title: 'Dit mailprogram er åbnet',
-    body: 'Beskeden ligger klar til kontakt@smartfilmdanmark.dk. Tryk send i dit mailprogram, og vi svarer så hurtigt som muligt.',
+    body: 'Beskeden ligger klar til info@smartfilmdanmark.dk. Tryk send i dit mailprogram, og vi svarer så hurtigt som muligt.',
   },
   fields: {
     name: { label: 'Navn', error: 'Skriv venligst dit navn.' },
