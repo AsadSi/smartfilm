@@ -25,19 +25,16 @@ dem: en reel montage sælger produktet bedre end en visualisering.
 
 ## Et rigtigt billede af Smart Film
 
-Afsnittet **Klart eller mat** låner lige nu et af LED-billederne, beskåret
-hårdt ind i den højre tredjedel, fordi der ikke findes et billede af smart
-film i materialet. Det skal erstattes af ét rigtigt motiv:
+Afsnittet **Klart eller mat** og Smart Film-kortet viser nu et AI-genereret
+mødelokale, fotograferet fra samme position to gange: én med ruden mat, én med
+den klar. Billederne er mærket "Visualisering". Erstat dem med rigtige optagelser
+fra en udført opgave, så snart I har dem:
 
 - en glasvæg ind til et mødelokale, en klinik eller et badeværelse
 - **samme kameraposition, to optagelser**: én med ruden mat, én med den klar
 - gerne dagslys i rummet bagved, så pointen om at mat ikke er mørkt kan ses
 
-Når billederne er her, bliver afsnittet både rigtigt og bedre: kontakten
-skifter så mellem to fotografier af den samme rude frem for mellem to
-tilstande af det samme.
-
 ## Rettigheder
 
-Bekræft at I har rettighederne til hero-klippet (`hero-scrub.mp4`), hvis det
-ikke er jeres egen optagelse.
+Hero-klippet (`hero-scrub.mp4`) og billederne bag det er AI-genererede til
+sitet, så der er ingen fremmede rettigheder at afklare.
