@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Footer } from '@/components/Footer';
-import { Lit } from '@/components/Lit';
 import { Privacy } from '@/components/Privacy';
 import { PRIVACY, SITE } from '@/content/site';
 
@@ -24,7 +23,6 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <Lit />
       <div className="env" aria-hidden="true" />
 
       <div className="page">

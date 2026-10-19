@@ -83,9 +83,15 @@ body{
   margin:0;background:var(--canvas);color:var(--text);
   font-family:var(--body);font-size:17px;font-weight:300;line-height:1.72;
   -webkit-font-smoothing:antialiased;
-  opacity:0;transition:opacity .7s var(--e-out);
+  animation:page-in .7s var(--e-out) both;
 }
-body.lit{opacity:1}
+/* The page fades in so the reader never sees the fonts swap. In CSS, from the
+   first paint, not on a class set after hydration: that kept every pixel at
+   opacity 0 until the JavaScript ran, which on a phone was most of six
+   seconds, and Chrome does not count a paint at opacity 0 as content. It
+   starts at .1, not 0 or .01: the headline's own fade multiplies with this
+   one, and .01 x .01 still measured as nothing painted. */
+@keyframes page-in{from{opacity:.1}}
 img,video,svg{display:block;max-width:100%}
 p{margin:0}
 a{color:inherit}
@@ -337,7 +343,10 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
 @media (max-height:420px){ .scroll-cue{display:none} }
 
 /* React Bits' BlurText: each word is its own box, so it can rise on its own */
-.blur-text span{display:inline-block}
+/* Each word arrives frosted and settles clear, in CSS so the headline starts
+   on the first paint rather than after hydration. --i is the word's index. */
+.blur-text span{display:inline-block;animation:blur-in .8s cubic-bezier(.23,1,.32,1) calc(.3s + var(--i) * .09s) both}
+@keyframes blur-in{from{opacity:.1;filter:blur(10px);transform:translateY(12px)}}
 
 .chip i{width:5px;height:5px;border-radius:50%;background:var(--ice);font-style:normal;box-shadow:0 0 8px var(--ice)}
 
@@ -823,6 +832,8 @@ hr.edge{width:52px;margin-block:var(--s3)}
     display:flex;align-items:center;gap:12px;position:absolute;z-index:2;
     top:calc(var(--nav-h) + 8px);right:50px;margin:0;
     font-family:var(--mono);font-size:.64rem;letter-spacing:.24em;color:#EDF1F8;text-shadow:var(--tshadow);
+    /* the photo behind is light in places; the backing keeps 10px type legible */
+    padding:7px 10px;background:rgba(5,6,12,.62);
   }
   .reel-count i{display:block;width:56px;height:1px;background:rgba(237,241,248,.3)}
   .reel-count b{display:block;height:100%;background:linear-gradient(90deg,#5FE0D8,#4D9FFF,#FF86C4);transform-origin:left;transform:scaleX(var(--p,0))}
@@ -953,10 +964,9 @@ hr.edge{width:52px;margin-block:var(--s3)}
        (orientation:portrait) and (pointer:coarse),
        (orientation:landscape) and (pointer:coarse) and (max-height:560px){
   .hero{height:auto}
-  .stage{
-    position:relative;height:auto;min-height:100svh;
-    background:#04050A url('/assets/hero-static.jpg') center/cover no-repeat;
-  }
+  /* No still behind the stage here: the poster and then the video cover it,
+     and a background under them is downloaded all the same. */
+  .stage{position:relative;height:auto;min-height:100svh}
   /* the corner chip, ring and desktop CTA have no room here */
   .chip,.hero-cta{display:none!important}
   .static-hero{
@@ -988,7 +998,6 @@ hr.edge{width:52px;margin-block:var(--s3)}
    ============================================================ */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
-  body{opacity:1}
   .rise{opacity:1;transform:none}
   .slide:hover .shot img{transform:none}
   .env::before,.env::after{animation:none}
@@ -999,7 +1008,8 @@ hr.edge{width:52px;margin-block:var(--s3)}
     position:relative;height:auto;min-height:100svh;
     background:#04050A url('/assets/hero-static.jpg') center/cover no-repeat;
   }
-  .stage video,.chip,.hero-cta{display:none!important}
+  /* the poster goes too, or it covers the composed still */
+  .stage video,.stage .poster,.chip,.hero-cta{display:none!important}
   .static-hero{
     display:flex;flex-direction:column;justify-content:flex-end;
     position:relative;z-index:2;min-height:100svh;

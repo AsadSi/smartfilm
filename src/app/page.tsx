@@ -6,7 +6,6 @@ import { Faq, Specs } from '@/components/Sections';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
-import { Lit } from '@/components/Lit';
 import { Products } from '@/components/Products';
 import { QuoteForm } from '@/components/QuoteForm';
 import { Steps } from '@/components/Steps';
@@ -68,7 +67,6 @@ export default function Page() {
     <>
       <JsonLd data={ORGANIZATION} />
       <JsonLd data={FAQ_PAGE} />
-      <Lit />
       <div className="env" aria-hidden="true" />
 
       <div className="page">

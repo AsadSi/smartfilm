@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Footer } from '@/components/Footer';
-import { Lit } from '@/components/Lit';
 import { ProductPage } from '@/components/ProductPage';
 import { JsonLd } from '@/components/JsonLd';
 import { PRODUCTS, SITE } from '@/content/site';
@@ -41,7 +40,6 @@ export default function Page() {
           areaServed: { '@type': 'Country', name: 'Danmark' },
         }}
       />
-      <Lit />
       <div className="env" aria-hidden="true" />
 
       <div className="page">
