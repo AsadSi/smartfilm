@@ -107,10 +107,13 @@ export const PRODUCTS = {
       for: 'Mødelokaler, klinikker og badeværelser',
       href: '#klar',
       cta: 'Prøv kontakten',
-      /** The Smart Film section's two photographs, matte on the left half. */
-      image: '/assets/sf-klar.jpg',
-      matte: '/assets/sf-mat.jpg',
-      alt: 'Glasvæg ind til et mødelokale. Den venstre halvdel er mat, den højre er klar, så mødebordet bagved ses.',
+      /**
+       * A clinic, matte on the left half. Deliberately not the meeting room:
+       * that pair is the Smart Film section's own, further down the same page.
+       */
+      image: '/assets/sf-klinik-klar.jpg',
+      matte: '/assets/sf-klinik-mat.jpg',
+      alt: 'Glasvæg ind til et behandlingsrum. Den venstre halvdel er mat, den højre er klar, så briksen bagved ses.',
       panes: ['Mat', 'Klar'],
     },
   ],
