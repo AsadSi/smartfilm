@@ -4,16 +4,18 @@ import { Globe } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { DA, SITE } from '@/content/site';
 import { setLang, useT } from './lang';
+import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
 
 // Only the hrefs are read, and they are the same in both languages.
 const LINKS = [...DA.NAV_LEFT, ...DA.NAV_RIGHT];
 
 /**
- * The wordmark sits in the middle with the menu parted around it, two items
- * either side. It crosses two grounds — the dark hero, then paper — so it
- * carries no colour of its own: white over the footage, ink the moment the
- * page starts scrolling, and everything in it inherits that.
+ * The logo sits in the middle with the menu parted around it, two items
+ * either side. It crosses two grounds — the dark hero, then paper — so its
+ * words carry no colour of their own: white over the footage, ink the moment
+ * the page starts scrolling. The mark and FILM are the brand blues, which
+ * read on both.
  *
  * Under 1080 the parted menu has no room, so the left column becomes a Menu
  * button that drops the full list under the header, and on a phone the right
@@ -154,9 +156,8 @@ export function Header() {
           <nav className="nav nav-l" aria-label={t.UI.mainNav}>{t.NAV_LEFT.map(item)}</nav>
         </div>
 
-        <a className="brand" href="#top">
-          <b>{SITE.name}</b>
-          <span>DANMARK</span>
+        <a className="brand" href="#top" aria-label={SITE.full}>
+          <Logo />
         </a>
 
         {/* The button cannot live inside .nav: the nav is display:none below

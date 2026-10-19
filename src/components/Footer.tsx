@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { SITE } from '@/content/site';
 import { useT } from './lang';
+import { Logo } from './Logo';
 
 /**
  * On the one-pager the links are in-page anchors. Anywhere else they need the
@@ -15,7 +16,7 @@ export function Footer({ base = '' }: { base?: string }) {
       <div className="wrap">
         <div className="ftr-grid">
           <div>
-            <a className="brand" href={`${base}#top`}><b>{SITE.name}</b><span>DANMARK</span></a>
+            <a className="brand" href={`${base}#top`} aria-label={SITE.full}><Logo /></a>
             <p className="ftr-tag">{FOOTER.tagline}</p>
           </div>
 

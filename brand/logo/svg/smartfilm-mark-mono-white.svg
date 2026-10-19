@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 94.88" fill="none" role="img"><title>SmartFilm</title>
+<g transform="translate(6 6)"><defs><mask id="mm" maskUnits="userSpaceOnUse" x="-2" y="-2" width="44" height="86.88">
+<rect x="-2" y="-2" width="44" height="86.88" fill="#fff"/><path d="M0 55.04L40 27.84" stroke="#000" stroke-width="2.4"/></mask></defs>
+<g mask="url(#mm)" fill="#FFFFFF"><path d="M28 0L14.06 9.48C5.34 15.41 0 25.5 0 36.04L0 55.04L28 36Z"/><path d="M12 82.88L25.94 73.4C34.66 67.47 40 57.38 40 46.84L40 27.84L12 46.88Z"/></g></g>
+</svg>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { SITE } from '@/content/site';
 import { setLang, useT } from './lang';
+import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
 
 /**
@@ -32,9 +33,8 @@ export function SubHeader({ title }: { title: string }) {
           </Link>
         </div>
 
-        <Link className="brand" href="/">
-          <b>{SITE.name}</b>
-          <span>DANMARK</span>
+        <Link className="brand" href="/" aria-label={SITE.full}>
+          <Logo />
         </Link>
 
         <div className="hdr-r">

@@ -187,12 +187,10 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
 .hdr-l{grid-column:1;display:flex;align-items:center;gap:var(--s2)}
 .brand{grid-column:2}
 .hdr-r{grid-column:3}
-.brand{display:flex;flex-direction:column;align-items:center;text-decoration:none;min-height:44px;justify-content:center}
-/* text-indent puts back the trailing letter-space, or tracked caps sit left of
-   true centre by half a space and the whole header looks a pixel off */
-.brand b{font-family:var(--display);font-weight:400;font-size:1.2rem;letter-spacing:.28em;text-indent:.28em;text-transform:uppercase;line-height:1}
-.brand span{font-family:var(--mono);font-size:.54rem;letter-spacing:.34em;text-indent:.34em;margin-top:6px;opacity:.72}
-.hdr.solid .brand span{color:var(--text-dim);opacity:1}
+.brand{display:flex;align-items:center;text-decoration:none;min-height:44px}
+.brand svg{display:block;height:36px;width:auto}
+/* On a phone it shares the bar with Menu, EN and Ring; 30px leaves them room. */
+@media (max-width:639px){ .hdr .brand svg{height:30px} }
 .hdr-r{display:flex;align-items:center;justify-content:flex-end;gap:var(--s1)}
 /* Measured, not guessed. The outer columns are 1fr, so both are as wide as the
    heavier one — the right, which carries the menu and the button — and the
@@ -940,6 +938,7 @@ hr.edge{width:52px;margin-block:var(--s3)}
 .ftr ul a:hover{color:var(--ice)}
 /* the wordmark centres on itself, and the box sits on the column's left edge */
 .ftr .brand{display:inline-flex}
+.ftr .brand svg{height:44px}
 .ftr-tag{color:var(--text-dim);font-size:.95rem;max-width:34ch;margin-top:var(--s3)}
 .ftr-bot{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);justify-content:space-between;padding-top:var(--s3);border-top:1px solid var(--line);font-size:.8rem;color:var(--text-dim)}
 .ftr-bot a{text-underline-offset:3px;transition:color .3s var(--e-out)}

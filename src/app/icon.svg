@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#070910"/>
-  <rect x="12" y="13" width="11" height="38" rx="1.5" fill="#EDF1F8" fill-opacity=".3"/>
-  <rect x="26.5" y="13" width="11" height="38" rx="1.5" fill="#4D9FFF"/>
-  <rect x="41" y="13" width="11" height="38" rx="1.5" fill="#EDF1F8" fill-opacity=".3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img"><title>SmartFilm</title>
+<rect x=".75" y=".75" width="62.5" height="62.5" rx="14.1" fill="#07111F" stroke="#2C5F9E" stroke-width="1.5"/><g transform="translate(19.645 6.400) scale(0.6178)"><defs>
+<linearGradient id="mu" x1="28" y1="0" x2="0" y2="55.04" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#6CC3FF"/><stop offset=".55" stop-color="#EAF6FC"/><stop offset="1" stop-color="#FFF1DE"/></linearGradient>
+<linearGradient id="ml" x1="40" y1="27.84" x2="12" y2="82.88" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1E74D8"/><stop offset="1" stop-color="#20C8F1"/></linearGradient>
+</defs>
+<path d="M28 0L14.06 9.48C5.34 15.41 0 25.5 0 36.04L0 55.04L28 36Z" fill="url(#mu)"/><path d="M12 82.88L25.94 73.4C34.66 67.47 40 57.38 40 46.84L40 27.84L12 46.88Z" fill="url(#ml)"/>
+<path d="M0 55.04L40 27.84" stroke="#F2A65A" stroke-width="3" stroke-linecap="round"/></g>
 </svg>

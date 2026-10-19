@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SmartFilm Danmark · Brandguide 2.0</title>
+<link rel="icon" href="logo/svg/smartfilm-favicon.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* One A4 landscape page per .page in print (1123 x 794 px); a scrolling
+   document on screen. Print: Chrome, "Gem som PDF", margins none, backgrounds on. */
+:root{
+  --navy:#061B30; --midnight:#07111F; --signal:#087FC5; --signal-deep:#0667A3; --cyan:#20C8F1;
+  --ice:#EAF6FC; --gold:#E6B278; --slate:#5B6B7E; --slate-lt:#9FB2C6; --white:#FFFFFF;
+  --line:rgba(6,27,48,.12); --line-dk:rgba(159,178,198,.2); --bad:#C2352B; --good:#1F8A5B;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:#C9D3DD}
+body{margin:0;font:400 15px/1.6 Inter,system-ui,sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,figure{margin:0}
+ul{padding:0;list-style:none}
+code,.mono{font:500 .82em/1.5 'JetBrains Mono',ui-monospace,monospace}
+img{display:block;max-width:100%}
+
+.page{position:relative;background:var(--white);width:100%;max-width:1123px;margin:24px auto;padding:56px 64px 72px;overflow:hidden;box-shadow:0 1px 3px rgba(6,27,48,.15)}
+.page.dark{background:var(--midnight);color:var(--white)}
+@media screen and (max-width:700px){.page{padding:32px 16px 64px;margin:0 0 8px}}
+.run{display:flex;justify-content:space-between;align-items:center;font:600 .68rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--signal-deep);margin-bottom:28px}
+.dark .run{color:var(--cyan)}
+.foot{position:absolute;left:64px;right:64px;bottom:28px;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;font:500 .64rem Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.dark .foot{border-color:var(--line-dk);color:var(--slate-lt)}
+@media screen and (max-width:700px){.foot{left:16px;right:16px}}
+h1{font:700 2.6rem/1.08 Inter,sans-serif;letter-spacing:-.03em}
+h1 + .sub{margin-top:10px;font-size:1.05rem;color:var(--slate);max-width:62ch}
+.dark h1 + .sub{color:var(--slate-lt)}
+h3{font:600 .72rem Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:10px}
+.dark h3{color:var(--slate-lt)}
+.body{margin-top:36px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media screen and (max-width:860px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.dim{color:var(--slate)} .dark .dim{color:var(--slate-lt)}
+.small{font-size:.84rem}
+.tile{border-radius:14px;display:grid;place-items:center;padding:32px}
+.tile.l{background:var(--white);border:1px solid var(--line)}
+.tile.i{background:var(--ice)}
+.tile.d{background:var(--navy)}
+.tile.m{background:var(--midnight);border:1px solid var(--line-dk)}
+.cap{margin-top:10px;font-size:.84rem;color:var(--slate)}
+.cap b{color:var(--navy);font-weight:600}
+.dark .cap{color:var(--slate-lt)} .dark .cap b{color:var(--white)}
+.rules li{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:10px 0;border-top:1px solid var(--line)}
+.dark .rules li{border-color:var(--line-dk)}
+.rules li::before{content:"";width:8px;height:8px;margin-top:8px;border-radius:2px;background:linear-gradient(135deg,var(--cyan),var(--signal))}
+.rules b{font-weight:600}
+
+/* cover */
+.cover{display:flex;flex-direction:column;justify-content:space-between;min-height:794px;background:radial-gradient(120% 90% at 20% 30%,#0B2A4A 0%,var(--midnight) 60%)}
+.cover .logo{width:min(640px,100%);margin:120px 0 0 -12px}
+.cover .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:flex-end}
+.cover .meta b{font:700 1.6rem Inter,sans-serif;letter-spacing:-.02em}
+.seam{width:64px;height:2px;background:var(--gold);margin:28px 0 14px}
+
+/* pillars */
+.pillar{padding:22px;border-radius:14px;background:var(--ice)}
+.pillar b{display:block;font:600 1.1rem Inter,sans-serif;margin-bottom:6px}
+.quote{font:600 1.7rem/1.25 Inter,sans-serif;letter-spacing:-.02em;max-width:30ch}
+.quote span{color:var(--signal-deep)}
+
+/* colour */
+.sw{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.sw i{display:block;height:60px}
+.sw div{padding:12px 14px 14px}
+.sw b{display:block;font-weight:600}
+.sw .mono{display:block;color:var(--slate)}
+.sw p{font-size:.8rem;color:var(--slate);margin-top:4px;line-height:1.45}
+.bar{display:flex;height:22px;border-radius:6px;overflow:hidden;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{text-align:left;padding:5px 10px 5px 0;border-top:1px solid var(--line);vertical-align:middle}
+th{font:600 .66rem Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.chip{display:inline-flex;align-items:center;padding:4px 10px;border-radius:6px;font-weight:600;font-size:.82rem;white-space:nowrap}
+.ok{color:var(--good);font-weight:600} .no{color:var(--bad);font-weight:600}
+
+/* type */
+.ts{display:grid;grid-template-columns:200px 1fr;gap:6px 28px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line)}
+.ts .mono{color:var(--slate);font-size:.74rem}
+@media screen and (max-width:700px){.ts{grid-template-columns:1fr}}
+
+/* don'ts */
+.dont{position:relative}
+.dont .tile{height:150px;overflow:hidden;padding:20px}
+.dont .tile img{max-height:70px}
+.dont .x{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:var(--bad);display:grid;place-items:center}
+.dont .x::before,.dont .x::after{content:"";position:absolute;width:12px;height:2px;background:#fff;transform:rotate(45deg)}
+.dont .x::after{transform:rotate(-45deg)}
+
+/* web */
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:10px;font:600 .92rem Inter,sans-serif;border:1px solid transparent}
+pre{margin:0;background:var(--midnight);color:#D3E2EE;border-radius:14px;padding:20px 22px;font:400 .76rem/1.7 'JetBrains Mono',monospace;overflow:auto}
+pre em{font-style:normal;color:var(--cyan)}
+.files li{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:.84rem}
+.files code{color:var(--signal-deep);word-break:break-all}
+
+@media print{
+  @page{size:297mm 210mm;margin:0}
+  html,body{background:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{width:1123px;height:794px;max-width:none;margin:0;box-shadow:none;break-after:page}
+  .page:last-child{break-after:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- 01 · Forside -->
+<section class="page dark cover">
+  <div>
+    <img class="logo" src="logo/svg/smartfilm-logo-primary-dark-transparent.svg" alt="SmartFilm Danmark – Intelligente glasløsninger til fremtidens bygninger">
+  </div>
+  <div class="meta">
+    <div><div class="seam"></div><b>Brandguide</b><p class="dim">Logo · farver · typografi · digitale formater · anvendelse</p></div>
+    <p class="dim small">Version 2.0 · Oktober 2026<br>Erstatter version 1.0</p>
+  </div>
+</section>
+
+<!-- 02 · Brandet -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>01 Brandet</span></div>
+  <h1>Et brand for intelligent glas</h1>
+  <p class="sub">Positionering, principper og den tone, alt vi skriver, skal holde.</p>
+  <div class="body grid g2" style="gap:48px">
+    <div>
+      <p class="quote">Global teknologi. <span>Intelligente løsninger.</span></p>
+      <p style="margin-top:20px;max-width:52ch">SmartFilm Danmark udvælger og bringer innovative internationale glas- og displayteknologier til danske virksomheder. Vi forener transparent LED-film, intelligent glas og digital kommunikation i komplette erhvervsløsninger.</p>
+      <div class="grid g3" style="margin-top:28px;gap:12px">
+        <div class="pillar"><b>Innovation</b><span class="small dim">Teknologisk nysgerrighed og internationalt udsyn.</span></div>
+        <div class="pillar"><b>Præcision</b><span class="small dim">Faglighed, kvalitet og ansvarlig teknisk rådgivning.</span></div>
+        <div class="pillar"><b>Helhed</b><span class="small dim">Fra idé og installation til visuelt indhold.</span></div>
+      </div>
+    </div>
+    <div>
+      <h3>Sådan lyder vi</h3>
+      <ul class="rules">
+        <li><span><b>Konkret før smukt.</b> En arkitekt skal kunne finde svaret fra databladet i én læsning.</span></li>
+        <li><span><b>Korte, sikre sætninger.</b> „Tre skridt. Butikken holder åbent.“</span></li>
+        <li><span><b>Tal står aldrig alene.</b> Skriv betingelsen ved siden af: transparens, afstand, lysforhold.</span></li>
+        <li><span><b>Vi viser frem for at love.</b> Ingen superlativer, ingen „revolutionerende“.</span></li>
+        <li><span><b>Kun det, vi kan dokumentere.</b> Ingen opdigtede kunder, logoer, certificeringer, brandklasser eller specifikationer.</span></li>
+        <li><span><b>Dansk er kildesproget.</b> Engelsk oversættes linje for linje, ikke omskrevet.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>02</span></div>
+</section>
+
+<!-- 03 · Logo -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>02 Logo</span></div>
+  <h1>Logoet</h1>
+  <p class="sub">Symbolet er to ruder, der mødes på én diagonal og tilsammen danner et S. Fugen imellem er en tynd stribe varmt lys – glasset, der tændes.</p>
+  <div class="body grid g2">
+    <figure><div class="tile l" style="height:250px"><img src="logo/svg/smartfilm-logo-primary-light.svg" alt="" style="width:88%"></div>
+      <figcaption class="cap"><b>Primært logo.</b> Symbol, SMARTFILM, DANMARK og slogan. Til forsider, skilte, facader og præsentationer.</figcaption></figure>
+    <figure><div class="tile m" style="height:250px"><img src="logo/svg/smartfilm-logo-primary-dark-transparent.svg" alt="" style="width:88%"></div>
+      <figcaption class="cap"><b>Primært logo, mørk.</b> Samme opbygning med hvid tekst. Foretrukken version.</figcaption></figure>
+    <figure><div class="tile l" style="height:120px"><img src="logo/svg/smartfilm-logo-light.svg" alt="" style="height:56px"></div>
+      <figcaption class="cap"><b>Sekundært logo.</b> Uden slogan. Til website-header, e-mailsignatur, dokumenter og alt under 180 px bredde.</figcaption></figure>
+    <figure><div class="tile d" style="height:120px"><img src="logo/svg/smartfilm-logo-dark.svg" alt="" style="height:56px"></div>
+      <figcaption class="cap"><b>Sekundært logo, mørk.</b> Symbolet og FILM bevarer de blå farver på både lys og mørk bund.</figcaption></figure>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>03</span></div>
+</section>
+
+<!-- 04 · Konstruktion og frizone -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>02 Logo</span></div>
+  <h1>Konstruktion, frizone og mindstestørrelse</h1>
+  <p class="sub">Symbolet er tegnet efter faste mål, så det kan genskabes præcist. Det tegnes aldrig om i hånden.</p>
+  <div class="body grid g3" style="gap:36px">
+    <figure>
+      <div class="tile i" style="height:330px">
+        <svg viewBox="-14 -8 68 100" style="height:290px" aria-label="Symbolets konstruktion">
+          <g stroke="#9FB2C6" stroke-width=".3" stroke-dasharray="1 1">
+            <path d="M0 -6V90M12 -6V90M28 -6V90M40 -6V90"/>
+            <path d="M-12 63.2L52 19.68"/>
+          </g>
+          <path d="M28 0L14.06 9.48C5.34 15.41 0 25.5 0 36.04L0 55.04L28 36Z" fill="#20C8F1" fill-opacity=".35" stroke="#087FC5" stroke-width=".5"/>
+          <path d="M12 82.88L25.94 73.4C34.66 67.47 40 57.38 40 46.84L40 27.84L12 46.88Z" fill="#087FC5" fill-opacity=".35" stroke="#087FC5" stroke-width=".5"/>
+          <path d="M0 55.04L40 27.84" stroke="#E6B278" stroke-width="1.2"/>
+          <circle cx="20" cy="41.44" r="1.2" fill="#061B30"/>
+          <g font-family="Inter,sans-serif" font-size="3.4" fill="#061B30">
+            <text x="20" y="-1.5" text-anchor="middle">28 + 12 = 40</text>
+            <text x="44" y="22">34°</text>
+            <text x="23" y="45">centrum</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption class="cap"><b>To ens ruder.</b> Den nederste er den øverste drejet 180° om centrum. Begge er 28 enheder brede, forskudt 12. Fugen hælder 34° (stigning 0,68), og de to bløde hjørner har samme radius.</figcaption>
+    </figure>
+    <figure>
+      <div class="tile l" style="height:330px;padding:0">
+        <div style="position:relative;outline:1.5px dashed #20C8F1;outline-offset:0;padding:28px">
+          <img src="logo/svg/smartfilm-logo-light.svg" alt="" style="height:64px">
+          <span style="position:absolute;left:0;top:0;width:28px;height:28px;background:rgba(32,200,241,.18)"></span>
+        </div>
+      </div>
+      <figcaption class="cap"><b>Frizone.</b> Hold mindst højden af et versal i SMARTFILM fri på alle sider (det blå felt). Intet andet – tekst, kant, billede – må komme ind i zonen.</figcaption>
+    </figure>
+    <div>
+      <h3>Mindstestørrelse</h3>
+      <table>
+        <tr><th>Version</th><th>Skærm</th><th>Tryk</th></tr>
+        <tr><td>Primært logo</td><td>180 px bredt</td><td>50 mm</td></tr>
+        <tr><td>Sekundært logo</td><td>120 px bredt</td><td>30 mm</td></tr>
+        <tr><td>Symbol, glas</td><td>64 px højt</td><td>20 mm</td></tr>
+        <tr><td>Symbol, fladt</td><td>16 px højt</td><td>5 mm</td></tr>
+      </table>
+      <p class="small dim" style="margin-top:16px">Under mindstestørrelsen går man ét trin ned: fra primært til sekundært logo, fra logo til symbol, fra glas- til fladt symbol.</p>
+      <h3 style="margin-top:24px">Ordmærket</h3>
+      <p class="small">SMARTFILM er sat i Montserrat Bold med et åbent A uden tværstreg og er konverteret til kurver. Det må aldrig sættes som almindelig tekst eller i en anden skrift.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>04</span></div>
+</section>
+
+<!-- 05 · Versioner -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>02 Logo</span></div>
+  <h1>Symbolets fire udgaver</h1>
+  <p class="sub">Det glødende glassymbol er mesteren, men det er bygget til store flader. Jo mindre eller enklere mediet er, desto enklere udgave.</p>
+  <div class="body grid g4">
+    <figure><div class="tile m" style="height:260px"><img src="logo/svg/smartfilm-mark-glass-dark.svg" alt="" style="height:210px"></div>
+      <figcaption class="cap"><b>Glas.</b> Gennemsigtige ruder med lys i fugen. Til forsider, video, facader og skilte. Fra 64 px.</figcaption></figure>
+    <figure><div class="tile l" style="height:260px"><img src="logo/svg/smartfilm-mark-flat.svg" alt="" style="height:210px"></div>
+      <figcaption class="cap"><b>Fladt.</b> To blå flader og en guldfuge. Standard på web, i apps og under 64 px. Virker på lys og mørk bund.</figcaption></figure>
+    <figure><div class="tile i" style="height:260px"><img src="logo/svg/smartfilm-mark-mono-navy.svg" alt="" style="height:210px"></div>
+      <figcaption class="cap"><b>Mono, navy.</b> Én farve, fugen er et snit. Til stempel, gravering, folie og fax-agtigt tryk.</figcaption></figure>
+    <figure><div class="tile d" style="height:260px"><img src="logo/svg/smartfilm-mark-mono-white.svg" alt="" style="height:210px"></div>
+      <figcaption class="cap"><b>Mono, hvid.</b> Til mørke fotos, sandblæst glas, lasergravering og prægning.</figcaption></figure>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>05</span></div>
+</section>
+
+<!-- 06 · Forkert brug -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>02 Logo</span></div>
+  <h1>Forkert brug</h1>
+  <p class="sub">Logoet må kun bruges fra de leverede filer. Disse ændringer svækker genkendelsen og er ikke tilladt.</p>
+  <div class="body grid g4">
+    <figure class="dont"><div class="tile l"><img src="logo/svg/smartfilm-logo-light.svg" alt="" style="transform:scaleX(1.45)"></div><span class="x"></span><figcaption class="cap">Stræk eller pres ikke logoet.</figcaption></figure>
+    <figure class="dont"><div class="tile l"><img src="logo/svg/smartfilm-logo-light.svg" alt="" style="transform:rotate(-12deg)"></div><span class="x"></span><figcaption class="cap">Drej ikke logoet.</figcaption></figure>
+    <figure class="dont"><div class="tile l"><img src="logo/svg/smartfilm-logo-light.svg" alt="" style="filter:hue-rotate(150deg) saturate(1.6)"></div><span class="x"></span><figcaption class="cap">Skift ikke farverne.</figcaption></figure>
+    <figure class="dont"><div class="tile l"><span style="font:700 2rem Inter,sans-serif;letter-spacing:-.02em;color:#061B30">SmartFilm</span></div><span class="x"></span><figcaption class="cap">Sæt ikke navnet som tekst i stedet for ordmærket.</figcaption></figure>
+    <figure class="dont"><div class="tile i"><img src="logo/svg/smartfilm-logo-dark.svg" alt=""></div><span class="x"></span><figcaption class="cap">Brug ikke den hvide version på lys bund (og omvendt).</figcaption></figure>
+    <figure class="dont"><div class="tile" style="background:url(preview/hero-static.jpg) center/cover"><img src="logo/svg/smartfilm-logo-light.svg" alt=""></div><span class="x"></span><figcaption class="cap">Placér ikke logoet på uroligt foto uden mørk eller lys flade bag.</figcaption></figure>
+    <figure class="dont"><div class="tile l"><img src="logo/svg/smartfilm-logo-light.svg" alt="" style="filter:drop-shadow(4px 6px 3px rgba(0,0,0,.55))"></div><span class="x"></span><figcaption class="cap">Tilføj ikke skygge, kontur, glød eller 3D-effekter.</figcaption></figure>
+    <figure class="dont"><div class="tile d" style="gap:10px;grid-auto-flow:column"><img src="logo/svg/smartfilm-mark-glass-dark.svg" alt="" style="height:22px"><span class="small" style="color:#9FB2C6">22 px</span></div><span class="x"></span><figcaption class="cap">Brug ikke glassymbolet eller appikonet under 48 px – brug det flade symbol eller det forenklede favicon.</figcaption></figure>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>06</span></div>
+</section>
+
+<!-- 07 · Farver -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>03 Farver</span></div>
+  <h1>Farvesystem</h1>
+  <p class="sub">Seks brandfarver fra version 1.0, plus tre arbejdsfarver, der får tekst og knapper til at leve op til tilgængelighedskravene.</p>
+  <div class="body grid g4" style="gap:14px">
+    <div class="sw"><i style="background:#061B30"></i><div><b>Deep Navy</b><span class="mono">#061B30 · RGB 6 27 48</span><p>Primær mørk bund, tekst på lys bund.</p></div></div>
+    <div class="sw"><i style="background:#07111F"></i><div><b>Midnight</b><span class="mono">#07111F · RGB 7 17 31</span><p>Dybeste bund: forsider, hero, video.</p></div></div>
+    <div class="sw"><i style="background:#087FC5"></i><div><b>Signal Blue</b><span class="mono">#087FC5 · RGB 8 127 197</span><p>Symbol, ordmærke, grafik og stor tekst.</p></div></div>
+    <div class="sw"><i style="background:#20C8F1"></i><div><b>Electric Cyan</b><span class="mono">#20C8F1 · RGB 32 200 241</span><p>Accent, links og knapper på mørk bund.</p></div></div>
+    <div class="sw"><i style="background:#EAF6FC"></i><div><b>Ice White</b><span class="mono">#EAF6FC · RGB 234 246 252</span><p>Lyse flader og sektioner.</p></div></div>
+    <div class="sw"><i style="background:#E6B278"></i><div><b>Warm Gold</b><span class="mono">#E6B278 · RGB 230 178 120</span><p>Kun fugen i symbolet og tynde linjer.</p></div></div>
+    <div class="sw"><i style="background:#0667A3"></i><div><b>Signal Deep</b> <span class="small" style="color:var(--signal-deep);font-weight:600">ny</span><span class="mono">#0667A3 · RGB 6 103 163</span><p>Links og knapper på lys bund (6,0:1).</p></div></div>
+    <div class="sw"><i style="background:linear-gradient(90deg,#5B6B7E 50%,#9FB2C6 50%)"></i><div><b>Slate / Slate Light</b> <span class="small" style="color:var(--signal-deep);font-weight:600">ny</span><span class="mono">#5B6B7E · #9FB2C6</span><p>Sekundær tekst på lys / mørk bund.</p></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:22px;gap:36px">
+    <div>
+      <h3>Fordeling</h3>
+      <div class="bar"><i style="flex:60;background:#061B30"></i><i style="flex:28;background:#EAF6FC;border-block:1px solid var(--line)"></i><i style="flex:10;background:linear-gradient(90deg,#087FC5,#20C8F1)"></i><i style="flex:2;background:#E6B278"></i></div>
+      <p class="small dim" style="margin-top:8px">Cirka 60 % navy, 28 % hvid og ice, 10 % blå og cyan, højst 2 % guld. Guld er aldrig en flade, knap eller tekst.</p>
+    </div>
+    <div>
+      <h3>Gradient</h3>
+      <div class="bar" style="background:linear-gradient(90deg,#087FC5,#20C8F1)"></div>
+      <p class="small dim" style="margin-top:8px">Signal Blue → Electric Cyan, venstre mod højre. Bruges i ordmærkets FILM og i symbolet – sparsomt andre steder, aldrig bag brødtekst.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>07</span></div>
+</section>
+
+<!-- 08 · Kontrast -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>03 Farver</span></div>
+  <h1>Kontrast og tilgængelighed</h1>
+  <p class="sub">Målt efter WCAG 2.2. Brødtekst kræver mindst 4,5:1 (AA), stor tekst over 24 px eller 19 px fed mindst 3:1.</p>
+  <div class="body grid g2" style="gap:40px">
+    <table>
+      <tr><th>Kombination</th><th>Eksempel</th><th>Kontrast</th><th>Brug</th></tr>
+      <tr><td>Navy på hvid</td><td><span class="chip" style="background:#fff;color:#061B30;border:1px solid var(--line)">Aa tekst</span></td><td>17,4:1</td><td class="ok">Al tekst</td></tr>
+      <tr><td>Hvid på Midnight</td><td><span class="chip" style="background:#07111F;color:#fff">Aa tekst</span></td><td>18,9:1</td><td class="ok">Al tekst</td></tr>
+      <tr><td>Cyan på Navy</td><td><span class="chip" style="background:#061B30;color:#20C8F1">Aa link</span></td><td>8,8:1</td><td class="ok">Links, accenter</td></tr>
+      <tr><td>Midnight på Cyan</td><td><span class="chip" style="background:#20C8F1;color:#07111F">Få et tilbud</span></td><td>9,6:1</td><td class="ok">Knap på mørk</td></tr>
+      <tr><td>Hvid på Signal Deep</td><td><span class="chip" style="background:#0667A3;color:#fff">Få et tilbud</span></td><td>6,0:1</td><td class="ok">Knap på lys</td></tr>
+      <tr><td>Slate på hvid</td><td><span class="chip" style="background:#fff;color:#5B6B7E;border:1px solid var(--line)">Aa tekst</span></td><td>5,5:1</td><td class="ok">Sekundær tekst</td></tr>
+      <tr><td>Slate Light på Navy</td><td><span class="chip" style="background:#061B30;color:#9FB2C6">Aa tekst</span></td><td>8,0:1</td><td class="ok">Sekundær tekst</td></tr>
+      <tr><td>Hvid på Signal Blue</td><td><span class="chip" style="background:#087FC5;color:#fff">Aa tekst</span></td><td>4,3:1</td><td>Kun stor tekst</td></tr>
+      <tr><td>Signal Blue på Navy</td><td><span class="chip" style="background:#061B30;color:#087FC5">Aa tekst</span></td><td>4,0:1</td><td>Kun grafik</td></tr>
+      <tr><td>Cyan på hvid</td><td><span class="chip" style="background:#fff;color:#20C8F1;border:1px solid var(--line)">Aa tekst</span></td><td>2,0:1</td><td class="no">Aldrig tekst</td></tr>
+      <tr><td>Guld på hvid</td><td><span class="chip" style="background:#fff;color:#E6B278;border:1px solid var(--line)">Aa tekst</span></td><td>1,9:1</td><td class="no">Aldrig tekst</td></tr>
+    </table>
+    <div>
+      <h3>Hvad der er ændret siden 1.0</h3>
+      <ul class="rules">
+        <li><span><b>Signal Blue klarer ikke brødtekst.</b> Med 4,3:1 mod hvid ligger den lige under kravet. Den bliver i symbolet og ordmærket; links og knapper på lys bund får <b>Signal Deep #0667A3</b>.</span></li>
+        <li><span><b>På mørk bund er Cyan handlingsfarven.</b> Primærknappen er Cyan med Midnight-tekst.</span></li>
+        <li><span><b>To gråtoner til sekundær tekst</b>, så ingen farver blandes ad hoc med gennemsigtighed.</span></li>
+        <li><span><b>Fokus</b> vises altid som 2 px ring i Cyan (mørk bund) eller Signal Deep (lys bund) med 3 px afstand.</span></li>
+      </ul>
+      <h3 style="margin-top:22px">Tryk</h3>
+      <p class="small dim">Tryk- og foliefarver (CMYK, Pantone) skal afstemmes med trykkeriet på prøvetryk, før de fastlægges. Skærmværdierne her er udgangspunktet.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>08</span></div>
+</section>
+
+<!-- 09 · Typografi -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>04 Typografi</span></div>
+  <h1>Typografi</h1>
+  <p class="sub">Inter er husets skrift på alle digitale og trykte flader. Den er gratis (SIL Open Font License) og findes på Google Fonts.</p>
+  <div class="body" style="margin-top:24px">
+    <div class="ts"><span class="mono">Display · 700 · 56–72 / 1,03<br>spatiering −3,5 %</span><span style="font:700 56px/1.03 Inter,sans-serif;letter-spacing:-.035em">Usynlig. Indtil den tændes.</span></div>
+    <div class="ts"><span class="mono">Overskrift 1 · 700 · 44/48<br>spatiering −3 %</span><span style="font:700 44px/1.1 Inter,sans-serif;letter-spacing:-.03em">To slags film til glas.</span></div>
+    <div class="ts"><span class="mono">Overskrift 2 · 600 · 24/30<br>spatiering −1,5 %</span><span style="font:600 24px/1.25 Inter,sans-serif;letter-spacing:-.015em">Ruden bliver mat. På en kontakt.</span></div>
+    <div class="ts"><span class="mono">Brødtekst · 400 · 17/28</span><span style="font:400 17px/1.65 Inter,sans-serif;max-width:62ch">Et lag film lamineret ind i ruden. Strøm på, og glasset er klart; strøm af, og det er mat. Filmen sættes på indefra, og facaden ændres ikke.</span></div>
+    <div class="ts"><span class="mono">Etiket · 600 · 12<br>versaler, spatiering +16 %</span><span style="font:600 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#0667A3">Transparent LED-film · Visualisering</span></div>
+  </div>
+  <div class="grid g3" style="margin-top:22px">
+    <p class="small"><b>Tre vægte.</b> Regular 400 til tekst, SemiBold 600 til mellemoverskrifter og knapper, Bold 700 til store overskrifter.</p>
+    <p class="small"><b>Sætning, ikke versaler.</b> Overskrifter skrives med stort begyndelsesbogstav. Versaler kun i korte etiketter.</p>
+    <p class="small"><b>Erstatning.</b> Hvor Inter ikke kan installeres: Arial eller systemets sans-serif. Montserrat bruges kun inde i logoet.</p>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>09</span></div>
+</section>
+
+<!-- 10 · Ikoner -->
+<section class="page dark">
+  <div class="run"><span>SmartFilm / Danmark</span><span>05 Digitale formater</span></div>
+  <h1>Ikon, favicon og profilbillede</h1>
+  <p class="sub">Appikonet fra version 1.0 – det glødende glassymbol på en mørk, afrundet flade – bruges fra 48 px og op. Under 48 px bliver gløden til støj, så faneblad og bogmærker får en forenklet udgave.</p>
+  <div class="body grid g4" style="align-items:end">
+    <figure><img src="logo/png/appicon-1024.png" alt="" style="width:100%;border-radius:22%"><figcaption class="cap"><b>App-ikon 1024 px.</b> Fuld firkant – App Store og Android runder selv hjørnerne.</figcaption></figure>
+    <figure><img src="logo/png/icon-512.png" alt="" style="width:100%"><figcaption class="cap"><b>Ikon med gennemsigtige hjørner.</b> Til web, præsentationer og alle steder, hvor platformen ikke selv runder.</figcaption></figure>
+    <figure><img src="logo/png/social-profile-400.png" alt="" style="width:62%;border-radius:50%"><figcaption class="cap"><b>Profilbillede 400 px.</b> LinkedIn, Facebook, Instagram. Symbolet står frit af den runde beskæring.</figcaption></figure>
+    <figure>
+      <div style="display:flex;align-items:flex-end;gap:16px"><img src="logo/svg/smartfilm-favicon.svg" alt="" style="width:96px"><img src="logo/png/favicon-48.png" alt="" style="width:48px"><img src="logo/png/favicon-32.png" alt="" style="width:32px"><img src="logo/png/favicon-16.png" alt="" style="width:16px"></div>
+      <figcaption class="cap"><b>Favicon, forenklet.</b> Samme plade, ruder og guldfuge – uden glød, facetter og fine linjer. Til 16, 32 og 48 px: <code>favicon.ico</code> og <code>smartfilm-favicon.svg</code>.</figcaption></figure>
+  </div>
+  <p class="small dim" style="margin-top:28px;max-width:80ch"><b style="color:#fff">Reglen:</b> 48 px og op → appikonet. Under 48 px → det forenklede favicon. Appikonet er den oprindelige billedfil (1254 px). Den kan ikke skaleres op over 1024 px uden tab; skal den bruges større – fx på facade eller bil – bruges glassymbolet som vektor (<code>smartfilm-mark-glass-dark.svg</code>) på en Midnight-flade.</p>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>10</span></div>
+</section>
+
+<!-- 11 · Web -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>05 Digitale formater</span></div>
+  <h1>Website og designtokens</h1>
+  <p class="sub">Grundværdierne til webbureauet. Mørk navy er hovedtemaet; Ice White er den lyse sektion.</p>
+  <div class="body grid g2" style="gap:36px">
+    <div>
+      <h3>Knapper</h3>
+      <div class="tile m" style="justify-content:start;display:flex;gap:12px;padding:22px;flex-wrap:wrap">
+        <span class="btn" style="background:#20C8F1;color:#07111F">Få et tilbud</span>
+        <span class="btn" style="color:#fff;border-color:rgba(234,246,252,.32)">Se produkterne</span>
+        <span class="btn" style="background:#20C8F1;color:#07111F;outline:2px solid #20C8F1;outline-offset:3px">Fokus</span>
+      </div>
+      <div class="tile i" style="justify-content:start;display:flex;gap:12px;padding:22px;margin-top:12px;flex-wrap:wrap">
+        <span class="btn" style="background:#0667A3;color:#fff">Få et tilbud</span>
+        <span class="btn" style="color:#061B30;border-color:rgba(6,27,48,.25)">Se produkterne</span>
+        <span class="btn" style="background:#0667A3;color:#fff;outline:2px solid #0667A3;outline-offset:3px">Fokus</span>
+      </div>
+      <ul class="rules" style="margin-top:18px">
+        <li><span><b>Én primærknap pr. skærm.</b> Den anden handling er en kantknap.</span></li>
+        <li><span><b>Hjørner:</b> 10 px på knapper og felter, 16–18 px på kort, 22 % på app-ikonet.</span></li>
+        <li><span><b>Afstande</b> på et 8 px-net: 8, 16, 24, 32, 48, 64, 96, 128.</span></li>
+        <li><span><b>Bevægelse:</b> farveskift 250 ms, tryk skalerer til 97 %. Intet bevæger sig, når brugeren har slået reduceret bevægelse til.</span></li>
+      </ul>
+    </div>
+    <pre><em>:root</em> {
+  --sf-navy:        #061B30;
+  --sf-midnight:    #07111F;
+  --sf-signal:      #087FC5; <span style="color:#9FB2C6">/* grafik, stor tekst */</span>
+  --sf-signal-deep: #0667A3; <span style="color:#9FB2C6">/* links, knapper på lys */</span>
+  --sf-cyan:        #20C8F1; <span style="color:#9FB2C6">/* links, knapper på mørk */</span>
+  --sf-ice:         #EAF6FC;
+  --sf-gold:        #E6B278; <span style="color:#9FB2C6">/* kun linjer */</span>
+  --sf-slate:       #5B6B7E;
+  --sf-slate-light: #9FB2C6;
+  --sf-gradient: linear-gradient(90deg,
+                   #087FC5, #20C8F1);
+
+  --sf-font: Inter, Arial, sans-serif;
+  --sf-radius: 10px;
+  --sf-radius-card: 18px;
+  --sf-ease: cubic-bezier(.16, 1, .3, 1);
+}</pre>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>11</span></div>
+</section>
+
+<!-- 12 · Billeder -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>06 Billeder</span></div>
+  <h1>Foto og video</h1>
+  <p class="sub">Produktet findes først for alvor, når glasset er tændt. Billederne viser derfor arkitektur i skumring og glas i brug.</p>
+  <div class="body grid g3" style="gap:20px">
+    <figure><img src="preview/hero-static.jpg" alt="" style="border-radius:14px;aspect-ratio:4/3;object-fit:cover;width:100%"><figcaption class="cap"><b>Facader i skumring.</b> Mørk himmel, tændt glas, mennesker i skala. Ingen tredjeparts butiksskilte eller logoer i billedet.</figcaption></figure>
+    <figure><div style="display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;aspect-ratio:4/3"><img src="preview/sf-mat.jpg" alt="" style="height:100%;object-fit:cover"><img src="preview/sf-klar.jpg" alt="" style="height:100%;object-fit:cover"></div><figcaption class="cap"><b>Før og efter, samme rum.</b> Smart Film vises altid som et par: mat og klar fra samme vinkel.</figcaption></figure>
+    <div>
+      <h3>Regler</h3>
+      <ul class="rules">
+        <li><span><b>Visualiseringer mærkes „Visualisering“</b> – altid, også på sociale medier.</span></li>
+        <li><span><b>Rigtige kundeprojekter</b> erstatter visualiseringer, så snart der er tilladelse.</span></li>
+        <li><span><b>Logoet på foto</b> står på en rolig, mørk del af billedet eller på en navy flade.</span></li>
+        <li><span><b>Video</b> starter mørkt og tænder glasset – aldrig omvendt.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>12</span></div>
+</section>
+
+<!-- 13 · Filer -->
+<section class="page">
+  <div class="run"><span>SmartFilm / Danmark</span><span>07 Filer</span></div>
+  <h1>Leverede filer</h1>
+  <p class="sub">Alle logoer er vektorer (SVG) tegnet efter konstruktionen på side 04, og logo-PNG’erne er gennemsigtige og 2400 px brede. Appikonerne er skåret fra det oprindelige appikon; faviconet er en forenklet vektor.</p>
+  <div class="body grid g2" style="gap:36px">
+    <ul class="files">
+      <li><code>svg/smartfilm-logo-primary-light.svg</code><span>Primært logo, lys bund</span></li>
+      <li><code>svg/smartfilm-logo-primary-dark-transparent.svg</code><span>Primært logo, mørk bund</span></li>
+      <li><code>svg/smartfilm-logo-primary-dark.svg</code><span>Primært logo på Midnight-flade</span></li>
+      <li><code>svg/smartfilm-logo-light.svg</code><span>Sekundært logo, lys bund</span></li>
+      <li><code>svg/smartfilm-logo-dark.svg</code><span>Sekundært logo, mørk bund</span></li>
+      <li><code>svg/smartfilm-logo-mono-navy.svg</code><span>Én farve, navy</span></li>
+      <li><code>svg/smartfilm-logo-mono-white.svg</code><span>Én farve, hvid</span></li>
+      <li><code>svg/smartfilm-mark-glass-dark.svg</code><span>Symbol, glas, mørk bund</span></li>
+      <li><code>svg/smartfilm-mark-glass-light.svg</code><span>Symbol, glas, lys bund</span></li>
+      <li><code>svg/smartfilm-mark-flat.svg</code><span>Symbol, fladt</span></li>
+      <li><span><code>svg/smartfilm-mark-mono-navy.svg</code><br><code>svg/smartfilm-mark-mono-white.svg</code></span><span>Symbol, én farve</span></li>
+    </ul>
+    <div>
+      <ul class="files">
+        <li><code>png/appicon-1024.png</code><span>App-ikon, fuld firkant</span></li>
+        <li><span><code>png/icon-1024.png</code> · <code>-512</code> · <code>-192</code></span><span>Appikon, gennemsigtige hjørner</span></li>
+        <li><span><code>svg/smartfilm-favicon.svg</code><br><code>png/favicon.ico</code> · <code>favicon-16/32/48.png</code></span><span>Forenklet favicon, under 48 px</span></li>
+        <li><code>png/apple-icon-180.png</code><span>iPhone-hjemmeskærm</span></li>
+        <li><code>png/social-profile-400.png</code><span>Profilbillede</span></li>
+        <li><code>png/logo-*-2400.png</code><span>Alle logoer som PNG</span></li>
+      </ul>
+      <h3 style="margin-top:24px">Stadig udestående</h3>
+      <ul class="rules">
+        <li><span>CMYK- og Pantone-værdier afstemt med trykkeriet.</span></li>
+        <li><span>Skabeloner til LinkedIn, tilbud og præsentationer.</span></li>
+        <li><span>Fotos fra rigtige installationer.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Brandguide 2.0 · Oktober 2026</span><span>13</span></div>
+</section>
+
+</body>
+</html>
