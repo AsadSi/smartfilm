@@ -14,7 +14,12 @@ import { useT } from './lang';
  * ring — went with it. What is left is a poster that hands over to a looping
  * video, which is all the markup ever actually used.
  *
- * It plays on phones too — it is four seconds and 2 MB, muted and inline, and
+ * The footage is brand/hero-video, a HyperFrames edit: the facade with its
+ * film off, a sweep that switches it on, two scenes of lit glass, then smart
+ * film going matte, looping back to the dark facade. It carries no words, so
+ * it serves Danish and English alike; the headline is page text over it.
+ *
+ * It plays on phones too — it is eleven seconds and 2 MB, muted and inline, and
  * a phone is where most of this page is read. Only someone who asked for less
  * motion or for less data gets the still; the file is then never fetched.
  * (iOS in Low Power Mode refuses autoplay on its own, and the poster stays.)
@@ -68,13 +73,11 @@ export function Hero() {
         <div className="scrim" aria-hidden="true" />
         <div className="vignette" aria-hidden="true" />
 
-        {/* No overlay headline: this footage carries its own in every frame,
-            so the page adds one action and gets out of the way. */}
+        {/* The headline, the strap and the one action, in the dark strip at
+            the bottom. Hidden with the rest of .hero-cta wherever the stacked
+            hero, and its own h1, takes over. */}
         <div className="hero-cta">
-          {/* The footage carries the headline in its frames; this is the same
-              line for search engines and screen readers. Hidden with the rest
-              of .hero-cta wherever the stacked hero, and its own h1, takes over. */}
-          <h1 className="sr">{HERO.headline}</h1>
+          <BlurText key={HERO.headline} text={HERO.headline} />
           <p>{HERO.strap}</p>
           <a className="btn btn-primary" href="#tilbud">{HERO.cta}</a>
         </div>

@@ -294,8 +294,8 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
 .scrim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 120% 92% at 46% 46%,rgba(6,7,14,0) 30%,rgba(6,7,14,.66) 100%)}
 .vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(7,9,16,.72) 0%,transparent 22%,transparent 76%,rgba(7,9,16,.88) 100%)}
 
-/* The persistent hero CTA. The footage carries its own headline, so the page
-   adds one clickable action in the dark strip at the bottom and nothing else. */
+/* The persistent hero CTA: headline, strap and one clickable action in the
+   dark strip at the bottom. The footage has no words of its own. */
 .hero-cta{
   position:absolute;left:0;right:0;bottom:0;z-index:4;
   display:flex;flex-direction:column;align-items:center;gap:var(--s3);
@@ -306,6 +306,10 @@ h3{font-size:clamp(1.15rem,1.9vw,1.45rem);letter-spacing:.05em}
 .hero-cta p{
   font-family:var(--mono);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
   color:rgba(237,241,248,.82);text-align:center;text-shadow:var(--tshadow);
+}
+.hero-cta h1{
+  font-size:clamp(2.8rem,5.2vw,5.4rem);line-height:.98;max-width:20ch;
+  color:#EDF1F8;text-align:center;text-shadow:var(--tshadow);
 }
 .hero-cta .btn{pointer-events:auto}
 @media (min-width:820px){ .hero-cta{padding-inline:48px} }
@@ -975,9 +979,8 @@ hr.edge{width:52px;margin-block:var(--s3)}
     padding-block:calc(var(--nav-h) + 40px) 108px;
     text-shadow:var(--tshadow);
   }
-  /* Dark at BOTH ends: the bottom carries the text, and the top damps the
-     "SMARTFILM DANMARK" title baked into the footage, which would otherwise
-     sit right under the header wordmark and say the brand name twice. */
+  /* Dark at BOTH ends: the bottom carries the text, and the top keeps the
+     header's logo and menu legible over the brightest part of the footage. */
   .static-hero::before{
     content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(to top,
