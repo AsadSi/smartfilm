@@ -12,10 +12,9 @@ const LINKS = [...DA.NAV_LEFT, ...DA.NAV_RIGHT];
 
 /**
  * The logo sits in the middle with the menu parted around it, two items
- * either side. It crosses two grounds — the dark hero, then paper — so its
- * words carry no colour of their own: white over the footage, ink the moment
- * the page starts scrolling. The mark and FILM are the brand blues, which
- * read on both.
+ * either side. It crosses two grounds — the dark hero, then paper — so it is
+ * two pictures (Logo.tsx): white lettering over the footage, navy the moment
+ * the page starts scrolling.
  *
  * Under 1080 the parted menu has no room, so the left column becomes a Menu
  * button that drops the full list under the header, and on a phone the right
@@ -157,7 +156,7 @@ export function Header() {
         </div>
 
         <a className="brand" href="#top" aria-label={SITE.full}>
-          <Logo />
+          <Logo priority />
         </a>
 
         {/* The button cannot live inside .nav: the nav is display:none below

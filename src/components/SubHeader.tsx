@@ -34,7 +34,7 @@ export function SubHeader({ title }: { title: string }) {
         </div>
 
         <Link className="brand" href="/" aria-label={SITE.full}>
-          <Logo />
+          <Logo priority />
         </Link>
 
         <div className="hdr-r">

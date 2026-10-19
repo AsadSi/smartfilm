@@ -5,7 +5,11 @@ SMARTFILM is the open Λ of the original artwork, made by dropping the bar.
 
 usage: python -I make_logo.py <fontsource-montserrat/files dir> <out dir>
 (needs fonttools and brotli; it writes svg/ files and site-logo.svg flat in
-<out dir>, so move them after — Logo.tsx is regenerated from site-logo.svg)
+<out dir>, so move them after)
+
+This vector redraw is the ALTERNATIVE logo. The site and the brand guide use
+the client's own artwork (cut_logo.py); of this set only smartfilm-favicon.svg
+is in use, as the favicon.
 """
 import sys
 from pathlib import Path
