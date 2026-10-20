@@ -1,19 +1,22 @@
-# Lights on: storyboard (v5)
+# Lights on: storyboard (v6)
 
-One composition, `index.html`, 14.75 s at 24 fps. v4 (2026-10-20) adds the client's two clips as
+One composition, `index.html`, 14.75 s at 24 fps. v6 (2026-10-20, Asad: drop the dark start
+and the colours appearing, keep it simple, add ad-style motion) opens on the lit facade. v4 (2026-10-20) adds the client's two clips as
 Frames 4a/4b; v5 cuts the street clip before its mockup headline and adds blur crossfades and
 a second gold sweep. v2 (2026-10-19, Asad: "add some of
 the other videos ... slightly better and immersive") adds the old site hero's two
 scenes, a brand-recoloured light leak, bloom on the lit glass and a tilt-shift.
 
-## Frame 1 — 0.0–1.2 s · status: animated
-The facade with its LED film off: facade.mp4 graded dark and colourless, vignette, slow drift.
+## Frame 1 — 0.0–3.4 s · status: animated
+The lit facade, pulling back from 1.12 to 1.0 on a speed ramp: 1x, easing to 0.45x slow motion
+from 1.4 to 2.8 s, back up to 1.2x. Bloom 0.35, vignette 0.25.
 
-## Frame 2 — 1.2–2.6 s · status: animated
-Clip-path wipe along a 12° edge with a gold beam; bloom surges to 0.7 and settles to 0.35.
+## Frame 2 — 1.3–2.8 s · status: animated
+A soft glint (a wide, faint highlight at 12°) travels the glass while the shot is slowest.
 
-## Frame 3 — 2.2–4.4 s · status: animated
-Lit facade, push-in to 1.09. Light leak (organic-light-leak-overlay, gold/cyan) 3.5–4.9 s.
+## Frame 3 — 3.5–4.4 s · status: animated
+Push through into the light leak (organic-light-leak-overlay, gold/cyan, 3.5–4.9 s): scale to
+1.16 with an 8 px motion blur.
 
 ## Frame 4a — 3.9–7.9 s · status: client footage
 Through the light leak into the client's mall clip, which dissolves into the SMARTFILM DANMARK
@@ -35,4 +38,4 @@ The clinic's film switches off: the matte still fades away in 0.7 s and the room
 Blur crossfade to glass.mp4 at 1.1x: the meeting-room glass goes clear to matte.
 
 ## Frame 7 — 13.4–14.75 s · status: animated
-The glass blurs out (0.6 s) as it crossfades to facade-first.jpg with the Frame 1 grade: the loop closes without a seam.
+The glass blurs out (0.6 s) as it crossfades to facade-first.jpg at the opening's 1.12 framing and grade: the loop closes without a seam.

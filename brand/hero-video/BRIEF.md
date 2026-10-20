@@ -11,11 +11,10 @@ language: none (no words in the picture; the headline is page text, DA/EN)
 
 ## Intent
 
-"Lights on". The facade starts with its LED film off (graded dark and
-colourless), a soft diagonal sweep switches it on with a warm line at the
-edge, the lit facade holds with a slow push-in, then the meeting-room glass
-goes clear to matte, and the piece crossfades back to the dark facade so the
-loop has no seam. Chosen because the brief was a video "not just for one
+"Lights on". Since v6 it opens on the lit facade (the dark, colourless start
+and its colour-reveal sweep were removed), runs through the client's clips and
+the two smart-film rooms, and crossfades back to the facade's first frame so
+the loop has no seam. Chosen because the brief was a video "not just for one
 language"; plan approved 2026-10-19.
 
 ## Assets
@@ -42,6 +41,9 @@ language"; plan approved 2026-10-19.
 - v4 (2026-10-20, the client asked for their two videos in the hero) inserts them after the lit
   facade, 3.9–10.5 s. Both carry words in the picture (SMARTFILM DANMARK, Danish shop-window
   copy, a "Gør dine vinduer til oplevelser" mockup); the mall shows its shop signs unblurred.
+- v6 (2026-10-20, Asad: "remove" the dark overlay before the colours show, keep it simple, add
+  ad-style animation) opens on the lit facade with a pull-back on a speed ramp, a glint across
+  the glass and a motion-blurred push into the light leak; the loop ends on the lit first frame.
 - v5 (2026-10-20, Asad: cut where the text pops up at 9 s, add smooth animation) stops the
   street clip at 1.3 s of its media, before the mockup headline, slowed to 0.7x; blur crossfades
   replace the plain ones, and the opening gold sweep returns to switch on the clinic.
@@ -56,9 +58,9 @@ ffmpeg -i "$H/hero-facade.mp4" -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420
 ffmpeg -i "$H/glass-switch.mp4" -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p -an assets/glass.mp4
 ffmpeg -i ~/Downloads/VIDEO-2026-10-19-23-33-49.mp4 -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p -an assets/client-mall.mp4
 ffmpeg -i ~/Downloads/VIDEO-2026-10-20-00-01-30.mp4 -vf "crop=648:434:0:490,scale=1920:1286:flags=lanczos,unsharp=5:5:0.5" -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p -an assets/client-street.mp4
-npx hyperframes render --quality delivery --fps 24 --output renders/hero-v5-master.mp4
-ffmpeg -i renders/hero-v5-master.mp4 -c:v libx264 -preset veryslow -crf 31 -profile:v high -pix_fmt yuv420p -movflags +faststart -an ../../public/assets/hero-scrub.mp4
+npx hyperframes render --quality delivery --fps 24 --output renders/hero-v6-master.mp4
+ffmpeg -i renders/hero-v6-master.mp4 -c:v libx264 -preset veryslow -crf 31 -profile:v high -pix_fmt yuv420p -movflags +faststart -an ../../public/assets/hero-scrub.mp4
 ```
 
-The poster (`hero-poster.webp`) is frame 0 of the master; `hero-static.jpg` is the frame
+The poster (`hero-poster.webp`) is frame 0 of the master, at 1600 px, WebP q66; `hero-static.jpg` is the frame
 at 3.3 s; `hero-ending.jpg` is that frame cropped to 1200×630.
