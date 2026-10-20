@@ -1,41 +1,33 @@
-# Lights on: storyboard (v6)
+# Lights on: storyboard (v7)
 
-One composition, `index.html`, 14.75 s at 24 fps. v6 (2026-10-20, Asad: drop the dark start
-and the colours appearing, keep it simple, add ad-style motion) opens on the lit facade. v4 (2026-10-20) adds the client's two clips as
-Frames 4a/4b; v5 cuts the street clip before its mockup headline and adds blur crossfades and
-a second gold sweep. v2 (2026-10-19, Asad: "add some of
-the other videos ... slightly better and immersive") adds the old site hero's two
-scenes, a brand-recoloured light leak, bloom on the lit glass and a tilt-shift.
+One composition, `index.html`, 14.0 s at 24 fps. v7 (2026-10-20, Asad: "try changing it up fully,
+the loop doesn't feel seamless") is a full re-cut. The loop point now sits inside one playing shot:
+the video opens on the facade at 2.0 s of its clip and closes on 0.6–2.0 s of the same clip, with
+both cameras pushing in at 0.03 scale per second and meeting at 1.08. No freeze, no fade at the
+loop. Transitions alternate between a zoom-through and the brand's gold diagonal wipe.
 
-## Frame 1 — 0.0–3.4 s · status: animated
-The lit facade, pulling back from 1.12 to 1.0 on a speed ramp: 1x, easing to 0.45x slow motion
-from 1.4 to 2.8 s, back up to 1.2x. Bloom 0.35, vignette 0.25.
+## A — 0.0–2.6 s
+The lit facade (media 2.0–4.6), constant push 1.08 → 1.146. Bloom 0.35, vignette 0.25.
 
-## Frame 2 — 1.3–2.8 s · status: animated
-A soft glint (a wide, faint highlight at 12°) travels the glass while the shot is slowest.
+## A → B — 2.2 s · zoom-through + light leak (2.0–3.4 s)
+The facade rushes to 1.4 with a 10 px blur; the mall arrives at 1.3 and settles.
 
-## Frame 3 — 3.5–4.4 s · status: animated
-Push through into the light leak (organic-light-leak-overlay, gold/cyan, 3.5–4.9 s): scale to
-1.16 with an 8 px motion blur.
+## B — 2.2–6.24 s · client footage
+The client's mall clip, dissolving into the SMARTFILM DANMARK building; slow push to 1.05.
 
-## Frame 4a — 3.9–7.9 s · status: client footage
-Through the light leak into the client's mall clip, which dissolves into the SMARTFILM DANMARK
-building at about 6.2 s. Slow push-in to 1.06.
+## B → C — 5.6 s · gold diagonal wipe
+## C — 5.6–7.45 s · client footage
+The client's street at 0.7x, media 0–1.3 s, cut before the "Gør dine vinduer til oplevelser"
+mockup appears.
 
-## Frame 4b — 7.3–9.15 s · status: client footage
-Blur crossfade (12 px, 0.7 s) to the client's street clip at 0.7x: a beauty clinic's window and
-along the storefront. Cut at 1.3 s of its media, before the "Gør dine vinduer til oplevelser"
-mockup fades in. Settle from 1.06.
+## C → D — 7.05 s · zoom-through
+## D — 7.05–10.2 s
+The clinic (Higgsfield step1 B1/B2), matte; the film switches off at 8.1 s and the room opens up.
 
-## Frame 4 — 8.45–9.55 s · status: animated
-The gold sweep from Frame 2 returns (0.7 s) and wipes in the clinic from the Higgsfield pair (step1 B1/B2, same camera), glass matte, slow pull-back.
-Replaced the old hero's mall and jellyfish in v3: cropped from 1080p they looked soft.
+## D → E — 9.6 s · gold diagonal wipe
+## E — 9.6–13.2 s
+The meeting room (glass.mp4 at 1.1x) goes clear to matte.
 
-## Frame 5 — 9.55–11.6 s · status: animated
-The clinic's film switches off: the matte still fades away in 0.7 s and the room opens up.
-
-## Frame 6 — 10.85–14.05 s · status: animated
-Blur crossfade to glass.mp4 at 1.1x: the meeting-room glass goes clear to matte.
-
-## Frame 7 — 13.4–14.75 s · status: animated
-The glass blurs out (0.6 s) as it crossfades to facade-first.jpg at the opening's 1.12 framing and grade: the loop closes without a seam.
+## E → Z — 12.6 s · gold diagonal wipe
+## Z — 12.6–14.0 s
+The facade again (media 0.6–2.0), push 1.038 → 1.08, ending one frame before the opening frame.

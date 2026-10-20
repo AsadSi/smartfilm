@@ -14,14 +14,14 @@ import { useT } from './lang';
  * ring — went with it. What is left is a poster that hands over to a looping
  * video, which is all the markup ever actually used.
  *
- * The footage is brand/hero-video, a HyperFrames edit: the lit facade on a
- * speed ramp, the client's own two clips — a mall
- * turning into the SmartFilm building, a street of lit shop windows — then
- * smart film twice — a clinic's glass clearing, a meeting room's going matte —
- * looping back to the facade. The headline is page text over it; the
+ * The footage is brand/hero-video, a HyperFrames edit: the lit facade, the
+ * client's own two clips — a mall turning into the SmartFilm building, a
+ * street of lit shop windows — then smart film twice — a clinic's glass
+ * clearing, a meeting room's going matte — and the facade again. It starts and
+ * ends inside that one facade shot, so the loop has no seam. The headline is page text over it; the
  * client's clips carry some Danish words of their own.
  *
- * It plays on phones too — it is fifteen seconds and 2.2 MB, muted and inline, and
+ * It plays on phones too — it is fourteen seconds and 2.2 MB, muted and inline, and
  * a phone is where most of this page is read. Only someone who asked for less
  * motion or for less data gets the still; the file is then never fetched.
  * (iOS in Low Power Mode refuses autoplay on its own, and the poster stays.)

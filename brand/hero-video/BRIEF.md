@@ -5,16 +5,16 @@ storyboard: no
 message: "SmartFilm glass looks like ordinary glass until it is switched on."
 destination: website hero background (smartfilmdanmark.dk), muted autoplay loop
 aspect: "16:9"
-length: 14.75s seamless loop
+length: 14s seamless loop
 language: none (no words in the picture; the headline is page text, DA/EN)
 ---
 
 ## Intent
 
-"Lights on". Since v6 it opens on the lit facade (the dark, colourless start
-and its colour-reveal sweep were removed), runs through the client's clips and
-the two smart-film rooms, and crossfades back to the facade's first frame so
-the loop has no seam. Chosen because the brief was a video "not just for one
+"Lights on". Since v7 it starts and ends inside one playing shot of the lit
+facade, so the browser's loop lands between two consecutive frames; between
+the two halves it runs through the client's clips and the two smart-film
+rooms, joined by zoom-throughs and the brand's gold diagonal wipe. Chosen because the brief was a video "not just for one
 language"; plan approved 2026-10-19.
 
 ## Assets
@@ -41,6 +41,9 @@ language"; plan approved 2026-10-19.
 - v4 (2026-10-20, the client asked for their two videos in the hero) inserts them after the lit
   facade, 3.9–10.5 s. Both carry words in the picture (SMARTFILM DANMARK, Danish shop-window
   copy, a "Gør dine vinduer til oplevelser" mockup); the mall shows its shop signs unblurred.
+- v7 (2026-10-20, Asad: "try changing it up fully, the loop doesn't feel seamless") is a full
+  re-cut: the loop point sits mid-shot (no frozen still, no fade), transitions alternate
+  zoom-through and gold wipe. See STORYBOARD.md.
 - v6 (2026-10-20, Asad: "remove" the dark overlay before the colours show, keep it simple, add
   ad-style animation) opens on the lit facade with a pull-back on a speed ramp, a glint across
   the glass and a motion-blurred push into the light leak; the loop ends on the lit first frame.
@@ -58,9 +61,9 @@ ffmpeg -i "$H/hero-facade.mp4" -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420
 ffmpeg -i "$H/glass-switch.mp4" -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p -an assets/glass.mp4
 ffmpeg -i ~/Downloads/VIDEO-2026-10-19-23-33-49.mp4 -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p -an assets/client-mall.mp4
 ffmpeg -i ~/Downloads/VIDEO-2026-10-20-00-01-30.mp4 -vf "crop=648:434:0:490,scale=1920:1286:flags=lanczos,unsharp=5:5:0.5" -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p -an assets/client-street.mp4
-npx hyperframes render --quality delivery --fps 24 --output renders/hero-v6-master.mp4
-ffmpeg -i renders/hero-v6-master.mp4 -c:v libx264 -preset veryslow -crf 31 -profile:v high -pix_fmt yuv420p -movflags +faststart -an ../../public/assets/hero-scrub.mp4
+npx hyperframes render --quality delivery --fps 24 --output renders/hero-v7-master.mp4
+ffmpeg -i renders/hero-v7-master.mp4 -c:v libx264 -preset veryslow -crf 31 -profile:v high -pix_fmt yuv420p -movflags +faststart -an ../../public/assets/hero-scrub.mp4
 ```
 
 The poster (`hero-poster.webp`) is frame 0 of the master, at 1600 px, WebP q66; `hero-static.jpg` is the frame
-at 3.3 s; `hero-ending.jpg` is that frame cropped to 1200×630.
+at 1.2 s; `hero-ending.jpg` is that frame cropped to 1200×630.
