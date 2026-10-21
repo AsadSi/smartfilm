@@ -37,7 +37,6 @@ export function Steps() {
         <Reveal className="head">
           <p className="kicker">{STEPS.kicker}</p>
           <h2>{STEPS.headline}</h2>
-          <hr className="edge" />
           <p className="lede">{STEPS.lede}</p>
         </Reveal>
 

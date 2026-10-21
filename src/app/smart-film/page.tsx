@@ -40,7 +40,6 @@ export default function Page() {
           areaServed: { '@type': 'Country', name: 'Danmark' },
         }}
       />
-      <div className="env" aria-hidden="true" />
 
       <div className="page">
         <ProductPage index={1} />

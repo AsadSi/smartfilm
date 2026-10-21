@@ -163,7 +163,7 @@ export function Header() {
             1080px and the one action in the header would go with it. */}
         <div className="hdr-r">
           <nav className="nav" aria-label={t.UI.shortcuts}>{t.NAV_RIGHT.map(item)}</nav>
-          <a className="btn btn-line" href="#tilbud">{t.UI.cta}</a>
+          <a className="btn btn-primary" href="#tilbud">{t.UI.cta}</a>
           <a className="hdr-link hdr-call" href={SITE.phoneHref}>{t.UI.call}</a>
         </div>
       </div>

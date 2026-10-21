@@ -23,7 +23,6 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <div className="env" aria-hidden="true" />
 
       <div className="page">
         <Privacy />

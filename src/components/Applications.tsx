@@ -28,7 +28,6 @@ export function Applications() {
         <Reveal className="head">
           <p className="kicker">{REFS.kicker}</p>
           <h2>{REFS.headline}</h2>
-          <hr className="edge" />
           <p className="lede">{REFS.lede}</p>
         </Reveal>
       </div>

@@ -108,7 +108,6 @@ export function Channels() {
           <Reveal className="demo-copy">
             <p className="kicker">{DEMO.kicker}</p>
             <h2>{DEMO.headline}</h2>
-            <hr className="edge" />
             <p className="lede">{DEMO.lede}</p>
           </Reveal>
 

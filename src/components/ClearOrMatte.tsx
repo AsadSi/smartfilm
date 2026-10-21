@@ -30,7 +30,6 @@ export function ClearOrMatte() {
           <Reveal className="klar-copy">
             <p className="kicker">{S.kicker}</p>
             <h2>{S.headline}</h2>
-            <hr className="edge" />
             <p className="lede">{S.lede}</p>
           </Reveal>
 

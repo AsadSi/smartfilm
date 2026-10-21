@@ -79,7 +79,6 @@ export function QuoteForm() {
           <Reveal>
             <p className="kicker">{QUOTE.kicker}</p>
             <h2>{QUOTE.headline}</h2>
-            <hr className="edge" />
             <p className="lede">{QUOTE.lede}</p>
             <ul className="facts">
               <li><div>{UI.facts.email}</div><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>

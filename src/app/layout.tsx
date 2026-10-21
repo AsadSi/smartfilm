@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { IBM_Plex_Mono, Italiana, Manrope } from 'next/font/google';
+import { Italiana, Manrope } from 'next/font/google';
 import { SITE } from '@/content/site';
 import './globals.css';
 
 const italiana = Italiana({ subsets: ['latin'], weight: '400', variable: '--font-italiana', display: 'swap' });
-const manrope = Manrope({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-manrope', display: 'swap' });
-const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' });
+const manrope = Manrope({ subsets: ['latin'], weight: ['400', '500', '600', '800'], variable: '--font-manrope', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -42,7 +41,7 @@ const REMEMBER_THEME = `try{if(localStorage.getItem('sf-theme')==='blue')documen
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // The head scripts may change lang and data-theme before React arrives.
-    <html lang="da" suppressHydrationWarning className={`${italiana.variable} ${manrope.variable} ${mono.variable}`}>
+    <html lang="da" suppressHydrationWarning className={`${italiana.variable} ${manrope.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: REMEMBER_LANG }} />
         <script dangerouslySetInnerHTML={{ __html: REMEMBER_THEME }} />

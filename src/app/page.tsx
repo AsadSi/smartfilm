@@ -67,7 +67,6 @@ export default function Page() {
     <>
       <JsonLd data={ORGANIZATION} />
       <JsonLd data={FAQ_PAGE} />
-      <div className="env" aria-hidden="true" />
 
       <div className="page">
         <Header />

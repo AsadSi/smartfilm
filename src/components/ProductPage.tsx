@@ -56,7 +56,6 @@ export function ProductPage({ index }: { index: number }) {
               <Reveal className="head">
                 <p className="kicker">{SMART_FILM.kicker}</p>
                 <h2>{SMART_FILM.headline}</h2>
-                <hr className="edge" />
                 <p className="lede">{SMART_FILM.lede}</p>
               </Reveal>
               <Reveal>
@@ -77,7 +76,6 @@ export function ProductPage({ index }: { index: number }) {
               <Reveal className="head">
                 <p className="kicker">{DEMO.kicker}</p>
                 <h2>{DEMO.headline}</h2>
-                <hr className="edge" />
                 <p className="lede">{DEMO.lede}</p>
               </Reveal>
               <Reveal>

@@ -5,8 +5,9 @@ import { ProductShot } from './ProductShot';
 import { Reveal } from './Reveal';
 
 /**
- * The two products side by side, each with what it does, three facts, where it
- * belongs and a way into its own demonstration further down.
+ * The two products side by side: the picture, the name, what it does in one
+ * line and a way into its own demonstration further down. The facts and where
+ * each one belongs are on its product page.
  *
  * The Smart Film picture is the Smart Film section's frame at rest in both
  * states at once — half matte, half clear — because a still photograph
@@ -23,7 +24,6 @@ export function Products() {
         <Reveal className="head">
           <p className="kicker">{P.kicker}</p>
           <h2>{P.headline}</h2>
-          <hr className="edge" />
           <p className="lede">{P.lede}</p>
         </Reveal>
 
@@ -34,12 +34,7 @@ export function Products() {
 
               <h3><a href={PAGES[i]}>{p.name}</a></h3>
               <p className="prod-claim">{p.claim}</p>
-              <p className="prod-text">{p.body}</p>
-              <ul className="prod-points">
-                {p.points.map((t) => <li key={t}>{t}</li>)}
-              </ul>
-              <p className="prod-for"><span>{P.forLabel}</span>{p.for}</p>
-              <a className="btn btn-line" href={p.href}>{p.cta}</a>
+              <a className="more" href={p.href}>{p.cta}</a>
             </article>
           ))}
         </Reveal>

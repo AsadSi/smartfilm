@@ -15,7 +15,6 @@ export function Specs() {
         <Reveal className="head">
           <p className="kicker">{SPECS.kicker}</p>
           <h2>{SPECS.headline}</h2>
-          <hr className="edge" />
           <p className="lede">{SPECS.lede}</p>
         </Reveal>
 
@@ -47,7 +46,6 @@ export function Faq() {
         <Reveal className="head">
           <p className="kicker">{FAQ.kicker}</p>
           <h2>{FAQ.headline}</h2>
-          <hr className="edge" />
           <p className="lede">{FAQ.lede}</p>
         </Reveal>
 
