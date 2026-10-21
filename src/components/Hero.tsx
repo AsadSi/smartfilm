@@ -14,7 +14,7 @@ import { useT } from './lang';
  * ring — went with it. What is left is a poster that hands over to a looping
  * video, which is all the markup ever actually used.
  *
- * The footage is brand/hero-video, a HyperFrames edit: the lit facade, the
+ * The footage is smartfilm-brand/hero-video (outside this repo), a HyperFrames edit: the lit facade, the
  * client's own two clips — a mall turning into the SmartFilm building, a
  * street of lit shop windows — then smart film twice — a clinic's glass
  * clearing, a meeting room's going matte — and the facade again. It starts and

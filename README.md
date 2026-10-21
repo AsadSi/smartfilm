@@ -138,4 +138,6 @@ redefines them.
 - **`.rise` starts at opacity 0.** Anything that stops the reveal observer
   running hides the page. Scripting being off is covered by a `<noscript>`
   rule in the layout; a thrown error during hydration is not.
-- See `CONTENT-REQUEST.md` for what is still missing from the client.
+- Brand sources (logo scripts, brand guide, hero-video edit) and `CONTENT-REQUEST.md`,
+  the list of what is still missing from the client, live outside this repo in
+  `smartfilm-brand/`, next to it.

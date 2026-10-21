@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 /**
- * The client's own logo, cut from their brand guide (brand/logo/cut_logo.py):
+ * The client's own logo, cut from their brand guide (smartfilm-brand/logo/cut_logo.py, outside this repo):
  * the glass S, then SMARTFILM over DANMARK, without the tagline. It is a
  * picture, so it cannot take the header's colour; there are two, and the
  * stylesheet shows the one that suits the ground — white lettering over the
